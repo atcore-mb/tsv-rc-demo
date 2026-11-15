@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Variante A überarbeitet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Variante A, überarbeitet</h1>
+  <p>Eingearbeitet: <b>feste Unterpunkte plus Drei-Punkte-Menü (⋯)</b> je Bereich, <b>gemeinsame Funktionen pro Bereich vorgefiltert</b> (Modelle, Ausleihe) und <b>„Modelle“ statt „Drohnen“/„Fahrzeuge“</b> mit vom Admin gepflegten Typen.</p>
+  <div class="legend"><span><span class="badge b-air"><i class="bi bi-airplane"></i> Luftsport</span></span><span><span class="badge b-car"><i class="bi bi-car-front"></i> RC Cars</span></span><span class="mut">Welche Unterpunkte fest stehen, ist ein Vorschlag.</span></div>
+</div>
+
+<!-- ============ 1: Navigation im Bereich ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Navigation im Bereich: feste Punkte + ⋯</h2></div>
+  <p class="ddesc">Luftsport: <b>Flugbuch · Modelle · Ausleihe · ⋯</b>. RC Cars: <b>Modelle · Ausleihe · Meisterschaft · ⋯</b>. „Modelle“ und „Ausleihe“ sind dieselben Seiten wie in jedem Bereich, nur vorgefiltert. Der Filter-Chip „RC Cars ✕“ hebt die Vorfilterung auf.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Luftsport › Flugbuch</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-airplane" style="font-size:22px"></i><div><div class="t1">Luftsport</div><div class="t2">Drohnen · FPV · Halle</div></div></div>
+        <div class="body">
+          <div class="subnav"><div class="on">Flugbuch</div><div>Modelle</div><div>Ausleihe</div><div class="more" title="Weitere"><i class="bi bi-three-dots"></i></div></div>
+          <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+          <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std.</span></div><div class="stat"><b>3</b><span>Drohnen</span></div></div>
+          <button class="btn"><i class="bi bi-plus-lg"></i> Neuer Flug</button>
+          <h3>Letzte Flüge</h3>
+          <div class="card">
+            <div class="row"><span><b>14.11.</b> DJI Neo 2<br><small>Vereinsgelände · Training</small></span><span>18 min</span></div>
+            <div class="row"><span><b>12.11.</b> FPV Quad 5″<br><small>Sporthalle · Training</small></span><span>6 min</span></div>
+            <div class="row"><span><b>09.11.</b> Mini 4 Pro<br><small>Wolfgangsberg · Foto</small></span><span>24 min</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div class="on"><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Luftsport › ⋯ geöffnet</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-airplane" style="font-size:22px"></i><div><div class="t1">Luftsport</div><div class="t2">Drohnen · FPV · Halle</div></div></div>
+        <div class="body">
+          <div class="subnav"><div class="on">Flugbuch</div><div>Modelle</div><div>Ausleihe</div><div class="more open" title="Weitere"><i class="bi bi-three-dots"></i></div></div>
+          <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std.</span></div><div class="stat"><b>3</b><span>Drohnen</span></div></div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div class="on"><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+        <div class="dim"></div>
+        <div class="sheet"><div class="grip"></div>
+          <h4>Weitere in Luftsport</h4>
+          <div class="it"><i class="bi bi-patch-check"></i>Nachweise<span class="r badge b-w">1 läuft ab</span></div>
+          <div class="it"><i class="bi bi-exclamation-diamond"></i>Vorfälle &amp; Schäden</div>
+          <div class="it"><i class="bi bi-list-check"></i>Checklisten</div>
+          <div class="it"><i class="bi bi-mortarboard"></i>Schulungen</div>
+          <div class="it"><i class="bi bi-geo-alt"></i>Orte &amp; dipul-Karte</div>
+          <div class="it"><i class="bi bi-cloud-sun"></i>Drohnenwetter</div>
+          <div class="it"><i class="bi bi-file-earmark-bar-graph"></i>Berichte &amp; Export</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">RC Cars › Modelle (vorgefiltert)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-car-front" style="font-size:22px"></i><div><div class="t1">RC Cars</div><div class="t2">Offroad · Crawler · Glattbahn</div></div><div class="sp"></div><i class="bi bi-plus-lg" style="font-size:20px"></i></div>
+        <div class="body">
+          <div class="subnav"><div class="on">Modelle</div><div>Ausleihe</div><div>Meisterschaft</div><div class="more" title="Weitere"><i class="bi bi-three-dots"></i></div></div>
+          <div class="chips"><span class="chip on"><i class="bi bi-car-front"></i> RC Cars <span class="x">✕</span></span><span class="chip">Meine</span><span class="chip">Verein</span><span class="chip">Typ <i class="bi bi-chevron-down"></i></span></div>
+          <div class="card">
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Losi Mini-T 2.0</b><br><small>Offroad · 1:18</small></span></span><span class="badge b-w">Wartung</span></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Axial SCX24</b><br><small>Crawler · 1:24</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>TRX-4M</b> <span class="badge b-g">Verein</span><br><small>Crawler · verliehen bis 17.11.</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+          <h3>Zubehör</h3>
+          <div class="card">
+            <div class="row"><span><b>Akku 2S 5000 #3</b><br><small>Akku · 48 Ladezyklen</small></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span><b>FlySky Noble NB4</b><br><small>Fernsteuerung · auch Luftsport</small></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+          <div class="note">Fernsteuerung erscheint in beiden Bereichen, weil ihr Typ beiden zugeordnet ist.</div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-airplane"></i>Luftsport</div><div class="on"><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <p class="sublabel">PC-Ansicht · Luftsport › Flugbuch, ⋯ aufgeklappt</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/flugbuch</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots" title="Weitere"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dropdown" style="left:452px;top:124px">
+      <a><i class="bi bi-list-check"></i>Checklisten</a><a><i class="bi bi-mortarboard"></i>Schulungen</a><a><i class="bi bi-geo-alt"></i>Orte &amp; dipul-Karte</a><a><i class="bi bi-cloud-sun"></i>Drohnenwetter</a><div class="sep"></div><a><i class="bi bi-file-earmark-bar-graph"></i>Berichte &amp; Export</a>
+    </div>
+    <div class="dmain">
+      <div>
+        <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std. Flugzeit</span></div><div class="stat"><b>3</b><span>Drohnen</span></div><div class="stat"><b>0</b><span>Vorfälle</span></div></div>
+        <div class="card">
+          <div class="hrow"><h3>Letzte Flüge</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Neuer Flug</span></div>
+          <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+            <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>18</td></tr>
+            <tr><td>12.11.2026</td><td>FPV Quad 5″</td><td>Sporthalle</td><td>Training</td><td>6</td></tr>
+            <tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td>24</td></tr>
+            <tr><td>02.11.2026</td><td>Avata 2 <span class="badge b-g">Verein</span></td><td>Vereinsgelände</td><td>Schulung</td><td>11</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+        <div class="card"><h3>Termine Luftsport</h3>
+          <table class="dt"><tr><td>Di 19.11. Hallenfliegen</td></tr><tr><td>Sa 23.11. Schulung A1/A3</td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="ddesc" style="margin-top:10px">Am PC passen mehr feste Punkte in die zweite Zeile (hier fünf), das Drei-Punkte-Menü nimmt den Rest auf. Am Handy sind es drei.</p>
+</section>
+
+<!-- ============ 2: Modell anlegen ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Modell anlegen: Formular aus dem Modelltyp</h2></div>
+  <p class="ddesc">Zuerst den Typ wählen, dann baut sich das Formular aus dem Regelwerk auf: <b>Grundangaben</b> (immer), <b>Felder des Typs</b> (Pflicht mit <span style="color:var(--red)">*</span>, die meisten optional) und <b>eigene Angaben</b> ohne jede Vorgabe.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Typ „Offroad“ (RC Cars)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div class="t1">Modell anlegen</div></div>
+        <div class="body">
+          <label>Typ <span class="req">*</span></label><div class="inp"><span><i class="bi bi-car-front" style="color:var(--car)"></i> Offroad</span><i class="bi bi-chevron-down"></i></div>
+          <label>Bezeichnung <span class="req">*</span></label><div class="inp">Losi Mini-T 2.0</div>
+          <div class="two"><div><label>Hersteller <span class="opt">optional</span></label><div class="inp">Losi</div></div><div><label>Seriennr. <span class="opt">optional</span></label><div class="inp ph">–</div></div></div>
+          <div class="fsec">Felder des Typs Offroad <span class="ln"></span></div>
+          <div class="two"><div><label>Maßstab <span class="req">*</span></label><div class="inp">1:18 <i class="bi bi-chevron-down"></i></div></div><div><label>Antrieb <span class="opt">optional</span></label><div class="inp">Elektro <i class="bi bi-chevron-down"></i></div></div></div>
+          <label>Akku-System <span class="opt">optional</span></label><div class="inp ph">z. B. 2S LiPo</div>
+          <div class="fsec">Eigene Angaben <span class="ln"></span></div>
+          <div class="kv"><div class="inp">Motor</div><div class="inp">3300 kV brushless</div><span class="x"><i class="bi bi-x"></i></span></div>
+          <div class="kv"><div class="inp">Reifen</div><div class="inp">Pro-Line Hoosier</div><span class="x"><i class="bi bi-x"></i></span></div>
+          <div class="addlink"><i class="bi bi-plus-circle"></i> Angabe hinzufügen</div>
+          <button class="btn" style="margin-top:10px">Speichern</button>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Typ „Drohne“ (Luftfahrzeug)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div class="t1">Modell anlegen</div></div>
+        <div class="body">
+          <label>Typ <span class="req">*</span></label><div class="inp"><span><i class="bi bi-airplane" style="color:var(--air)"></i> Drohne</span><i class="bi bi-chevron-down"></i></div>
+          <label>Bezeichnung <span class="req">*</span></label><div class="inp">DJI Neo 2</div>
+          <div class="fsec"><i class="bi bi-lock"></i> Luftfahrzeug (fest) <span class="ln"></span></div>
+          <div class="two"><div><label>EU-Klasse <span class="req">*</span></label><div class="inp">C0 <i class="bi bi-chevron-down"></i></div></div><div><label>Gewicht (g) <span class="req">*</span></label><div class="inp">151</div></div></div>
+          <div class="two"><div><label>Remote-ID <span class="opt">optional</span></label><div class="inp ph">–</div></div><div><label>Betreiber <span class="req">*</span></label><div class="inp">ich <i class="bi bi-chevron-down"></i></div></div></div>
+          <div class="hint">Diese Felder kommen aus der Eigenschaft „ist Luftfahrzeug“ und sind gesetzlich begründet.</div>
+          <div class="fsec">Felder des Typs Drohne <span class="ln"></span></div>
+          <div class="two"><div><label>Kamera <span class="opt">optional</span></label><div class="inp">4K <i class="bi bi-chevron-down"></i></div></div><div><label>Kaufdatum <span class="opt">optional</span></label><div class="inp ph">TT.MM.JJJJ</div></div></div>
+          <div class="fsec">Eigene Angaben <span class="ln"></span></div>
+          <div class="addlink"><i class="bi bi-plus-circle"></i> Angabe hinzufügen</div>
+          <button class="btn" style="margin-top:12px">Speichern</button>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3: Admin Modelltypen ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Admin: Modelltypen pflegen</h2></div>
+  <p class="ddesc">Ein Typ hat drei Teile: <b>feste Eigenschaften</b> (nur ankreuzen, steuern Verhalten), <b>Zusatzfelder</b> (frei definierbar, Pflicht oder optional) und die Zuordnung zu <b>Bereichen</b>. Benutzte Typen und Felder lassen sich nur deaktivieren, nicht löschen. Jede Änderung ergibt eine neue Regelwerk-Version.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Admin › Modelltypen</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-gear" style="font-size:20px"></i><div><div class="t1">Modelltypen</div><div class="t2">Admin · Regelwerk v4</div></div><div class="sp"></div><i class="bi bi-plus-lg" style="font-size:20px"></i></div>
+        <div class="body">
+          <div class="chips"><span class="chip on">Alle</span><span class="chip">Modelle</span><span class="chip">Zubehör</span><span class="chip">inaktiv</span></div>
+          <div class="card">
+            <div class="row"><span class="li"><span class="ico air"><i class="bi bi-airplane"></i></span><span><b>Drohne</b><br><small>Luftfahrzeug · 2 Felder · 7 Modelle</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico air"><i class="bi bi-airplane"></i></span><span><b>FPV</b><br><small>Luftfahrzeug · 3 Felder · 4 Modelle</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Offroad</b><br><small>3 Felder · 5 Modelle</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Crawler</b><br><small>2 Felder · 3 Modelle</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Glattbahn</b><br><small>2 Felder · 0 Modelle</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+          <h3>Zubehör</h3>
+          <div class="card">
+            <div class="row"><span><b>Akku</b> <span class="badge b-air">Luft</span> <span class="badge b-car">RC</span><br><small>Ladezyklen · 2 Felder</small></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span><b>Fernsteuerung</b> <span class="badge b-air">Luft</span> <span class="badge b-car">RC</span><br><small>1 Feld</small></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div class="on"><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Typ „Offroad“ bearbeiten</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Offroad</div><div class="t2">Modelltyp · 5 Modelle</div></div></div>
+        <div class="body">
+          <label>Name <span class="req">*</span></label><div class="inp">Offroad</div>
+          <label>Bereiche</label><div class="chips" style="margin:0"><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip on"><i class="bi bi-car-front"></i> RC Cars</span></div>
+          <div class="fsec"><i class="bi bi-lock"></i> Feste Eigenschaften <span class="ln"></span></div>
+          <div class="chk"><i class="bi bi-record-circle"></i><span>Modell <span class="mut">(nicht Zubehör)</span></span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Ist Luftfahrzeug<small class="mut">Flugbuch, EU-Klasse, Remote-ID</small></span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Hat Ladezyklen</span></div>
+          <div class="fsec">Zusatzfelder <span class="ln"></span></div>
+          <div class="card" style="padding:2px 10px">
+            <div class="row"><span><b>Maßstab</b><br><small>Auswahl · 1:10, 1:18, 1:24</small></span><span class="badge b-r">Pflicht</span></div>
+            <div class="row"><span><b>Antrieb</b><br><small>Auswahl · Elektro, Verbrenner</small></span><span class="badge b-all">optional</span></div>
+            <div class="row"><span><b>Akku-System</b><br><small>Text</small></span><span class="badge b-all">optional</span></div>
+          </div>
+          <div class="addlink"><i class="bi bi-plus-circle"></i> Feld hinzufügen</div>
+          <button class="btn" style="margin-top:10px">Speichern (neue Version)</button>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <p class="sublabel">PC-Ansicht · Admin › Modelltypen › Offroad</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/modelltypen/offroad</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <div class="h">Regelwerk v4</div>
+        <a>Flugarten</a><a>Nachweistypen</a><a class="on">Modelltypen</a><a>Checklisten</a><a>Aufbewahrung</a>
+        <div class="h" style="margin-top:8px">System</div>
+        <a>Konten</a><a>Bereiche</a><a>Orte</a><a>Backup</a>
+      </div>
+      <div class="dcontent">
+        <div class="hrow"><h3 style="font-size:18px">Modelltyp: Offroad</h3><span><span class="ibtn out">Deaktivieren</span> <span class="ibtn">Speichern (neue Version)</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:16px">
+          <div>
+            <div class="card"><h3>Allgemein</h3>
+              <label>Name <span class="req">*</span></label><div class="inp">Offroad</div>
+              <label>Symbol</label><div class="inp"><span><i class="bi bi-car-front"></i> car-front</span><i class="bi bi-chevron-down"></i></div>
+              <label>Bereiche</label><div class="chips" style="margin:0"><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip on"><i class="bi bi-car-front"></i> RC Cars</span></div>
+            </div>
+            <div class="card"><h3><i class="bi bi-lock"></i> Feste Eigenschaften</h3>
+              <div class="chk"><i class="bi bi-record-circle"></i><span>Art: Modell</span></div>
+              <div class="chk"><i class="bi bi-square off"></i><span>Ist Luftfahrzeug<small class="mut">Flugbuch, EU-Klasse, Gewicht, Remote-ID, Betreiber, Meldehinweis</small></span></div>
+              <div class="chk"><i class="bi bi-square off"></i><span>Hat Ladezyklen</span></div>
+              <div class="lock">Neue feste Eigenschaften erfordern eine Programmänderung.</div>
+            </div>
+          </div>
+          <div class="card"><div class="hrow"><h3>Zusatzfelder</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Feld</span></div>
+            <table class="dt"><tr><th></th><th>Feld</th><th>Feldtyp</th><th>Werte / Einheit</th><th>Pflicht</th><th>Status</th></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Maßstab</b></td><td>Auswahl</td><td>1:10, 1:18, 1:24</td><td><i class="bi bi-check-square-fill" style="color:var(--g)"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Antrieb</b></td><td>Auswahl</td><td>Elektro, Verbrenner</td><td><i class="bi bi-square" style="color:#aaa"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Akku-System</b></td><td>Text</td><td>–</td><td><i class="bi bi-square" style="color:#aaa"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Gewicht</b></td><td>Zahl</td><td>g</td><td><i class="bi bi-square" style="color:#aaa"></i></td><td><span class="badge b-all">inaktiv</span></td></tr>
+            </table>
+            <div class="hint" style="margin-top:8px"><i class="bi bi-info-circle"></i> Häufig genutzte „eigene Angaben“ bei Offroad-Modellen: <b>Motor</b> (4×), <b>Reifen</b> (2×). <span style="color:var(--g);font-weight:700">Als Feld übernehmen</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

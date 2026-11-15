@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Entwürfe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px 40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  a.tile{display:block;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:14px 16px;color:var(--t);text-decoration:none}
+  a.tile:hover{border-color:var(--g)}
+  a.tile b{display:block;font-size:16px;margin-bottom:4px}
+  a.tile.main{border:2px solid var(--g)}
+  a.tile small{color:var(--mut)}
+  h2{font-size:19px;margin:26px 0 10px}
+  details{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:10px 14px;margin-bottom:8px}
+  summary{font-weight:700;cursor:pointer}
+  details ul{margin:8px 0 2px;padding-left:20px;font-size:14px}
+  details li{margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="intro"><h1>TSV RC – Entwürfe der Seitengestaltung</h1>
+<p>Stilrichtung „Vereinsklassisch“, Navigation Variante A. Stand 14.11.2026. Wegwerf-Prototypen, Daten sind erfunden.</p></div>
+<div class="wrap">
+  <h2>Zum Ausprobieren</h2>
+  <div class="grid">
+    <a class="tile main" href="klickdummy.html"><b><i class="bi bi-phone"></i> Klickdummy (Handy)</b><small>Alle Handy-Seiten klickbar, rund 160 Bildschirme, keine Platzhalter. Am Handy geöffnet im Vollbild.</small></a>
+  </div>
+  <h2>PC-Ansichten</h2>
+  <div class="grid">
+    <a class="tile" href="seiten-1-anmeldung.html"><b>1 · Anmeldung &amp; Konto</b><small>Login, Einladung, Registrierung, Passwort, 2FA, Passkeys, Geräte, API-Tokens, Startseite</small></a>
+    <a class="tile" href="seiten-2a-flugbuch.html"><b>2a · Flugbuch</b><small>Flug erfassen und nachtragen, Liste, Detail mit Änderungsverlauf, Sync-Konflikt, Startzeit korrigieren, ungültig markieren, Ort auf Karte</small></a>
+    <a class="tile" href="seiten-2b-modelle-vorfaelle.html"><b>2b · Modelle &amp; Vorfälle</b><small>Modell-Detail (Drohne, FPV, Car, Zubehör, geteilt), Akku, Wartung, Vorfall melden und Detail, Strecken, Checklisten</small></a>
+    <a class="tile" href="seiten-2c-profil-freigaben.html"><b>2c · Profil, Nachweise, Freigaben</b><small>Nachweis-Detail und Teilen, Daten bearbeiten, geteiltes Flugbuch, Synchronisierung, Ansicht für Erziehungsberechtigte</small></a>
+    <a class="tile" href="seiten-3a-kalender.html"><b>3a · Kalender &amp; Schulungen</b><small>Monatsraster, Events, Teilnahme, Schulungen mit Ergebnis, ICS-Abo, auswärtige Adresse</small></a>
+    <a class="tile" href="seiten-3b-ausleihe.html"><b>3b · Ausleihe</b><small>Antrag, Meine Ausleihen, Übergabeprotokoll, Genehmigung, Belegungsplan, Sets, abgeschlossene Ausleihe</small></a>
+    <a class="tile" href="seiten-3c-leitung.html"><b>3c · Abteilungsleitung &amp; Gelände</b><small>Übersicht, Mitglied-Detail, Konto Erziehungsberechtigte, Änderungsprotokoll, Nachweise, Flüge Vereinsgelände, Vorfälle, Anwesenheit, Aufsicht, Gastpiloten</small></a>
+    <a class="tile" href="seiten-4-admin.html"><b>4 · Admin</b><small>Konten, Erziehungsberechtigte einladen, Bereiche, Orte, Regelwerk mit alten Versionen, Inhalte, Backup, Änderungsprotokoll</small></a>
+    <a class="tile" href="seiten-5-weitere.html"><b>5 · Berichte, Info, Meisterschaft</b><small>Export, DJI-Import, DSGVO, Hilfe-Artikel, Kontakt, Orte, Wetter, dipul, Vereinsmeisterschaft mit Archiv</small></a>
+    <a class="tile" href="seiten-6-wissen.html"><b>6 · Wissen</b><small>Übersicht mit Suche und Filtern, Artikel mit Kommentaren, Editor, Verlauf mit Unterschied und Wiederherstellen, Bearbeitungskonflikt, Moderation</small></a>
+  </div>
+  <h2>Grundlagen</h2>
+  <div class="grid">
+    <a class="tile" href="variante-a-v2.html"><b>Navigation &amp; Modelltypen</b><small>Variante A überarbeitet, Modell anlegen, Admin Modelltypen</small></a>
+    <a class="tile" href="navigation-bereiche.html"><b>Varianten A/B/C</b><small>ursprüngliche Navigationsvorschläge</small></a>
+    <a class="tile" href="stilrichtungen.html"><b>Stilrichtungen</b><small>Handy (gewählt: A Vereinsklassisch)</small></a>
+  </div>
+
+  <h2>Offene Fragen aus der Seitengestaltung</h2>
+  <p class="mut" style="font-size:14px">Annahmen sind in den Seiten gelb markiert. Fachliche Punkte sind mit dem Verein abzustimmen.</p>
+  <details open><summary>Allgemein</summary><ul>
+    <li><s>Wochentage passten nicht zu 2026</s> – <b>erledigt</b> (alle Seiten auf den Kalender 2026 umgestellt; Hallenfliegen liegt dadurch auf Donnerstag).</li>
+    <li>Fliegen mit fremdem Privatmodell (z. B. Drohne des Ausbilders bei einer Schulung): wie im Flug erfassen?</li>
+    <li><s>Wer genehmigt Ausleihen der Abteilungsleitung?</s> <b>Entschieden:</b> keine Genehmigung nötig.</li>
+  </ul></details>
+  <details><summary>Anmeldung &amp; Konto</summary><ul>
+    <li>Darf bei Selbstregistrierung sofort ein Passkey angelegt werden oder erst nach Freischaltung?</li>
+    <li>Sanfter Hinweis auf 2FA für Nicht-Admins?</li>
+    <li>Gültigkeit von Einladungslinks (gezeigt: 7 Tage).</li>
+  </ul></details>
+  <details><summary>Kalender &amp; Schulungen</summary><ul>
+    <li>Wer sieht Teilnehmerlisten? Sagen Minderjährige selbst zu oder nur Erziehungsberechtigte?</li>
+    <li>Welche Nachweise erzeugt eine Vereinsschulung, mit welcher Gültigkeit?</li>
+    <li>Brauchen Event-Reservierungen ein volles Übergabeprotokoll je Person?</li>
+  </ul></details>
+  <details><summary>Ausleihe</summary><ul>
+    <li>Sets nur für Vereinsgerät? Teile eines Sets auch einzeln ausleihbar?</li>
+    <li>Höchstdauer und Verlängerung von Ausleihen (gezeigt: 7 Tage).</li>
+    <li>Bestätigung beider Seiten bei Übergabe: wie genau, was bei ausbleibender Bestätigung?</li>
+    <li>Haftung bei Minderjährigen; blockieren offene Anträge Tage für andere?</li>
+  </ul></details>
+  <details><summary>Abteilungsleitung &amp; Gelände</summary><ul>
+    <li><s>Flugleiter: Rolle, Liste oder Nachweis?</s> <b>Entschieden:</b> „Aufsicht“ als von der Leitung gepflegte Liste, überall optional (Vereinsgelände, Halle, Events, beide Bereiche).</li>
+    <li><s>Welche Vorfälle sieht die Leitung?</s> <b>Entschieden:</b> geteilte sowie am Vereinsgelände oder bei Events. Zusätzlich alle Vorfälle mit Vereinsgerät.</li>
+    <li>Pflichtangaben und Aufbewahrung bei Gastpiloten. Angenommen: das eintragende Mitglied bestätigt und trägt die Flüge ein.</li>
+    <li>Erziehungsberechtigte in der Mitgliederliste mit eigenem Filter oder nur unter „Alle Rollen“?</li>
+    <li>Aufbewahrung und Sichtbarkeit von Anwesenheiten.</li>
+  </ul></details>
+  <details><summary>Admin</summary><ul>
+    <li>Regelwerk (Pflichtfelder, Checklisten, Flugarten): Wenn der Admin mehrere Dinge ändert, sollen diese erst als Entwurf gesammelt und dann auf einmal gültig werden, oder wirkt jede gespeicherte Änderung sofort? Vorschlag: Entwurf, dann „Aktivieren“.</li>
+    <li>Feste Eigenschaften benutzter Modelltypen sperren?</li>
+    <li>Welche Module kann ein Bereich haben, wie viele feste Unterpunkte?</li>
+    <li>Externe Backup-Ablage (offener Punkt 14.3).</li>
+  </ul></details>
+  <details><summary>Berichte, Info, Meisterschaft</summary><ul>
+    <li>DJI-Flugprotokolle: Neuere DJI-Apps verschlüsseln die Protokolldateien. Zum Entschlüsseln braucht es einen (kostenlosen) DJI-Entwicklerschlüssel und eine Online-Abfrage bei DJI je Datei. Technische Klärung vor Teil 3, keine Vereinsentscheidung.</li>
+    <li>Disziplinen, Punkteschema, Streichregel der Vereinsmeisterschaft (offener Punkt 6); FPV-Race auch unter Luftsport?</li>
+    <li>Wetter-Grenzwerte global oder je Modell?</li>
+    <li>Gibt es für RC Cars Checklisten, die gespeichert werden (bisher angenommen: nein)? Sollen Checklisten auch im RC-Cars-Menü stehen?</li>
+  </ul></details>
+  <details><summary>Wissen</summary><ul>
+    <li>Artikel mit rechtlichem Bezug: dürfen alle Mitglieder sie frei ändern (gezeigt: ja, die Prüfmarkierung fällt dabei weg) oder sollen sie standardmäßig gesperrt sein?</li>
+    <li>Reicht „Lesen offline“ oder sollen Mitglieder auch offline schreiben und kommentieren (Konflikte dann häufiger)?</li>
+    <li>Verknüpfung mit privaten Modellen: Wer sieht den Link, wenn das Modell nicht geteilt ist? Angenommen: nur wer das Modell sehen darf.</li>
+    <li>Wo liegt „Wissen“ am PC? Angenommen: zweite Menüzeile des Bereichs rechts neben dem ⋯; Moderation darin nur für die Leitung.</li>
+    <li>Brauchen Fragen einen Status „beantwortet“? Wer darf neue Themen anlegen (angenommen: alle, die Leitung führt doppelte zusammen)?</li>
+  </ul></details>
+</div>
+</body>
+</html>

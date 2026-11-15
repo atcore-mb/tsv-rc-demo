@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Wissen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
+  .tabs .on{color:var(--g);border-color:var(--g)}
+  .app.tall{height:640px}
+  .srch{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ced4da;border-radius:6px;padding:7px 12px;font-size:14px;margin-bottom:10px}
+  .srch i{color:var(--mut)}
+  .srch b{font-weight:600}
+  .doc h4{font-size:15px;margin:12px 0 4px}
+  .doc h4:first-child{margin-top:0}
+  .doc p{margin:0 0 8px;font-size:13.5px;line-height:1.5}
+  .doc ul{margin:0 0 8px;padding-left:20px;font-size:13.5px;line-height:1.5}
+  .doc .ln{color:var(--g);font-weight:700;text-decoration:underline}
+  .img{height:90px;border-radius:6px;display:flex;align-items:flex-end;padding:6px 10px;color:#fff;font-size:12px;font-weight:700;margin:6px 0 10px;background:linear-gradient(135deg,#9aa0a6,#3c4043)}
+  .legal{background:var(--airbg);border:1px solid #c9dcf0;border-radius:6px;padding:8px 12px;font-size:12.5px;margin-bottom:8px;color:#173f6b}
+  .ok{display:flex;gap:8px;align-items:center;background:var(--gl);border:1px solid #c5e1ca;border-radius:6px;padding:7px 12px;font-size:12.5px;color:#14532d;margin-bottom:8px}
+  .meta{font-size:12px;color:var(--mut);margin:-4px 0 8px}
+  .tagrow{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+  .cm{padding:8px 0;border-top:1px solid #eef0ee;font-size:13px}
+  .cm .h{display:flex;gap:6px;align-items:center}
+  .cm .h small{margin-left:auto}
+  .cm .mod{font-size:12px;font-weight:700;color:var(--g)}
+  .cm.hid .tx{color:#999;text-decoration:line-through}
+  .tb{display:flex;gap:2px;border:1px solid #ced4da;border-bottom:0;border-radius:4px 4px 0 0;background:#f4f5f4;padding:3px 6px;font-size:15px}
+  .tb span{padding:3px 10px;border-radius:4px}
+  .tb .sep{width:1px;background:#d6dad6;margin:2px 4px;padding:0}
+  .ta{border:1px solid #ced4da;border-radius:0 0 4px 4px;background:#fff;padding:8px 10px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;white-space:pre-wrap;height:190px;overflow:hidden}
+  .ta .cur{border-left:2px solid var(--g);margin-left:-1px}
+  .tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:3px 8px}
+  .ovl{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:8px;box-shadow:0 10px 26px rgba(0,0,0,.18);width:300px;padding:10px 12px;z-index:5;font-size:13px}
+  .ovl .sec{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:8px 0 2px}
+  .ovl .it{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #f0f2f0}
+  .ovl .foot{font-size:11px;color:var(--mut);margin-top:6px;border-top:1px solid #eef0ee;padding-top:6px}
+  .d{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;white-space:pre-wrap;padding:2px 8px;border-radius:3px;margin-bottom:1px}
+  .d.add{background:#e6f4ea;color:#14532d}
+  .d.del{background:#fde8e8;color:#7f1d1d;text-decoration:line-through}
+  .d.eq{color:#666}
+  .d.gap{color:var(--mut);font-style:italic;font-family:inherit}
+  .p{color:var(--g);font-weight:700}.m{color:var(--red);font-weight:700}
+  table.dt tr.sel td{background:var(--gl)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .colh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:6px}
+  .alert2{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:9px 12px;font-size:13px;margin-bottom:12px;color:#7a4a06}
+  .dside a .badge{font-weight:700}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle}
+  .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+  .tg.on{background:var(--g)}.tg.on::after{left:18px}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Wissen</h1>
+  <p>Gruppe 6, <b>PC-Ansicht</b> der gemeinsamen Wissenssammlung (Gesamtdesign 6.3). Die Handy-Seiten sind klickbar im <b>Klickdummy</b>: Luftsport oder RC Cars › ⋯ › Wissen, dazu „Neu im Wissen“ auf der Startseite und „Wissen zu diesem Modell“ auf jeder Modell-Detailseite.</p>
+  <p><span class="assume">Annahme: Am PC sitzt „Wissen“ in der zweiten Menüzeile jedes Bereichs (vorgefiltert); der Filter lässt sich auf „Alle Bereiche“ umschalten. Am Handy zusätzlich unter „Mehr“ für alle Bereiche.</span></p>
+</div>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Übersicht mit Suche</h2></div>
+  <p class="ddesc">Links Filter (Bereich, Themen, Beobachtet, Moderation für die Leitung), Mitte Volltextsuche mit Treffern und Textausschnitt, rechts beobachtete Artikel und der Offline-Hinweis. Ergebnisse filtern sich beim Tippen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/wissen?q=akku</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <div class="h">Bereich</div>
+        <a class="on">Luftsport<span>6</span></a><a>RC Cars<span>5</span></a><a>Alle Bereiche<span>8</span></a>
+        <div class="h">Themen</div>
+        <a>Akku<span>1</span></a><a>Einsteiger<span>2</span></a><a>FPV<span>2</span></a><a>Sicherheit<span>2</span></a><a>Recht<span>1</span></a><a>Wartung<span>1</span></a>
+        <div class="h">Für dich</div>
+        <a><span><i class="bi bi-bell"></i> Beobachtet</span><span>2</span></a>
+        <a><span><i class="bi bi-shield-check"></i> Moderation</span><span class="badge b-w">1</span></a>
+      </div>
+      <div class="dcontent" style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+        <div>
+          <div class="hrow"><h3>Wissen · Luftsport</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Artikel schreiben</span></div>
+          <div class="srch"><i class="bi bi-search"></i><b>akku</b><span class="mut" style="margin-left:auto;font-size:12px">2 Treffer in Titel, Text und Themen</span></div>
+          <div class="card">
+            <table class="dt"><tr><th>Artikel</th><th>Bereich</th><th>Geändert</th><th>Status</th></tr>
+              <tr><td><b>LiPo-<mark>Akku</mark>s richtig lagern und laden</b><br><small class="mut">… auf Lagerspannung bringen: 3,80–3,85 V je Zelle …</small></td><td><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></td><td>Di 10.11.<br><small class="mut">Jonas B.</small></td><td><span class="badge b-w">Prüfung aufgehoben</span></td></tr>
+              <tr><td><b>Erste Schritte FPV: Simulator und Tinywhoop</b><br><small class="mut">… Kein Bruch, keine <mark>Akku</mark>s, beliebig viele Versuche …</small></td><td><span class="badge b-air">Luftsport</span></td><td>So 08.11.<br><small class="mut">Lena K.</small></td><td>–</td></tr>
+            </table>
+          </div>
+          <div class="note" style="text-align:left">Ohne Suchbegriff erscheinen hier alle Artikel des Bereichs, zuletzt geänderte zuerst.</div>
+        </div>
+        <div>
+          <div class="card"><h3><i class="bi bi-bell"></i> Beobachtet</h3>
+            <table class="dt"><tr><td><b>LiPo-Akkus richtig lagern und laden</b><br><small class="mut">geändert Di 10.11. · 3 neue Kommentare</small></td></tr><tr><td><b>Propeller am Avata 2 wechseln</b><br><small class="mut">geändert Mo 02.11.</small></td></tr></table></div>
+          <div class="card" style="font-size:13px"><h3><i class="bi bi-cloud-check"></i> Offline verfügbar</h3>8 Artikel deiner Bereiche, Bilder verkleinert. Zuletzt abgeglichen heute 09:38.<br><span class="assume">Annahme: Offline nur lesen; Schreiben und Kommentieren brauchen Netz.</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Artikel lesen mit Kommentaren</h2></div>
+  <p class="ddesc">Ein Artikel-Bildschirm für alle Artikel. Beispiel mit rechtlichem Bezug: Hinweis „Keine Rechtsberatung, Stand …“ und Prüfmarkierung. Rechts Angaben, Verknüpfungen (der Artikel erscheint auf der Detailseite dieser Modelle), Beobachten, Verlauf und die Aktionen der Abteilungsleitung.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/offene-kategorie-a1-a3</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div class="dmain">
+      <div>
+        <div class="hrow"><h3 style="font-size:19px">Offene Kategorie A1/A3 kurz erklärt</h3><span><span class="ibtn out"><i class="bi bi-clock-history"></i> Verlauf</span> <span class="ibtn"><i class="bi bi-pencil"></i> Bearbeiten</span></span></div>
+        <div class="meta">Version 2 · geändert Do 01.10.2026 von Max R. · <span class="badge b-air">Luftsport</span> · <i class="bi bi-tag"></i> Recht · Einsteiger · Nachweise</div>
+        <div class="legal"><i class="bi bi-info-circle"></i> <b>Keine Rechtsberatung.</b> Stand Do 01.10.2026. Maßgeblich sind die EU-Drohnenverordnung (EU 2019/947) und die LuftVO in der jeweils gültigen Fassung.</div>
+        <div class="ok"><i class="bi bi-patch-check-fill"></i> Geprüft von <b>Markus B.</b> (Abteilungsleitung) am Mo 12.10.2026</div>
+        <div class="card doc" style="padding:12px 16px">
+          <p>Die meisten Vereinsflüge mit Drohnen und FPV finden in der <b>offenen Kategorie</b> statt. Sie ist in die Unterkategorien A1, A2 und A3 aufgeteilt; hier geht es um A1 und A3.</p>
+          <h4>A1: über Menschen</h4><ul><li>Für sehr leichte Drohnen (Klasse C0 und C1 bzw. unter 250 g).</li><li>Nie über Menschenansammlungen; Unbeteiligte möglichst nicht überfliegen.</li></ul>
+          <h4>A3: fern von Menschen</h4><ul><li>Für schwerere Drohnen bis 25 kg, z. B. Klassen C2 bis C4 oder Eigenbauten ohne Klasse.</li></ul>
+          <h4>Für alle</h4><ul><li>Höchstens 120 m über Grund und immer in Sichtweite; bei FPV mit Luftraumbeobachter.</li><li>Am Vereinsgelände gelten zusätzlich die <span class="ln">Platzregeln Vereinsgelände</span>.</li></ul>
+        </div>
+        <div class="card"><h3>Kommentare und Fragen (2)</h3>
+          <div class="cm"><div class="h"><b>Lena K.</b> <span class="badge b-w">Frage</span><small class="mut">Mi 14.10.2026, 18:02</small></div><div class="tx">Gilt A1 auch für den Tinywhoop in der Halle?</div><span class="mod"><i class="bi bi-eye-slash"></i> Ausblenden (Leitung)</span></div>
+          <div class="cm"><div class="h"><b>Max R.</b><small class="mut">Mi 14.10.2026, 19:30</small></div><div class="tx">Das klären wir gerade mit dem Verein. Bis dahin gelten in der Halle die Hallenregeln.</div><span class="mod"><i class="bi bi-eye-slash"></i> Ausblenden (Leitung)</span></div>
+          <div class="inp ph" style="margin-top:8px;min-height:44px;align-items:flex-start">Kommentar oder Frage schreiben …</div>
+          <div style="margin-top:6px;display:flex;gap:6px;align-items:center"><span class="chip on">Kommentar</span><span class="chip">Frage</span><span class="ibtn" style="margin-left:auto"><i class="bi bi-send"></i> Senden</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Verknüpft mit</h3>
+          <table class="dt"><tr><td><i class="bi bi-diagram-3"></i> Modelltyp <b>Drohne</b></td><td class="mut">alle Drohnen</td></tr><tr><td><i class="bi bi-diagram-3"></i> Modelltyp <b>FPV</b></td><td class="mut">alle FPV</td></tr></table>
+          <div class="note" style="text-align:left">Erscheint unter „Wissen zu diesem Modell“ auf jeder Modell-Detailseite dieser Typen.</div></div>
+        <div class="card" style="font-size:13px"><table class="dt"><tr><td><i class="bi bi-bell"></i> Beobachten</td><td style="text-align:right"><span class="tg"></span></td></tr><tr><td><i class="bi bi-clock-history"></i> Verlauf</td><td style="text-align:right">2 Versionen</td></tr><tr><td><i class="bi bi-cloud-check"></i> Offline</td><td style="text-align:right">gespeichert</td></tr></table></div>
+        <div class="card"><h3>Abteilungsleitung</h3>
+          <span class="ibtn out"><i class="bi bi-patch-minus"></i> Prüfmarkierung entfernen</span><br>
+          <span class="ibtn out" style="margin-top:6px;color:var(--red);border-color:var(--red)"><i class="bi bi-lock"></i> Sperren …</span>
+          <div class="note" style="text-align:left">Jede spätere Änderung hebt die Prüfmarkierung auf. Gesperrte Artikel ändert nur die Leitung; lesen und kommentieren können alle.</div>
+          <span class="assume">Annahme: „Stand …“ ist das Datum der aktuellen Version; gekennzeichnet wird über den Schalter „Rechtlicher Bezug“ im Editor.</span>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Artikel anlegen und bearbeiten</h2></div>
+  <p class="ddesc">Links das Formular mit Formatierungsleiste (Überschrift, Liste, Fett, Link, Bild) im eingeschränkten Format, rechts die Live-Vorschau, Anhänge, Verknüpfungen und die Änderungsnotiz. Themen und Verknüpfungen wählt man im Auswahldialog (hier offen: Themen, mit „neues Thema“). Speichern ist erst mit Titel und Bereich aktiv und erzeugt eine neue Version.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/propeller-avata-2/bearbeiten</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div class="dmain" style="grid-template-columns:1.15fr 1fr">
+      <div style="position:relative">
+        <div class="hrow"><h3>Bearbeiten · Version 2</h3><span class="mut" style="font-size:12px">Propeller am Avata 2 wechseln</span></div>
+        <label>Titel <span class="req">*</span></label><div class="inp">Propeller am Avata 2 wechseln</div>
+        <div class="two"><div><label>Bereich(e) <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip">RC Cars</span></div></div>
+          <div><label>Themen</label><div class="inp" style="border-color:var(--g)"><span><span class="badge b-all tag">Wartung ×</span> <span class="badge b-all tag">Propeller ×</span> <span class="badge b-all tag">DJI ×</span></span><i class="bi bi-chevron-down"></i></div></div></div>
+        <label>Text</label>
+        <div class="tb"><span><b>H</b></span><span><i class="bi bi-list-ul"></i></span><span><i class="bi bi-type-bold"></i></span><span class="sep"></span><span><i class="bi bi-link-45deg"></i></span><span><i class="bi bi-image"></i></span><span class="mut" style="margin-left:auto;font-size:11px;padding-top:5px">Kein HTML · Bild über Foto- oder Dateiauswahl</span></div>
+        <div class="ta">## Ablauf
+- Akku entnehmen.
+- Je Propeller die Schrauben lösen und den Propeller abnehmen.
+- Neuen Propeller mit gleicher Kennzeichnung aufsetzen (**Drehrichtung beachten!**).
+- Schrauben handfest anziehen, nicht überdrehen.
+![Bild: Propeller mit Kennzeichnung](img:3)
+## Danach
+- Kurzer Schwebeflug, auf Vibrationen achten.
+- Bei jedem zweiten Wechsel neue Schrauben verwenden.<span class="cur"></span></div>
+        <div class="ovl" style="right:0;top:118px">
+          <b>Themen wählen</b>
+          <div class="srch" style="margin:6px 0 4px;padding:5px 10px;font-size:13px"><i class="bi bi-search"></i><b>Schrau</b></div>
+          <div class="sec">Gewählt</div><div class="it">Wartung <i class="bi bi-check-lg" style="color:var(--g)"></i></div><div class="it">Propeller <i class="bi bi-check-lg" style="color:var(--g)"></i></div>
+          <div class="sec">Treffer</div><div class="it">Schrauben­sicherung <small class="mut">noch nicht verwendet</small></div>
+          <div class="sec">Neu</div><div class="it" style="color:var(--g);font-weight:700"><span><i class="bi bi-plus-circle"></i> „Schrau…“ als neues Thema anlegen</span></div>
+          <div class="foot">Themen sind Schlagworte für beide Bereiche. Antippen fügt hinzu oder entfernt.</div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><div class="tabs" style="margin-bottom:6px"><div class="on">Vorschau</div><div>Unterschied zu Version 2</div></div>
+          <div class="doc"><h4>Ablauf</h4><ul><li>Akku entnehmen.</li><li>Neuen Propeller mit gleicher Kennzeichnung aufsetzen (<b>Drehrichtung beachten!</b>).</li></ul><div class="img"><i class="bi bi-image"></i>&nbsp;Propeller mit Kennzeichnung</div><h4>Danach</h4><ul><li>Bei jedem zweiten Wechsel neue Schrauben verwenden.</li></ul></div></div>
+        <div class="card"><h3>Anhänge und Verknüpfungen</h3>
+          <table class="dt"><tr><td><i class="bi bi-file-earmark-pdf"></i> DJI_Avata2_Kurzanleitung.pdf</td><td class="mut">1,2 MB</td><td>×</td></tr>
+            <tr><td><i class="bi bi-airplane"></i> DJI Avata 2 <small class="mut">(Max R.)</small></td><td class="mut">Modell</td><td>×</td></tr>
+            <tr><td><i class="bi bi-box-seam"></i> Avata-Set 1 <small class="mut">(Verein)</small></td><td class="mut">Vereinsmodell</td><td>×</td></tr>
+            <tr><td><i class="bi bi-diagram-3"></i> FPV</td><td class="mut">Modelltyp</td><td>×</td></tr></table>
+          <span class="ibtn out" style="margin-top:6px"><i class="bi bi-paperclip"></i> Datei anhängen</span> <span class="ibtn out" style="margin-top:6px"><i class="bi bi-link-45deg"></i> Modell oder Typ verknüpfen</span></div>
+        <label>Änderungsnotiz <span class="opt">optional</span></label><div class="inp">Hinweis auf neue Schrauben ergänzt</div>
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center"><span class="ibtn">Speichern als Version 3</span><span class="ibtn out">Abbrechen</span><small class="mut">Beobachter werden benachrichtigt.</small></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Verlauf und Versionen</h2></div>
+  <p class="ddesc">Links alle Versionen mit wer, wann, Notiz und Umfang; zwei Versionen sind zum Vergleich gewählt. Rechts der Unterschied (alt → neu, zeilenweise). „Diese Version wiederherstellen“ erzeugt eine neue Version, nichts geht verloren. Darunter die Moderationsereignisse.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/lipo-akkus/verlauf?von=3&amp;bis=4</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Modelle</a><a>Ausleihe</a><a>Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on" style="color:var(--car);border-color:var(--car)"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.2fr">
+      <div>
+        <div class="hrow"><h3>Verlauf · LiPo-Akkus richtig lagern und laden</h3></div>
+        <div class="card"><table class="dt"><tr><th></th><th>Version</th><th>Von / wann</th><th>Notiz</th><th>Umfang</th></tr>
+          <tr class="sel"><td><i class="bi bi-record-circle-fill" style="color:var(--g)"></i></td><td><b>4</b> <span class="badge b-g">aktuell</span></td><td>Jonas B.<br><small class="mut">Di 10.11.2026, 20:31</small></td><td>Abschnitt Transport ergänzt</td><td><span class="p">+4</span> <span class="m">−0</span></td></tr>
+          <tr class="sel"><td><i class="bi bi-record-circle-fill" style="color:var(--g)"></i></td><td><b>3</b> <span class="badge b-g">geprüft</span></td><td>Markus B.<br><small class="mut">Sa 03.10.2026, 10:15</small></td><td>Lagerspannung präzisiert, Bild Ladetisch</td><td><span class="p">+2</span> <span class="m">−1</span></td></tr>
+          <tr><td><i class="bi bi-circle mut"></i></td><td><b>2</b></td><td>Lena K.<br><small class="mut">Sa 20.06.2026, 19:02</small></td><td>Ladestrom ergänzt</td><td><span class="p">+1</span> <span class="m">−0</span></td></tr>
+          <tr><td><i class="bi bi-circle mut"></i></td><td><b>1</b></td><td>Max R.<br><small class="mut">So 08.03.2026, 14:10</small></td><td>Erste Fassung</td><td>neu</td></tr></table></div>
+        <div class="card" style="font-size:12.5px"><h3>Moderation</h3>Sa 03.10.2026 · Markus B.: als geprüft markiert (Version 3)<br>Di 10.11.2026 · System: Prüfmarkierung durch Änderung aufgehoben</div>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3>Version 3 → Version 4</h3><span class="ibtn out"><i class="bi bi-arrow-counterclockwise"></i> Version 3 wiederherstellen</span></div>
+          <div class="tabs" style="margin-bottom:6px"><div class="on">Unterschied</div><div>Ganze Fassung Version 3</div><div>Nebeneinander</div></div>
+          <div class="d gap">⋯ 8 unveränderte Zeilen</div>
+          <div class="d eq">  - Nach dem Flug oder der Fahrt erst abkühlen lassen.</div>
+          <div class="d eq">  ![Bild: Ladetisch am Vereinsgelände](img:1)</div>
+          <div class="d add">+ ## Transport</div>
+          <div class="d add">+ - Im Auto in der LiPo-Tasche, nicht in der prallen Sonne liegen lassen.</div>
+          <div class="d add">+ ## Kurz merken</div>
+          <div class="d add">+ - **Voll** nur am Flug- oder Fahrtag, sonst Lagerspannung.</div>
+          <div class="note" style="text-align:left;margin-top:8px"><span class="m">− rot</span>: entfernt · <span class="p">+ grün</span>: hinzugefügt. Wiederherstellen erzeugt Version 5 mit dem Inhalt von Version 3 und hebt eine Prüfmarkierung auf.</div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Bearbeitungskonflikt</h2></div>
+  <p class="ddesc">Optimistisches Sperren wie in 5.5: Hat jemand parallel gespeichert, lehnt der Server ab. Beide Fassungen stehen nebeneinander, jeweils mit den Änderungen gegenüber der gemeinsamen Ausgangsversion. Darunter ein Vorschlag zum Zusammenführen, den man prüft und anpasst; alternativ eigene oder andere Fassung übernehmen. Nichts wird still überschrieben.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/erste-schritte-fpv/bearbeiten</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div style="padding:14px 22px;overflow:hidden">
+      <div class="alert2"><i class="bi bi-people"></i> <b>Max R.</b> hat „Erste Schritte FPV: Simulator und Tinywhoop“ heute um 09:40 gespeichert (Version 4), während du Version 3 bearbeitet hast. Deine Fassung ist noch nicht gespeichert.</div>
+      <div class="two-col">
+        <div class="card"><div class="colh"><span>Deine Fassung</span><span class="ibtn out">Meine übernehmen</span></div>
+          <div class="d gap">⋯ 2 unveränderte Zeilen</div>
+          <div class="d del">− - Rechne mit 10 bis 20 Stunden, bevor es auf den echten Copter geht.</div>
+          <div class="d add">+ - Rechne mit 10 bis 15 Stunden, bevor es auf den echten Copter geht.</div>
+          <div class="d gap">⋯ 10 unveränderte Zeilen</div>
+          <div class="d add">+ - Akkus fürs Hallenfliegen vorher laden.</div></div>
+        <div class="card"><div class="colh"><span>Fassung Max R. · Version 4 <small class="mut">„Simulatoren ergänzt“</small></span><span class="ibtn out">Andere behalten</span></div>
+          <div class="d gap">⋯ 4 unveränderte Zeilen</div>
+          <div class="d del">− - Liftoff</div>
+          <div class="d add">+ - Liftoff (dazu „Micro Drones“ für Tinywhoop-Gefühl)</div>
+          <div class="d eq">  - Velocidrone</div><div class="d eq">  - Uncrashed</div>
+          <div class="d add">+ - Tryp FPV</div></div>
+      </div>
+      <div class="card"><div class="colh"><span><i class="bi bi-intersect"></i> Zusammenführen (Vorschlag, bitte prüfen)</span><span><span class="ibtn">Zusammengeführt speichern</span></span></div>
+        <div class="ta" style="height:96px;border-radius:4px">- Rechne mit 10 bis 15 Stunden, bevor es auf den echten Copter geht.
+## Simulatoren
+- Liftoff (dazu „Micro Drones“ für Tinywhoop-Gefühl)
+- Velocidrone
+…</div>
+        <div class="note" style="text-align:left">Speichern erzeugt Version 5 mit der Notiz „Zusammengeführt mit Version 4 von Max R.“. Beide Ausgangsfassungen bleiben im Verlauf.</div>
+        <span class="assume">Annahme: Der Vorschlag übernimmt nicht überlappende Zeilenänderungen beider Seiten automatisch; Überschneidungen löst man von Hand.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Moderation (Abteilungsleitung)</h2></div>
+  <p class="ddesc">Übersicht nur für die Abteilungsleitung: zu prüfende Artikel (Prüfung durch Änderung aufgehoben oder rechtlicher Bezug ohne Prüfung), gesperrte Artikel, ausgeblendete Kommentare und Änderungen der letzten 7 Tage. Endgültiges Löschen bleibt dem Admin vorbehalten.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/moderation</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div class="dmain three">
+      <div>
+        <div class="stats"><div class="stat"><b>1</b><span>zu prüfen</span></div><div class="stat"><b>1</b><span>gesperrt</span></div><div class="stat"><b>1</b><span>ausgeblendet</span></div></div>
+        <div class="card"><h3>Zu prüfen</h3><table class="dt"><tr><td><b>LiPo-Akkus richtig lagern und laden</b><br><small class="mut">nach Prüfung geändert von Jonas B., Di 10.11.</small></td><td><span class="ibtn out">Prüfen</span></td></tr></table></div>
+        <div class="card"><h3>Gesperrt</h3><table class="dt"><tr><td><b>Platzregeln Vereinsgelände</b><br><small class="mut">seit So 12.04.2026 · Vereinsregel – Änderungen nur durch die Abteilungsleitung</small></td><td><span class="ibtn out">Entsperren</span></td></tr></table></div>
+      </div>
+      <div>
+        <div class="card"><h3>Ausgeblendete Kommentare</h3>
+          <div class="cm hid" style="border-top:0"><div class="h"><b>Lena K.</b> zu „Crawler: Reifen kleben“<small class="mut">Fr 13.11., 21:02</small></div><div class="tx">Ich verkaufe noch zwei gebrauchte Reifensätze 1:24, Preise gern per WhatsApp an 0171 …</div>
+            <small style="color:#7a4a06"><i class="bi bi-eye-slash"></i> ausgeblendet von Markus B., heute 08:15 · nur für die Leitung sichtbar</small><br><span class="mod">Wieder einblenden</span></div>
+        </div>
+        <div class="note" style="text-align:left">Ausblenden wirkt sofort für alle Mitglieder. Endgültig löschen (z. B. auf DSGVO-Antrag) kann nur der Admin.</div>
+      </div>
+      <div>
+        <div class="card"><h3>Änderungen der letzten 7 Tage</h3><table class="dt">
+          <tr><td><b>Crawler: Reifen kleben</b><br><small class="mut">Version 1 · Jonas B. · Fr 13.11.</small></td><td><span class="badge b-g">neu</span></td></tr>
+          <tr><td><b>LiPo-Akkus richtig lagern und laden</b><br><small class="mut">Version 4 · Jonas B. · Di 10.11.</small></td><td><span class="p">+4</span></td></tr>
+          <tr><td><b>Erste Schritte FPV</b><br><small class="mut">Version 3 · Lena K. · So 08.11.</small></td><td><span class="p">+1</span> <span class="m">−1</span></td></tr></table></div>
+        <span class="assume">Annahme: Die Moderationsübersicht liegt im Wissen (Filterleiste „Für dich“) und ist nur für die Abteilungsleitung sichtbar.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+</body>
+</html>

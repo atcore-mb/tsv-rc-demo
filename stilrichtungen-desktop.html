@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkyLog – Stilrichtungen am PC</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1240px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0;color:#444;max-width:860px}
+  .direction{max-width:1240px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer}
+  .direction:hover{border-color:#cfd8cf}.direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 14px;font-size:14px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:600px;display:flex;overflow:hidden}
+  small,.mut{color:var(--mut)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:7px 8px}
+  td{padding:8px;border-top:1px solid #eef0ee}
+
+  /* A */
+  .va{flex-direction:column;background:var(--bg)}
+  .va .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .va .hdr img{height:38px}
+  .va .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.va .hdr .t2{font-size:11px;opacity:.8}
+  .va .hdr .user{margin-left:auto;font-size:13px}
+  .va .nav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .va .nav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;text-decoration:none;border-bottom:3px solid transparent}
+  .va .nav a.on{color:var(--g);border-color:var(--g)}
+  .va .main{padding:18px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .va .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:12px 14px}
+  .va h3{margin:0 0 10px;font-size:16px}
+  .va .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:9px 12px;font-size:13px;color:#7a4a06;margin-bottom:14px}
+  .va .stats{display:flex;gap:10px;margin-bottom:14px}
+  .va .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:10px;text-align:center}
+  .va .stat b{display:block;font-size:22px;color:var(--g)}.va .stat span{font-size:11px;color:var(--mut)}
+  .va .btn{background:var(--g);color:#fff;border-radius:6px;padding:8px 14px;font-weight:700;font-size:14px;display:inline-block}
+  .va .badge{font-size:11px;border-radius:4px;padding:1px 6px;background:var(--gl);color:var(--g);font-weight:700}
+  .va .badge.w{background:var(--warnbg);color:var(--warn)}
+
+  /* B */
+  .vb{background:#f3f5f3}
+  .vb .side{width:220px;background:linear-gradient(180deg,var(--g),var(--gd));color:#fff;padding:18px 12px;display:flex;flex-direction:column;gap:4px}
+  .vb .side .logo{font-weight:800;font-size:20px;padding:0 10px 16px;display:flex;gap:8px;align-items:center}
+  .vb .side a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:12px;font-weight:700;font-size:14px;opacity:.85;display:flex;gap:10px}
+  .vb .side a.on{background:rgba(255,255,255,.18);opacity:1}
+  .vb .side .sp{flex:1}
+  .vb .main{flex:1;padding:20px 24px;overflow:hidden}
+  .vb .toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .vb .toprow h2{margin:0;font-size:24px}
+  .vb .add{background:var(--g);color:#fff;border-radius:14px;padding:10px 16px;font-weight:800;box-shadow:0 4px 12px rgba(10,92,35,.3)}
+  .vb .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+  .vb .tile{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .vb .tile b{font-size:26px;display:block;color:var(--gd)}.vb .tile span{font-size:12px;color:var(--mut)}
+  .vb .tile.w{background:var(--warnbg)}.vb .tile.w b{color:var(--warn)}
+  .vb .grid{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+  .vb .card{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .vb h3{margin:0 0 8px;font-size:15px}
+  .vb .pill{font-size:11px;border-radius:10px;padding:2px 8px;font-weight:800;background:var(--gl);color:var(--g)}
+  .vb .pill.w{background:var(--warnbg);color:var(--warn)}
+
+  /* C */
+  .vc{flex-direction:column;background:#fff}
+  .vc .hdr{display:flex;align-items:center;gap:18px;padding:10px 22px;border-bottom:3px solid var(--g)}
+  .vc .brand{display:flex;gap:8px;align-items:center;font-weight:800;font-size:20px}
+  .vc .brand img{height:30px}
+  .vc .nav{display:flex;gap:4px}
+  .vc .nav a{padding:7px 12px;font-weight:800;font-size:14px;color:#000;text-decoration:none;border-radius:6px}
+  .vc .nav a.on{background:var(--g);color:#fff}
+  .vc .net{margin-left:auto;font-size:11px;font-weight:800;border:2px solid #000;border-radius:4px;padding:1px 6px}
+  .vc .main{padding:18px 22px;display:grid;grid-template-columns:2fr 1fr;gap:18px;overflow:hidden}
+  .vc .bigbtn{background:var(--g);color:#fff;font-weight:800;font-size:18px;border-radius:6px;padding:14px;text-align:center;margin-bottom:12px}
+  .vc .warn{border:3px solid var(--warn);border-radius:6px;padding:8px 12px;font-weight:700;font-size:14px;margin-bottom:12px}
+  .vc .kpi{display:flex;border:2px solid #000;border-radius:6px;margin-bottom:14px}
+  .vc .kpi div{flex:1;padding:10px;text-align:center}.vc .kpi div+div{border-left:2px solid #000}
+  .vc .kpi b{display:block;font-size:24px}.vc .kpi span{font-size:11px;font-weight:800}
+  .vc .sec{font-size:13px;font-weight:800;text-transform:uppercase;margin:0 0 6px}
+  .vc table{font-size:14px}.vc td{border-top:2px solid #e5e5e5}.vc th{color:#000;font-weight:800}
+  .vc .box{border:2px solid #000;border-radius:6px;padding:12px}
+  .vc .tag{font-size:12px;font-weight:800;border:2px solid currentColor;border-radius:4px;padding:0 6px}
+  .vc .tag.w{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>Dieselbe App am PC</h1>
+  <p>SkyLog passt sich der Bildschirmbreite an (eine Codebasis, kein eigener „PC-Modus“). Am PC wird aus der unteren Tab-Leiste eine Navigation oben bzw. links, Listen werden zu Tabellen, und Inhalte stehen nebeneinander statt untereinander. Gezeigt ist jeweils die Startseite eines Piloten, der auch Abteilungsleitung ist.</p>
+</div>
+
+<section class="direction" data-choice="a" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">A</span><h2>Vereinsklassisch</h2></div>
+  <p class="ddesc">Kopf und Menüleiste oben wie auf der Vereinswebsite.</p>
+  <div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">skylog.tsv1927roethenbach.de</span></div>
+  <div class="app va">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">SkyLog</div><div class="t2">TSV 1927 Röthenbach · RC-Modellsport</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="nav"><a class="on">Flugbuch</a><a>Drohnen</a><a>Vorfälle</a><a>Kalender</a><a>Ausleihe</a><a>Abteilung</a><a>Berichte</a></div>
+    <div class="main">
+      <div>
+        <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+        <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std. Flugzeit</span></div><div class="stat"><b>3</b><span>Drohnen</span></div><div class="stat"><b>0</b><span>Vorfälle</span></div></div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center"><h3>Letzte Flüge</h3><span class="btn"><i class="bi bi-plus-lg"></i> Neuer Flug</span></div>
+          <table><tr><th>Datum</th><th>Drohne</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+            <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Modellfluggelände</td><td>Training</td><td>18</td></tr>
+            <tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td>24</td></tr>
+            <tr><td>02.11.2026</td><td>Avata 2 <span class="badge">Abteilung</span></td><td>Modellfluggelände</td><td>Schulung</td><td>11</td></tr>
+            <tr><td>28.10.2026</td><td>DJI Neo 2</td><td>Modellfluggelände</td><td>Training</td><td>15</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px"><h3>Abteilung: Nachweise</h3>
+          <table><tr><td>Lena K. · A1/A3</td><td><span class="badge w" style="background:#fde8e8;color:var(--red)">abgelaufen</span></td></tr><tr><td>Jonas B. · A2</td><td><span class="badge w">23 Tage</span></td></tr></table></div>
+        <div class="card" style="margin-bottom:14px"><h3>Offene Ausleihanträge</h3><table><tr><td>Avata-Set 1<br><small>Jonas B. · 20.–22.11.</small></td><td style="white-space:nowrap"><i class="bi bi-check-circle" style="color:var(--g);font-size:18px"></i> <i class="bi bi-x-circle" style="color:var(--red);font-size:18px"></i></td></tr></table></div>
+        <div class="card"><h3>Nächste Termine</h3><table><tr><td>22.11. Schulung A2</td></tr><tr><td>06.12. Vereinsfliegen</td></tr></table></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="direction" data-choice="b" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">B</span><h2>Moderne App</h2></div>
+  <p class="ddesc">Grüne Seitenleiste links, Kacheln und Karten im Raster – typisch für Web-Apps.</p>
+  <div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">skylog.tsv1927roethenbach.de</span></div>
+  <div class="app vb">
+    <div class="side"><div class="logo"><i class="bi bi-send-fill"></i> SkyLog</div>
+      <a class="on"><i class="bi bi-house-fill"></i>Start</a><a><i class="bi bi-journal-text"></i>Flugbuch</a><a><i class="bi bi-airplane"></i>Drohnen</a><a><i class="bi bi-exclamation-triangle"></i>Vorfälle</a><a><i class="bi bi-calendar3"></i>Termine</a><a><i class="bi bi-box-seam"></i>Ausleihe</a><a><i class="bi bi-people"></i>Abteilung</a><a><i class="bi bi-bar-chart"></i>Berichte</a>
+      <div class="sp"></div><a><i class="bi bi-person-circle"></i>Markus B.</a></div>
+    <div class="main">
+      <div class="toprow"><h2>Hallo, Markus</h2><span class="add"><i class="bi bi-plus-lg"></i> Neuer Flug</span></div>
+      <div class="tiles"><div class="tile"><b>37</b><span>Flüge 2026</span></div><div class="tile"><b>9:12 h</b><span>Flugzeit</span></div><div class="tile w"><b>41 T.</b><span>bis A2 abläuft</span></div><div class="tile"><b>2</b><span>Anträge offen</span></div></div>
+      <div class="grid">
+        <div class="card"><h3>Letzte Flüge</h3>
+          <table><tr><th>Datum</th><th>Drohne</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+            <tr><td>Heute</td><td>DJI Neo 2</td><td>Modellfluggelände</td><td><span class="pill">Training</span></td><td>18</td></tr>
+            <tr><td>09.11.</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td><span class="pill">Foto</span></td><td>24</td></tr>
+            <tr><td>02.11.</td><td>Avata 2 · Abt.</td><td>Modellfluggelände</td><td><span class="pill">Schulung</span></td><td>11</td></tr>
+            <tr><td>28.10.</td><td>DJI Neo 2</td><td>Modellfluggelände</td><td><span class="pill">Training</span></td><td>15</td></tr>
+          </table></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card"><h3>Nachweise Abteilung</h3><table><tr><td>Lena K. · A1/A3</td><td><span class="pill w" style="background:#fde8e8;color:var(--red)">abgelaufen</span></td></tr><tr><td>Jonas B. · A2</td><td><span class="pill w">23 Tage</span></td></tr></table></div>
+          <div class="card"><h3>Nächste Termine</h3><table><tr><td>22.11. Schulung A2</td></tr><tr><td>06.12. Vereinsfliegen</td></tr></table></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="direction" data-choice="c" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">C</span><h2>Outdoor-Kontrast</h2></div>
+  <p class="ddesc">Kompakte Kopfzeile mit Navigation, harte Linien, große Hauptaktion.</p>
+  <div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">skylog.tsv1927roethenbach.de</span></div>
+  <div class="app vc">
+    <div class="hdr"><div class="brand"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt="">SkyLog</div>
+      <div class="nav"><a class="on">Flugbuch</a><a>Drohnen</a><a>Vorfälle</a><a>Termine</a><a>Ausleihe</a><a>Abteilung</a><a>Berichte</a></div><span class="net">ONLINE</span></div>
+    <div class="main">
+      <div>
+        <div class="kpi"><div><b>37</b><span>FLÜGE 2026</span></div><div><b>9:12</b><span>STUNDEN</span></div><div><b>3</b><span>DROHNEN</span></div><div><b>0</b><span>VORFÄLLE</span></div></div>
+        <div class="sec">Letzte Flüge</div>
+        <table><tr><th>Datum</th><th>Drohne</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+          <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Modellfluggelände</td><td>Training</td><td><b>18</b></td></tr>
+          <tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td><b>24</b></td></tr>
+          <tr><td>02.11.2026</td><td>Avata 2 (Abt.)</td><td>Modellfluggelände</td><td>Schulung</td><td><b>11</b></td></tr>
+          <tr><td>28.10.2026</td><td>DJI Neo 2</td><td>Modellfluggelände</td><td>Training</td><td><b>15</b></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="bigbtn"><i class="bi bi-plus-circle-fill"></i> Flug erfassen</div>
+        <div class="warn"><i class="bi bi-exclamation-octagon-fill" style="color:var(--warn)"></i> A2-Zeugnis läuft in 41 Tagen ab</div>
+        <div class="box" style="margin-bottom:12px"><div class="sec">Nachweise Abteilung</div><table><tr><td>Lena K. · A1/A3</td><td><span class="tag" style="color:var(--red)">ABGELAUFEN</span></td></tr><tr><td>Jonas B. · A2</td><td><span class="tag w">23 TAGE</span></td></tr></table></div>
+        <div class="box"><div class="sec">Nächste Termine</div><table><tr><td>22.11. Schulung A2</td></tr><tr><td>06.12. Vereinsfliegen</td></tr></table></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

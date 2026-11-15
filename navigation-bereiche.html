@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Bereiche und Navigation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Bereiche in der Oberfläche</h1>
+  <p>Die Stilrichtung <b>„Vereinsklassisch“</b> bleibt. Neu ist die Frage, wie <b>Luftsport</b> und <b>RC Cars</b> zusammen in <b>einer</b> Oberfläche ohne Umschalten Platz finden (Ziel aus dem Gesamtdesign). Alle Beispiele zeigen <b>Markus</b>, der in beiden Bereichen aktiv ist. Wer nur in einem Bereich ist, sieht den anderen gar nicht.</p>
+  <p>Klicke eine Variante an oder sag im Chat, was du mischen würdest.</p>
+  <div class="legend"><span><span class="badge b-air"><i class="bi bi-airplane"></i> Luftsport</span></span><span><span class="badge b-car"><i class="bi bi-car-front"></i> RC Cars</span></span><span><span class="badge b-all">Alle</span> bereichsübergreifend</span><span class="mut">Bereichsfarben (Blau/Rostrot) sind nur ein Vorschlag, Vereinsgrün bleibt Hauptfarbe.</span></div>
+</div>
+
+<!-- ======================= A ======================= -->
+<section class="direction" data-choice="a" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">A</span><h2>Bereiche als eigene Tabs</h2></div>
+  <p class="ddesc">Untere Leiste: <b>Start · Luftsport · RC Cars · Kalender · Mehr</b>. Jeder Bereich hat seine eigene Seite mit Unterpunkten (z. B. Flugbuch / Drohnen / Nachweise). Gemeinsames (Kalender, Ausleihe, Nachweise der Leitung) steht außerhalb der Bereiche.</p>
+  <div class="proscons">
+    <div><b>Vorteile</b><ul><li>sehr klare Trennung, jeder findet „seinen“ Bereich</li><li>neuer Bereich = neuer Tab</li></ul></div>
+    <div><b>Nachteile</b><ul><li>Tab-Leiste ist schon mit zwei Bereichen voll, ein dritter (Flugzeuge, Boote) passt nicht mehr</li><li>Ausleihe und Modelle sind über mehrere Stellen verteilt</li></ul></div>
+  </div>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Start (gemeinsam)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
+        <div class="body">
+          <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+          <h3>Nächste Termine</h3>
+          <div class="card">
+            <div class="row"><span><b>Sa 16.11.</b> Fahrtag Sandbahn<br><small>10–16 Uhr · Rennstrecke</small></span><span class="badge b-car">RC Cars</span></div>
+            <div class="row"><span><b>Di 19.11.</b> Hallenfliegen<br><small>18–20 Uhr · Sporthalle</small></span><span class="badge b-air">Luftsport</span></div>
+            <div class="row"><span><b>Fr 29.11.</b> Abteilungsversammlung<br><small>19 Uhr · Sportheim</small></span><span class="badge b-all">Alle</span></div>
+          </div>
+          <h3>Meine Ausleihen</h3>
+          <div class="card">
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span>Vereins-Crawler TRX-4M<br><small>bis So 17.11.</small></span></span><span class="badge b-g">aktiv</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div class="on"><i class="bi bi-house"></i>Start</div><div><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Tab Luftsport</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-airplane" style="font-size:22px"></i><div><div class="t1">Luftsport</div><div class="t2">Drohnen · FPV · Halle</div></div></div>
+        <div class="body">
+          <div class="subnav"><div class="on">Flugbuch</div><div>Drohnen</div><div>Nachweise</div></div>
+          <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std.</span></div><div class="stat"><b>3</b><span>Drohnen</span></div></div>
+          <button class="btn"><i class="bi bi-plus-lg"></i> Neuer Flug</button>
+          <h3>Letzte Flüge</h3>
+          <div class="card">
+            <div class="row"><span><b>14.11.</b> DJI Neo 2<br><small>Vereinsgelände · Training</small></span><span>18 min</span></div>
+            <div class="row"><span><b>12.11.</b> FPV Quad 5″<br><small>Sporthalle · Training</small></span><span>6 min</span></div>
+            <div class="row"><span><b>09.11.</b> Mini 4 Pro<br><small>Wolfgangsberg · Foto</small></span><span>24 min</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div class="on"><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Tab RC Cars</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-car-front" style="font-size:22px"></i><div><div class="t1">RC Cars</div><div class="t2">Offroad · Crawler · Glattbahn</div></div></div>
+        <div class="body">
+          <div class="subnav"><div class="on">Fahrzeuge</div><div>Strecken</div><div>Meisterschaft</div></div>
+          <div class="card">
+            <div class="row"><span><b>Losi Mini-T 2.0</b><br><small>1:18 · Offroad · elektrisch</small></span><span class="badge b-w">Wartung fällig</span></div>
+            <div class="row"><span><b>Axial SCX24</b><br><small>1:24 · Crawler</small></span><span class="badge b-g">fahrbereit</span></div>
+            <div class="row"><span><b>Akku 2S 5000 #3</b><br><small>Zubehör · 48 Ladezyklen</small></span><i class="bi bi-chevron-right mut"></i></span></div>
+          </div>
+          <button class="btn out" style="margin-bottom:6px"><i class="bi bi-plus-lg"></i> Fahrzeug anlegen</button>
+          <h3>Vereinsmeisterschaft Offroad <span class="badge b-all">Teil 5</span></h3>
+          <div class="card pad"><table class="tab">
+            <tr><td>1. Jonas B.</td><td class="r">86 P.</td></tr>
+            <tr class="me"><td>&nbsp;2. Markus B.</td><td class="r">79 P.</td></tr>
+            <tr><td>3. Max R.</td><td class="r">71 P.</td></tr>
+          </table></div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-airplane"></i>Luftsport</div><div class="on"><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+  </div>
+  <p class="sublabel">PC-Ansicht · Luftsport › Flugbuch (Bereich in der Menüleiste, Unterpunkte in zweiter Zeile)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/flugbuch</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-box-seam"></i>Ausleihe</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Drohnen</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a></div>
+    <div class="dmain">
+      <div>
+        <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std. Flugzeit</span></div><div class="stat"><b>3</b><span>Drohnen</span></div><div class="stat"><b>0</b><span>Vorfälle</span></div></div>
+        <div class="card">
+          <div class="hrow"><h3>Letzte Flüge</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Neuer Flug</span></div>
+          <table class="dt"><tr><th>Datum</th><th>Drohne</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+            <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>18</td></tr>
+            <tr><td>12.11.2026</td><td>FPV Quad 5″</td><td>Sporthalle</td><td>Training</td><td>6</td></tr>
+            <tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td>24</td></tr>
+            <tr><td>02.11.2026</td><td>Avata 2 <span class="badge b-g">Abteilung</span></td><td>Vereinsgelände</td><td>Schulung</td><td>11</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+        <div class="card"><h3>Termine Luftsport</h3>
+          <table class="dt"><tr><td>Di 19.11. Hallenfliegen</td></tr><tr><td>Sa 23.11. Schulung A1/A3</td></tr></table></div>
+        <div class="card"><h3>Meine Drohnen</h3>
+          <table class="dt"><tr><td>DJI Neo 2</td><td><small>C0</small></td></tr><tr><td>Mini 4 Pro</td><td><small>C0</small></td></tr><tr><td>FPV Quad 5″</td><td><small>Eigenbau</small></td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ======================= B ======================= -->
+<section class="direction" data-choice="b" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">B</span><h2>Nach Funktionen, Bereich als Filter</h2></div>
+  <p class="ddesc">Untere Leiste: <b>Start · Flugbuch · Modelle · Kalender · Mehr</b>. Gegliedert nach dem, was man tut, nicht nach Bereich. Modelle, Kalender und Ausleihe zeigen alles gemischt mit Bereichs-Kennzeichen und Filter-Chips. „Flugbuch“ erscheint nur für Mitglieder im Luftsport.</p>
+  <div class="proscons">
+    <div><b>Vorteile</b><ul><li>gemeinsame Funktionen nur einmal vorhanden</li><li>weitere Bereiche brauchen keinen neuen Tab, nur einen Filter</li><li>passt zum Datenmodell (Modell mit Bereich und Typ)</li></ul></div>
+    <div><b>Nachteile</b><ul><li>RC Cars hat keinen eigenen „Ort“ in der App, Rennen/Meisterschaft muss später unter „Mehr“ oder als eigener Tab</li></ul></div>
+  </div>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Start</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
+        <div class="body">
+          <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> <b>A2-Zeugnis</b> läuft in 41 Tagen ab.</div>
+          <div class="btns"><button class="btn"><i class="bi bi-plus-lg"></i> Neuer Flug</button><button class="btn out"><i class="bi bi-exclamation-diamond"></i> Schaden</button></div>
+          <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>5</b><span>Modelle</span></div><div class="stat"><b>1</b><span>Ausleihe</span></div></div>
+          <h3>Demnächst</h3>
+          <div class="card">
+            <div class="row"><span><b>Sa 16.11.</b> Fahrtag Sandbahn<br><small>Rennstrecke</small></span><span class="badge b-car">RC Cars</span></div>
+            <div class="row"><span><b>So 17.11.</b> Rückgabe TRX-4M<br><small>Ausleihe</small></span><span class="badge b-w">Rückgabe</span></div>
+            <div class="row"><span><b>Di 19.11.</b> Hallenfliegen<br><small>Sporthalle</small></span><span class="badge b-air">Luftsport</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div class="on"><i class="bi bi-house"></i>Start</div><div><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-grid"></i>Modelle</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Modelle (gemischt)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><div class="t1">Modelle</div><div class="sp"></div><i class="bi bi-plus-lg" style="font-size:20px"></i></div>
+        <div class="body">
+          <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
+          <div class="subnav"><div class="on">Meine</div><div>Vereinsmodelle</div></div>
+          <div class="card">
+            <div class="row"><span class="li"><span class="ico air"><i class="bi bi-airplane"></i></span><span><b>DJI Neo 2</b><br><small>Drohne · C0 · 151 g</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico air"><i class="bi bi-airplane"></i></span><span><b>FPV Quad 5″</b><br><small>FPV · Eigenbau</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Losi Mini-T 2.0</b><br><small>Offroad · 1:18</small></span></span><span class="badge b-w">Wartung</span></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Axial SCX24</b><br><small>Crawler · 1:24</small></span></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+          <h3>Zubehör</h3>
+          <div class="card">
+            <div class="row"><span><b>Akku 2S 5000 #3</b> <span class="badge b-car">RC Cars</span><br><small>48 Ladezyklen</small></span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span><b>Akku 4S 1300 ×4</b> <span class="badge b-air">Luftsport</span><br><small>Ø 61 Ladezyklen</small></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-journal-text"></i>Flugbuch</div><div class="on"><i class="bi bi-grid"></i>Modelle</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Kalender (bereichsübergreifend)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><div class="t1">Kalender</div><div class="sp"></div><i class="bi bi-funnel" style="font-size:18px"></i></div>
+        <div class="body">
+          <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="chip">Schulungen</span></div>
+          <h3>November</h3>
+          <div class="card">
+            <div class="row"><span><b>Sa 16.11.</b> Fahrtag Sandbahn<br><small>Rennstrecke · 6 Zusagen</small></span><span class="badge b-car">RC Cars</span></div>
+            <div class="row"><span><b>Di 19.11.</b> Hallenfliegen<br><small>Sporthalle · Flugleiter: Max R.</small></span><span class="badge b-air">Luftsport</span></div>
+            <div class="row"><span><b>Sa 23.11.</b> Schulung A1/A3<br><small>Vereinsheim · 4 Plätze frei</small></span><span class="badge b-air">Luftsport</span></div>
+            <div class="row"><span><b>So 24.11.</b> VM Lauf 5 · Crawler<br><small>Crawler-Strecke · Rennen</small></span><span class="badge b-car">RC Cars</span></div>
+            <div class="row"><span><b>Fr 29.11.</b> Abteilungsversammlung<br><small>Sportheim</small></span><span class="badge b-all">Alle</span></div>
+          </div>
+          <button class="btn out"><i class="bi bi-calendar-plus"></i> Kalender abonnieren (ICS)</button>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-grid"></i>Modelle</div><div class="on"><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+  </div>
+  <p class="sublabel">PC-Ansicht · Modelle (eine Tabelle für alle Bereiche, Spalte „Bereich“, Filter)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/modelle</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-journal-text"></i>Flugbuch</a><a class="on"><i class="bi bi-grid"></i>Modelle</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-box-seam"></i>Ausleihe</a><a><i class="bi bi-exclamation-diamond"></i>Vorfälle</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dmain">
+      <div>
+        <div class="hrow"><div class="chips" style="margin:0"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="chip">Meine</span><span class="chip">Vereinsmodelle</span></div><span class="ibtn"><i class="bi bi-plus-lg"></i> Modell anlegen</span></div>
+        <div class="card">
+          <table class="dt"><tr><th>Modell</th><th>Bereich</th><th>Typ</th><th>Details</th><th>Besitzer</th><th>Status</th></tr>
+            <tr><td><b>DJI Neo 2</b></td><td><span class="badge b-air">Luftsport</span></td><td>Drohne</td><td>C0 · 151 g</td><td>Markus B.</td><td><span class="badge b-g">bereit</span></td></tr>
+            <tr><td><b>FPV Quad 5″</b></td><td><span class="badge b-air">Luftsport</span></td><td>FPV</td><td>Eigenbau · 4S</td><td>Markus B.</td><td><span class="badge b-g">bereit</span></td></tr>
+            <tr><td><b>Losi Mini-T 2.0</b></td><td><span class="badge b-car">RC Cars</span></td><td>Offroad</td><td>1:18 · elektrisch</td><td>Markus B.</td><td><span class="badge b-w">Wartung fällig</span></td></tr>
+            <tr><td><b>Axial SCX24</b></td><td><span class="badge b-car">RC Cars</span></td><td>Crawler</td><td>1:24</td><td>Markus B.</td><td><span class="badge b-g">bereit</span></td></tr>
+            <tr><td><b>Avata-Set 1</b></td><td><span class="badge b-air">Luftsport</span></td><td>Set</td><td>Drohne + Brille + 3 Akkus</td><td>Abteilung</td><td><span class="badge b-g">frei</span></td></tr>
+            <tr><td><b>TRX-4M Crawler</b></td><td><span class="badge b-car">RC Cars</span></td><td>Crawler</td><td>1:18 · inkl. Fernsteuerung</td><td>Abteilung</td><td><span class="badge b-r">verliehen</span></td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Zubehör mit Hinweis</h3>
+          <table class="dt"><tr><td>Akku 2S 5000 #3 <span class="badge b-car">RC</span></td><td><small>48 Zyklen</small></td></tr><tr><td>Akku 4S 1300 #2 <span class="badge b-air">Luft</span></td><td><span class="badge b-w">aufgebläht?</span></td></tr></table></div>
+        <div class="card"><h3>Wartung fällig</h3>
+          <table class="dt"><tr><td>Losi Mini-T 2.0</td><td><small>Differenzial prüfen</small></td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ======================= C ======================= -->
+<section class="direction" data-choice="c" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">C</span><h2>Startseite mit Bereichsblöcken</h2></div>
+  <p class="ddesc">Untere Leiste wie B (<b>Start · Modelle · Kalender · Ausleihe · Mehr</b>), aber die Startseite ist nach Bereichen gegliedert: je Bereich ein Block mit farbiger Kante, eigener Kennzahl und der wichtigsten Aktion (z. B. „Flug erfassen“, „Meisterschaft“). Wer nur in einem Bereich ist, sieht nur einen Block.</p>
+  <div class="proscons">
+    <div><b>Vorteile</b><ul><li>Bereiche sind auf den ersten Blick sichtbar, ohne die Navigation zu zerteilen</li><li>Startseite passt sich der Person an</li><li>Rennen/Meisterschaft bekommt später einfach einen Block</li></ul></div>
+    <div><b>Nachteile</b><ul><li>Startseite wird bei zwei Bereichen lang (Scrollen)</li><li>Flugbuch selbst ist nur über den Block oder „Mehr“ erreichbar</li></ul></div>
+  </div>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Start (beide Bereiche)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
+        <div class="body">
+          <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> <b>A2-Zeugnis</b> läuft in 41 Tagen ab.</div>
+          <div class="block air">
+            <div class="bh"><span><i class="bi bi-airplane" style="color:var(--air)"></i> Luftsport</span><span class="act">Flugbuch <i class="bi bi-chevron-right"></i></span></div>
+            <div class="mini"><span><b>37</b> Flüge</span><span><b>9:12</b> Std.</span><span><b>3</b> Drohnen</span></div>
+            <div class="row"><span>Letzter Flug: <b>Neo 2</b>, heute</span><span>18 min</span></div>
+            <button class="btn" style="margin:4px 0 4px"><i class="bi bi-plus-lg"></i> Flug erfassen</button>
+          </div>
+          <div class="block car">
+            <div class="bh"><span><i class="bi bi-car-front" style="color:var(--car)"></i> RC Cars</span><span class="act">Fahrzeuge <i class="bi bi-chevron-right"></i></span></div>
+            <div class="row"><span>Nächster Fahrtag: <b>Sa 16.11.</b></span><span class="badge b-g">zugesagt</span></div>
+            <div class="row"><span>Losi Mini-T 2.0</span><span class="badge b-w">Wartung fällig</span></div>
+            <div class="row"><span>Meisterschaft Offroad</span><span><b>Platz 2</b> · 79 P.</span></div>
+          </div>
+          <div class="block" style="border-left-color:#888">
+            <div class="bh"><span><i class="bi bi-people"></i> Abteilung</span><span class="act">Kalender <i class="bi bi-chevron-right"></i></span></div>
+            <div class="row"><span>Fr 29.11. Abteilungsversammlung</span><span class="badge b-all">Alle</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div class="on"><i class="bi bi-house"></i>Start</div><div><i class="bi bi-grid"></i>Modelle</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-box-seam"></i>Ausleihe</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Start (nur RC Cars, z. B. Lena)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
+        <div class="body">
+          <div class="block car">
+            <div class="bh"><span><i class="bi bi-car-front" style="color:var(--car)"></i> RC Cars</span><span class="act">Fahrzeuge <i class="bi bi-chevron-right"></i></span></div>
+            <div class="mini"><span><b>2</b> Fahrzeuge</span><span><b>6</b> Akkus</span></div>
+            <div class="row"><span>Nächster Fahrtag: <b>Sa 16.11.</b></span><span class="badge b-w">offen</span></div>
+            <div class="btns" style="margin:6px 0 4px"><button class="btn">Zusagen</button><button class="btn out">Absagen</button></div>
+          </div>
+          <div class="block car">
+            <div class="bh"><span><i class="bi bi-trophy" style="color:var(--car)"></i> Vereinsmeisterschaft</span><span class="act">Tabellen <i class="bi bi-chevron-right"></i></span></div>
+            <table class="tab">
+              <tr><td colspan="2"><small>Crawler · nach Lauf 4</small></td></tr>
+              <tr><td>1. Max R.</td><td class="r">64 P.</td></tr>
+              <tr class="me"><td>&nbsp;2. Lena K.</td><td class="r">58 P.</td></tr>
+              <tr><td>3. Jonas B.</td><td class="r">51 P.</td></tr>
+            </table>
+            <div class="note">Lauf 5 am So 24.11.</div>
+          </div>
+          <div class="block" style="border-left-color:#888">
+            <div class="bh"><span><i class="bi bi-people"></i> Abteilung</span><span class="act">Kalender <i class="bi bi-chevron-right"></i></span></div>
+            <div class="row"><span>Fr 29.11. Abteilungsversammlung</span><span class="badge b-all">Alle</span></div>
+          </div>
+          <div class="note">Kein Luftsport-Block: Lena ist nur im Bereich RC Cars.</div>
+        </div>
+        <div class="tabbar"><div class="on"><i class="bi bi-house"></i>Start</div><div><i class="bi bi-grid"></i>Modelle</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-box-seam"></i>Ausleihe</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Ausleihe (beide Bereiche)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><div class="t1">Ausleihe</div></div>
+        <div class="body">
+          <div class="subnav"><div class="on">Verfügbar</div><div>Meine (1)</div><div>Anträge</div></div>
+          <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
+          <div class="card">
+            <div class="row"><span class="li"><span class="ico air"><i class="bi bi-airplane"></i></span><span><b>Avata-Set 1</b><br><small>Drohne + Brille + 3 Akkus</small></span></span><span class="badge b-g">frei</span></div>
+            <div class="row"><span class="li"><span class="ico air"><i class="bi bi-airplane"></i></span><span><b>Tinywhoop-Set</b><br><small>für Hallenfliegen</small></span></span><span class="badge b-w">ab 20.11.</span></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>TRX-4M Crawler</b><br><small>inkl. Fernsteuerung, 2 Akkus</small></span></span><span class="badge b-r">verliehen</span></div>
+            <div class="row"><span class="li"><span class="ico car"><i class="bi bi-car-front"></i></span><span><b>Mini-T Einsteiger-Set</b><br><small>Offroad 1:18 · Genehmigung nötig</small></span></span><span class="badge b-g">frei</span></div>
+          </div>
+          <button class="btn"><i class="bi bi-box-arrow-in-right"></i> Ausleihe beantragen</button>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-grid"></i>Modelle</div><div><i class="bi bi-calendar3"></i>Kalender</div><div class="on"><i class="bi bi-box-seam"></i>Ausleihe</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+  </div>
+  <p class="sublabel">PC-Ansicht · Start (Bereichsblöcke nebeneinander, Abteilung rechts)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a class="on"><i class="bi bi-house"></i>Start</a><a><i class="bi bi-grid"></i>Modelle</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-box-seam"></i>Ausleihe</a><a><i class="bi bi-journal-text"></i>Flugbuch</a><a><i class="bi bi-trophy"></i>Meisterschaft</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dmain three">
+      <div>
+        <div class="block air">
+          <div class="bh"><span><i class="bi bi-airplane" style="color:var(--air)"></i> Luftsport</span><span class="ibtn"><i class="bi bi-plus-lg"></i> Flug erfassen</span></div>
+          <div class="mini"><span><b>37</b> Flüge</span><span><b>9:12</b> Std.</span><span><b>3</b> Drohnen</span></div>
+          <table class="dt"><tr><th>Datum</th><th>Drohne</th><th>Min.</th></tr>
+            <tr><td>14.11.</td><td>DJI Neo 2</td><td>18</td></tr>
+            <tr><td>12.11.</td><td>FPV Quad 5″</td><td>6</td></tr>
+            <tr><td>09.11.</td><td>Mini 4 Pro</td><td>24</td></tr></table>
+          <div class="act" style="margin-top:6px">Zum Flugbuch <i class="bi bi-chevron-right"></i></div>
+        </div>
+        <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Zeugnis</b> läuft in 41 Tagen ab.</div>
+      </div>
+      <div>
+        <div class="block car">
+          <div class="bh"><span><i class="bi bi-car-front" style="color:var(--car)"></i> RC Cars</span><span class="ibtn out">Fahrzeuge</span></div>
+          <div class="row"><span>Nächster Fahrtag <b>Sa 16.11.</b></span><span class="badge b-g">zugesagt</span></div>
+          <div class="row"><span>Losi Mini-T 2.0</span><span class="badge b-w">Wartung fällig</span></div>
+          <h3 style="margin:10px 0 4px">Vereinsmeisterschaft Offroad</h3>
+          <table class="dt"><tr><td>1. Jonas B.</td><td>86 P.</td></tr><tr class="me"><td>2. Markus B.</td><td>79 P.</td></tr><tr><td>3. Max R.</td><td>71 P.</td></tr></table>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Nächste Termine</h3>
+          <table class="dt">
+            <tr><td>Sa 16.11. Fahrtag Sandbahn</td><td><span class="badge b-car">RC</span></td></tr>
+            <tr><td>Di 19.11. Hallenfliegen</td><td><span class="badge b-air">Luft</span></td></tr>
+            <tr><td>Fr 29.11. Versammlung</td><td><span class="badge b-all">Alle</span></td></tr></table></div>
+        <div class="card"><h3>Meine Ausleihen</h3>
+          <table class="dt"><tr><td>TRX-4M Crawler<br><small>Rückgabe So 17.11.</small></td><td><span class="badge b-g">aktiv</span></td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+<script>
+  function toggleSelect(el){document.querySelectorAll('.direction').forEach(d=>{if(d!==el)d.classList.remove('selected')});el.classList.toggle('selected')}
+</script>
+</body>
+</html>

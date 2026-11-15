@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Profil, Nachweise, Freigaben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .kv2{display:grid;grid-template-columns:120px 1fr;gap:6px 10px;font-size:13px;padding:4px 0;margin:0}
+  .kv2 dt{color:var(--mut)}
+  .kv2 dd{margin:0;font-weight:600}
+  .avatar{width:56px;height:56px;border-radius:50%;background:var(--gl);color:var(--g);font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle}
+  .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+  .tg.on{background:var(--g)}.tg.on::after{left:18px}
+  .lockrow td{color:#555}
+  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
+  .tabs .on{color:var(--g);border-color:var(--g)}
+  .banner{background:var(--airbg);border:1px solid #c9dcf0;border-radius:6px;padding:9px 12px;font-size:13px;margin-bottom:14px}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Profil, Nachweise, Freigaben</h1>
+  <p>Gruppe 2, Teil 1, <b>PC-Ansicht</b>. Die Handy-Seiten sind klickbar im <b>Klickdummy</b> (Mehr › Profil, Nachweise, Freigaben, Meine Kinder).</p>
+</div>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Profil mit Nachweisen</h2></div>
+  <p class="ddesc">Links Person und Sicherheit, Mitte Nachweise als Tabelle, rechts Benachrichtigungen und Kalender-Link.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.5fr 1fr">
+      <div>
+        <div class="card">
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><div class="avatar">MB</div><div><b style="font-size:16px">Markus B.</b><br><small class="mut">Mitglied seit 03/2024</small><br><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></div></div>
+          <dl class="kv2"><dt>Rollen</dt><dd>Mitglied, Abteilungsleitung, Admin</dd><dt>Geburtsdatum</dt><dd>12.05.1980</dd><dt>E-Mail</dt><dd>markus@…</dd><dt>Telefon</dt><dd>0911 …</dd></dl>
+          <span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span>
+        </div>
+        <div class="card"><h3>Anmeldung &amp; Sicherheit</h3>
+          <table class="dt"><tr><td><i class="bi bi-fingerprint"></i> Passkeys</td><td>iPhone, MacBook</td></tr><tr><td><i class="bi bi-shield-lock"></i> Zwei-Faktor</td><td>1 App</td></tr><tr><td><i class="bi bi-life-preserver"></i> Wiederherstellung</td><td>8 / 10 Codes</td></tr><tr><td><i class="bi bi-phone"></i> Geräte</td><td>3 angemeldet</td></tr><tr><td><i class="bi bi-code-slash"></i> API-Tokens</td><td>1 aktiv</td></tr></table>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="hrow"><h3>Nachweise</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Nachweis</span></div>
+          <table class="dt"><tr><th>Typ</th><th>Nummer</th><th>Gültig bis</th><th>Datei</th><th>Status</th></tr>
+            <tr><td><b>Fernpilotenzeugnis A2</b></td><td>DEU-A2-0012345</td><td>25.12.2026</td><td><i class="bi bi-file-earmark-pdf"></i></td><td><span class="badge b-w">41 Tage</span></td></tr>
+            <tr><td><b>Kompetenznachweis A1/A3</b></td><td>DEU-RP-…</td><td>03/2029</td><td><i class="bi bi-file-earmark-pdf"></i></td><td><span class="badge b-g">gültig</span></td></tr>
+            <tr><td><b>Betreiber-Registrierung</b></td><td>DEU8K2P4…</td><td>05/2027</td><td><i class="bi bi-image"></i></td><td><span class="badge b-g">gültig</span></td></tr>
+            <tr><td><b>Haftpflichtversicherung</b></td><td>über Verein</td><td>31.12.2026</td><td>–</td><td><span class="badge b-w">47 Tage</span></td></tr>
+          </table>
+          <div class="note" style="text-align:left;margin-top:8px">Die Abteilungsleitung sieht Gültigkeit und Ablauf, nicht die Dateien.</div>
+        </div>
+        <div class="card"><h3>Datenschutz</h3><span class="ibtn out"><i class="bi bi-download"></i> Meine Daten herunterladen</span> <span class="ibtn out" style="color:var(--red);border-color:var(--red)"><i class="bi bi-person-x"></i> Austritt</span></div>
+      </div>
+      <div>
+        <div class="card"><h3>Benachrichtigungen</h3>
+          <table class="dt"><tr><td>Nachweis läuft ab</td><td><span class="tg on"></span></td></tr><tr><td>Ausleihe / Rückgabe</td><td><span class="tg on"></span></td></tr><tr><td>Neue Termine</td><td><span class="tg"></span></td></tr><tr><td>E-Mail</td><td><span class="tg on"></span></td></tr></table></div>
+        <div class="card"><h3>Kalender-Abo</h3><small class="mut">Persönlicher ICS-Link für Termine deiner Bereiche</small><div style="margin-top:8px"><span class="ibtn out">Link kopieren</span> <span class="ibtn out">Neu erzeugen</span></div></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Freigaben</h2></div>
+  <p class="ddesc">Zwei Tabellen: von mir geteilt (mit automatischen, gesperrten Freigaben) und mit mir geteilt. Neue Freigabe als Formular rechts.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain">
+      <div>
+        <div class="card"><div class="tabs"><div class="on">Von mir geteilt</div><div>Mit mir geteilt (2)</div></div>
+          <table class="dt"><tr><th>Was</th><th>An</th><th>Bis</th><th></th></tr>
+            <tr><td><b>Flugbuch (gesamt)</b></td><td>Max R.</td><td>31.12.2026</td><td><span class="ibtn out">Widerrufen</span></td></tr>
+            <tr><td><b>Modell DJI Neo 2</b></td><td>Jonas B.</td><td>unbefristet</td><td><span class="ibtn out">Widerrufen</span></td></tr>
+            <tr class="lockrow"><td>Flüge am Vereinsgelände</td><td>Abteilungsleitung</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
+            <tr class="lockrow"><td>Gültigkeit der Nachweise</td><td>Abteilungsleitung</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
+          </table>
+          <div class="note" style="text-align:left;margin-top:8px">Freigaben sind immer nur lesen. Automatische Freigaben ergeben sich aus den Vereinsregeln.</div>
+        </div>
+      </div>
+      <div class="card"><h3>Neue Freigabe</h3>
+        <label>Was teilen?</label><div class="chips"><span class="chip on">Flugbuch</span><span class="chip">Modelle</span><span class="chip">Nachweise</span><span class="chip">Einzelnes …</span></div>
+        <label>Mit wem?</label><div class="inp"><span class="mut">Person oder Gruppe suchen …</span><i class="bi bi-search"></i></div>
+        <label>Wie lange?</label><div class="chips"><span class="chip on">Unbefristet</span><span class="chip">1 Monat</span><span class="chip">Datum …</span></div>
+        <span class="ibtn" style="margin-top:6px">Freigeben</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Ansicht für Erziehungsberechtigte</h2></div>
+  <p class="ddesc">Eltern wechseln über ihren Namen oben rechts in die Sicht des Kindes. Alles ist nur lesbar, ein Hinweisband macht das deutlich.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kinder/tim</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Sandra S. <i class="bi bi-chevron-down"></i></div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people-fill"></i>Tim S. (14)</a></div>
+    <div style="padding:16px 22px 0"><div class="banner"><i class="bi bi-eye"></i> Du siehst die Daten von <b>Tim S.</b> als Erziehungsberechtigte. Nur lesen. Endet automatisch am 18. Geburtstag (03.2030).</div></div>
+    <div class="dmain" style="padding-top:0">
+      <div class="card"><h3>Flüge</h3>
+        <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Ort</th><th>Art</th><th>Ausbilder</th><th>Min.</th></tr>
+          <tr><td>12.11.2026</td><td>Tinywhoop-Set <span class="badge b-g">Verein</span></td><td>Sporthalle</td><td>Schulung</td><td>Max R.</td><td>8</td></tr>
+          <tr><td>05.11.2026</td><td>Tinywhoop-Set <span class="badge b-g">Verein</span></td><td>Sporthalle</td><td>Schulung</td><td>Max R.</td><td>10</td></tr>
+        </table></div>
+      <div>
+        <div class="card"><h3>Nachweise</h3><table class="dt"><tr><td>A1/A3</td><td><span class="badge b-g">bis 10/2031</span></td></tr><tr><td>Einwilligung</td><td><span class="badge b-g">01.09.2026</span></td></tr></table></div>
+        <div class="card"><h3>Termine</h3><table class="dt"><tr><td>Do 19.11. Hallenfliegen</td><td>zugesagt</td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Nachweis-Detail und Nachweis teilen</h2></div>
+  <p class="ddesc">Ein Detailbildschirm für alle Nachweistypen (A1/A3, A2, e-ID, Versicherung …), befüllt aus dem jeweiligen Nachweis: Angaben, Ablaufwarnung, Datei, wer ihn sieht, Verlauf. Teilen öffnet rechts ein Formular; Freigaben sind nur lesen und widerrufbar.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/nachweise/versicherung</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1.5fr 1fr">
+      <div class="card" style="padding:14px 18px">
+        <div class="hrow"><h3>Haftpflichtversicherung</h3><span><span class="ibtn out"><i class="bi bi-arrow-repeat"></i> Verlängert</span> <span class="ibtn"><i class="bi bi-share"></i> Teilen</span></span></div>
+        <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> <b>Läuft in 47 Tagen ab</b> (31.12.2026). Erinnerung kam 60 Tage vorher, die nächste folgt am 17.12.2026.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <dl class="kv2"><dt>Typ</dt><dd>Haftpflichtversicherung</dd><dt>Nummer</dt><dd>Gruppenvertrag des Vereins</dd><dt>Aussteller</dt><dd>über Verein</dd><dt>Gültig von</dt><dd>01.01.2026</dd><dt>Gültig bis</dt><dd>31.12.2026</dd><dt>Status</dt><dd><span class="badge b-w">47 Tage</span></dd></dl>
+            <span class="assume">Annahme: Versicherung über den Verein mit jährlicher Bestätigung; Umfang und Nachweisform mit dem Verein abstimmen.</span>
+            <h3 style="margin-top:10px">Datei</h3>
+            <div style="display:flex;gap:10px;align-items:center;font-size:13px"><i class="bi bi-file-earmark-pdf" style="font-size:26px;color:var(--g)"></i><span><b>Versicherungsbestaetigung-2026.pdf</b><br><small class="mut">95 KB · nur für dich und deine Freigaben</small></span><span class="ibtn out" style="margin-left:auto">Ersetzen</span></div>
+          </div>
+          <div>
+            <h3>Sichtbar für</h3>
+            <table class="dt"><tr class="lockrow"><td>Abteilungsleitung</td><td>nur Gültigkeit · automatisch</td><td><i class="bi bi-lock"></i></td></tr><tr><td>Jonas B.</td><td>mit Datei · bis 31.01.2027</td><td><span class="ibtn out">Widerrufen</span></td></tr></table>
+            <h3 style="margin-top:12px">Verlauf</h3>
+            <div class="tl">
+              <div class="e"><b>Geteilt · 15.11. · Markus B.</b><small>an Jonas B. · mit Datei · bis 31.01.2027</small></div>
+              <div class="e"><b>Erinnerung versendet · 01.11.2026</b><small>60 Tage vor Ablauf</small></div>
+              <div class="e"><b>Erfasst · 05.01.2026 · Markus B.</b><small>Bestätigung vom Verein hochgeladen</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="padding:14px 18px"><h3>Nachweis teilen</h3>
+        <label>Was</label><div class="inp" style="background:#f3f5f3">Haftpflichtversicherung <i class="bi bi-lock lock"></i></div>
+        <label>Mit wem? <span class="req">*</span></label><div class="inp">Jonas B. <i class="bi bi-chevron-down"></i></div>
+        <label>Umfang <span class="req">*</span></label><div class="chips"><span class="chip">Nur Angaben</span><span class="chip on">Angaben und Datei</span></div>
+        <label>Wie lange? <span class="req">*</span></label><div class="chips"><span class="chip">1 Monat</span><span class="chip">bis 31.12.2026</span><span class="chip">Unbefristet</span><span class="chip on">Datum …</span></div>
+        <div class="inp">31.01.2027</div>
+        <div class="note" style="text-align:left;margin:8px 0">Nur lesen, jederzeit widerrufbar. Die Person wird benachrichtigt.</div>
+        <span class="assume">Annahme: Einzelne Nachweise lassen sich mit oder ohne Datei teilen.</span><br>
+        <span class="ibtn" style="margin-top:6px">Freigeben</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Persönliche Daten bearbeiten</h2></div>
+  <p class="ddesc">Mitglieder ändern E-Mail und Telefon selbst. Name, Geburtsdatum und Bereiche pflegt die Abteilungsleitung. Die E-Mail ist der Anmeldename: Änderung nur mit erneuter Bestätigung (Passkey/Passwort) und Bestätigungslink an die neue Adresse.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/daten</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain">
+      <div class="card" style="padding:14px 18px">
+        <div class="hrow"><h3>Persönliche Daten</h3><span class="mut" style="font-size:12px"><span style="color:var(--red)">*</span> Pflichtfeld</span></div>
+        <div class="two"><div><label>Name</label><div class="inp" style="background:#f3f5f3">Markus B. <i class="bi bi-lock lock"></i></div></div><div><label>Geburtsdatum</label><div class="inp" style="background:#f3f5f3">12.05.1980 <i class="bi bi-lock lock"></i></div></div></div>
+        <div class="hint">Name und Geburtsdatum ändert die Abteilungsleitung.</div>
+        <div class="two"><div><label>E-Mail (Anmeldename) <span class="req">*</span></label><div class="inp" style="border-color:var(--g);border-width:2px">markus.neu@beispiel.de</div></div><div><label>Telefon <span class="opt">optional</span></label><div class="inp">0911 5550123</div></div></div>
+        <div class="alert" style="margin-top:8px"><i class="bi bi-shield-lock"></i> Die E-Mail ist dein Anmeldename. Zum Ändern bestätigst du mit Passkey oder Passwort. Danach geht ein Bestätigungslink an die neue Adresse; bis dahin gilt die alte.</div>
+        <label>Bereiche</label><div class="inp" style="background:#f3f5f3"><span><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></span><i class="bi bi-lock lock"></i></div>
+        <div style="margin-top:12px"><span class="ibtn"><i class="bi bi-fingerprint"></i> Mit Passkey bestätigen &amp; speichern</span> <span class="ibtn out">Abbrechen</span></div>
+      </div>
+      <div>
+        <div class="card"><h3>Protokoll</h3><small class="mut">Bei Kontakt- und Profildaten steht im Änderungsprotokoll nur, <b>dass</b> sich ein Feld geändert hat, nicht der Wert.</small></div>
+        <div class="card"><span class="assume">Annahme: Name, Geburtsdatum und Bereiche sind für Mitglieder gesperrt (Altersgrenzen hängen am Geburtsdatum).</span><br><span class="assume">Annahme: Telefon ist freiwillig und nur für die Abteilungsleitung sichtbar.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Geteiltes Flugbuch (Freigabe „Mit mir geteilt“)</h2></div>
+  <p class="ddesc">Lena K. hat Markus B. als ihrem Ausbilder das Flugbuch freigegeben. Gleiche Tabelle wie im eigenen Flugbuch, aber ohne Bearbeiten; ein Hinweisband nennt Besitzerin, Frist und „nur lesen“.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben/lena-k/flugbuch</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div style="padding:16px 22px 0"><div class="banner"><i class="bi bi-eye"></i> <b>Flugbuch von Lena K.</b> · mit dir geteilt bis So 31.01.2027 · nur lesen. Lena kann die Freigabe jederzeit widerrufen.</div></div>
+    <div class="dmain" style="padding-top:0;grid-template-columns:1.6fr 1fr">
+      <div class="card">
+        <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Ort</th><th>Art</th><th>Ausbilder</th><th>Zeit</th><th>Min.</th></tr>
+          <tr><td>Sa 14.11.2026</td><td>DJI Mini 3</td><td>Vereinsgelände</td><td>Schulung</td><td>Markus B.</td><td>10:20</td><td>16</td></tr>
+          <tr><td>Mi 11.11.2026</td><td>Tinywhoop-Set <span class="badge b-g">Verein</span></td><td>Sporthalle</td><td>Training</td><td>–</td><td>18:05</td><td>9</td></tr>
+          <tr style="background:var(--gl)"><td>Sa 07.11.2026</td><td>DJI Mini 3</td><td>Vereinsgelände</td><td>Schulung</td><td>Markus B.</td><td>14:10</td><td>21</td></tr>
+        </table>
+        <div class="note" style="text-align:left;margin:8px 0 4px">14 Flüge · 3:05 h in 2026 · davon 6 Schulungsflüge</div>
+      </div>
+      <div class="card"><h3>Flug am 07.11.2026</h3>
+        <dl class="kv2"><dt>Pilotin</dt><dd>Lena K.</dd><dt>Modell</dt><dd>DJI Mini 3</dd><dt>Zeit</dt><dd>14:10 – 14:31</dd><dt>Flugart</dt><dd>Schulung · Ausbilder Markus B.</dd><dt>Checkliste</dt><dd>6/6 · 14:06</dd><dt>Bemerkung</dt><dd>Schwebeflug, Achten</dd></dl>
+        <h3 style="margin-top:10px">Änderungsverlauf</h3>
+        <div class="tl"><div class="e"><b>Erfasst · 07.11. 14:31 · Lena K.</b><small>offline erfasst · übertragen 15:02</small></div></div>
+        <div class="note" style="text-align:left">Korrekturen kann nur Lena K. vornehmen.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Synchronisierung</h2></div>
+  <p class="ddesc">Auch am PC (installierte PWA, z. B. Laptop am Platz) gibt es die Übersicht: Status, Warteschlange, Konflikte. Konflikte werden nebeneinander gezeigt; der Nutzer entscheidet, nichts wird still überschrieben. Beide Fassungen bleiben im Änderungsverlauf.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/synchronisierung</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.4fr">
+      <div>
+        <div class="card"><div class="hrow"><span><i class="bi bi-cloud-check" style="color:var(--g)"></i> <b>Online</b> · zuletzt synchronisiert heute 9:38</span><span class="ibtn"><i class="bi bi-arrow-repeat"></i> Jetzt synchronisieren</span></div></div>
+        <div class="card"><h3>Warteschlange (2)</h3>
+          <table class="dt"><tr><td><i class="bi bi-airplane"></i> Flug · Sa 14.11. 14:05 · DJI Neo 2</td><td><i class="bi bi-cloud-arrow-up mut"></i></td></tr><tr><td><i class="bi bi-list-check"></i> Checkliste · Sa 14.11. 13:55</td><td><i class="bi bi-cloud-arrow-up mut"></i></td></tr></table></div>
+        <div class="card"><h3>Auf diesem Gerät</h3><small class="mut">Offline verfügbar: eigene Modelle, Orte, Checklistenvorlagen, eigene Nachweise · 1,2 MB</small>
+          <table class="dt" style="margin-top:6px"><tr><td>Automatisch synchronisieren</td><td><span class="tg on"></span></td></tr><tr><td>Fotos nur über WLAN</td><td><span class="tg"></span></td></tr></table>
+          <span class="assume">Annahme: Schalter für automatische Übertragung und „Fotos nur über WLAN“.</span></div>
+      </div>
+      <div class="card"><div class="hrow"><h3>Konflikt: Flug 09.11.2026 · Mini 4 Pro</h3><span class="badge b-w">entscheiden</span></div>
+        <table class="dt"><tr><th>Feld</th><th>Dieses Gerät (offline 09.11. 18:40)</th><th>Server (PC, 10.11. 08:12)</th></tr>
+          <tr><td>Landung</td><td class="mut">16:14 (unverändert)</td><td><b>16:04</b></td></tr>
+          <tr><td>Bemerkung</td><td><label style="margin:0;font-weight:600"><i class="bi bi-record-circle-fill" style="color:var(--g)"></i> Herbstfotos, starker Wind</label></td><td><label style="margin:0;font-weight:600"><i class="bi bi-circle mut"></i> Herbstfotos für die Website</label></td></tr>
+        </table>
+        <div class="chips" style="margin-top:10px"><span class="chip">Alles von diesem Gerät</span><span class="chip">Alles vom Server</span><span class="chip on">Zusammenführen (Felder wählen)</span></div>
+        <span class="ibtn">Übernehmen</span>
+        <div class="note" style="text-align:left;margin-top:8px">Beide Fassungen bleiben im Änderungsverlauf des Flugs.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Modelle und Vorfälle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .kv2{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:13px;padding:6px 0;margin:0}
+  .kv2 dt{color:var(--mut)}
+  .kv2 dd{margin:0;font-weight:600}
+  .hero{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .hero .pic{width:72px;height:72px;border-radius:6px;background:var(--carbg);color:var(--car);display:flex;align-items:center;justify-content:center;font-size:34px;flex:0 0 auto}
+  .hero .pic.air{background:var(--airbg);color:var(--air)}
+  .hero b{font-size:17px;display:block}
+  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs div{padding:7px 10px;color:var(--mut);border-bottom:2px solid transparent;white-space:nowrap}
+  .tabs .on{color:var(--g);border-color:var(--g)}
+  .meter{height:8px;background:#e3e6e3;border-radius:4px;overflow:hidden;margin:4px 0}
+  .meter div{height:100%;background:var(--g)}
+  .meter.w div{background:var(--warn)}
+  .sev{display:flex;gap:6px;margin-bottom:6px}
+  .sev div{flex:1;border:1px solid #ced4da;border-radius:6px;padding:8px 4px;text-align:center;font-size:12px;font-weight:700;background:#fff}
+  .sev div i{display:block;font-size:18px;margin-bottom:2px}
+  .sev .on{border:2px solid var(--red);color:var(--red);background:#fde8e8}
+  .photos{display:flex;gap:8px;margin:4px 0 8px}
+  .photos div{width:64px;height:64px;border-radius:6px;background:#dfe3df;display:flex;align-items:center;justify-content:center;color:#888;font-size:22px}
+  .photos .add{border:2px dashed #c3c8c3;background:#fff;color:var(--g)}
+  .legal{background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:9px 11px;font-size:12.5px;color:#7f1d1d;margin-bottom:10px}
+  .legal b{display:block;margin-bottom:2px}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .tl{position:relative;padding-left:18px;font-size:12.5px}
+  .tl::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:#dfe3df}
+  .tl .e{position:relative;padding:4px 0 8px}
+  .tl .e::before{content:"";position:absolute;left:-17px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--g);border:2px solid #fff}
+  .tl .e.w::before{background:var(--warn)}
+  .tl .e b{display:block}
+  .md-share{background:var(--airbg);border:1px solid #c9dcf0;border-radius:6px;padding:8px 12px;font-size:13px;margin-bottom:12px;color:#173f6b}
+  .md-map{position:relative;height:150px;border-radius:6px;background:linear-gradient(135deg,#dfe9d8 0%,#cfdcc6 45%,#e6ece0 100%);border:1px solid #d3dccd;margin-bottom:12px;overflow:hidden}
+  .md-map::before{content:"";position:absolute;left:-10%;right:-10%;top:58%;height:12px;background:#f4f1e6;transform:rotate(-8deg)}
+  .md-pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:800;color:var(--car)}
+  .md-pin i{font-size:24px;line-height:1}
+  .md-pin span{background:#fff;border-radius:3px;padding:0 4px;margin-top:-2px;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .md-pin.air{color:var(--air)}
+  .md-sel{background:var(--gl)}
+  .diff{font-size:12px;background:#f6f7f6;border-radius:4px;padding:3px 6px;margin-top:2px}
+  .diff s{color:var(--red)}
+  .diff ins{color:var(--g);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Modelle und Vorfälle</h1>
+  <p>Gruppe 2, Teil 1. <b>Modell-Detail</b> (Daten, Wartung, Zubehör, Einsätze), <b>Akku mit Ladezyklen</b>, <b>Wartung eintragen</b> <b>Vorfall/Schaden melden</b>, außerdem <b>Modell-Detail für Drohne/FPV und Zubehör</b>, <b>geteiltes Modell</b>, <b>Vorfall-Detail</b>, <b>Strecken</b> und <b>Checklisten</b> (Abschnitte 4–8; die Handy-Fassung davon ist im Klickdummy). Modellliste und „Modell anlegen“ stehen schon im Entwurf <i>Variante A überarbeitet</i>.</p>
+  <div class="legend"><span class="assume">Gelb markiert: Annahme, im Feindesign Teil 1 zu klären</span></div>
+</div>
+
+<!-- ========== 1 Modell-Detail ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Modell-Detail</h2></div>
+  <p class="ddesc">Eine Seite für jeden Modelltyp. Oben die Grunddaten, darunter Reiter für <b>Daten · Wartung · Zubehör · Einsätze</b>. Bei Luftfahrzeugen heißt „Einsätze“ Flüge, bei RC Cars sind es z. B. Rennläufe (Teil 5). Was angezeigt wird, kommt aus dem Modelltyp.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">RC Car · Reiter Daten</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Losi Mini-T 2.0</div><div class="t2">Offroad · RC Cars</div></div><div class="sp"></div><i class="bi bi-pencil" style="font-size:17px"></i></div>
+        <div class="body">
+          <div class="hero"><div class="pic"><i class="bi bi-car-front"></i></div><div><b>Losi Mini-T 2.0</b><small>Besitzer: Markus B.</small><br><span class="badge b-w">Wartung fällig</span></div></div>
+          <div class="tabs"><div class="on">Daten</div><div>Wartung</div><div>Zubehör</div><div>Einsätze</div></div>
+          <div class="card pad">
+            <dl class="kv2"><dt>Hersteller</dt><dd>Losi</dd><dt>Seriennummer</dt><dd class="mut">–</dd><dt>Maßstab</dt><dd>1:18</dd><dt>Antrieb</dt><dd>Elektro</dd><dt>Akku-System</dt><dd>2S LiPo</dd></dl>
+          </div>
+          <h3>Eigene Angaben</h3>
+          <div class="card pad"><dl class="kv2"><dt>Motor</dt><dd>3300 kV brushless</dd><dt>Reifen</dt><dd>Pro-Line Hoosier</dd></dl></div>
+          <div class="btns"><button class="btn out"><i class="bi bi-share"></i> Teilen</button><button class="btn out"><i class="bi bi-exclamation-diamond"></i> Schaden</button></div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-airplane"></i>Luftsport</div><div class="on"><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Reiter Wartung</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Losi Mini-T 2.0</div><div class="t2">Offroad · RC Cars</div></div></div>
+        <div class="body">
+          <div class="tabs"><div>Daten</div><div class="on">Wartung</div><div>Zubehör</div><div>Einsätze</div></div>
+          <div class="alert"><i class="bi bi-wrench-adjustable"></i> <b>Differenzial prüfen</b> – fällig seit 01.11. (alle 3 Monate)</div>
+          <button class="btn" style="margin-bottom:10px"><i class="bi bi-plus-lg"></i> Wartung eintragen</button>
+          <h3>Verlauf</h3>
+          <div class="card pad"><div class="tl">
+            <div class="e"><b>12.10. · Reifen gewechselt</b><small>Pro-Line Hoosier · 18 €</small></div>
+            <div class="e"><b>01.08. · Differenzial geölt</b><small>nächste Prüfung 01.11.</small></div>
+            <div class="e w"><b>20.07. · Schaden: Querlenker gebrochen</b><small>aus Vorfall vom 20.07. · repariert</small></div>
+          </div></div>
+          <h3>Wiederkehrende Aufgaben</h3>
+          <div class="card">
+            <div class="row"><span>Differenzial prüfen<br><small>alle 3 Monate</small></span><span class="badge b-w">fällig</span></div>
+            <div class="row"><span>Lager reinigen<br><small>alle 20 Fahrstunden</small></span><span class="badge b-g">ok</span></div>
+          </div>
+          <span class="assume">Annahme: Erinnerungsintervalle je Modell frei einstellbar</span>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Drohne · Reiter Zubehör</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">DJI Neo 2</div><div class="t2">Drohne · Luftsport</div></div></div>
+        <div class="body">
+          <div class="hero"><div class="pic air"><i class="bi bi-airplane"></i></div><div><b>DJI Neo 2</b><small>C0 · 151 g · Betreiber: ich</small><br><span class="badge b-g">bereit</span></div></div>
+          <div class="tabs"><div>Daten</div><div>Wartung</div><div class="on">Zubehör</div><div>Flüge</div></div>
+          <div class="card">
+            <div class="row"><span><b>Akku Neo #1</b><br><small>112 Ladezyklen</small></span><span class="badge b-w">alt</span></div>
+            <div class="row"><span><b>Akku Neo #2</b><br><small>64 Ladezyklen</small></span><span class="badge b-g">ok</span></div>
+            <div class="row"><span><b>Akku Neo #3</b><br><small>12 Ladezyklen</small></span><span class="badge b-g">ok</span></div>
+            <div class="row"><span><b>RC-N3 Fernsteuerung</b><br><small>auch für Mini 4 Pro</small></span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+          <button class="btn out"><i class="bi bi-link-45deg"></i> Zubehör zuordnen</button>
+          <div class="note">Zubehör kann mehreren Modellen zugeordnet sein.</div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div class="on"><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Akku-Detail</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Akku Neo #1</div><div class="t2">Akku · Zubehör</div></div></div>
+        <div class="body">
+          <div class="card pad">
+            <div class="hrow" style="margin-bottom:2px"><b>Ladezyklen</b><b>112</b></div>
+            <div class="meter w"><div style="width:75%"></div></div>
+            <small>Herstellerangabe ca. 150 Zyklen</small>
+            <button class="btn" style="margin-top:10px"><i class="bi bi-plus-lg"></i> 1 Ladezyklus</button>
+            <div class="note">Zählt auch automatisch, wenn der Akku bei einem Flug ausgewählt wird.</div>
+          </div>
+          <div class="card pad"><dl class="kv2"><dt>Typ</dt><dd>Li-Ion 2S, 1435 mAh</dd><dt>Gekauft</dt><dd>03/2025</dd><dt>Zugeordnet</dt><dd>DJI Neo 2</dd><dt>Zustand</dt><dd>leicht aufgebläht?</dd></dl></div>
+          <div class="btns"><button class="btn out">Ausmustern</button><button class="btn out"><i class="bi bi-exclamation-diamond"></i> Schaden</button></div>
+          <span class="assume">Annahme: Flug mit Akku zählt automatisch einen Zyklus</span>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <p class="sublabel">PC-Ansicht · Modell-Detail (Reiter nebeneinander als Spalten)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/modelle/losi-mini-t-2</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on" style="color:var(--car);border-color:var(--car)">Modelle</a><a>Ausleihe</a><a>Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain three">
+      <div>
+        <div class="hero"><div class="pic"><i class="bi bi-car-front"></i></div><div><b>Losi Mini-T 2.0</b><small>Offroad · Besitzer Markus B.</small><br><span class="badge b-w">Wartung fällig</span></div></div>
+        <div class="card"><h3>Daten</h3><dl class="kv2"><dt>Hersteller</dt><dd>Losi</dd><dt>Maßstab</dt><dd>1:18</dd><dt>Antrieb</dt><dd>Elektro</dd><dt>Akku-System</dt><dd>2S LiPo</dd><dt>Motor</dt><dd>3300 kV <small class="mut">(eigene Angabe)</small></dd><dt>Reifen</dt><dd>Pro-Line <small class="mut">(eigene Angabe)</small></dd></dl>
+          <span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-share"></i> Teilen</span></div>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3>Wartung</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Eintrag</span></div>
+          <div class="alert" style="margin-bottom:8px"><b>Differenzial prüfen</b> fällig seit 01.11.</div>
+          <div class="tl"><div class="e"><b>12.10. Reifen gewechselt</b></div><div class="e"><b>01.08. Differenzial geölt</b></div><div class="e w"><b>20.07. Querlenker gebrochen</b><small>aus Vorfall</small></div></div></div>
+      </div>
+      <div>
+        <div class="card"><h3>Zubehör</h3><table class="dt"><tr><td>Akku 2S 5000 #3</td><td><small>48 Zyklen</small></td></tr><tr><td>Akku 2S 5000 #4</td><td><small>31 Zyklen</small></td></tr><tr><td>FlySky Noble NB4</td><td><small>Fernsteuerung</small></td></tr></table></div>
+        <div class="card"><h3>Einsätze</h3><table class="dt"><tr><td>VM Lauf 4 Offroad</td><td>Platz 2</td></tr><tr><td>VM Lauf 3 Offroad</td><td>Platz 3</td></tr></table><small class="mut">aus Teil 5 (Rennen)</small></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 2 Wartung eintragen ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Wartung eintragen</h2></div>
+  <p class="ddesc">Kurzes Formular, optional mit Kosten und Foto. Eine wiederkehrende Aufgabe lässt sich direkt als erledigt markieren.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Handy</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div><div class="t1">Wartung eintragen</div><div class="t2">Losi Mini-T 2.0</div></div></div>
+        <div class="body">
+          <label>Erledigt Aufgabe</label>
+          <div class="chips"><span class="chip on">Differenzial prüfen</span><span class="chip">Lager reinigen</span><span class="chip">– keine –</span></div>
+          <label>Datum <span class="req">*</span></label><div class="inp">14.11.2026</div>
+          <label>Was wurde gemacht? <span class="req">*</span></label><div class="inp" style="height:54px">Differenzial geöffnet, neu gefettet</div>
+          <div class="two"><div><label>Kosten (€) <span class="opt">opt.</span></label><div class="inp ph">–</div></div><div><label>Zeit (min) <span class="opt">opt.</span></label><div class="inp">40</div></div></div>
+          <label>Fotos <span class="opt">optional</span></label>
+          <div class="photos"><div class="add"><i class="bi bi-camera"></i></div></div>
+          <button class="btn" style="margin-top:8px">Speichern</button>
+          <div class="note">Nächste Prüfung wird auf 14.02.2027 gesetzt.</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3 Vorfall melden ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Vorfall oder Schaden melden</h2></div>
+  <p class="ddesc">Für beide Bereiche. Bezug zu Flug, Modell oder Ausleihe ist optional und meist schon vorausgefüllt (z. B. aus „Nach der Landung“). Bei <b>schweren Vorfällen mit Luftfahrzeugen</b> erscheint der Hinweis auf die Meldepflicht.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Schritt 1: Was ist passiert?</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:25</span><span><i class="bi bi-wifi-off"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div class="t1">Vorfall melden</div></div>
+        <div class="body">
+          <div class="card pad" style="font-size:13px"><i class="bi bi-link-45deg"></i> Zu Flug <b>14.11. 14:05</b> · DJI Neo 2</div>
+          <label>Schwere <span class="req">*</span></label>
+          <div class="sev"><div><i class="bi bi-info-circle"></i>Beinahe</div><div><i class="bi bi-wrench"></i>Schaden am Modell</div><div class="on"><i class="bi bi-exclamation-octagon"></i>Schwer</div></div>
+          <div class="hint">Schwer = Personen verletzt oder erheblicher Sachschaden bei Dritten</div>
+          <label>Beschreibung <span class="req">*</span></label><div class="inp" style="height:64px">Drohne nach Signalverlust auf Parkplatz gestürzt, Auto beschädigt</div>
+          <label>Fotos</label>
+          <div class="photos"><div><i class="bi bi-image"></i></div><div><i class="bi bi-image"></i></div><div class="add"><i class="bi bi-camera"></i></div></div>
+          <button class="btn">Weiter</button>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Schritt 2: Hinweis Meldepflicht</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:27</span><span><i class="bi bi-wifi-off"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div class="t1">Vorfall melden</div></div>
+        <div class="body">
+          <div class="legal"><b><i class="bi bi-exclamation-octagon-fill"></i> Möglicherweise meldepflichtig</b>Schwere Unfälle und Störungen mit unbemannten Luftfahrzeugen können meldepflichtig sein (u. a. an die BFU). Die App meldet nicht selbst.</div>
+          <div class="card">
+            <div class="row"><span><i class="bi bi-box-arrow-up-right"></i> Meldeformular BFU</span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span><i class="bi bi-telephone"></i> Abteilungsleitung anrufen</span><i class="bi bi-chevron-right mut"></i></div>
+            <div class="row"><span><i class="bi bi-shield-check"></i> Versicherung: Nachweis anzeigen</span><i class="bi bi-chevron-right mut"></i></div>
+          </div>
+          <label>Behördlich gemeldet?</label>
+          <div class="chips"><span class="chip">Ja, am …</span><span class="chip on">Noch nicht</span><span class="chip">Nicht nötig</span></div>
+          <label>Beteiligte / Zeugen <span class="opt">optional</span></label><div class="inp ph">Namen, Kontakt</div>
+          <button class="btn" style="margin-top:12px">Vorfall speichern</button>
+          <div class="note">Die Abteilungsleitung wird benachrichtigt.</div>
+          <span class="assume">Annahme: Meldestellen und Texte prüft der Verein</span>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Vorfälle (Liste)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><div class="t1">Vorfälle &amp; Schäden</div><div class="sp"></div><i class="bi bi-plus-lg" style="font-size:20px"></i></div>
+        <div class="body">
+          <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="chip">offen</span></div>
+          <div class="card">
+            <div class="row"><span><b>14.11.</b> DJI Neo 2<br><small>Absturz Parkplatz</small></span><span class="badge b-r">schwer · offen</span></div>
+            <div class="row"><span><b>20.07.</b> Losi Mini-T 2.0<br><small>Querlenker gebrochen</small></span><span class="badge b-g">erledigt</span></div>
+            <div class="row"><span><b>02.06.</b> TRX-4M <span class="badge b-g">Verein</span><br><small>Schaden bei Rückgabe</small></span><span class="badge b-g">erledigt</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div class="on"><i class="bi bi-airplane"></i>Luftsport</div><div><i class="bi bi-car-front"></i>RC Cars</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4 Modell-Detail Drohne/FPV und Zubehör ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Modell-Detail: Drohne/FPV und Zubehör</h2></div>
+  <p class="ddesc">Dieselbe Seite wie beim RC Car, gefüllt aus dem Modelltyp. Bei Luftfahrzeugen erscheinen die festen Felder (EU-Klasse, Gewicht, Remote-ID, Betreiber) mit Schloss, der Reiter heißt <b>Flüge</b>, Akkus stehen mit Ladezyklen dabei. Zubehör (z. B. Fernsteuerung, Akku) hat kein Flugbuch, zeigt dafür <b>„Passt zu“</b> und bei Akkus den Ladezyklen-Zähler. Handy: Klickdummy, Bildschirm <code>md-detail</code>.</p>
+  <p class="sublabel">PC · FPV Quad 5″ (Luftfahrzeug)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/modelle/fpv-quad-5</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a>Flugbuch</a><a class="on">Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain three">
+      <div>
+        <div class="hero"><div class="pic air"><i class="bi bi-airplane"></i></div><div><b>FPV Quad 5″</b><small>FPV · Besitzer Markus B.</small><br><span class="badge b-g">bereit</span> <span class="badge b-air">Luftfahrzeug</span></div></div>
+        <div class="card"><h3><i class="bi bi-lock" style="color:var(--mut);font-size:13px"></i> Luftfahrzeug (fest)</h3><dl class="kv2"><dt>EU-Klasse</dt><dd>Ohne Klasse – Eigenbau</dd><dt>Gewicht</dt><dd>640 g</dd><dt>Remote-ID</dt><dd class="mut">–</dd><dt>Betreiber</dt><dd>ich · DEU8K2P4… <i class="bi bi-lock mut"></i></dd></dl></div>
+        <div class="card"><h3>Typ FPV · eigene Angaben</h3><dl class="kv2"><dt>Größe</dt><dd>5″</dd><dt>Videosystem</dt><dd>Analog</dd><dt>Akku-System</dt><dd>6S 1100</dd><dt>Frame</dt><dd>TBS Source One V5 <small class="mut">(eigene Angabe)</small></dd></dl>
+          <span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-share"></i> Teilen</span> <span class="ibtn out"><i class="bi bi-exclamation-diamond"></i> Vorfall</span></div>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3>Flüge</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Flug</span></div><div class="stats"><div class="stat"><b>14</b><span>Flüge 2026</span></div><div class="stat"><b>1:31</b><span>Std.</span></div></div>
+          <table class="dt"><tr><td>Do 12.11.</td><td>Sporthalle · Training</td><td>6 min</td></tr><tr><td>Sa 07.11.</td><td>Vereinsgelände · Training</td><td>5 min</td></tr><tr><td>Sa 11.04.</td><td>Vereinsgelände · mit Vorfall</td><td>7 min</td></tr></table></div>
+        <div class="card"><div class="hrow"><h3>Akkus &amp; Zubehör</h3><span class="ibtn out"><i class="bi bi-link-45deg"></i> Zuordnen</span></div><table class="dt"><tr><td>Akku 6S 1100 #1</td><td><small>88 Zyklen</small></td><td><span class="badge b-w">alt</span></td></tr><tr><td>Akku 6S 1100 #3</td><td><small>40 Zyklen</small></td><td><span class="badge b-g">ok</span></td></tr><tr><td>Radiomaster Boxer</td><td><small>Fernsteuerung</small></td><td><span class="badge b-g">ok</span></td></tr></table></div>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3>Wartung</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Eintrag</span></div><div class="tl"><div class="e w"><b>So 12.04. Propeller getauscht</b><small>nach Vorfall vom Sa 11.04.</small></div></div>
+          <table class="dt"><tr><td>Schrauben nachziehen<br><small class="mut">alle 10 Flüge</small></td><td><span class="badge b-w">in 2 Flügen</span></td></tr></table></div>
+        <div class="card"><h3>Verlauf</h3><div class="tl"><div class="e"><b>So 12.04. · Markus B.</b><small>Vorfall „Propeller gebrochen“ verknüpft</small></div><div class="e"><b>So 14.02. · Markus B.</b><small>Angelegt</small></div></div></div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="sublabel">PC · Zubehör FlySky Noble NB4 und Akku mit Ladezyklen</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/modelle/flysky-noble-nb4</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a class="on" style="color:var(--car);border-color:var(--car)">Modelle</a><a>Ausleihe</a><a>Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain three">
+      <div>
+        <div class="hero"><div class="pic"><i class="bi bi-controller"></i></div><div><b>FlySky Noble NB4</b><small>Fernsteuerung · Zubehör · beide Bereiche</small><br><span class="badge b-g">ok</span></div></div>
+        <div class="card"><h3>Daten</h3><dl class="kv2"><dt>Hersteller</dt><dd>FlySky</dd><dt>Seriennummer</dt><dd>NB4-20931</dd><dt>Protokoll</dt><dd>AFHDS 3</dd><dt>Empfänger</dt><dd>2 × FGr4B <small class="mut">(eigene Angabe)</small></dd></dl><span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span></div>
+      </div>
+      <div>
+        <div class="card"><h3>Passt zu</h3><table class="dt"><tr><td><i class="bi bi-car-front" style="color:var(--car)"></i> Losi Mini-T 2.0</td><td><small>Offroad · 1:18</small></td></tr><tr><td><i class="bi bi-car-front" style="color:var(--car)"></i> Axial SCX24</td><td><small>Crawler · 1:24</small></td></tr></table><small class="mut">Mehrfachzuordnung; erscheint beim jeweiligen Modell im Reiter Zubehör.</small></div>
+        <div class="card"><h3>Wartung &amp; Verlauf</h3><div class="tl"><div class="e"><b>Sa 31.10. Firmware aktualisiert</b></div><div class="e"><b>Sa 31.10. · „Passt zu“: Axial SCX24 hinzugefügt</b></div></div></div>
+      </div>
+      <div>
+        <div class="card"><h3>Zum Vergleich: Akku Neo #1</h3><div class="hrow" style="margin-bottom:2px"><b><i class="bi bi-lock mut"></i> Ladezyklen</b><b>112</b></div><div class="meter w"><div style="width:75%"></div></div><small class="mut">Richtwert ca. 150 Zyklen · passt zu DJI Neo 2</small>
+          <div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-plus-lg"></i> 1 Ladezyklus</span></div></div>
+        <span class="assume">Annahme: Typwechsel nach dem Anlegen nicht möglich (nur Neuanlage)</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 5 Geteiltes Modell ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Geteiltes Modell (nur lesen)</h2></div>
+  <p class="ddesc">Ein fremdes Modell, das jemand mit mir geteilt hat (Mehr › Freigaben › Mit mir geteilt). Gleiche Seite, aber mit Hinweis „geteilt von …“, ohne Bearbeiten, Teilen, Flug erfassen oder Wartung eintragen. Handy: <code>md-detail</code> mit Avata 2 von Max R.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben/modell/avata-2-max</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dmain">
+      <div>
+        <div class="md-share"><i class="bi bi-eye"></i> <b>Geteilt von Max R.</b> · nur lesen · unbefristet (seit Di 03.11.). Ändern kann nur der Besitzer, die Freigabe kann Max R. jederzeit widerrufen.</div>
+        <div class="hero"><div class="pic air"><i class="bi bi-airplane"></i></div><div><b>DJI Avata 2</b><small>FPV · Besitzer Max R.</small><br><span class="badge b-g">bereit</span> <span class="badge b-air">Luftfahrzeug</span></div></div>
+        <div class="card"><h3><i class="bi bi-lock" style="color:var(--mut);font-size:13px"></i> Luftfahrzeug (fest) · Typ FPV</h3><dl class="kv2"><dt>EU-Klasse</dt><dd>C1</dd><dt>Gewicht</dt><dd>377 g</dd><dt>Remote-ID</dt><dd>aktiv</dd><dt>Betreiber</dt><dd>Max R. · registriert</dd><dt>Größe</dt><dd>3″</dd><dt>Videosystem</dt><dd>DJI O3 / O4</dd></dl></div>
+        <span class="assume">Annahme (DSGVO): Die Registrierungsnummer des Betreibers wird bei Freigaben nicht angezeigt</span>
+      </div>
+      <div>
+        <div class="card"><h3>Zubehör</h3><table class="dt"><tr><td>Akku Avata 2 #1</td><td><small>24 Zyklen</small></td></tr><tr><td>Akku Avata 2 #2</td><td><small>21 Zyklen</small></td></tr><tr><td>DJI Goggles 3</td><td><small>FPV-Brille</small></td></tr><tr><td>RC Motion 3</td><td><small>Fernsteuerung</small></td></tr></table></div>
+        <div class="card"><h3>Wartung</h3><div class="tl"><div class="e"><b>So 01.11. Propeller getauscht</b></div></div></div>
+        <span class="assume">Annahme: Freigabe „Modell“ zeigt keine Flüge des Besitzers (dafür Freigabe „Flugbuch“)</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 6 Vorfall-Detail ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Vorfall-Detail</h2></div>
+  <p class="ddesc">Aus der Liste „Vorfälle &amp; Schäden“. Die Meldung selbst bleibt unverändert; Ergänzungen und Statuswechsel kommen als <b>Nachtrag</b> in den Verlauf. Sichtbarkeit wird angezeigt (z. B. automatisch für die Abteilungsleitung bei Vereinsgelände oder Vereinsgerät). Handy: <code>md-vf</code> und <code>md-vf-add</code>.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/vorfaelle/2026-04-11-fpv-quad</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dmain">
+      <div>
+        <div class="hrow"><h3>Vorfall · FPV Quad 5″ · Sa 11.04.2026</h3><span><span class="badge b-g">erledigt</span> <span class="badge b-all">Schaden am Modell</span></span></div>
+        <div class="card"><dl class="kv2"><dt>Modell</dt><dd style="color:var(--g)">FPV Quad 5″</dd><dt>Wann</dt><dd>Sa 11.04.2026, 15:20</dd><dt>Wo</dt><dd>Vereinsgelände</dd><dt>Bezug</dt><dd>Flug Sa 11.04. 15:12 · 7 min</dd><dt>Gemeldet von</dt><dd>Markus B.</dd><dt>Sichtbar für</dt><dd>Abteilungsleitung (automatisch: Vereinsgelände)</dd></dl></div>
+        <div class="card"><h3>Beschreibung</h3><div style="font-size:13px">Beim Freestyle-Training Bodenberührung, zwei Propeller gebrochen. Keine Personen und keine fremden Sachen betroffen.</div>
+          <div class="photos" style="margin-top:8px"><div><i class="bi bi-image"></i></div></div></div>
+        <div class="card" style="font-size:13px"><i class="bi bi-info-circle"></i> Luftfahrzeug, aber nicht als „schwer“ eingestuft: kein Hinweis auf Meldepflicht.</div>
+        <span class="assume">Annahme: Meldehinweis hängt allein an der Schwere „Schwer“</span>
+      </div>
+      <div>
+        <div class="card"><h3>Verlauf</h3><div class="tl"><div class="e"><b>So 12.04. · Markus B.</b><small>Status → erledigt · Propeller getauscht</small></div><div class="e"><b>Sa 11.04. · Markus B.</b><small>Vorfall gemeldet</small></div></div></div>
+        <div class="card"><h3>Nachtrag</h3>
+          <label>Status <span class="req">*</span></label><div class="chips"><span class="chip">offen</span><span class="chip">in Bearbeitung</span><span class="chip on">erledigt</span></div>
+          <label>Nachtrag <span class="req">*</span></label><div class="inp ph" style="height:50px;align-items:flex-start">z. B. Ersatzteil bestellt</div>
+          <div style="margin-top:8px"><span class="ibtn">Nachtrag speichern</span> <span class="ibtn out"><i class="bi bi-share"></i> Teilen</span></div></div>
+        <span class="assume">Annahme: Status ändern Meldende und bei Vereinsgerät die Abteilungsleitung</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 7 Strecken ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Strecken (RC Cars)</h2></div>
+  <p class="ddesc">Übersicht der Strecken und Parcours mit aktuellem <b>Zustand</b>, den jedes Mitglied melden kann. Detail mit Streckenangaben, Regeln vor Ort, Terminen an der Strecke, Route und Einchecken. Strecken sind Orte des Bereichs RC Cars (vom Admin gepflegt). Handy: <code>md-strecken</code>, <code>md-strecke</code>.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/rc-cars/strecken/sand-rennstrecke</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a>Modelle</a><a>Ausleihe</a><a>Meisterschaft</a><a class="on" style="color:var(--car);border-color:var(--car)">Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain">
+      <div>
+        <div class="md-map"><div class="md-pin" style="left:28%;top:46%"><i class="bi bi-geo-alt-fill"></i><span>Sand</span></div><div class="md-pin" style="left:52%;top:40%"><i class="bi bi-geo-alt-fill"></i><span>Crawler</span></div><div class="md-pin" style="left:70%;top:80%"><i class="bi bi-geo-alt-fill"></i><span>Teer</span></div><div class="md-pin air" style="left:14%;top:88%"><i class="bi bi-geo-alt"></i><span>Vereinsgelände</span></div></div>
+        <div class="card"><table class="dt"><tr><th>Strecke</th><th>Disziplin</th><th>Zustand</th><th>gemeldet</th></tr>
+          <tr class="md-sel"><td><b>Sand-Rennstrecke</b></td><td>Offroad</td><td><span class="badge b-g">befahrbar</span></td><td><small>Sa 14.11. 09:12 · Jonas B.</small></td></tr>
+          <tr><td><b>Crawler-Strecke</b></td><td>Crawler</td><td><span class="badge b-w">nass, rutschig</span></td><td><small>Fr 13.11. 17:40 · Max R.</small></td></tr>
+          <tr><td><b>Teerfläche</b></td><td>Glattbahn</td><td><span class="badge b-r">gesperrt</span></td><td><small>Sa 07.11. · Markus B.</small></td></tr>
+          <tr><td><b>Sporthalle</b></td><td>Indoor-Crawlen (Winter)</td><td><span class="badge b-all">nach Hallenplan</span></td><td><small>Kalender</small></td></tr></table></div>
+        <span class="assume">Annahme: Strecke = Ort mit Bereich RC Cars plus Zusatzfelder (Disziplin, Untergrund, Streckenführung)</span>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3>Sand-Rennstrecke</h3><span class="badge b-g">befahrbar</span></div><dl class="kv2"><dt>Untergrund</dt><dd>Sand/Lehm, gewässert</dd><dt>Strecke</dt><dd>ca. 180 m · 9 Kurven · 2 Sprünge</dd><dt>Fahrzeuge</dt><dd>Offroad bis 1:8, Elektro</dd><dt>Ansprechpartner</dt><dd>Jonas B.</dd><dt>Koordinaten</dt><dd>49.4119, 11.2051</dd></dl>
+          <span class="ibtn out">Zustand melden</span> <span class="ibtn out"><i class="bi bi-sign-turn-right"></i> Route</span> <span class="ibtn out"><i class="bi bi-geo-alt"></i> Einchecken</span></div>
+        <div class="card"><h3>Regeln vor Ort</h3><div style="font-size:13px">✓ Fahren nur mit mindestens zwei Personen am Platz<br>✓ Zuschauer hinter der Absperrung<br>✓ Keine Verbrenner (Lärmschutz)</div></div>
+        <div class="card"><h3>Termine hier</h3><table class="dt"><tr><td>Fahrtag Sandbahn</td><td><small>Event</small></td></tr><tr><td>Vereinsmeisterschaft Offroad</td><td><small>Rennen</small></td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 8 Checklisten ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">8</span><h2>Checklisten</h2></div>
+  <p class="ddesc">Die vom Admin im Regelwerk vorgegebenen Vorlagen, nach Bereich filterbar, mit Vorschau zum Abhaken (wird nicht gespeichert). Gespeichert wird eine Checkliste nur beim Flug erfassen (mit Uhrzeit am Flug) bzw. im Übergabeprotokoll. Darunter die zuletzt durchgeführten Checklisten. Handy: <code>md-checklisten</code>, <code>md-cl</code>.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/checklisten</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="on">Checklisten</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain">
+      <div>
+        <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
+        <div class="card"><table class="dt"><tr><th>Vorlage</th><th>Wann</th><th>Gilt für</th><th>Punkte</th></tr>
+          <tr class="md-sel"><td><b>Vor dem Flug – Offene Kategorie</b></td><td>vor dem Flug</td><td>Drohne, FPV</td><td>6</td></tr>
+          <tr><td><b>Hallenfliegen</b></td><td>vor dem Flug</td><td>FPV</td><td>4</td></tr>
+          <tr><td><b>Vor der Fahrt</b></td><td>vor der Fahrt</td><td>Offroad, Crawler, Glattbahn</td><td>5</td></tr>
+          <tr><td><b>Übergabe Vereinsmodell</b></td><td>Übergabe und Rückgabe</td><td>alle Modelltypen</td><td>7</td></tr></table></div>
+        <div class="card"><h3>Zuletzt durchgeführt</h3><table class="dt"><tr><td>Sa 14.11. · 14:02</td><td>Vor dem Flug</td><td>DJI Neo 2</td><td><span class="badge b-g">6/6</span></td></tr><tr><td>Do 12.11. · 18:11</td><td>Hallenfliegen</td><td>FPV Quad 5″</td><td><span class="badge b-g">4/4</span></td></tr></table></div>
+        <span class="assume">Annahme: Mitglieder legen keine eigenen Checklisten an; Vorschläge gehen an den Admin</span>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3>Vorschau</h3><span class="badge b-w">2 / 6</span></div>
+          <div class="chk"><i class="bi bi-check-square-fill"></i><span>Akku geladen und fest eingerastet</span></div>
+          <div class="chk"><i class="bi bi-check-square-fill"></i><span>Propeller ohne Beschädigung</span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Luftraum frei, keine Personen im Gefahrenbereich</span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Wetter geeignet</span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Remote-ID aktiv (falls nötig)</span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Aufsicht informiert (falls vorhanden)</span></div>
+          <div style="margin-top:8px"><span class="ibtn out">Zurücksetzen</span> <span class="ibtn"><i class="bi bi-airplane"></i> Flug erfassen</span></div></div>
+        <span class="assume">Annahme: Für RC Cars wird „Vor der Fahrt“ nicht gespeichert (kein Fahrtenbuch)</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

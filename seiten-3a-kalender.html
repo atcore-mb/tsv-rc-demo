@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Kalender, Events, Schulungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .kv2{display:grid;grid-template-columns:130px 1fr;gap:6px 10px;font-size:13px;padding:4px 0;margin:0}
+  .kv2 dt{color:var(--mut)}
+  .kv2 dd{margin:0;font-weight:600}
+  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
+  .tabs .on{color:var(--g);border-color:var(--g)}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle}
+  .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+  .tg.on{background:var(--g)}.tg.on::after{left:18px}
+  .seg{display:inline-flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;font-size:13px;font-weight:700}
+  .seg div{padding:5px 12px;color:var(--g);background:#fff}
+  .seg div+div{border-left:1px solid var(--g)}
+  .seg .on{background:var(--g);color:#fff}
+  /* Monatsraster */
+  .ev-tool{display:flex;align-items:center;gap:12px;padding:12px 22px 0;flex-wrap:wrap}
+  .ev-tool .chips{margin:0}
+  .ev-tool .mon{font-size:18px;font-weight:800;display:flex;align-items:center;gap:10px}
+  .ev-tool .mon i{color:var(--g);font-size:16px}
+  .ev-cal{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid #e3e6e3;border-radius:6px;overflow:hidden;background:#fff}
+  .ev-cal .wd{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px;background:#f6f7f6;border-bottom:1px solid #e3e6e3}
+  .ev-cal .c{height:78px;border-right:1px solid #eef0ee;border-bottom:1px solid #eef0ee;padding:4px 5px;font-size:12px;overflow:hidden}
+  .ev-cal .c:nth-child(7n){border-right:0}
+  .ev-cal .c .n{font-weight:700;color:#444;font-size:12px}
+  .ev-cal .c.out .n{color:#c3c8c3}
+  .ev-cal .c.past{background:#fbfbfb}
+  .ev-cal .c.today .n{background:var(--g);color:#fff;border-radius:10px;padding:0 6px}
+  .ev-cal .c.sel{outline:2px solid var(--g);outline-offset:-2px}
+  .pill{display:block;font-size:11px;font-weight:700;border-radius:3px;padding:1px 5px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid}
+  .pill.air{background:var(--airbg);color:var(--air);border-color:var(--air)}
+  .pill.car{background:var(--carbg);color:var(--car);border-color:var(--car)}
+  .pill.all{background:#eceeec;color:#333;border-color:#6c757d}
+  .pill.ps{opacity:.55}
+  .pill i{font-size:10px}
+  .ev-side .row{font-size:13px}
+  .ev-date{width:34px;text-align:center;flex:0 0 auto;line-height:1.05}
+  .ev-date b{display:block;font-size:17px}
+  .ev-date small{font-size:10px;text-transform:uppercase;font-weight:800}
+  .rsvp{display:flex;gap:8px;margin:4px 0 8px}
+  .rsvp div{flex:1;border:1px solid #ced4da;border-radius:6px;text-align:center;padding:7px 2px;font-size:12.5px;font-weight:700;background:#fff}
+  .rsvp i{display:block;font-size:17px}
+  .rsvp .on{border:2px solid var(--g);background:var(--gl);color:var(--g)}
+  .tag{display:inline-flex;align-items:center;gap:5px;background:var(--g);color:#fff;border-radius:4px;padding:3px 8px;font-size:12px;font-weight:700;margin:0 4px 4px 0}
+  .tag.light{background:#fff;color:var(--t);border:1px solid #ced4da}
+  .hero{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+  .hero .pic{width:52px;height:52px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--carbg);color:var(--car)}
+  .hero .pic.air{background:var(--airbg);color:var(--air)}
+  .hero b{font-size:18px;display:block}
+  .form2{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}
+  .modal{position:absolute;top:40px;right:40px;width:380px;bottom:30px;background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;flex-direction:column;z-index:6}
+  .modal .mh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 8px;font-size:16px}
+  .modal .ms{margin:0 16px 6px;border:1px solid #ced4da;border-radius:6px;padding:7px 10px;color:var(--mut);font-size:13px}
+  .modal .ml{flex:1;overflow:hidden;padding:0 16px}
+  .modal .sec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:10px 0 2px}
+  .modal .it{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .modal .it .tx{flex:1}.modal .it .tx b{display:block}
+  .modal .it.on .bi-check-lg{visibility:visible}
+  .modal .it .bi-check-lg{visibility:hidden;color:var(--g);font-size:18px}
+  .modal .it.dim{opacity:.5}
+  .modal .mf{font-size:11.5px;color:var(--mut);padding:8px 16px 12px;border-top:1px solid #eef0ee}
+  .shade{position:absolute;inset:0;background:rgba(0,0,0,.25);z-index:5}
+  .ck{display:inline-block;width:16px;height:16px;border:2px solid #aaa;border-radius:3px;vertical-align:middle}
+  .ck.on{background:var(--g);border-color:var(--g);position:relative}
+  .ck.on::after{content:"";position:absolute;left:3px;top:0;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .link{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#f6f7f6;border:1px dashed #c3c8c3;border-radius:4px;padding:8px;word-break:break-all;margin:6px 0}
+  ol.steps{margin:4px 0;padding-left:20px;font-size:13px}
+  ol.steps li{margin-bottom:5px}
+  .ok{background:var(--gl);border:1px solid #b9dcbf;border-radius:6px;padding:8px 12px;font-size:13px;color:var(--gd);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Kalender, Events, Schulungen</h1>
+  <p>Gruppe 3a, <b>PC-Ansicht</b>. Kalender als Monatsraster und Liste, Event-Detail mit Teilnahme und reservierten Vereinsmodellen, Event und Schulung anlegen, Schulung mit Ergebnis → Nachweis, Kalender-Abo (ICS). Die Handy-Seiten sind klickbar im <b>Klickdummy</b> (Tab Kalender, Umschalter Liste/Monat).</p>
+  <div class="legend"><span class="assume">Gelb markiert: Annahme, im Feindesign Teil 2 mit dem Verein zu klären</span><span><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span> <span class="badge b-all">Alle</span></span></div>
+</div>
+
+<!-- 1 Monatsraster -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Kalender – Monatsansicht</h2></div>
+  <p class="ddesc">Filter nach Bereich und Art oben, Monatsraster mit farbigen Einträgen je Bereich (Symbol zeigt die Art). Rechts Details zum gewählten Tag und die eigenen nächsten Zusagen. „+ Neu“ nur für Abteilungsleitung und Ausbilder (Schulung).</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender?ansicht=monat</span></div>
+  <div class="app" style="height:720px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="ev-tool">
+      <div class="mon"><i class="bi bi-chevron-left"></i>November 2026<i class="bi bi-chevron-right"></i></div>
+      <span class="ibtn out" style="padding:4px 10px">Heute</span>
+      <div class="seg"><div class="on">Monat</div><div>Liste</div></div>
+      <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
+      <div class="chips"><span class="chip on">Alle Arten</span><span class="chip">Event</span><span class="chip">Schulung</span><span class="chip">Termin</span><span class="chip">Rennen</span></div>
+      <span style="margin-left:auto"></span><span class="ibtn out"><i class="bi bi-calendar-plus"></i> Abonnieren</span><span class="ibtn"><i class="bi bi-plus-lg"></i> Neu</span>
+    </div>
+    <div class="dmain" style="grid-template-columns:1fr 290px">
+      <div class="ev-cal">
+        <div class="wd">Mo</div><div class="wd">Di</div><div class="wd">Mi</div><div class="wd">Do</div><div class="wd">Fr</div><div class="wd">Sa</div><div class="wd">So</div>
+        <div class="c out past"><span class="n">26</span></div><div class="c out past"><span class="n">27</span></div><div class="c out past"><span class="n">28</span></div><div class="c out past"><span class="n">29</span></div><div class="c out past"><span class="n">30</span></div><div class="c out past"><span class="n">31</span></div><div class="c past"><span class="n">1</span></div>
+        <div class="c past"><span class="n">2</span></div><div class="c past"><span class="n">3</span></div><div class="c past"><span class="n">4</span></div><div class="c past"><span class="n">5</span><span class="pill air ps"><i class="bi bi-calendar-event"></i> 18:00 Hallenfliegen</span></div><div class="c past"><span class="n">6</span></div><div class="c past"><span class="n">7</span></div><div class="c past"><span class="n">8</span></div>
+        <div class="c past"><span class="n">9</span><span class="pill car ps"><i class="bi bi-calendar"></i> 14:00 Crawler-Treff</span></div><div class="c past"><span class="n">10</span></div><div class="c past"><span class="n">11</span></div><div class="c past"><span class="n">12</span><span class="pill air ps"><i class="bi bi-calendar-event"></i> 18:00 Hallenfliegen</span></div><div class="c past"><span class="n">13</span></div><div class="c today"><span class="n">14</span></div><div class="c"><span class="n">15</span></div>
+        <div class="c sel"><span class="n">16</span><span class="pill car"><i class="bi bi-calendar-event"></i> 10:00 Fahrtag Sandbahn</span></div><div class="c"><span class="n">17</span></div><div class="c"><span class="n">18</span></div><div class="c"><span class="n">19</span><span class="pill air"><i class="bi bi-calendar-event"></i> 18:00 Hallenfliegen</span></div><div class="c"><span class="n">20</span></div><div class="c"><span class="n">21</span><span class="pill all"><i class="bi bi-calendar"></i> 19:00 Werkstattabend</span></div><div class="c"><span class="n">22</span></div>
+        <div class="c"><span class="n">23</span><span class="pill air"><i class="bi bi-mortarboard"></i> 10:00 Schulung A1/A3</span></div><div class="c"><span class="n">24</span><span class="pill car"><i class="bi bi-trophy"></i> 10:00 VM Lauf 5 · Crawler</span></div><div class="c"><span class="n">25</span></div><div class="c"><span class="n">26</span><span class="pill air"><i class="bi bi-calendar-event"></i> 18:00 Hallenfliegen</span></div><div class="c"><span class="n">27</span></div><div class="c"><span class="n">28</span></div><div class="c"><span class="n">29</span><span class="pill all"><i class="bi bi-calendar"></i> 19:00 Abteilungsversammlung</span></div>
+        <div class="c"><span class="n">30</span></div><div class="c out"><span class="n">1</span></div><div class="c out"><span class="n">2</span></div><div class="c out"><span class="n">3</span></div><div class="c out"><span class="n">4</span></div><div class="c out"><span class="n">5</span></div><div class="c out"><span class="n">6</span></div>
+      </div>
+      <div class="ev-side">
+        <div class="card"><h3>Mo 16.11.</h3>
+          <div class="hero" style="margin:6px 0"><div class="pic" style="width:40px;height:40px;font-size:18px"><i class="bi bi-calendar-event"></i></div><div><b style="font-size:15px">Fahrtag Sandbahn</b><small class="mut">10:00–16:00 · Sand-Rennstrecke</small></div></div>
+          <div style="font-size:13px;margin-bottom:6px"><span class="badge b-g">Event</span> <span class="badge b-car">RC Cars</span> · 6 Zusagen · 2 vielleicht</div>
+          <div class="rsvp"><div><i class="bi bi-check-circle"></i>Zusage</div><div><i class="bi bi-question-circle"></i>Vielleicht</div><div><i class="bi bi-x-circle"></i>Absage</div></div>
+          <span class="ibtn out">Details öffnen</span>
+        </div>
+        <div class="card"><h3>Meine nächsten Zusagen</h3>
+          <div class="row"><span class="li"><span class="ev-date"><b>29</b><small>Fr</small></span><span><b>Abteilungsversammlung</b><br><small class="mut">19:00 · Sportheim</small></span></span><span class="badge b-all">Alle</span></div>
+          <div class="row"><span class="li"><span class="ev-date"><b>13</b><small>Fr</small></span><span><b>Weihnachtsfeier</b><br><small class="mut">Dez · 18:30 · Sportheim</small></span></span><span class="badge b-all">Alle</span></div>
+        </div>
+        <div class="note" style="text-align:left">Du siehst Termine deiner Bereiche und allgemeine Termine. Vergangene Tage sind blasser.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 2 Liste -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Kalender – Liste</h2></div>
+  <p class="ddesc">Gleiche Filter, als Tabelle mit eigener Teilnahme und Zusagen. Gut zum Planen über Monatsgrenzen; vergangene Termine über „Archiv“.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender?ansicht=liste</span></div>
+  <div class="app" style="height:500px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="ev-tool">
+      <div class="seg"><div>Monat</div><div class="on">Liste</div></div>
+      <div class="chips"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
+      <div class="chips"><span class="chip on">Alle Arten</span><span class="chip">Event</span><span class="chip">Schulung</span><span class="chip">Termin</span><span class="chip">Rennen</span></div>
+      <span style="margin-left:auto" class="mut">Archiv</span><span class="ibtn out"><i class="bi bi-calendar-plus"></i> Abonnieren</span><span class="ibtn"><i class="bi bi-plus-lg"></i> Neu</span>
+    </div>
+    <div class="dmain" style="grid-template-columns:1fr">
+      <div class="card">
+        <table class="dt"><tr><th>Datum</th><th>Zeit</th><th>Titel</th><th>Art</th><th>Bereich</th><th>Ort</th><th>Teilnahme</th><th>Ich</th></tr>
+          <tr><td><b>Mo 16.11.</b></td><td>10:00–16:00</td><td><b>Fahrtag Sandbahn</b></td><td><i class="bi bi-calendar-event"></i> Event</td><td><span class="badge b-car">RC Cars</span></td><td>Sand-Rennstrecke</td><td>6 Zusagen</td><td><span class="badge b-all">offen</span></td></tr>
+          <tr><td><b>Do 19.11.</b></td><td>18:00–20:00</td><td><b>Hallenfliegen</b> <i class="bi bi-repeat mut" title="wiederkehrend"></i></td><td><i class="bi bi-calendar-event"></i> Event</td><td><span class="badge b-air">Luftsport</span></td><td>Sporthalle</td><td>5 / 12</td><td><span class="badge b-all">offen</span></td></tr>
+          <tr><td><b>Sa 21.11.</b></td><td>19:00–21:30</td><td><b>Werkstattabend</b></td><td><i class="bi bi-calendar"></i> Termin</td><td><span class="badge b-all">Alle</span></td><td>Vereinsheim</td><td class="mut">ohne Anmeldung</td><td></td></tr>
+          <tr><td><b>Mo 23.11.</b></td><td>10:00–13:00</td><td><b>Schulung A1/A3</b></td><td><i class="bi bi-mortarboard"></i> Schulung</td><td><span class="badge b-air">Luftsport</span></td><td>Vereinsheim</td><td>4 / 8 · bis 21.11.</td><td><span class="badge b-all">offen</span></td></tr>
+          <tr><td><b>Di 24.11.</b></td><td>10:00–15:00</td><td><b>VM Lauf 5 · Crawler</b></td><td><i class="bi bi-trophy"></i> Rennen</td><td><span class="badge b-car">RC Cars</span></td><td>Crawler-Strecke</td><td>8 Starter</td><td><span class="badge b-g">Starter</span></td></tr>
+          <tr><td><b>So 29.11.</b></td><td>19:00–21:00</td><td><b>Abteilungsversammlung</b></td><td><i class="bi bi-calendar"></i> Termin</td><td><span class="badge b-all">Alle</span></td><td>Sportheim</td><td>7 Zusagen</td><td><span class="badge b-g">zugesagt</span></td></tr>
+          <tr><td><b>Mo 07.12.</b></td><td>09:00–15:00</td><td><b>Schulung A2-Vorbereitung</b></td><td><i class="bi bi-mortarboard"></i> Schulung</td><td><span class="badge b-air">Luftsport</span></td><td>Vereinsgelände</td><td>2 / 6 · bis 05.12.</td><td><span class="badge b-all">offen</span></td></tr>
+          <tr><td><b>So 13.12.</b></td><td>18:30–23:00</td><td><b>Weihnachtsfeier</b></td><td><i class="bi bi-calendar-event"></i> Event</td><td><span class="badge b-all">Alle</span></td><td>Sportheim</td><td>4 / 40 · bis 06.12.</td><td><span class="badge b-w">vielleicht</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 3 Event-Detail -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Event-Detail</h2></div>
+  <p class="ddesc">Links Eckdaten, Beschreibung und Teilnehmerliste mit Reitern. Rechts eigene Teilnahme, reservierte Vereinsmodelle, „Zum Kalender hinzufügen“ und die Aktionen für Leitung und Verantwortliche.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/fahrtag-sandbahn-2026-11-16</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain">
+      <div>
+        <div class="card">
+          <div class="hero"><div class="pic"><i class="bi bi-calendar-event"></i></div><div><small class="mut"><i class="bi bi-arrow-left"></i> Kalender</small><b>Fahrtag Sandbahn</b><span class="badge b-g">Event</span> <span class="badge b-car">RC Cars</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">
+            <dl class="kv2"><dt>Datum</dt><dd>Mo 16.11.2026</dd><dt>Zeit</dt><dd>10:00 – 16:00 Uhr</dd><dt>Ort</dt><dd>Sand-Rennstrecke <span class="mut" style="font-weight:400">· Karte</span></dd></dl>
+            <dl class="kv2"><dt>Verantwortlich</dt><dd>Markus B., Jonas B.</dd><dt>Teilnahme</dt><dd>erforderlich · unbegrenzt</dd><dt>Wiederholung</dt><dd>–</dd></dl>
+          </div>
+          <p style="font-size:13px;margin:8px 0 0">Freies Fahren auf der Sandbahn. Die Strecke wird ab 9:30 gewässert und abgesteckt. Gäste willkommen, Vereinsautos zum Ausprobieren sind da. Mittags Grill, bitte bei Zusage Bescheid geben.</p>
+        </div>
+        <div class="card">
+          <div class="hrow"><h3>Teilnehmer</h3><span class="mut" style="font-size:13px">6 Zusagen · 2 vielleicht · 1 Absage</span></div>
+          <div class="tabs"><div class="on">Zusagen (6)</div><div>Vielleicht (2)</div><div>Absagen (1)</div></div>
+          <table class="dt"><tr><th>Name</th><th>Bereich</th><th>Zugesagt am</th><th>Hinweis</th></tr>
+            <tr><td><b>Jonas B.</b></td><td>RC Cars, Luftsport</td><td>02.11.</td><td>Verantwortlich</td></tr>
+            <tr><td><b>Lena K.</b></td><td>Luftsport, RC Cars</td><td>05.11.</td><td></td></tr>
+            <tr><td><b>Tim S. (14)</b></td><td>RC Cars</td><td>06.11.</td><td>zugesagt von Sandra S. (Mutter)</td></tr>
+            <tr><td><b>Paul W.</b></td><td>RC Cars</td><td>08.11.</td><td>möchte Vereinsauto testen</td></tr>
+            <tr><td><b>Anna H.</b></td><td>RC Cars</td><td>10.11.</td><td></td></tr>
+          </table>
+          <span class="assume">Annahme: Teilnehmerliste sehen Mitglieder der Abteilung; für Minderjährige sagen Erziehungsberechtigte zu.</span>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Meine Teilnahme</h3>
+          <div class="rsvp"><div class="on"><i class="bi bi-check-circle"></i>Zusage</div><div><i class="bi bi-question-circle"></i>Vielleicht</div><div><i class="bi bi-x-circle"></i>Absage</div></div>
+          <small class="mut">Änderbar bis Beginn. Die Verantwortlichen sehen deine Antwort.</small>
+        </div>
+        <div class="card"><h3>Reservierte Vereinsmodelle</h3>
+          <table class="dt"><tr><td><i class="bi bi-car-front" style="color:var(--car)"></i> <b>Losi Mini-T 2.0</b><br><small class="mut">Offroad · 1:18</small></td><td><span class="badge b-g">reserviert</span></td></tr>
+            <tr><td><i class="bi bi-battery-half" style="color:var(--car)"></i> <b>Vereins-Akkus 2S (4 Stück)</b><br><small class="mut">mit Ladekoffer</small></td><td><span class="badge b-g">reserviert</span></td></tr></table>
+          <span class="assume">Annahme: Ausgabe vor Ort durch die Verantwortlichen, ohne Ausleihantrag; Übergabeprotokoll bleibt Pflicht.</span>
+        </div>
+        <div class="card"><h3>Kalender</h3><span class="ibtn out"><i class="bi bi-download"></i> .ics für diesen Termin</span> <span class="ibtn out"><i class="bi bi-arrow-repeat"></i> Alles abonnieren</span></div>
+        <div class="card"><h3>Leitung &amp; Verantwortliche</h3><span class="ibtn"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-megaphone"></i> Nachricht an Teilnehmer</span> <span class="ibtn out" style="color:var(--red);border-color:var(--red);margin-top:6px"><i class="bi bi-calendar-x"></i> Absagen</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 4 Event anlegen -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Event anlegen / bearbeiten</h2></div>
+  <p class="ddesc">Art zuerst (Auswahldialog), dann nur die passenden Felder in zwei Spalten. Ort, Verantwortliche und Vereinsmodelle wählt man über Auswahldialoge; hier geöffnet: <b>Vereinsmodelle reservieren</b>, vorgefiltert auf die gewählten Bereiche, belegte Modelle ausgegraut. Speichern erst, wenn alle Pflichtfelder gefüllt sind.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/neu</span></div>
+  <div class="app" style="height:640px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dcontent">
+      <div class="hrow"><h3 style="font-size:17px">Neues Event</h3><span class="mut" style="font-size:12px">nur Abteilungsleitung</span></div>
+      <div class="form2">
+        <div>
+          <label>Art <span class="req">*</span></label><div class="inp">Event <i class="bi bi-chevron-down"></i></div>
+          <label>Titel <span class="req">*</span></label><div class="inp">Fahrtag Sandbahn</div>
+          <label>Bereiche <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip">Luftsport</span><span class="chip on">RC Cars</span></div>
+          <div class="hint">Beide gewählt = Termin für alle.</div>
+          <label>Ort <span class="req">*</span></label><div class="inp">Sand-Rennstrecke <i class="bi bi-chevron-down"></i></div>
+          <div class="two"><div><label>Datum <span class="req">*</span></label><div class="inp">16.11.2026</div></div><div><label>Von <span class="req">*</span></label><div class="inp">10:00</div></div><div><label>Bis <span class="opt">opt.</span></label><div class="inp">16:00</div></div></div>
+          <label>Wiederkehrend</label><div class="inp" style="justify-content:flex-start;gap:10px"><span class="tg"></span> nein</div>
+          <label>Beschreibung <span class="opt">optional</span></label><div class="inp" style="height:52px;align-items:flex-start">Freies Fahren auf der Sandbahn …</div>
+        </div>
+        <div>
+          <label>Verantwortliche <span class="req">*</span></label>
+          <div><span class="tag">Markus B. <i class="bi bi-x"></i></span><span class="tag">Jonas B. <i class="bi bi-x"></i></span></div>
+          <div class="addlink"><i class="bi bi-person-plus"></i> Person hinzufügen</div>
+          <label>Teilnahme erforderlich</label><div class="inp" style="justify-content:flex-start;gap:10px"><span class="tg on"></span> ja</div>
+          <div class="two"><div><label>Max. Teilnehmer <span class="opt">opt.</span></label><div class="inp ph">unbegrenzt</div></div><div><label>Anmeldeschluss <span class="opt">opt.</span></label><div class="inp ph">TT.MM.</div></div></div>
+          <span class="assume">Annahme: volle Events führen eine Warteliste.</span>
+          <label>Vereinsmodelle reservieren</label>
+          <div><span class="tag light"><i class="bi bi-car-front"></i> Losi Mini-T 2.0 <i class="bi bi-x"></i></span></div>
+          <div class="addlink"><i class="bi bi-plus-circle"></i> Vereinsmodell reservieren</div>
+          <div class="hint">Im Zeitraum für Ausleihen gesperrt.</div>
+          <label>Benachrichtigen</label><div class="inp" style="justify-content:flex-start;gap:10px"><span class="tg on"></span> Mitglieder der Bereiche per Push/E-Mail</div>
+          <div style="margin-top:14px;display:flex;gap:8px;align-items:center"><span class="ibtn">Speichern</span><span class="ibtn out">Abbrechen</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="shade"></div>
+    <div class="modal">
+      <div class="mh"><b>Vereinsmodell reservieren</b><i class="bi bi-x-lg"></i></div>
+      <div class="ms"><i class="bi bi-search"></i> Suchen</div>
+      <div class="ml">
+        <div class="sec">Zuletzt reserviert</div>
+        <div class="it on"><span class="ico car"><i class="bi bi-car-front"></i></span><span class="tx"><b>Losi Mini-T 2.0 (Verein)</b><small class="mut">Offroad · 1:18</small></span><i class="bi bi-check-lg"></i></div>
+        <div class="sec">RC Cars</div>
+        <div class="it"><span class="ico car"><i class="bi bi-car-front"></i></span><span class="tx"><b>Axial SCX24 (Verein)</b><small class="mut">Crawler · 1:24</small></span><i class="bi bi-check-lg"></i></div>
+        <div class="it"><span class="ico car"><i class="bi bi-battery-half"></i></span><span class="tx"><b>Vereins-Akkus 2S (4 Stück)</b><small class="mut">Zubehör · mit Ladekoffer</small></span><i class="bi bi-check-lg"></i></div>
+        <div class="it dim"><span class="ico car"><i class="bi bi-car-front"></i></span><span class="tx"><b>Vereins-Crawler TRX-4M</b><small class="mut">ausgeliehen an Markus B. bis 17.11.</small></span><span class="badge b-r">belegt</span></div>
+      </div>
+      <div class="mf">Es erscheinen Vereinsmodelle und Zubehör der gewählten Bereiche (hier: RC Cars). „Belegt“: im Zeitraum schon ausgeliehen oder reserviert, Überschneidungen sind nicht möglich. Ausgemusterte sind ausgeblendet.</div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 5 Schulung-Detail -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Schulung-Detail mit Ausbilder-Ansicht</h2></div>
+  <p class="ddesc">Mitglieder sehen Infos und melden sich an. Ausbilder und Leitung haken Anwesende ab und tragen das Ergebnis ein. „Bestanden“ legt beim Teilnehmer den Ziel-Nachweis an oder verlängert ihn.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/schulung-a1-a3-2026-11-23</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Max R.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.7fr">
+      <div>
+        <div class="card">
+          <div class="hero"><div class="pic air"><i class="bi bi-mortarboard"></i></div><div><b>Schulung A1/A3</b><span class="badge b-g">Schulung</span> <span class="badge b-air">Luftsport</span></div></div>
+          <dl class="kv2"><dt>Datum</dt><dd>Mo 23.11.2026</dd><dt>Zeit</dt><dd>10:00 – 13:00</dd><dt>Ort</dt><dd>Vereinsheim</dd><dt>Ausbilder</dt><dd>Max R.</dd><dt>Ziel-Nachweis</dt><dd>Kompetenznachweis A1/A3 (Vorbereitung)</dd><dt>Plätze</dt><dd>4 von 8 frei</dd><dt>Anmeldeschluss</dt><dd>Sa 21.11.</dd></dl>
+          <p style="font-size:13px;margin:6px 0">Vorbereitung auf den Online-Test des LBA. Handy oder Laptop mitbringen.</p>
+          <span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-download"></i> .ics</span>
+        </div>
+        <span class="assume">Annahme: Den amtlichen A1/A3-Nachweis (LBA) trägt das Mitglied selbst ein; die Schulung erzeugt den Vereinsnachweis „Schulung A1/A3 besucht“.</span>
+      </div>
+      <div class="card">
+        <div class="hrow"><h3>Teilnehmer &amp; Ergebnis</h3><span class="mut" style="font-size:12px">Ansicht Ausbilder / Leitung</span></div>
+        <table class="dt"><tr><th>Anwesend</th><th>Name</th><th>Ergebnis</th><th>Nachweis beim Teilnehmer</th></tr>
+          <tr><td><span class="ck on"></span></td><td><b>Lena K.</b></td><td><div class="chips" style="margin:0"><span class="chip on">bestanden</span><span class="chip">nicht bestanden</span></div></td><td>wird <b>verlängert</b> bis 23.11.2031</td></tr>
+          <tr><td><span class="ck on"></span></td><td><b>Tim S. (14)</b><br><small class="mut">minderjährig · Mutter Sandra S.</small></td><td><div class="chips" style="margin:0"><span class="chip on">bestanden</span><span class="chip">nicht bestanden</span></div></td><td>wird <b>angelegt</b> · Sandra S. wird benachrichtigt</td></tr>
+          <tr><td><span class="ck on"></span></td><td><b>Paul W.</b></td><td><div class="chips" style="margin:0"><span class="chip">bestanden</span><span class="chip on">nicht bestanden</span></div></td><td class="mut">kein Nachweis</td></tr>
+          <tr><td><span class="ck"></span></td><td><b>Anna H.</b></td><td><div class="chips" style="margin:0"><span class="chip on">nicht teilgenommen</span></div></td><td class="mut">kein Nachweis</td></tr>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center"><span class="ibtn">Ergebnisse speichern</span><span class="ibtn out"><i class="bi bi-person-plus"></i> Teilnehmer hinzufügen</span><small class="mut">Speichern erst, wenn jeder Teilnehmer ein Ergebnis hat.</small></div>
+        <div class="ok"><i class="bi bi-check-circle-fill"></i> Nach dem Speichern: 2 Nachweise angelegt bzw. verlängert, Änderungen im Protokoll.</div>
+        <span class="assume">Annahme: Nachweistyp und Gültigkeit kommen aus dem Ziel-Nachweis (Regelwerk); Eltern werden bei Minderjährigen benachrichtigt.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 6 Schulung anlegen -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Schulung anlegen</h2></div>
+  <p class="ddesc">Dasselbe Formular wie bei Events, mit Art „Schulung“: zusätzlich Ausbilder und Ziel-Nachweis (beide Pflicht, per Auswahldialog). Ausbilder dürfen Schulungen anlegen. Der Hinweis unter „Speichern“ nennt, was noch fehlt.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/neu?art=schulung</span></div>
+  <div class="app" style="height:520px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Max R.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dcontent">
+      <div class="hrow"><h3 style="font-size:17px">Neue Schulung</h3><span class="mut" style="font-size:12px">Abteilungsleitung und Ausbilder</span></div>
+      <div class="form2">
+        <div>
+          <label>Art <span class="req">*</span></label><div class="inp">Schulung <i class="bi bi-chevron-down"></i></div>
+          <label>Titel <span class="req">*</span></label><div class="inp">Schulung A2-Vorbereitung</div>
+          <label>Bereiche <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Luftsport</span><span class="chip">RC Cars</span></div>
+          <label>Ort <span class="req">*</span></label><div class="inp">Vereinsgelände <i class="bi bi-chevron-down"></i></div>
+          <div class="two"><div><label>Datum <span class="req">*</span></label><div class="inp">07.12.2026</div></div><div><label>Von <span class="req">*</span></label><div class="inp">09:00</div></div><div><label>Bis <span class="opt">opt.</span></label><div class="inp">15:00</div></div></div>
+        </div>
+        <div>
+          <div class="fsec" style="margin-top:8px"><i class="bi bi-mortarboard"></i> Schulung <span class="ln"></span></div>
+          <label>Ausbilder <span class="req">*</span></label><div class="inp">Max R. <i class="bi bi-chevron-down"></i></div>
+          <label>Ziel-Nachweis <span class="req">*</span></label><div class="inp ph">Nachweis wählen <i class="bi bi-chevron-down"></i></div>
+          <div class="hint">Typen aus dem Regelwerk: A1/A3 (Vorbereitung), A2 (Vorbereitung), Einweisung Vereinsgelände, Einweisung Vereinsmodelle, Verbandsnachweis, kein Nachweis.</div>
+          <div class="two"><div><label>Max. Teilnehmer</label><div class="inp">6</div></div><div><label>Anmeldeschluss</label><div class="inp">05.12.</div></div></div>
+          <label>Verantwortliche <span class="req">*</span></label><div><span class="tag">Max R. <i class="bi bi-x"></i></span></div>
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center"><span class="ibtn" style="opacity:.4">Speichern</span><small class="mut">Es fehlt: Ziel-Nachweis.</small></div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 7 ICS -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Kalender abonnieren (ICS)</h2></div>
+  <p class="ddesc">Persönlicher, widerrufbarer Link mit Auswahl der Inhalte. Neu erzeugen macht den alten Link sofort ungültig. Darunter die Anleitungen für iPhone, Android und Outlook nebeneinander.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/abo</span></div>
+  <div class="app" style="height:560px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1fr">
+      <div>
+        <div class="card"><h3>Dein persönlicher Link</h3>
+          <div class="link">webcal://rc.tsv1927roethenbach.de/ics/k3F9x2LmQ8vTp0Zr.ics</div>
+          <small class="mut">erzeugt am 02.11.2026 · zuletzt abgerufen heute 06:12</small>
+          <div style="margin-top:8px"><span class="ibtn"><i class="bi bi-box-arrow-up-right"></i> In Kalender öffnen</span> <span class="ibtn out"><i class="bi bi-clipboard"></i> Kopieren</span> <span class="ibtn out"><i class="bi bi-arrow-clockwise"></i> Neu erzeugen</span> <span class="ibtn out" style="color:var(--red);border-color:var(--red)"><i class="bi bi-x-circle"></i> Widerrufen</span></div>
+          <div class="alert" style="margin:10px 0 0"><i class="bi bi-shield-exclamation"></i> Wer den Link kennt, sieht deine Vereinstermine. Nicht weitergeben.</div>
+        </div>
+        <div class="card"><h3>Inhalt</h3>
+          <div class="chips"><span class="chip on">Luftsport</span><span class="chip on">RC Cars</span><span class="chip on">Allgemeine Termine</span></div>
+          <table class="dt"><tr><td>Nur Events, denen ich zugesagt habe</td><td><span class="tg"></span></td></tr><tr><td>Schulungen</td><td><span class="tg on"></span></td></tr><tr><td>Rennen</td><td><span class="tg on"></span></td></tr></table>
+          <span class="assume">Annahme: Feed enthält Titel, Zeit, Ort, Bereich und Link in die App, keine Teilnehmernamen.</span>
+        </div>
+      </div>
+      <div class="card"><h3>So geht's</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+          <div><b><i class="bi bi-apple"></i> iPhone</b><ol class="steps"><li><b>In Kalender öffnen</b> am iPhone tippen.</li><li>„Kalender abonnieren?“ → <b>Abonnieren</b>.</li><li>Name „TSV RC“, Farbe → <b>Fertig</b>.</li></ol></div>
+          <div><b><i class="bi bi-android2"></i> Android</b><ol class="steps"><li>Link kopieren.</li><li><b>calendar.google.com</b> › Weitere Kalender › <b>Per URL</b>.</li><li><code>webcal://</code> durch <code>https://</code> ersetzen, hinzufügen.</li><li>Am Handy Kalender „TSV RC“ einblenden.</li></ol></div>
+          <div><b><i class="bi bi-microsoft"></i> Outlook</b><ol class="steps"><li>Link kopieren.</li><li><b>Kalender hinzufügen</b> › <b>Aus dem Internet abonnieren</b>.</li><li>Link einfügen, Name „TSV RC“ › <b>Importieren</b>.</li></ol></div>
+        </div>
+        <div class="note" style="text-align:left;margin-top:10px">Kalender-Apps holen Änderungen selbst ab, Google nur alle paar Stunden. Abgesagte Termine verschwinden beim nächsten Abruf.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- 8 Adresse eingeben -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">8</span><h2>Auswärtige Adresse für einen Termin</h2></div>
+  <p class="ddesc">Im Event-Formular steht im Ort-Auswahldialog unter „Anderer Ort“ der Eintrag <b>Adresse eingeben</b>. Er öffnet dieses Formular (am PC als Dialog über dem Formular). Bezeichnung, Straße, PLZ und Ort sind Pflicht; sobald die Adresse vollständig ist, zeigt eine Karte die gefundene Position. „Ort übernehmen“ trägt „Bezeichnung, Ort“ ins Feld Ort ein und die volle Adresse in die Beschreibung.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/neu</span></div>
+  <div class="app" style="height:560px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a class="on"><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dcontent">
+      <div class="hrow"><h3 style="font-size:17px">Neues Event</h3><span class="mut" style="font-size:12px">nur Abteilungsleitung</span></div>
+      <div class="form2" style="opacity:.55">
+        <div><label>Art <span class="req">*</span></label><div class="inp">Event <i class="bi bi-chevron-down"></i></div>
+          <label>Titel <span class="req">*</span></label><div class="inp">Freundschaftsfliegen beim MFC Lauf</div>
+          <label>Ort <span class="req">*</span></label><div class="inp ph">Ort wählen <i class="bi bi-chevron-down"></i></div></div>
+        <div><label>Bereiche <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Luftsport</span><span class="chip">RC Cars</span></div>
+          <div class="two"><div><label>Datum <span class="req">*</span></label><div class="inp">So 29.11.2026</div></div><div><label>Von <span class="req">*</span></label><div class="inp">10:00</div></div></div></div>
+      </div>
+    </div>
+    <div class="shade"></div>
+    <div class="modal" style="width:440px">
+      <div class="mh"><b>Adresse eingeben</b><i class="bi bi-x-lg"></i></div>
+      <div class="ml" style="overflow:hidden">
+        <label>Bezeichnung <span class="req">*</span></label><div class="inp">Modellflugplatz Lauf</div>
+        <label>Straße und Hausnummer <span class="req">*</span></label><div class="inp">Am Flugfeld 3</div>
+        <div class="two"><div style="flex:0 0 100px"><label>PLZ <span class="req">*</span></label><div class="inp">91207</div></div><div><label>Ort <span class="req">*</span></label><div class="inp">Lauf a. d. Pegnitz</div></div></div>
+        <label>Treffpunkt / Hinweis <span class="opt">optional</span></label><div class="inp ph">z. B. Parkplatz am Vereinsheim</div>
+        <div style="position:relative;height:90px;border-radius:6px;overflow:hidden;border:1px solid #d6dad6;margin:10px 0 4px;background:#eef2ea;background-image:linear-gradient(#dde5d8 1px,transparent 1px),linear-gradient(90deg,#dde5d8 1px,transparent 1px);background-size:20px 20px"><i class="bi bi-geo-alt-fill" style="position:absolute;left:48%;top:50%;transform:translate(-50%,-100%);font-size:24px;color:var(--red)"></i><span style="position:absolute;left:6px;bottom:5px;font-size:10.5px;background:#fff;border-radius:4px;padding:1px 6px;color:#555">Position gefunden (simuliert)</span></div>
+        <span class="assume">Annahme: Adresse gilt nur für diesen Termin, wird kein Vereinsort; Kartendienst klärt Teil 4.</span>
+      </div>
+      <div class="mf" style="display:flex;gap:8px;justify-content:flex-end;padding:10px 16px"><span class="ibtn out">Abbrechen</span><span class="ibtn">Ort übernehmen</span></div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

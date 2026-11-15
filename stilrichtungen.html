@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkyLog – Stilrichtungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0;color:#444;max-width:800px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 14px;font-size:14px}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700}
+  .body{flex:1;overflow:hidden;padding:12px 14px}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  small,.mut{color:var(--mut)}
+
+  /* ============ A: Vereinsklassisch ============ */
+  .va .status{background:var(--gd);color:#fff}
+  .va .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .va .top img{height:34px}
+  .va .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .va .top .t2{font-size:11px;opacity:.8}
+  .va .body{background:var(--bg)}
+  .va h3{font-size:18px;margin:4px 0 10px}
+  .va .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:10px 12px;margin-bottom:10px}
+  .va .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .va .stats{display:flex;gap:8px;margin-bottom:10px}
+  .va .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .va .stat b{display:block;font-size:20px;color:var(--g)}
+  .va .stat span{font-size:11px;color:var(--mut)}
+  .va .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .va .row:last-child{border-bottom:0}
+  .va .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:11px;font-weight:700;font-size:15px;text-align:center;font-family:inherit}
+  .va .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .va label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  .va .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:8px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+  .va .two{display:flex;gap:8px}.va .two>div{flex:1}
+  .va .gps{font-size:11px;color:var(--g);margin-top:3px}
+  .va .tabbar{background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .va .tabbar .on{color:var(--g);font-weight:700}
+  .va .badge{font-size:11px;border-radius:4px;padding:1px 6px;background:var(--gl);color:var(--g);font-weight:700}
+  .va .badge.w{background:var(--warnbg);color:var(--warn)}
+  .va .badge.r{background:#fde8e8;color:var(--red)}
+
+  /* ============ B: Moderne App ============ */
+  .vb{background:#f3f5f3}
+  .vb .status{background:var(--g);color:#fff}
+  .vb .hero{background:linear-gradient(160deg,var(--g),var(--gd));color:#fff;padding:10px 16px 46px;border-radius:0 0 26px 26px}
+  .vb .hero .hi{font-size:13px;opacity:.85}
+  .vb .hero .name{font-size:22px;font-weight:800;margin-bottom:10px}
+  .vb .hero .row1{display:flex;justify-content:space-between;align-items:center}
+  .vb .avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:800}
+  .vb .tiles{display:flex;gap:10px;margin:-36px 14px 0;position:relative}
+  .vb .tile{flex:1;background:#fff;border-radius:16px;padding:12px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+  .vb .tile b{font-size:24px;display:block;color:var(--gd)}
+  .vb .tile span{font-size:11px;color:var(--mut)}
+  .vb .body{padding:14px}
+  .vb .sec{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:12px 2px 8px}
+  .vb .card{background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .vb .warn{background:var(--warnbg);border-radius:16px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:13px;color:#7a4a06;margin-top:12px}
+  .vb .warn i{font-size:20px}
+  .vb .fl{display:flex;align-items:center;gap:12px}
+  .vb .ic{width:38px;height:38px;border-radius:12px;background:var(--gl);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}
+  .vb .fl .m{flex:1;font-size:13px}
+  .vb .fl .m b{display:block;font-size:14px}
+  .vb .fab{position:absolute;right:18px;bottom:76px;background:var(--g);color:#fff;border-radius:18px;padding:13px 18px;font-weight:800;box-shadow:0 6px 16px rgba(10,92,35,.4);font-size:15px}
+  .vb .tabbar{background:#fff;color:var(--mut);border-radius:20px 20px 0 0;box-shadow:0 -2px 10px rgba(0,0,0,.05)}
+  .vb .tabbar .on{color:var(--g);font-weight:800}
+  .vb .ftop{background:#fff;padding:8px 14px 10px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
+  .vb .field{background:#fff;border-radius:14px;padding:9px 12px;margin-bottom:8px}
+  .vb .field small{display:block;font-size:11px;font-weight:700}
+  .vb .field div{font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+  .vb .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .vb .chip{border-radius:20px;padding:6px 12px;background:#fff;font-size:13px;font-weight:700;border:1px solid #dfe4df}
+  .vb .chip.on{background:var(--g);color:#fff;border-color:var(--g)}
+  .vb .big{display:flex;gap:8px;margin-bottom:8px}
+  .vb .big .field{flex:1;margin:0;text-align:center}
+  .vb .big .field div{justify-content:center;font-size:22px}
+  .vb .now{display:inline-block;margin-top:4px;font-size:11px;background:var(--gl);color:var(--g);border-radius:10px;padding:2px 8px;font-weight:800}
+  .vb .save{background:var(--g);color:#fff;border-radius:16px;padding:14px;text-align:center;font-weight:800;font-size:16px;margin-top:10px}
+  .vb .pill{font-size:11px;border-radius:10px;padding:2px 8px;font-weight:800}
+  .vb .pill.w{background:var(--warnbg);color:var(--warn)}.vb .pill.r{background:#fde8e8;color:var(--red)}.vb .pill.g{background:var(--gl);color:var(--g)}
+
+  /* ============ C: Outdoor-Kontrast ============ */
+  .vc{background:#fff}
+  .vc .status{background:#fff;color:#000}
+  .vc .top{display:flex;justify-content:space-between;align-items:center;padding:6px 14px 10px;border-bottom:3px solid var(--g)}
+  .vc .top .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px}
+  .vc .top img{height:28px}
+  .vc .net{font-size:11px;font-weight:800;border:2px solid #000;border-radius:4px;padding:1px 6px}
+  .vc .body{padding:12px 14px}
+  .vc h3{font-size:22px;font-weight:800;margin:2px 0 10px}
+  .vc .bigbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--g);color:#fff;font-weight:800;font-size:20px;border-radius:6px;padding:18px;margin-bottom:12px}
+  .vc .warn{border:3px solid var(--warn);border-radius:6px;padding:8px 10px;font-weight:700;font-size:14px;margin-bottom:12px;display:flex;gap:8px;align-items:center}
+  .vc .warn i{color:var(--warn);font-size:20px}
+  .vc .kpi{display:flex;border:2px solid #000;border-radius:6px;margin-bottom:12px}
+  .vc .kpi div{flex:1;padding:8px;text-align:center}
+  .vc .kpi div+div{border-left:2px solid #000}
+  .vc .kpi b{display:block;font-size:22px}
+  .vc .kpi span{font-size:11px;font-weight:700}
+  .vc .list .it{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:2px solid #e5e5e5;font-size:15px}
+  .vc .list .it b{font-size:15px}
+  .vc .list .it i{font-size:20px;color:#999}
+  .vc .tabbar{border-top:3px solid #000;color:#000;font-weight:700;font-size:11px}
+  .vc .tabbar .on{color:var(--g)}
+  .vc .tabbar .on i{background:var(--g);color:#fff;border-radius:6px;padding:2px 10px}
+  .vc label{display:block;font-size:13px;font-weight:800;margin:10px 0 4px}
+  .vc .inp{border:2px solid #000;border-radius:6px;padding:11px 12px;font-size:16px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+  .vc .two{display:flex;gap:8px}.vc .two>div{flex:1}
+  .vc .seg{display:flex;border:2px solid #000;border-radius:6px;overflow:hidden}
+  .vc .seg div{flex:1;text-align:center;padding:10px 0;font-weight:800;font-size:14px}
+  .vc .seg div+div{border-left:2px solid #000}
+  .vc .seg .on{background:var(--g);color:#fff}
+  .vc .tag{font-size:12px;font-weight:800;border:2px solid currentColor;border-radius:4px;padding:0 6px}
+  .vc .tag.w{color:var(--warn)}.vc .tag.r{color:var(--red)}.vc .tag.g{color:var(--g)}
+  .vc .sec{font-size:13px;font-weight:800;text-transform:uppercase;margin:14px 0 4px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>SkyLog – drei Stilrichtungen</h1>
+  <p>Alle drei nutzen Farben und Schrift der Vereinswebsite. Pro Richtung dieselben drei Handy-Bildschirme: <b>Start/Flugbuch</b>, <b>Flug erfassen</b> und <b>Übersicht Abteilungsleitung</b>. Es geht um Anmutung und Bedienung, nicht um jedes Detail. Klicke eine Richtung an, um sie auszuwählen (oder sag im Chat, was du mischen würdest).</p>
+</div>
+
+<!-- ======================= A ======================= -->
+<section class="direction" data-choice="a" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">A</span><h2>Vereinsklassisch</h2></div>
+  <p class="ddesc">Nah an der Website: dunkelgrüner Kopf mit Wappen, schlichte weiße Karten, kleine Ecken (4–6 px), Bootstrap-typisch. Wirkt vertraut und seriös, „wie ein Teil der Vereinsseite“.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Start / Flugbuch</p>
+      <div class="phone va"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">SkyLog</div><div class="t2">TSV 1927 Röthenbach · RC-Modellsport</div></div></div>
+        <div class="body">
+          <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+          <div class="stats"><div class="stat"><b>37</b><span>Flüge 2026</span></div><div class="stat"><b>9:12</b><span>Std. Flugzeit</span></div><div class="stat"><b>3</b><span>Drohnen</span></div></div>
+          <button class="btn"><i class="bi bi-plus-lg"></i> Neuer Flug</button>
+          <h3 style="margin-top:14px">Letzte Flüge</h3>
+          <div class="card">
+            <div class="row"><span><b>14.11.</b> DJI Neo 2<br><small>Modellfluggelände · Training</small></span><span>18 min</span></div>
+            <div class="row"><span><b>09.11.</b> Mini 4 Pro<br><small>Wolfgangsberg · Foto</small></span><span>24 min</span></div>
+            <div class="row"><span><b>02.11.</b> Avata 2 <span class="badge">Abteilung</span><br><small>Modellfluggelände · Schulung</small></span><span>11 min</span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div class="on"><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-airplane"></i>Drohnen</div><div><i class="bi bi-calendar3"></i>Kalender</div><div><i class="bi bi-box-seam"></i>Ausleihe</div><div><i class="bi bi-person"></i>Profil</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Flug erfassen</p>
+      <div class="phone va"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi-off"></i> offline</span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div class="t1">Flug erfassen</div></div>
+        <div class="body">
+          <label>Drohne</label><div class="inp">DJI Neo 2 <i class="bi bi-chevron-down"></i></div>
+          <label>Flugort</label><div class="inp">Modellfluggelände Röthenbach <i class="bi bi-geo-alt"></i></div>
+          <div class="gps"><i class="bi bi-crosshair"></i> per GPS erkannt (± 8 m)</div>
+          <div class="two"><div><label>Start</label><div class="inp">14:05 <i class="bi bi-clock"></i></div></div><div><label>Landung</label><div class="inp">14:23 <i class="bi bi-clock"></i></div></div></div>
+          <label>Flugart</label><div class="inp">Training <i class="bi bi-chevron-down"></i></div>
+          <label>Ausbilder</label><div class="inp"><span class="mut">optional</span> <i class="bi bi-chevron-down"></i></div>
+          <label>Bemerkungen</label><div class="inp" style="height:54px"><span class="mut">…</span></div>
+          <div style="margin-top:8px;font-size:12px"><i class="bi bi-check2-square"></i> Checkliste vor dem Flug: <b>erledigt</b></div>
+          <button class="btn" style="margin-top:12px">Flug speichern</button>
+          <div style="font-size:11px;margin-top:6px;text-align:center" class="mut">Wird synchronisiert, sobald wieder Netz da ist.</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Übersicht Abteilungsleitung</p>
+      <div class="phone va"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">Abteilung</div><div class="t2">RC-Modellsport · Leitung</div></div></div>
+        <div class="body">
+          <h3>Nachweise laufen ab</h3>
+          <div class="card">
+            <div class="row"><span>Lena K. · A1/A3</span><span class="badge r">abgelaufen</span></div>
+            <div class="row"><span>Jonas B. · A2</span><span class="badge w">in 23 Tagen</span></div>
+            <div class="row"><span>Max R. · Versicherung</span><span class="badge w">in 41 Tagen</span></div>
+          </div>
+          <button class="btn out" style="margin-bottom:12px"><i class="bi bi-calendar-plus"></i> Schulung planen</button>
+          <h3>Offene Ausleihanträge</h3>
+          <div class="card">
+            <div class="row"><span>Avata-Set 1<br><small>Jonas B. · 20.–22.11.</small></span><span><i class="bi bi-check-circle" style="color:var(--g);font-size:20px"></i> <i class="bi bi-x-circle" style="color:var(--red);font-size:20px"></i></span></div>
+          </div>
+          <h3>Heute am Platz</h3>
+          <div class="card"><div class="row"><span>3 Piloten · Flugleiter: Max R.</span><span>7 Flüge</span></div></div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-airplane"></i>Drohnen</div><div><i class="bi bi-calendar3"></i>Kalender</div><div class="on"><i class="bi bi-people"></i>Abteilung</div><div><i class="bi bi-person"></i>Profil</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= B ======================= -->
+<section class="direction" data-choice="b" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">B</span><h2>Moderne App</h2></div>
+  <p class="ddesc">Fühlt sich wie eine echte Handy-App an: grüner Verlaufskopf, große Kennzahl-Kacheln, runde Ecken (14–16 px), schwebender „+ Flug“-Knopf, Auswahl-Chips statt Dropdowns. Grün und Schrift vom Verein, Formensprache eigenständiger.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Start / Flugbuch</p>
+      <div class="phone vb"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="hero"><div class="row1"><div><div class="hi">Hallo,</div><div class="name">Markus</div></div><div class="avatar">M</div></div></div>
+        <div class="tiles"><div class="tile"><b>37</b><span>Flüge 2026</span></div><div class="tile"><b>9:12 h</b><span>Flugzeit</span></div></div>
+        <div class="body" style="padding-top:0">
+          <div class="warn"><i class="bi bi-hourglass-split"></i><div><b>A2-Zeugnis</b> läuft in 41 Tagen ab</div></div>
+          <div class="sec">Letzte Flüge</div>
+          <div class="card fl"><div class="ic"><i class="bi bi-airplane"></i></div><div class="m"><b>DJI Neo 2</b><small>Heute · Modellfluggelände · Training</small></div><b>18′</b></div>
+          <div class="card fl"><div class="ic"><i class="bi bi-camera"></i></div><div class="m"><b>Mini 4 Pro</b><small>09.11. · Wolfgangsberg · Foto</small></div><b>24′</b></div>
+          <div class="card fl"><div class="ic"><i class="bi bi-people"></i></div><div class="m"><b>Avata 2 · Abteilung</b><small>02.11. · Schulung</small></div><b>11′</b></div>
+        </div>
+        <div class="fab"><i class="bi bi-plus-lg"></i> Flug</div>
+        <div class="tabbar"><div class="on"><i class="bi bi-house-fill"></i>Start</div><div><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-calendar3"></i>Termine</div><div><i class="bi bi-box-seam"></i>Ausleihe</div><div><i class="bi bi-three-dots"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Flug erfassen</p>
+      <div class="phone vb"><div class="screen">
+        <div class="status" style="background:#fff;color:#000"><span>9:41</span><span><i class="bi bi-wifi-off"></i> offline</span></div>
+        <div class="ftop"><i class="bi bi-x-lg"></i> Neuer Flug</div>
+        <div class="body">
+          <div class="sec" style="margin-top:2px">Drohne</div>
+          <div class="chips" style="margin-bottom:8px"><span class="chip on">Neo 2</span><span class="chip">Mini 4 Pro</span><span class="chip">FPV Quad</span><span class="chip">+ Abteilung</span></div>
+          <div class="field"><small class="mut">Flugort · per GPS erkannt</small><div>Modellfluggelände <i class="bi bi-geo-alt-fill" style="color:var(--g)"></i></div></div>
+          <div class="big"><div class="field"><small class="mut">Start</small><div>14:05</div><span class="now">Jetzt</span></div><div class="field"><small class="mut">Landung</small><div>14:23</div><span class="now">Jetzt</span></div></div>
+          <div class="sec">Flugart</div>
+          <div class="chips" style="margin-bottom:8px"><span class="chip on">Training</span><span class="chip">Schulung</span><span class="chip">Foto/Video</span><span class="chip">Event</span></div>
+          <div class="field"><small class="mut">Bemerkungen</small><div class="mut" style="font-weight:400">optional …</div></div>
+          <div class="card" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;margin:0"><span><i class="bi bi-list-check"></i> Checkliste</span><span class="pill g">6/6 ✓</span></div>
+          <div class="save">Speichern</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Übersicht Abteilungsleitung</p>
+      <div class="phone vb"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="hero" style="padding-bottom:46px"><div class="hi">Abteilungsleitung</div><div class="name">RC-Modellsport</div></div>
+        <div class="tiles"><div class="tile"><b style="color:var(--red)">4</b><span>Nachweise kritisch</span></div><div class="tile"><b>2</b><span>Anträge offen</span></div><div class="tile"><b>3</b><span>heute am Platz</span></div></div>
+        <div class="body" style="padding-top:4px">
+          <div class="sec">Nachweise</div>
+          <div class="card fl"><div class="m"><b>Lena K.</b><small>A1/A3</small></div><span class="pill r">abgelaufen</span></div>
+          <div class="card fl"><div class="m"><b>Jonas B.</b><small>A2</small></div><span class="pill w">23 Tage</span></div>
+          <div class="sec">Ausleihe</div>
+          <div class="card fl"><div class="ic"><i class="bi bi-box-seam"></i></div><div class="m"><b>Avata-Set 1</b><small>Jonas B. · 20.–22.11.</small></div><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:24px"></i></div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-house"></i>Start</div><div><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-calendar3"></i>Termine</div><div class="on"><i class="bi bi-people-fill"></i>Abteilung</div><div><i class="bi bi-three-dots"></i>Mehr</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= C ======================= -->
+<section class="direction" data-choice="c" onclick="toggleSelect(this)">
+  <div class="dhead"><span class="dletter">C</span><h2>Outdoor-Kontrast</h2></div>
+  <p class="ddesc">Für den Einsatz auf dem Platz: maximaler Kontrast für pralle Sonne, große Schaltflächen (auch mit Handschuhen), dicke Linien, wenig Dekoration. Vereinsgrün als einzige Akzentfarbe, Netzstatus immer sichtbar.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Start / Flugbuch</p>
+      <div class="phone vc"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><div class="brand"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt="">SkyLog</div><span class="net">ONLINE</span></div>
+        <div class="body">
+          <div class="bigbtn"><i class="bi bi-plus-circle-fill"></i> Flug erfassen</div>
+          <div class="warn"><i class="bi bi-exclamation-octagon-fill"></i> A2-Zeugnis läuft in 41 Tagen ab</div>
+          <div class="kpi"><div><b>37</b><span>FLÜGE 2026</span></div><div><b>9:12</b><span>STUNDEN</span></div></div>
+          <div class="sec">Letzte Flüge</div>
+          <div class="list">
+            <div class="it"><span><b>Heute</b> · Neo 2<br><small>Modellfluggelände</small></span><span><b>18 min</b> <i class="bi bi-chevron-right"></i></span></div>
+            <div class="it"><span><b>09.11.</b> · Mini 4 Pro<br><small>Wolfgangsberg</small></span><span><b>24 min</b> <i class="bi bi-chevron-right"></i></span></div>
+            <div class="it"><span><b>02.11.</b> · Avata 2 (Abt.)<br><small>Modellfluggelände</small></span><span><b>11 min</b> <i class="bi bi-chevron-right"></i></span></div>
+          </div>
+        </div>
+        <div class="tabbar"><div class="on"><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-airplane"></i>Drohnen</div><div><i class="bi bi-calendar3"></i>Termine</div><div><i class="bi bi-list"></i>Mehr</div></div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Flug erfassen</p>
+      <div class="phone vc"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi-off"></i></span></div>
+        <div class="top"><div class="brand"><i class="bi bi-arrow-left"></i> Flug erfassen</div><span class="net" style="background:#000;color:#fff">OFFLINE</span></div>
+        <div class="body">
+          <label>DROHNE</label><div class="inp">DJI Neo 2 <i class="bi bi-caret-down-fill"></i></div>
+          <label>FLUGORT <span style="color:var(--g)">· GPS ✓</span></label><div class="inp">Modellfluggelände <i class="bi bi-geo-alt-fill"></i></div>
+          <div class="two"><div><label>START</label><div class="inp">14:05</div></div><div><label>LANDUNG</label><div class="inp">14:23</div></div></div>
+          <label>FLUGART</label>
+          <div class="seg"><div class="on">Training</div><div>Schulung</div><div>Foto</div></div>
+          <label>BEMERKUNG</label><div class="inp" style="height:50px"></div>
+          <div class="bigbtn" style="margin-top:14px;padding:15px">SPEICHERN</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Übersicht Abteilungsleitung</p>
+      <div class="phone vc"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><div class="brand">Abteilung</div><span class="net">ONLINE</span></div>
+        <div class="body">
+          <div class="sec" style="margin-top:0">Nachweise laufen ab</div>
+          <div class="list">
+            <div class="it"><span><b>Lena K.</b><br><small>A1/A3</small></span><span class="tag r">ABGELAUFEN</span></div>
+            <div class="it"><span><b>Jonas B.</b><br><small>A2</small></span><span class="tag w">23 TAGE</span></div>
+            <div class="it"><span><b>Max R.</b><br><small>Versicherung</small></span><span class="tag w">41 TAGE</span></div>
+          </div>
+          <div class="sec">Ausleihanträge</div>
+          <div class="list"><div class="it"><span><b>Avata-Set 1</b><br><small>Jonas B. · 20.–22.11.</small></span><span class="tag g">PRÜFEN</span></div></div>
+          <div class="sec">Heute am Platz</div>
+          <div class="list"><div class="it"><span><b>3 Piloten</b> · Flugleiter Max R.</span><span><b>7 Flüge</b></span></div></div>
+        </div>
+        <div class="tabbar"><div><i class="bi bi-journal-text"></i>Flugbuch</div><div><i class="bi bi-airplane"></i>Drohnen</div><div><i class="bi bi-calendar3"></i>Termine</div><div class="on"><i class="bi bi-people"></i>Abteilung</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

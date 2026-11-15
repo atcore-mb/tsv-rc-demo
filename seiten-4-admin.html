@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .kv2{display:grid;grid-template-columns:130px 1fr;gap:6px 10px;font-size:13px;padding:4px 0;margin:0}
+  .kv2 dt{color:var(--mut)}
+  .kv2 dd{margin:0;font-weight:600}
+  .avatar{width:52px;height:52px;border-radius:50%;background:var(--gl);color:var(--g);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle;flex:0 0 auto}
+  .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+  .tg.on{background:var(--g)}.tg.on::after{left:18px}
+  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
+  .tabs .on{color:var(--g);border-color:var(--g)}
+  .banner{background:var(--airbg);border:1px solid #c9dcf0;border-radius:6px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+  .app.tall{height:640px}
+  .dcontent{overflow:hidden}
+  .ad-grid{display:grid;gap:14px}
+  .ad-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+  .ad-tile{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:10px 12px;font-size:12.5px}
+  .ad-tile b{display:block;font-size:20px;color:var(--g);line-height:1.2}
+  .ad-tile.w{border-left:4px solid var(--warn)} .ad-tile.w b{color:var(--warn)}
+  .ad-tile.ok{border-left:4px solid var(--g)}
+  .ad-ok{color:var(--g)} .ad-no{color:#aaa} .ad-warn{color:var(--warn)}
+  .ad-map{position:relative;height:190px;border-radius:6px;overflow:hidden;border:1px solid #d6dad6;
+    background:#e9efe6;background-image:linear-gradient(#d8e2d4 1px,transparent 1px),linear-gradient(90deg,#d8e2d4 1px,transparent 1px);background-size:24px 24px}
+  .ad-map .road{position:absolute;left:-10%;top:58%;width:120%;height:10px;background:#fff;transform:rotate(-8deg);border:1px solid #dcdcdc}
+  .ad-map .rad{position:absolute;left:50%;top:46%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:2px dashed var(--g);background:rgba(10,92,35,.10)}
+  .ad-map .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-100%);font-size:26px;color:var(--red)}
+  .ad-map .cap{position:absolute;left:8px;bottom:6px;font-size:11px;background:#fff;border-radius:4px;padding:2px 6px;color:#555}
+  .ad-sw{display:inline-block;width:22px;height:22px;border-radius:4px;margin-right:4px;vertical-align:middle;border:2px solid transparent}
+  .ad-sw.on{border-color:#1a1a1a;box-shadow:0 0 0 2px #fff inset}
+  .ad-modal{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:6}
+  .ad-modal .box{background:#fff;border-radius:8px;width:520px;padding:16px 18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .ad-modal h3{margin:0 0 6px;font-size:16px}
+  .ad-pop{position:absolute;right:22px;bottom:14px;z-index:6}
+  .ad-pop .box{background:#fff;border-radius:8px;width:420px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.3);border:1px solid #d6dad6}
+  .ad-pop h3{margin:0 0 6px;font-size:15px}
+  .ad-step{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:8px 0;border-top:1px solid #eef0ee}
+  .ad-step .n{background:var(--g);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex:0 0 auto}
+  .ad-danger{background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:8px}
+  .ibtn.red{background:var(--red)} .ibtn.dis{opacity:.4}
+  .ibtn.out.red{background:#fff;color:var(--red);border-color:var(--red)}
+  .ad-hash{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#555;word-break:break-all}
+  table.dt tr.sel td{background:var(--gl)}
+  .ad-ta{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:8px 10px;font-size:13px;min-height:90px;color:#333}
+  .ad-tb{display:flex;gap:10px;border:1px solid #ced4da;border-bottom:0;border-radius:4px 4px 0 0;padding:4px 8px;background:#f6f7f6;color:#555;font-size:14px}
+  .ad-tb+.ad-ta{border-radius:0 0 4px 4px}
+  .ad-pt{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .ad-pt .bi-grip-vertical{color:#bbb}
+  .ad-pt .n{color:var(--mut);width:18px;text-align:right}
+  .ad-pt .r{margin-left:auto;color:var(--mut);display:flex;gap:8px}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Admin</h1>
+  <p>Gruppe 4, <b>PC-Ansicht</b> (Hauptansicht für Admin-Aufgaben). Alle Admin-Seiten nutzen die Seitenleiste aus Variante A v2. Die Handy-Seiten sind schlank, aber vollständig klickbar im <b>Klickdummy</b> (Mehr › Admin).</p>
+  <p>Admin-Funktionen gibt es nur online. Admin-Sitzungen laufen höchstens 12 Stunden; jede Änderung landet im Änderungsprotokoll.</p>
+  <div class="legend"><span class="assume">Gelb markiert: Annahme, nicht im Gesamtdesign festgelegt – mit Verein bzw. im Feindesign Teil 0/3/4 zu klären</span></div>
+</div>
+
+<!-- ============ 1 ÜBERSICHT ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Admin-Übersicht</h2></div>
+  <p class="ddesc">Einstieg mit Zustand auf einen Blick: offene Aufgaben (Freischaltung, Regelwerk-Entwurf), Sicherung, Hash-Kette, 2FA-Pflicht. Darunter die letzten Admin-Aktionen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. <span class="badge" style="background:#fff;color:var(--gd)">Admin · noch 11:20 h</span></div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a class="on">Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="ad-tiles">
+          <div class="ad-tile w"><b>1</b>Registrierung wartet auf Freischaltung<br><small class="mut">Paul W. · seit gestern</small></div>
+          <div class="ad-tile w"><b>v5</b>Regelwerk-Entwurf mit 3 Änderungen<br><small class="mut">aktiv: v4 seit 02.11.2026</small></div>
+          <div class="ad-tile ok"><b>02:30</b>Letzte Sicherung heute, erfolgreich<br><small class="mut">412 MB · Probe-Restore ok</small></div>
+          <div class="ad-tile ok"><b><i class="bi bi-link-45deg"></i> intakt</b>Hash-Kette Änderungsprotokoll<br><small class="mut">48.213 Einträge · geprüft 03:00</small></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px">
+          <div class="card"><h3>Letzte Admin-Aktionen</h3>
+            <table class="dt"><tr><th>Wann</th><th>Wer</th><th>Was</th></tr>
+              <tr><td>heute 09:41</td><td>Markus B.</td><td>Passwort-Link an <b>Lena K.</b> gesendet</td></tr>
+              <tr><td>heute 08:15</td><td>Markus B.</td><td>Regelwerk v5: Flugart „Testflug“ angelegt</td></tr>
+              <tr><td>gestern</td><td>System</td><td>Selbstregistrierung: Paul W. bestätigt E-Mail</td></tr>
+              <tr><td>12.11.</td><td>Markus B.</td><td>Ort „Sporthalle“: flugbuchpflichtig → nein</td></tr>
+              <tr><td>10.11.</td><td>Markus B.</td><td>Zweite Faktoren von Jonas B. zurückgesetzt</td></tr>
+            </table>
+          </div>
+          <div>
+            <div class="card"><h3>Sicherheit</h3>
+              <table class="dt"><tr><td>Admins mit 2FA/Passkey</td><td><span class="badge b-g">1 / 1</span></td></tr><tr><td>Gesperrte Konten</td><td>1</td></tr><tr><td>Fehlversuche (24 h)</td><td>3</td></tr></table>
+            </div>
+            <div class="card" style="border-left:4px solid var(--warn)"><h3><i class="bi bi-hdd-network ad-warn"></i> Externe Backup-Ablage</h3><small>Noch nicht eingerichtet. Sicherungen liegen nur auf dem Vereinsserver.</small><br><span class="assume">Offener Punkt 14.3 (Projektinhaber)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 2 KONTEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Konten: Liste und Selbstregistrierung</h2></div>
+  <p class="ddesc">Alle Konten mit Rollen, Bereichen und Anmeldestatus. Für Admins wird die 2FA-Pflicht direkt in der Liste geprüft. Oben rechts der Schalter für die Selbstregistrierung; neue Registrierungen erscheinen als „wartet“ und werden von Abteilungsleitung oder Admin freigeschaltet.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/konten</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a class="on">Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen</a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="hrow"><h3 style="font-size:18px">Konten <small class="mut" style="font-size:13px;font-weight:600">41</small></h3>
+          <span style="display:flex;gap:10px;align-items:center;font-size:13px"><span>Selbstregistrierung</span><span class="tg on"></span><span class="ibtn"><i class="bi bi-envelope-plus"></i> Person einladen</span></span></div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <div class="inp" style="width:260px"><span class="mut">Name oder E-Mail …</span><i class="bi bi-search"></i></div>
+          <div class="chips" style="margin:0"><span class="chip on">Alle</span><span class="chip">Wartet (1)</span><span class="chip">Eingeladen (1)</span><span class="chip">Admin</span><span class="chip">Abteilungsleitung</span><span class="chip">Minderjährig</span><span class="chip">Gesperrt</span></div>
+        </div>
+        <div class="card" style="padding:4px 10px">
+          <table class="dt"><tr><th>Name</th><th>E-Mail</th><th>Rollen</th><th>Bereiche</th><th>Anmeldung</th><th>Status</th><th>Letzte Anmeldung</th></tr>
+            <tr><td><b>Markus B.</b></td><td>markus@…</td><td>Admin <small class="mut">(global)</small>, Abteilungsleitung, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td><i class="bi bi-fingerprint"></i> 2 · <i class="bi bi-shield-lock"></i> 1 <span class="badge b-g">Admin-Pflicht erfüllt</span></td><td><span class="badge b-g">aktiv</span></td><td>heute</td></tr>
+            <tr><td><b>Max R.</b></td><td>max@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-fingerprint"></i> 1</td><td><span class="badge b-g">aktiv</span></td><td>gestern</td></tr>
+            <tr><td><b>Jonas B.</b></td><td>jonas@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td>Passwort <small class="mut">(2FA zurückgesetzt)</small></td><td><span class="badge b-g">aktiv</span></td><td>10.11.</td></tr>
+            <tr class="sel"><td><b>Lena K.</b></td><td>lena@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>08.11.</td></tr>
+            <tr><td><b>Tim S.</b> <span class="badge b-w">14</span></td><td>tim@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span> <small class="mut">Eltern: Sandra S.</small></td><td>12.11.</td></tr>
+            <tr><td><b>Sandra S.</b></td><td>sandra@…</td><td>Erziehungsberechtigte <small class="mut">(kein Mitglied)</small></td><td>–</td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>12.11.</td></tr>
+            <tr><td><b>Paul W.</b> <span class="badge b-w">16</span></td><td>paul@…</td><td>–</td><td><span class="badge b-car">RC</span> gewünscht</td><td>–</td><td><span class="badge b-w">wartet: Eltern fehlen</span></td><td>–</td></tr>
+            <tr><td><b>Eva M.</b></td><td>eva@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>–</td><td><span class="badge b-all">eingeladen · bis 21.11.</span></td><td>–</td></tr>
+            <tr style="color:#888"><td><b>Felix H.</b></td><td>felix@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-r">gesperrt</span></td><td>03/2026</td></tr>
+          </table>
+        </div>
+        <div class="hint">Minderjährige werden erst aktiv, wenn ein Erziehungsberechtigter verknüpft und die Einwilligung dokumentiert ist. Kontotyp „Dienst“ (Service Accounts) folgt in einer späteren Ausbaustufe.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 3 KONTO DETAIL ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Konto: Detail mit Rollen und Sperre</h2></div>
+  <p class="ddesc">Oben ein Hinweisband: Das Öffnen fremder Personendaten wird protokolliert. Rollen mit Geltung (global oder Abteilung). Lena hat keinen zweiten Faktor; die Admin-Rolle ließe sich vergeben, wird aber erst wirksam, wenn ein zweiter Faktor oder Passkey eingerichtet ist. Rechts unten geöffnet: der Dialog „Konto sperren“.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/konten/lena-k</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a class="on">Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen</a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="banner" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-eye"></i> <b>Personenbezogene Daten.</b> Nur zur Unterstützung von Lena K. nutzen. Das Ansehen wird nicht protokolliert, Änderungen schon. <span class="assume" style="margin:0">Annahme 7.3: Ob Admins Personendaten einsehen dürfen, ist mit dem Verein abzustimmen.</span></div>
+        <div class="hrow"><h3 style="font-size:18px">Lena K.</h3><span><span class="ibtn out"><i class="bi bi-envelope"></i> Passwort-Link senden</span> <span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:14px">
+          <div class="card"><h3>Person</h3>
+            <dl class="kv2"><dt>Kontotyp</dt><dd>Person</dd><dt>E-Mail (Login)</dt><dd>lena@…</dd><dt>Geburtsdatum</dt><dd>04.07.1998</dd><dt>Telefon</dt><dd>0911 …</dd><dt>Mitglied seit</dt><dd>09/2025</dd><dt>Bereiche</dt><dd><span class="badge b-car">RC Cars</span> <span class="mut">+ hinzufügen</span></dd></dl>
+            <div class="hint">Kontaktdaten-Änderungen werden ohne Werte protokolliert.</div>
+          </div>
+          <div class="card"><div class="hrow"><h3>Rollen</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Rolle</span></div>
+            <table class="dt"><tr><th>Rolle</th><th>Geltung</th><th>seit</th><th></th></tr>
+              <tr><td><b>Mitglied</b></td><td>Abteilung RC-Modellsport</td><td>09/2025</td><td><i class="bi bi-x mut"></i></td></tr>
+              <tr><td><b>Ausbilder</b></td><td>Abteilung RC-Modellsport</td><td><span class="badge b-g">neu</span></td><td><i class="bi bi-x mut"></i></td></tr>
+              <tr style="color:#888"><td><b>Admin</b></td><td>global</td><td><span class="badge b-w">wartet auf 2FA</span></td><td><i class="bi bi-x mut"></i></td></tr>
+            </table>
+            <div class="alert" style="margin:8px 0 0"><i class="bi bi-shield-exclamation"></i> Admins brauchen mindestens einen zweiten Faktor oder Passkey. Lena wird bei der nächsten Anmeldung zur Einrichtung aufgefordert; bis dahin hat sie keine Admin-Rechte.<br><span class="assume">Annahme: Rolle bleibt bis zur Einrichtung unwirksam</span></div>
+          </div>
+          <div>
+            <div class="card"><h3>Anmeldung</h3>
+              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>0</td></tr><tr><td>Fehlversuche</td><td>0</td></tr></table>
+              <div style="margin-top:8px"><span class="ibtn out">Zweite Faktoren zurücksetzen</span></div>
+              <div class="hint">Zurücksetzen wird protokolliert; Lena wird per E-Mail informiert.</div>
+            </div>
+            <div class="card"><h3>Familie</h3><small class="mut">Volljährig – keine Erziehungsberechtigung nötig.</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ad-pop"><div class="box">
+      <h3><i class="bi bi-slash-circle" style="color:var(--red)"></i> Konto „Lena K.“ sperren?</h3>
+      <div style="font-size:13px">Alle Sitzungen und API-Tokens werden sofort beendet. Flugbuch, Modelle und Nachweise bleiben erhalten. Entsperren ist jederzeit möglich; eine befristete Sperre endet automatisch.</div>
+      <label>Grund <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Verdacht auf Missbrauch</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Sonstiges …</span></div>
+      <label>Dauer <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip">unbefristet</span><span class="chip on">1 Woche</span><span class="chip">1 Monat</span><span class="chip">bis Datum …</span></div>
+      <div style="font-size:13px;margin-top:6px" class="mut">Endet automatisch am Sa 21.11.2026.</div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><span class="ibtn out">Abbrechen</span><span class="ibtn red">Sperren</span></div>
+      <span class="assume">Annahme: Sperre mit Pflichtgrund, keine Datenlöschung; die Person wird per E-Mail informiert.</span>
+    </div></div>
+  </div></div></div>
+</section>
+
+<!-- ============ 4 BEREICHE ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Abteilung und Bereiche</h2></div>
+  <p class="ddesc">Oben die Abteilung mit ihrer Leitung (0–N Personen). Darunter die Bereiche; ein Bereich hat Name, Symbol, Farbe, sichtbare Module mit festen Unterpunkten und zugeordnete Modelltypen. Ein neuer Bereich (z. B. Flugmodelle) braucht nur diese Konfiguration.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/bereiche/luftsport</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a class="on">Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen</a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:14px">
+          <div>
+            <div class="card"><h3>Abteilung RC-Modellsport</h3>
+              <label>Abteilungsleitung</label>
+              <div class="chips" style="margin:0"><span class="chip on">Markus B. <span class="x">✕</span></span><span class="chip"><i class="bi bi-plus-lg"></i> Person zuweisen</span></div>
+              <div class="hint">Zuständig für beide Bereiche. Eine Bereichsleitung gibt es nicht.</div>
+            </div>
+            <div class="card"><div class="hrow"><h3>Bereiche</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Bereich</span></div>
+              <table class="dt">
+                <tr class="sel"><td><span class="ico air"><i class="bi bi-airplane"></i></span></td><td><b>Luftsport</b><br><small class="mut">24 Mitglieder · 6 Module</small></td><td><span class="badge b-g">aktiv</span></td></tr>
+                <tr><td><span class="ico car"><i class="bi bi-car-front"></i></span></td><td><b>RC Cars</b><br><small class="mut">21 Mitglieder · 6 Module</small></td><td><span class="badge b-g">aktiv</span></td></tr>
+              </table>
+              <div class="hint">Reihenfolge = Reihenfolge in der Tab-Leiste. Bereiche lassen sich deaktivieren, nicht löschen.</div>
+            </div>
+          </div>
+          <div class="card"><div class="hrow"><h3>Bereich: Luftsport</h3><span class="ibtn">Speichern</span></div>
+            <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Luftsport</div></div><div><label>Untertitel</label><div class="inp">Drohnen · FPV · Halle</div></div></div>
+            <div class="two"><div><label>Symbol <span class="req">*</span></label><div class="inp"><span><i class="bi bi-airplane"></i> airplane</span><i class="bi bi-search"></i></div></div>
+              <div><label>Farbe <span class="req">*</span></label><div style="padding-top:4px"><span class="ad-sw on" style="background:#1e5a99"></span><span class="ad-sw" style="background:#a8361b"></span><span class="ad-sw" style="background:#6b3fa0"></span><span class="ad-sw" style="background:#0f766e"></span><span class="ad-sw" style="background:#a16207"></span></div></div></div>
+            <label>Sichtbare Module</label>
+            <table class="dt"><tr><th>Modul</th><th>sichtbar</th><th>fester Unterpunkt</th></tr>
+              <tr><td>Flugbuch <small class="mut">(nur mit Luftfahrzeug-Typen)</small></td><td><span class="tg on"></span></td><td><b>1</b></td></tr>
+              <tr><td>Modelle</td><td><span class="tg on"></span></td><td><b>2</b></td></tr>
+              <tr><td>Ausleihe</td><td><span class="tg on"></span></td><td><b>3</b></td></tr>
+              <tr><td>Nachweise · Vorfälle · Schulungen · Checklisten</td><td><span class="tg on"></span></td><td class="mut">im ⋯-Menü</td></tr>
+              <tr><td>Drohnenwetter · dipul-Karte</td><td><span class="tg on"></span></td><td class="mut">im ⋯-Menü</td></tr>
+              <tr><td>Strecken · Meisterschaft</td><td><span class="tg"></span></td><td class="mut">–</td></tr>
+            </table>
+            <label>Modelltypen in diesem Bereich</label>
+            <div class="chips" style="margin:0"><span class="chip on">Drohne</span><span class="chip on">FPV</span><span class="chip on">Akku</span><span class="chip on">Fernsteuerung</span><span class="chip on">Ladegerät</span><span class="chip on">FPV-Brille</span><span class="chip on">Sonstiges Zubehör</span></div>
+            <div class="hint">Die Zuordnung wird im Modelltyp gepflegt (Regelwerk) und hier nur angezeigt.</div>
+            <span class="assume">Annahme: höchstens 3 feste Unterpunkte, Rest im ⋯-Menü; Modulliste vorläufig</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 5 ORTE ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Orte: Liste und Detail</h2></div>
+  <p class="ddesc">Links alle Vereinsorte mit den beiden Schaltern, rechts der gewählte Ort mit Kartenplatzhalter, Koordinaten und Radius. „Flugbuchpflichtig“ ist nur für Orte mit Bereich Luftsport wählbar.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/orte/vereinsgelaende</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a class="on">Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen</a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:14px">
+          <div class="card"><div class="hrow"><h3>Vereinsorte</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Ort</span></div>
+            <table class="dt"><tr><th>Ort</th><th>Bereiche</th><th>Vereins&shy;gelände</th><th>flugbuch&shy;pflichtig</th><th>Radius</th></tr>
+              <tr class="sel"><td><b>Vereinsgelände</b><br><small class="mut">Röthenbach</small></td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td><i class="bi bi-check-lg ad-ok"></i></td><td>150 m</td></tr>
+              <tr><td><b>Sporthalle</b><br><small class="mut">St. Wolfgang</small></td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td><i class="bi bi-x-lg ad-no"></i></td><td>50 m</td></tr>
+              <tr><td><b>Sand-Rennstrecke</b></td><td><span class="badge b-car">RC</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td class="mut">–</td><td>80 m</td></tr>
+              <tr><td><b>Crawler-Strecke</b></td><td><span class="badge b-car">RC</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td class="mut">–</td><td>30 m</td></tr>
+              <tr><td><b>Teerfläche</b> <small class="mut">Glattbahn</small></td><td><span class="badge b-car">RC</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td class="mut">–</td><td>40 m</td></tr>
+            </table>
+            <span class="assume">Offener Punkt 13.2: welche Orte Vereinsgelände bzw. flugbuchpflichtig sind (Sporthalle?) – Werte hier nur Beispiel</span>
+          </div>
+          <div class="card"><div class="hrow"><h3>Ort: Vereinsgelände</h3><span><span class="ibtn out">Deaktivieren</span> <span class="ibtn">Speichern</span></span></div>
+            <div class="ad-map"><div class="road"></div><div class="rad"></div><i class="bi bi-geo-alt-fill pin"></i><span class="cap">Kartenplatzhalter · Punkt ziehen, Radius am Rand</span></div>
+            <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Vereinsgelände</div></div><div><label>Radius <span class="req">*</span></label><div class="inp">150 <span class="mut">m</span></div></div></div>
+            <div class="two"><div><label>Breite <span class="req">*</span></label><div class="inp">49.4127</div></div><div><label>Länge <span class="req">*</span></label><div class="inp">11.2034</div></div></div>
+            <label>Bereiche</label><div class="chips" style="margin:0"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
+            <table class="dt" style="margin-top:6px"><tr><td>Vereinsgelände<br><small class="mut">Flüge hier sind automatisch für die Abteilungsleitung sichtbar (Versicherung)</small></td><td><span class="tg on"></span></td></tr>
+              <tr><td>Flugbuchpflichtig<br><small class="mut">Flüge hier zählen fürs Vereinsflugbuch</small></td><td><span class="tg on"></span></td></tr></table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 6 REGELWERK ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Regelwerk: Versionen, Vorlage importieren, Aufbewahrung</h2></div>
+  <p class="ddesc">Genau ein Regelwerk ist aktiv. Änderungen an Flugarten, Feldern, Modelltypen usw. sammeln sich im Entwurf und werden gemeinsam aktiviert. Jeder Datensatz merkt sich seine Version; alte Einträge bleiben gültig. Vorlagen („Offene Kategorie“, später Verband) werden als Entwurf importiert.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a class="on">Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px">
+          <div>
+            <div class="card" style="border-left:4px solid var(--warn)"><div class="hrow"><h3>Entwurf v5 <span class="badge b-w">3 Änderungen</span></h3><span><span class="ibtn out red">Verwerfen</span> <span class="ibtn">Prüfen &amp; aktivieren</span></span></div>
+              <table class="dt"><tr><td><i class="bi bi-plus-circle ad-ok"></i> Flugart „Testflug“ angelegt</td><td class="mut">heute 08:15</td></tr>
+                <tr><td><i class="bi bi-plus-circle ad-ok"></i> Zusatzfeld „Wind (km/h)“ für Flüge, optional</td><td class="mut">13.11.</td></tr>
+                <tr><td><i class="bi bi-pencil ad-warn"></i> Checkliste „Hallenfliegen“: Punkt 3 geändert</td><td class="mut">13.11.</td></tr></table>
+            </div>
+            <div class="card"><h3>Versionen</h3>
+              <table class="dt"><tr><th>Version</th><th>Status</th><th>Zeitraum</th><th>Datensätze</th><th></th></tr>
+                <tr><td><b>v5</b></td><td><span class="badge b-w">Entwurf</span></td><td>–</td><td>–</td><td><span class="ibtn out">Vergleich mit v4</span></td></tr>
+                <tr class="sel"><td><b>v4</b></td><td><span class="badge b-g">aktiv</span></td><td>seit 02.11.2026</td><td>412</td><td><span class="ibtn out">Ansehen</span></td></tr>
+                <tr><td>v3</td><td><span class="badge b-all">alt</span></td><td>01.09.–01.11.2026</td><td>1.084</td><td><span class="ibtn out">Ansehen</span></td></tr>
+                <tr><td>v2</td><td><span class="badge b-all">alt</span></td><td>15.06.–31.08.2026</td><td>903</td><td><span class="ibtn out">Ansehen</span></td></tr>
+                <tr><td>v1</td><td><span class="badge b-all">alt</span></td><td>Import „Offene Kategorie“ + „RC Cars Grundkonfiguration“</td><td>211</td><td><span class="ibtn out">Ansehen</span></td></tr></table>
+              <span class="assume">Annahme: Änderungen sammeln sich in einem Entwurf und werden gemeinsam aktiviert (statt jede Änderung sofort als neue Version)</span>
+            </div>
+          </div>
+          <div>
+            <div class="card"><h3>Vorlage importieren</h3>
+              <table class="dt">
+                <tr><td><b>Offene Kategorie</b><br><small class="mut">EU 2019/947 · Luftsport · Stand 2026-1</small></td><td><span class="ibtn out">Als Entwurf</span></td></tr>
+                <tr><td><b>RC Cars Grundkonfiguration</b><br><small class="mut">Modelltypen, Checkliste</small></td><td><span class="ibtn out">Als Entwurf</span></td></tr>
+                <tr style="color:#999"><td><b>DMFV</b> / <b>DAeC</b><br><small>Verband noch offen (13.1)</small></td><td><span class="badge b-all">später</span></td></tr>
+                <tr><td><b>Aus Datei</b><br><small class="mut">exportiertes Regelwerk (JSON)</small></td><td><span class="ibtn out"><i class="bi bi-upload"></i></span></td></tr>
+              </table>
+              <div class="hint">Ein Import überschreibt nichts: Er erzeugt einen Entwurf, der vor dem Aktivieren verglichen wird.</div>
+            </div>
+            <div class="card"><h3>Aufbewahrungsfrist</h3>
+              <div class="two"><div><label>Flugbuch, Vorfälle, Nachweise <span class="req">*</span></label><div class="inp">3 <span class="mut">Jahre</span></div></div></div>
+              <div class="hint">Gilt ab Erfassung. Danach werden Daten gelöscht bzw. anonymisiert; das Protokoll wird blockweise gekürzt. Standard 3 Jahre (strengste bekannte Anforderung).</div>
+              <span class="assume">Fristbeginn „ab Erfassung“ ist Annahme; Verbandsfrist offen (13.1)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 7 FLUGARTEN / NACHWEISTYPEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Flugarten und Nachweistypen</h2></div>
+  <p class="ddesc">Zwei Wertelisten im Regelwerk. Flugarten mit Sortierung und dem Merkmal „Ausbilder nötig“; Nachweistypen mit Standard-Gültigkeit (schlägt beim Erfassen das Ablaufdatum vor). Benutzte Einträge werden deaktiviert, nicht gelöscht.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk/wertelisten</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a class="on">Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="banner" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-pencil-square"></i> Du bearbeitest <b>Entwurf v5</b>. Aktiv bleibt v4, bis der Entwurf aktiviert wird.</div>
+        <div style="display:grid;grid-template-columns:1fr 1.35fr;gap:14px">
+          <div class="card"><div class="hrow"><h3>Flugarten</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Flugart</span></div>
+            <table class="dt"><tr><th></th><th>Name</th><th>Ausbilder nötig</th><th>Status</th></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Training</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Schulung</b></td><td><i class="bi bi-check-square-fill ad-ok"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Foto/Video</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Event/Vorführung</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Wettbewerb/Rennen</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Testflug</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-w">neu in v5</span></td></tr>
+              <tr style="color:#999"><td><i class="bi bi-grip-vertical"></i></td><td>Sonstiges</td><td></td><td><span class="badge b-all">inaktiv</span></td></tr>
+            </table>
+            <span class="assume">Annahme: „Ausbilder nötig“ als Merkmal der Flugart</span>
+          </div>
+          <div class="card"><div class="hrow"><h3>Nachweistypen</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Nachweistyp</span></div>
+            <table class="dt"><tr><th>Name</th><th>Bereich</th><th>Standard-Gültigkeit</th><th>Nummer</th><th>Datei</th></tr>
+              <tr><td><b>Kompetenznachweis A1/A3</b></td><td><span class="badge b-air">Luft</span></td><td>5 Jahre</td><td>Pflicht</td><td>optional</td></tr>
+              <tr><td><b>Fernpilotenzeugnis A2</b></td><td><span class="badge b-air">Luft</span></td><td>5 Jahre</td><td>Pflicht</td><td>optional</td></tr>
+              <tr><td><b>STS-Zeugnis</b></td><td><span class="badge b-air">Luft</span></td><td>5 Jahre</td><td>Pflicht</td><td>optional</td></tr>
+              <tr><td><b>Betreiber-Registrierung (e-ID)</b></td><td><span class="badge b-air">Luft</span></td><td>1 Jahr</td><td>Pflicht</td><td>optional</td></tr>
+              <tr><td><b>Verbandsnachweis</b></td><td><span class="badge b-air">Luft</span></td><td>keine</td><td>optional</td><td>optional</td></tr>
+              <tr><td><b>Haftpflichtversicherung</b></td><td><span class="badge b-all">alle</span></td><td>bis 31.12.</td><td>optional</td><td>optional</td></tr>
+              <tr><td><b>Erste-Hilfe-Kurs</b></td><td><span class="badge b-all">alle</span></td><td>2 Jahre</td><td>–</td><td>optional</td></tr>
+              <tr><td><b>Einwilligung Erziehungsberechtigte</b></td><td><span class="badge b-all">alle</span></td><td>bis 18. Geb.</td><td>–</td><td>Pflicht</td></tr>
+            </table>
+            <div class="hint">Erinnerung 60 und 14 Tage vor Ablauf (systemweit einstellbar).</div>
+            <span class="assume">Gültigkeiten (z. B. e-ID 1 Jahr, Versicherung bis Jahresende) und Nummer-Pflicht sind Annahmen – mit dem Verein abzustimmen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 8 FELDER ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">8</span><h2>Pflichtfelder und Zusatzfelder</h2></div>
+  <p class="ddesc">Reiter je Datensatzart. Grundfelder sind fest programmiert und lassen sich nur als Pflicht/optional markieren (manche sind immer Pflicht, Schloss). Zusatzfelder legt der Admin frei an; rechts das Formular „Feld anlegen“.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk/felder/fluege</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a class="on">Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="tabs"><div class="on">Flüge</div><div>Vorfälle</div><div>Nachweise</div><div class="mut" style="font-weight:600">Modelle → je Modelltyp</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:14px">
+          <div class="card"><h3>Grundfelder</h3>
+            <table class="dt"><tr><th>Feld</th><th>Pflicht</th></tr>
+              <tr><td>Pilot</td><td><i class="bi bi-lock mut"></i> immer</td></tr>
+              <tr><td>Modell</td><td><i class="bi bi-lock mut"></i> immer</td></tr>
+              <tr><td>Start · Landung</td><td><i class="bi bi-lock mut"></i> immer</td></tr>
+              <tr><td>Ort</td><td><span class="tg on"></span></td></tr>
+              <tr><td>Flugart</td><td><span class="tg on"></span></td></tr>
+              <tr><td>Ausbilder</td><td><small class="mut">laut Flugart</small></td></tr>
+              <tr><td>Akku</td><td><span class="tg"></span></td></tr>
+              <tr><td>Bemerkungen</td><td><span class="tg"></span></td></tr>
+            </table>
+            <span class="assume">Annahme: Pilot, Modell, Start, Landung immer Pflicht</span>
+          </div>
+          <div class="card"><div class="hrow"><h3>Zusatzfelder</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Feld</span></div>
+            <table class="dt"><tr><th></th><th>Feld</th><th>Feldtyp</th><th>Pflicht</th><th>Status</th></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Aufsicht anwesend</b></td><td>Ja/Nein</td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Max. Höhe</b></td><td>Zahl · m</td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Wind</b></td><td>Zahl · km/h</td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-w">neu in v5</span></td></tr>
+              <tr class="sel"><td><i class="bi bi-grip-vertical"></i></td><td><b>Beobachter</b></td><td>Auswahl</td><td><i class="bi bi-check-square-fill ad-ok"></i></td><td><span class="badge b-all">wird angelegt</span></td></tr>
+            </table>
+            <div class="hint">Zusatzfelder werden je Datensatz gespeichert und gegen die Version geprüft, unter der er erfasst wurde.</div>
+          </div>
+          <div class="card" style="border:2px solid var(--g)"><h3>Feld anlegen</h3>
+            <label>Name <span class="req">*</span></label><div class="inp">Beobachter</div>
+            <label>Feldtyp <span class="req">*</span></label><div class="inp"><span>Auswahl</span><i class="bi bi-chevron-down"></i></div>
+            <label>Auswahlwerte <span class="req">*</span></label>
+            <div class="kv"><div class="inp">keiner</div><span class="x"><i class="bi bi-x"></i></span></div>
+            <div class="kv"><div class="inp">Luftraumbeobachter</div><span class="x"><i class="bi bi-x"></i></span></div>
+            <div class="addlink"><i class="bi bi-plus-circle"></i> Wert</div>
+            <label>Gilt für <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Flüge</span><span class="chip">Vorfälle</span><span class="chip">Nachweise</span></div>
+            <div class="chk" style="margin-top:6px"><i class="bi bi-check-square-fill"></i><span>Pflichtfeld</span></div>
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><span class="ibtn out">Abbrechen</span><span class="ibtn">In Entwurf übernehmen</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 9 CHECKLISTEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">9</span><h2>Checklistenvorlagen</h2></div>
+  <p class="ddesc">Vorlagen gelten je Modelltyp und Anlass (vor dem Flug/der Fahrt, Übergabe, Rückgabe). Punkte per Ziehen sortieren; ein Punkt kann einen Hinweis tragen (z. B. aktuelles Wetter).</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk/checklisten/vor-dem-flug</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a class="on">Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:14px">
+          <div class="card"><div class="hrow"><h3>Vorlagen</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Vorlage</span></div>
+            <table class="dt"><tr><th>Vorlage</th><th>Modelltypen</th><th>Punkte</th></tr>
+              <tr class="sel"><td><b>Vor dem Flug – Offene Kategorie</b><br><small class="mut">vor dem Flug</small></td><td>Drohne, FPV</td><td>6</td></tr>
+              <tr><td><b>Hallenfliegen</b> <span class="badge b-w">geändert</span><br><small class="mut">vor dem Flug</small></td><td>FPV</td><td>4</td></tr>
+              <tr><td><b>Vor der Fahrt</b><br><small class="mut">vor der Fahrt</small></td><td>Offroad, Crawler, Glattbahn</td><td>5</td></tr>
+              <tr><td><b>Übergabe Vereinsmodell</b><br><small class="mut">Übergabe · Rückgabe</small></td><td>alle Modelltypen</td><td>7</td></tr>
+            </table>
+          </div>
+          <div class="card"><div class="hrow"><h3>Vor dem Flug – Offene Kategorie</h3><span class="ibtn">In Entwurf übernehmen</span></div>
+            <div class="two"><div><label>Modelltypen <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Drohne</span><span class="chip on">FPV</span><span class="chip"><i class="bi bi-plus"></i></span></div></div>
+              <div><label>Anlass <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">vor dem Flug</span><span class="chip">Übergabe</span><span class="chip">Rückgabe</span></div></div></div>
+            <label>Punkte</label>
+            <div class="ad-pt"><i class="bi bi-grip-vertical"></i><span class="n">1</span>Akku geladen und fest eingerastet<span class="r"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></span></div>
+            <div class="ad-pt"><i class="bi bi-grip-vertical"></i><span class="n">2</span>Propeller ohne Beschädigung<span class="r"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></span></div>
+            <div class="ad-pt"><i class="bi bi-grip-vertical"></i><span class="n">3</span>Luftraum frei, keine Personen im Gefahrenbereich<span class="r"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></span></div>
+            <div class="ad-pt"><i class="bi bi-grip-vertical"></i><span class="n">4</span>Wetter geeignet <span class="badge b-all">zeigt Drohnenwetter</span><span class="r"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></span></div>
+            <div class="ad-pt"><i class="bi bi-grip-vertical"></i><span class="n">5</span>Remote-ID aktiv (falls nötig)<span class="r"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></span></div>
+            <div class="ad-pt"><i class="bi bi-grip-vertical"></i><span class="n">6</span>Aufsicht informiert (falls vorhanden)<span class="r"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></span></div>
+            <div class="addlink"><i class="bi bi-plus-circle"></i> Punkt hinzufügen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 10 MODELLTYPEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">10</span><h2>Modelltypen (Liste)</h2></div>
+  <p class="ddesc">Alle Typen der Startkonfiguration mit festen Eigenschaften und Bereichen. Das Bearbeiten eines Typs ist bereits in <a href="variante-a-v2.html">Variante A v2, Abschnitt 3 („Admin: Modelltypen pflegen“, Typ Offroad)</a> gestaltet und wird hier übernommen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk/modelltypen</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a class="on">Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="hrow"><h3 style="font-size:18px">Modelltypen</h3><span><span class="chips" style="display:inline-flex;margin:0 8px 0 0"><span class="chip on">Alle</span><span class="chip">Modelle</span><span class="chip">Zubehör</span><span class="chip">inaktiv</span></span><span class="ibtn"><i class="bi bi-plus-lg"></i> Modelltyp</span></span></div>
+        <div class="card" style="padding:4px 10px">
+          <table class="dt"><tr><th>Typ</th><th>Art</th><th>Bereiche</th><th>Luftfahrzeug</th><th>Ladezyklen</th><th>Zusatzfelder</th><th>Modelle</th><th>Status</th></tr>
+            <tr><td><b><i class="bi bi-airplane"></i> Drohne</b></td><td>Modell</td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td></td><td>2</td><td>7</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-airplane"></i> FPV</b></td><td>Modell</td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-check-lg ad-ok"></i></td><td></td><td>3</td><td>4</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr class="sel"><td><b><i class="bi bi-car-front"></i> Offroad</b></td><td>Modell</td><td><span class="badge b-car">RC</span></td><td></td><td></td><td>3</td><td>5</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-car-front"></i> Crawler</b></td><td>Modell</td><td><span class="badge b-car">RC</span></td><td></td><td></td><td>2</td><td>3</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-car-front"></i> Glattbahn</b></td><td>Modell</td><td><span class="badge b-car">RC</span></td><td></td><td></td><td>2</td><td>0</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-battery-half"></i> Akku</b></td><td>Zubehör</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td></td><td><i class="bi bi-check-lg ad-ok"></i></td><td>2</td><td>31</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-controller"></i> Fernsteuerung</b></td><td>Zubehör</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td></td><td></td><td>1</td><td>9</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-plug"></i> Ladegerät</b></td><td>Zubehör</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td></td><td></td><td>0</td><td>6</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-eyeglasses"></i> FPV-Brille</b></td><td>Zubehör</td><td><span class="badge b-air">Luft</span></td><td></td><td></td><td>0</td><td>3</td><td><span class="badge b-g">aktiv</span></td></tr>
+            <tr><td><b><i class="bi bi-box-seam"></i> Sonstiges Zubehör</b></td><td>Zubehör</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td></td><td></td><td>0</td><td>12</td><td><span class="badge b-g">aktiv</span></td></tr>
+          </table>
+        </div>
+        <span class="assume">Startkonfiguration laut 6.2 ist Annahme, mit dem Verein abzustimmen</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 11 INHALTE ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">11</span><h2>Inhalte: FAQ, Hilfeseiten, Links</h2></div>
+  <p class="ddesc">Drei Reiter mit gleicher Bedienung: Liste links (sortierbar, Entwurf/veröffentlicht), Editor rechts. Inhalte können auf einen Bereich beschränkt werden.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/inhalte/faq</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a class="on">FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="tabs"><div class="on">FAQ (9)</div><div>Hilfeseiten (6)</div><div>Links (7)</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:14px">
+          <div class="card"><div class="hrow"><h3>Fragen</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Frage</span></div>
+            <table class="dt">
+              <tr class="sel"><td><i class="bi bi-grip-vertical"></i></td><td><b>Brauche ich für die Halle ein Flugbuch?</b></td><td><span class="badge b-air">Luft</span></td><td><span class="badge b-w">Entwurf</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td>Wie leihe ich ein Vereinsmodell aus?</td><td><span class="badge b-all">alle</span></td><td><span class="badge b-g">online</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td>Welcher Kompetenznachweis für welche Drohne?</td><td><span class="badge b-air">Luft</span></td><td><span class="badge b-g">online</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td>Wann ist Fahrtag auf der Sandbahn?</td><td><span class="badge b-car">RC</span></td><td><span class="badge b-g">online</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td>Ich habe mein Handy verloren – was tun?</td><td><span class="badge b-all">alle</span></td><td><span class="badge b-g">online</span></td></tr>
+            </table>
+          </div>
+          <div class="card"><div class="hrow"><h3>Frage bearbeiten</h3><span><span class="ibtn out">Vorschau</span> <span class="ibtn">Veröffentlichen</span></span></div>
+            <label>Frage <span class="req">*</span></label><div class="inp">Brauche ich für die Halle ein Flugbuch?</div>
+            <label>Antwort <span class="req">*</span></label>
+            <div class="ad-tb"><i class="bi bi-type-bold"></i><i class="bi bi-type-italic"></i><i class="bi bi-list-ul"></i><i class="bi bi-link-45deg"></i></div>
+            <div class="ad-ta">Flüge in der Sporthalle fallen in der Regel nicht unter die EU-Drohnenverordnung. Trag sie trotzdem ein – sie zählen dann für deine Statistik, aber nicht fürs Vereinsflugbuch …</div>
+            <div class="two"><div><label>Bereich</label><div class="chips" style="margin:0"><span class="chip on">Luftsport</span><span class="chip">RC Cars</span><span class="chip">alle</span></div></div><div><label>Sichtbar</label><div class="chips" style="margin:0"><span class="chip on">angemeldet</span><span class="chip">auch ohne Login</span></div></div></div>
+            <span class="assume">Annahme: einfache Formatierung (Markdown) und Sichtbarkeit „auch ohne Login“</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 12 BACKUP ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">12</span><h2>Backup und Restore</h2></div>
+  <p class="ddesc">Zeitplan, letzte Sicherungen und Wiederherstellung. Die Wiederherstellung verlangt eine doppelte Bestätigung: erst Auswirkungen bestätigen, dann den Namen der Umgebung eintippen und mit Passkey/2FA erneut anmelden. Vorher wird automatisch der aktuelle Stand gesichert.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/backup</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a class="on">Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="hrow"><h3 style="font-size:18px">Backup &amp; Restore <span class="badge b-g">production</span></h3><span class="ibtn"><i class="bi bi-cloud-arrow-down"></i> Jetzt sichern</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:14px">
+          <div>
+            <div class="card"><h3>Zeitplan</h3>
+              <dl class="kv2"><dt>Automatisch</dt><dd>täglich 02:30</dd><dt>Umfang</dt><dd>Datenbank + Datei-Volume</dd><dt>Aufbewahren</dt><dd>14 täglich · 8 wöchentlich · 12 monatlich</dd><dt>Probe-Restore</dt><dd>wöchentlich, in temporäre DB</dd><dt>Externe Ablage</dt><dd class="ad-warn">nicht eingerichtet</dd></dl>
+              <span class="assume">Annahme: Aufbewahrungsstufen und Probe-Restore; externe Ablage offen (14.3)</span>
+            </div>
+          </div>
+          <div class="card"><h3>Letzte Sicherungen</h3>
+            <table class="dt"><tr><th>Zeitpunkt</th><th>Art</th><th>Größe</th><th>Prüfung</th><th></th></tr>
+              <tr><td><b>14.11.2026 02:30</b></td><td>automatisch</td><td>412 MB</td><td><span class="badge b-g">ok · Probe</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
+              <tr><td>13.11.2026 02:30</td><td>automatisch</td><td>410 MB</td><td><span class="badge b-g">ok</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
+              <tr><td>12.11.2026 17:02</td><td>manuell <small class="mut">vor Import</small></td><td>409 MB</td><td><span class="badge b-g">ok</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
+              <tr><td>12.11.2026 02:30</td><td>automatisch</td><td>409 MB</td><td><span class="badge b-g">ok</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
+              <tr><td>11.11.2026 02:30</td><td>automatisch</td><td>–</td><td><span class="badge b-r">fehlgeschlagen</span></td><td><small class="mut">Log</small></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ad-modal"><div class="box">
+      <h3><i class="bi bi-exclamation-octagon" style="color:var(--red)"></i> Sicherung vom 13.11.2026 02:30 wiederherstellen</h3>
+      <div class="ad-danger"><b>Alle Änderungen seit 13.11. 02:30 gehen verloren</b> (u. a. 14 Flüge, 2 Nachweise, 1 Ausleihe). Während der Wiederherstellung ist TSV RC für alle gesperrt. Offline erfasste, noch nicht übertragene Flüge bleiben auf den Geräten und werden danach erneut gesendet.</div>
+      <div class="ad-step"><span class="n">1</span><span><i class="bi bi-check-square-fill ad-ok"></i> Ich habe verstanden, dass Daten seit dem 13.11. 02:30 verloren gehen. Der aktuelle Stand wird vorher automatisch gesichert.</span></div>
+      <div class="ad-step"><span class="n">2</span><span style="flex:1">Zur Bestätigung <b>production</b> eintippen und erneut anmelden:<div class="two" style="margin-top:4px"><div class="inp">producti<span style="border-left:1px solid #333;margin-left:1px">&nbsp;</span></div><div class="inp mut" style="flex:0 0 auto"><i class="bi bi-fingerprint"></i>&nbsp;Passkey</div></div></span></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><span class="ibtn out">Abbrechen</span><span class="ibtn red dis">Wiederherstellen</span></div>
+      <span class="assume">Annahme: Bestätigung per Eintippen + erneute Anmeldung, automatisches Vorab-Backup</span>
+    </div></div>
+  </div></div></div>
+</section>
+
+<!-- ============ 13 PROTOKOLL ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">13</span><h2>Änderungsprotokoll</h2></div>
+  <p class="ddesc">Durchsuchbar nach Person, Objekt, Aktion, Zeitraum und Weg (Oberfläche/Token). Oben der Zustand der Hash-Kette mit Prüffunktion. Bei Kontaktdaten steht nur, dass sich ein Feld geändert hat. Reines Ansehen wird nicht protokolliert (entschieden), nur Änderungen und Exporte.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/protokoll?q=lena</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a class="on">Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="banner" style="background:var(--gl);border-color:#bfe0c6;display:flex;align-items:center;gap:10px"><i class="bi bi-link-45deg" style="font-size:20px;color:var(--g)"></i><span><b>Hash-Kette intakt.</b> 48.213 Einträge seit Prüfpunkt #3 (01.11.2026). Zuletzt automatisch geprüft heute 03:00.</span><span class="ibtn out" style="margin-left:auto">Jetzt prüfen</span></div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <div class="inp" style="width:220px"><span>lena</span><i class="bi bi-search"></i></div>
+          <div class="inp" style="width:150px"><span>Letzte 30 Tage</span><i class="bi bi-calendar3"></i></div>
+          <div class="chips" style="margin:0"><span class="chip on">Alle</span><span class="chip">Flüge</span><span class="chip">Konten &amp; Rollen</span><span class="chip">Regelwerk</span><span class="chip">Anmeldung</span><span class="chip">nur Token</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:14px">
+          <div class="card" style="padding:4px 10px">
+            <table class="dt"><tr><th>#</th><th>Zeit</th><th>Wer</th><th>Aktion</th><th>Objekt</th><th>Weg</th></tr>
+              <tr class="sel"><td>48213</td><td>14.11. 09:41</td><td>Markus B.</td><td>Passwort-Link gesendet</td><td>Konto Lena K.</td><td>Oberfläche</td></tr>
+              <tr><td>48190</td><td>13.11. 18:22</td><td>Lena K.</td><td>Modell geändert</td><td>Losi Mini-T 2.0</td><td>Oberfläche</td></tr>
+              <tr><td>48102</td><td>12.11. 10:05</td><td>Lena K.</td><td>Profil: Telefon geändert</td><td>Konto Lena K.</td><td>Oberfläche</td></tr>
+              <tr><td>47988</td><td>10.11. 19:40</td><td>Lena K.</td><td>Vorfall gemeldet</td><td>Vorfall #23</td><td>Oberfläche</td></tr>
+              <tr><td>47812</td><td>08.11. 16:11</td><td>Lena K.</td><td>Anmeldung</td><td>–</td><td>Passwort</td></tr>
+              <tr><td>47790</td><td>08.11. 15:02</td><td>Zeitmessung</td><td>Ergebnis importiert</td><td>Lauf 4 · Lena K.</td><td>Token tsvrc_7f…</td></tr>
+            </table>
+          </div>
+          <div class="card"><h3>Eintrag #48213</h3>
+            <dl class="kv2" style="grid-template-columns:90px 1fr"><dt>Zeit</dt><dd>14.11.2026 09:41:07</dd><dt>Wer</dt><dd>Markus B. (Admin)</dd><dt>Aktion</dt><dd>Passwort-Link gesendet (Support)</dd><dt>Objekt</dt><dd>Konto Lena K.</dd><dt>Weg</dt><dd>Oberfläche · Sitzung …a3f</dd></dl>
+            <div class="fsec">Kette <span class="ln"></span></div>
+            <div class="ad-hash">vorher: 9c1e…b47a<br>dieser: 4f02…e11c <i class="bi bi-check-circle-fill ad-ok"></i></div>
+            <div class="hint">Profiländerung #48102: nur „Telefon geändert“, ohne Werte (Kontaktdaten).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 14 BENACHRICHTIGUNGEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">14</span><h2>Benachrichtigungs-Vorlagen (optional)</h2></div>
+  <p class="ddesc">Texte für E-Mail und Push mit Platzhaltern. Optional: Ohne Anpassung gelten die mitgelieferten Texte; „Zurücksetzen“ stellt sie wieder her.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/benachrichtigungen</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen <span class="badge b-w">Entwurf</span></a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a class="on">Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:14px">
+          <div class="card"><h3>Vorlagen</h3>
+            <table class="dt">
+              <tr class="sel"><td><b>Nachweis läuft ab</b></td><td><span class="badge b-w">angepasst</span></td></tr>
+              <tr><td>Einladung</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Passwort zurücksetzen</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Ausleihe genehmigt / abgelehnt</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Rückgabe fällig</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Bald volljährig (an Eltern)</td><td><span class="badge b-all">Standard</span></td></tr>
+            </table>
+          </div>
+          <div class="card"><div class="hrow"><h3>Nachweis läuft ab</h3><span><span class="ibtn out">Zurücksetzen</span> <span class="ibtn">Speichern</span></span></div>
+            <label>Betreff (E-Mail) <span class="req">*</span></label><div class="inp">Dein {{nachweis}} läuft in {{tage}} Tagen ab</div>
+            <label>Text <span class="req">*</span></label><div class="ad-ta" style="min-height:70px">Hallo {{vorname}},<br>dein {{nachweis}} ist noch bis {{gueltig_bis}} gültig. Termine für Schulungen findest du im Kalender.</div>
+            <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}} · Push nutzt nur den Betreff.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 15 REGELWERK LESEANSICHT ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">15</span><h2>Regelwerk: ältere Version ansehen (nur lesen)</h2></div>
+  <p class="ddesc">Aus der Versionsliste („Ansehen“) öffnet sich jede alte Version im Lesemodus: Änderungen gegenüber der Vorversion, Flugarten, Nachweistypen, Pflicht- und Zusatzfelder, Checklisten und Aufbewahrungsfrist. Ändern ist nicht möglich; Datensätze dieser Version werden weiter gegen sie geprüft. Export als Datei, die sich als Vorlage wieder importieren lässt.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk/v3</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a>Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a class="on">Versionen</a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+        <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
+      </div>
+      <div class="dcontent">
+        <div class="hrow"><h3 style="font-size:17px">Regelwerk v3 <span class="badge b-all">alt · nur lesen</span></h3><span><span class="ibtn out"><i class="bi bi-download"></i> Exportieren</span> <span class="ibtn out"><i class="bi bi-clock-history"></i> Protokoll</span></span></div>
+        <div class="banner" style="background:#eceeec;border-color:#d6dad6"><i class="bi bi-lock"></i> Gültig 01.09.–01.11.2026 · aktiviert von Markus B. · <b>1.084 Einträge</b> wurden unter dieser Version erfasst und werden weiter gegen sie geprüft.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <div class="card"><h3>Änderungen gegenüber v2</h3><table class="dt"><tr><td><i class="bi bi-plus-circle ad-ok"></i> Flugart „Wettbewerb/Rennen“ angelegt</td></tr><tr><td><i class="bi bi-plus-circle ad-ok"></i> Zusatzfeld „Aufsicht anwesend“ (Ja/Nein) für Flüge</td></tr><tr><td><i class="bi bi-plus-circle ad-ok"></i> Nachweistyp „Verbandsnachweis“ angelegt</td></tr></table></div>
+            <div class="card"><h3>Flugarten</h3><span class="badge b-all">Training</span> <span class="badge b-all">Schulung</span> <span class="badge b-all">Foto/Video</span> <span class="badge b-all">Event/Vorführung</span> <span class="badge b-all">Wettbewerb/Rennen</span> <span class="badge b-all">Sonstiges</span></div>
+            <div class="card"><h3>Pflicht- und Zusatzfelder (Flüge)</h3><table class="dt"><tr><td>Pilot, Modell, Start, Landung, Ort</td><td class="mut">Grundfelder · Pflicht</td></tr><tr><td>Flugart</td><td class="mut">Grundfeld · Pflicht</td></tr><tr><td>Bemerkungen</td><td class="mut">optional</td></tr><tr><td>Aufsicht anwesend</td><td class="mut">Zusatzfeld · Ja/Nein · optional</td></tr></table></div>
+          </div>
+          <div>
+            <div class="card"><h3>Nachweistypen</h3><table class="dt"><tr><td>e-ID (Betreiber-Registrierung)</td><td class="mut">laut Registrierung</td></tr><tr><td>Kompetenznachweis A1/A3</td><td class="mut">5 Jahre</td></tr><tr><td>Fernpilotenzeugnis A2</td><td class="mut">5 Jahre</td></tr><tr><td>Versicherung</td><td class="mut">1 Jahr</td></tr><tr><td>Verbandsnachweis</td><td class="mut">DMFV / DAeC offen</td></tr></table></div>
+            <div class="card"><h3>Checklisten · Aufbewahrung</h3><table class="dt"><tr><td>Vor dem Flug</td><td class="mut">9 Punkte</td></tr><tr><td>Vor der Fahrt</td><td class="mut">5 Punkte</td></tr><tr><td><b>Aufbewahrungsfrist</b></td><td>3 Jahre</td></tr></table></div>
+            <span class="assume">Annahme: Inhalte der Versionen nur Beispiel; ein Export lässt sich unter „Vorlage importieren“ wieder als Entwurf einlesen.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 16 ERZIEHUNGSBERECHTIGTE EINLADEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">16</span><h2>Erziehungsberechtigte einladen</h2></div>
+  <p class="ddesc">Aus dem Konto eines Minderjährigen oder beim Einladen eines Kindes: im Auswahldialog „Erziehungsberechtigte“ der Eintrag <b>Person einladen …</b>. Das Formular legt ein Konto ohne Mitgliedschaft an und verknüpft es mit dem Kind. Die Verknüpfung legen nur Abteilungsleitung oder Admin an; sie wird mit Annahme der Einladung und dokumentierter Einwilligung wirksam. Bis dahin steht sie im Konto des Kindes als „offen“, und ein wartendes Kind kann noch nicht freigeschaltet werden.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/konten/paul-w/erziehungsberechtigte/einladen</span></div>
+  <div class="app tall" style="height:560px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
+    <div class="dbody">
+      <div class="dside">
+        <a>Übersicht</a>
+        <div class="h" style="margin-top:6px">Organisation</div><a class="on">Konten <span class="badge b-w">1</span></a><a>Abteilung &amp; Bereiche</a><a>Orte</a>
+        <div class="h" style="margin-top:6px">Regelwerk v4</div><a>Versionen</a><a>Flugarten · Nachweise</a><a>Pflicht- &amp; Zusatzfelder</a><a>Modelltypen</a><a>Checklisten</a>
+      </div>
+      <div class="dcontent">
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px">
+          <div class="card">
+            <h3>Erziehungsberechtigte einladen</h3>
+            <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Petra W.</div></div><div><label>E-Mail (Anmeldename) <span class="req">*</span></label><div class="inp">petra@beispiel.de</div></div></div>
+            <div class="hint">Eigene Adresse, nicht die des Kindes – systemweit eindeutig.</div>
+            <label>Verknüpftes Kind <span class="req">*</span></label><div class="inp">Paul W. (16, wartet auf Freischaltung) <i class="bi bi-chevron-down"></i></div>
+            <label>Beziehung <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
+            <div class="banner" style="margin-top:10px"><i class="bi bi-shield-lock"></i> Nur Abteilungsleitung oder Admin legen die Verknüpfung an. Wirksam nach Annahme und Einwilligung, endet automatisch mit dem 18. Geburtstag.</div>
+            <div style="display:flex;gap:8px"><span class="ibtn">Einladung senden</span><span class="ibtn out">Abbrechen</span></div>
+            <span class="assume">Annahme: Einwilligung bestätigt die Person beim Annehmen der Einladung; Text liefert der Verein (13.3). Link 7 Tage gültig.</span>
+          </div>
+          <div>
+            <div class="card"><h3>Konto Paul W. · danach</h3><table class="dt"><tr><td><b>Petra W.</b><br><small class="mut">eingeladen · Einwilligung offen, noch nicht wirksam</small></td><td><span class="badge b-w">offen</span></td></tr></table>
+              <div style="margin-top:8px"><span class="ibtn dis">Freischalten</span> <small class="mut">erst nach wirksamer Verknüpfung</small></div></div>
+            <div class="card"><h3>Auswahldialog „Kind wählen“</h3><table class="dt"><tr><td>Tim S.</td><td class="mut">14 · verknüpft: Sandra S.</td></tr><tr class="sel"><td>Paul W.</td><td class="mut">16 · noch niemand verknüpft</td></tr></table><div class="hint">Beim Einladen eines Kindes erscheint oben zusätzlich „Wird gerade eingeladen“.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

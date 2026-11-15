@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Berichte, Datenschutz, Info, Meisterschaft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block;line-height:1.35}
+  .kv2{display:grid;grid-template-columns:120px 1fr;gap:6px 10px;font-size:13px;padding:4px 0;margin:0}
+  .kv2 dt{color:var(--mut)}
+  .kv2 dd{margin:0;font-weight:600}
+  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
+  .tabs .on{color:var(--g);border-color:var(--g)}
+  .tabs.car .on{color:var(--car);border-color:var(--car)}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle}
+  .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+  .tg.on{background:var(--g)}.tg.on::after{left:18px}
+  .dnav2.car a.on{color:var(--car);border-color:var(--car)}
+  .wx-bar{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:3px 0}
+  .wx-bar .l{flex:0 0 120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wx-bar .t{flex:1;height:10px;background:#eef0ee;border-radius:3px;overflow:hidden}
+  .wx-bar .t span{display:block;height:100%;background:var(--air);border-radius:3px}
+  .wx-bar .v{flex:0 0 40px;text-align:right;font-weight:700}
+  .wx-cols{display:flex;align-items:flex-end;gap:6px;height:110px}
+  .wx-cols .c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:10.5px}
+  .wx-cols .c span{display:block;width:100%;background:var(--air);border-radius:2px 2px 0 0;min-height:2px}
+  .wx-cols .c.fut span{background:#e3e6e3}
+  .wx-clab{display:flex;gap:6px;font-size:10.5px;color:var(--mut);margin-top:3px}
+  .wx-clab span{flex:1;text-align:center}
+  .wx-steps{display:flex;gap:6px;margin-bottom:12px;font-size:12.5px;font-weight:700}
+  .wx-steps div{flex:1;padding:6px 4px;border-bottom:3px solid #dfe3df;color:var(--mut)}
+  .wx-steps .on{border-color:var(--g);color:var(--g)}
+  .wx-steps .done{border-color:#9cc7a6;color:var(--gd)}
+  tr.dup td{background:var(--warnbg)}
+  tr.off td{color:#999}
+  .pickf{display:inline-flex;align-items:center;gap:6px;border:1px solid #ced4da;border-radius:4px;padding:2px 8px;background:#fff;font-weight:700;font-size:12.5px}
+  .pickf.need{border-color:var(--red);color:var(--red)}
+  .wx-amp{display:flex;gap:12px;align-items:center;border-radius:6px;padding:12px;margin-bottom:14px;border:1px solid;font-size:13px}
+  .wx-amp .lamp{width:50px;height:50px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
+  .wx-amp b{font-size:18px;display:block}
+  .wx-amp.g{background:var(--gl);border-color:#b9dcbf}.wx-amp.g .lamp{background:#1f8a3b}
+  .wx-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
+  .wx-grid div{background:#fff;border:1px solid #e3e6e3;border-top:3px solid #1f8a3b;border-radius:6px;padding:8px 4px;text-align:center;font-size:11px;color:var(--mut)}
+  .wx-grid div.y{border-top-color:#d99a06}.wx-grid div.r{border-top-color:var(--red)}
+  .wx-grid b{display:block;font-size:18px;color:var(--t)}
+  table.hrs{border-collapse:collapse;font-size:12px;width:100%}
+  table.hrs th{font-size:10.5px;color:var(--mut);text-align:left;padding:4px 8px 4px 0;font-weight:700}
+  table.hrs td{text-align:center;padding:4px 3px;border-radius:3px}
+  table.hrs td.y{background:var(--warnbg)}
+  table.hrs td.r{background:#fde8e8;color:var(--red);font-weight:700}
+  .wx-dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#1f8a3b}
+  .wx-dot.y{background:#d99a06}.wx-dot.r{background:var(--red)}
+  .wx-map{height:100%;min-height:380px;border-radius:6px;border:1px solid #d6dad6;position:relative;overflow:hidden;background:linear-gradient(#e3eadf 1px,transparent 1px) 0 0/26px 26px,linear-gradient(90deg,#e3eadf 1px,transparent 1px) 0 0/26px 26px,#f4f7f1}
+  .wx-map .zone{position:absolute;border:2px dashed}
+  .wx-map .z1{left:-80px;top:-60px;width:300px;height:300px;border-radius:50%;border-color:var(--red);background:rgba(185,28,28,.07)}
+  .wx-map .z2{right:60px;bottom:50px;width:200px;height:130px;border-radius:40% 60% 50% 50%;border-color:#d99a06;background:rgba(217,154,6,.1)}
+  .wx-map .road{position:absolute;left:0;right:0;top:60%;height:8px;background:#e6e2d6;transform:rotate(-6deg)}
+  .wx-map .pin{position:absolute;left:52%;top:45%;color:var(--air);font-size:34px;transform:translate(-50%,-100%)}
+  .wx-map .ph{position:absolute;left:50%;top:18px;transform:translateX(-50%);background:rgba(255,255,255,.95);border-radius:6px;padding:10px 16px;font-size:13px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .wx-map .ctl{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px}
+  .wx-fq{border-bottom:1px solid #eef0ee}
+  .wx-fq:last-child{border-bottom:0}
+  .wx-q{display:flex;justify-content:space-between;gap:8px;padding:9px 0;font-size:13.5px;font-weight:700}
+  .wx-q i{color:var(--mut)}
+  .wx-a{font-size:13px;color:#333;padding:0 0 10px}
+  table.st td.x{text-decoration:line-through;color:#aaa}
+  table.st td.f{color:#ccc}
+  table.st td,table.st th{text-align:center}
+  table.st td.n,table.st th.n{text-align:left}
+  table.st td.s{font-weight:800;color:var(--g)}
+  table.dt tr.me td{background:var(--gl)}
+  table.dt input{width:62px;font:inherit;font-size:13px;border:1px solid #ced4da;border-radius:4px;padding:3px 6px;text-align:center}
+  .wx-grp{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .wx-grp:last-child{border-bottom:0}
+  .wx-grp>i{font-size:16px;margin-top:1px}
+  .wx-grp small{display:block}
+  .modal{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:6}
+  .modal .box{background:#fff;border-radius:8px;width:440px;padding:18px 20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .modal h3{margin:0 0 8px}
+  .legal{background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:9px 11px;font-size:12.5px;color:#7f1d1d;margin-bottom:10px}
+  .ckl{display:flex;gap:8px;align-items:flex-start;font-size:13px;padding:5px 0}
+  .ckl i{font-size:17px;color:var(--g)}
+  .ibtn.red{background:var(--red)}
+  .ibtn.dis{opacity:.4}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Berichte, Datenschutz, Info, Meisterschaft</h1>
+  <p>Gruppe 5, Gesamtdesign Teile 3, 4 und 5 sowie DSGVO-Abläufe (Abschnitt 9), <b>PC-Ansicht</b>. Die Handy-Seiten sind klickbar im <b>Klickdummy</b>: Luftsport › ⋯ › Berichte, Drohnenwetter, Orte &amp; dipul · Mehr › Profil › Datenschutz · Mehr › Hilfe · RC Cars › Meisterschaft.</p>
+  <div class="legend"><span class="assume">Gelb markiert: Annahme, im jeweiligen Feindesign (Teil 3, 4, 5) zu klären</span></div>
+</div>
+
+<!-- ============ 1 BERICHTE ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Berichte &amp; Export</h2></div>
+  <p class="ddesc">Jahresübersicht des eigenen Flugbuchs mit einfachen CSS-Balken (keine Chart-Bibliothek). Rechts der Export als PDF/CSV mit Zeitraum und Modellauswahl, darunter der Einstieg in den DJI-Import. Im Bereich RC Cars zeigt dieselbe Seite Modelle, Wartung und Ausleihen statt Flugzeiten.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/berichte</span></div>
+  <div class="app" style="height:640px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Berichte &amp; Export</a></div>
+    <div class="dmain">
+      <div>
+        <div class="hrow"><h3>Jahresübersicht</h3><div class="chips" style="margin:0"><span class="chip on">2026</span><span class="chip">2025</span><span class="chip">2024</span></div></div>
+        <div class="stats"><div class="stat"><b>37</b><span>Flüge</span></div><div class="stat"><b>9:12</b><span>Stunden</span></div><div class="stat"><b>4</b><span>Modelle</span></div><div class="stat"><b>4</b><span>Orte</span></div><div class="stat"><b>15 min</b><span>Ø Flugdauer</span></div></div>
+        <div class="card"><h3>Flüge je Monat</h3>
+          <div class="wx-cols">
+            <div class="c"><b></b><span style="height:2px"></span></div><div class="c"><b></b><span style="height:2px"></span></div><div class="c"><b>2</b><span style="height:18px"></span></div><div class="c"><b>3</b><span style="height:27px"></span></div><div class="c"><b>4</b><span style="height:36px"></span></div><div class="c"><b>5</b><span style="height:44px"></span></div><div class="c"><b>4</b><span style="height:36px"></span></div><div class="c"><b>3</b><span style="height:27px"></span></div><div class="c"><b>2</b><span style="height:18px"></span></div><div class="c"><b>9</b><span style="height:80px"></span></div><div class="c"><b>5</b><span style="height:44px"></span></div><div class="c fut"><b></b><span style="height:2px"></span></div>
+          </div>
+          <div class="wx-clab"><span>Jan</span><span>Feb</span><span>Mär</span><span>Apr</span><span>Mai</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Okt</span><span>Nov</span><span>Dez</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="card"><h3>Stunden je Modell</h3>
+            <div class="wx-bar"><span class="l">DJI Neo 2</span><span class="t"><span style="width:100%"></span></span><span class="v">4:05</span></div>
+            <div class="wx-bar"><span class="l">Mini 4 Pro</span><span class="t"><span style="width:65%"></span></span><span class="v">2:40</span></div>
+            <div class="wx-bar"><span class="l">FPV Quad 5″</span><span class="t"><span style="width:39%"></span></span><span class="v">1:35</span></div>
+            <div class="wx-bar"><span class="l">Avata 2 <span class="badge b-g">Verein</span></span><span class="t"><span style="width:21%"></span></span><span class="v">0:52</span></div>
+          </div>
+          <div class="card"><h3>Stunden je Ort</h3>
+            <div class="wx-bar"><span class="l">Vereinsgelände</span><span class="t"><span style="width:100%"></span></span><span class="v">5:30</span></div>
+            <div class="wx-bar"><span class="l">Sporthalle</span><span class="t"><span style="width:34%"></span></span><span class="v">1:52</span></div>
+            <div class="wx-bar"><span class="l">Wolfgangsberg</span><span class="t"><span style="width:24%"></span></span><span class="v">1:20</span></div>
+            <div class="wx-bar"><span class="l">Garten</span><span class="t"><span style="width:9%"></span></span><span class="v">0:30</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Flugbuch exportieren</h3>
+          <label>Format <span class="req">*</span></label><div class="chips"><span class="chip on"><i class="bi bi-file-earmark-pdf"></i> PDF</span><span class="chip"><i class="bi bi-filetype-csv"></i> CSV</span></div>
+          <label>Zeitraum <span class="req">*</span></label><div class="chips"><span class="chip on">2026</span><span class="chip">2025</span><span class="chip">Letzte 12 Monate</span><span class="chip">Eigener …</span></div>
+          <label>Modelle <span class="req">*</span></label><div class="inp">Alle Luftfahrzeuge<i class="bi bi-chevron-down"></i></div>
+          <label>Inhalt</label>
+          <table class="dt"><tr><td>Stornierte Einträge mit Grund</td><td><span class="tg on"></span></td></tr><tr><td>Änderungsverlauf je Flug</td><td><span class="tg"></span></td></tr><tr><td>Zusatzfelder des Regelwerks</td><td><span class="tg on"></span></td></tr></table>
+          <div style="margin-top:8px;font-size:13px"><i class="bi bi-eye"></i> 37 Flüge · 9:12 Std.</div>
+          <span class="ibtn" style="margin-top:8px"><i class="bi bi-download"></i> Export erstellen</span>
+          <div><span class="assume">Annahme: PDF-Kopf mit Name, Regelwerk-Version, Erstellungsdatum und Prüfsumme.</span></div>
+        </div>
+        <div class="card"><h3>Import</h3><div style="font-size:13px;margin-bottom:8px">Flüge aus DJI-Flugprotokollen übernehmen.</div><span class="ibtn out"><i class="bi bi-upload"></i> DJI-Protokolle importieren</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 2 DJI-IMPORT ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Import DJI-Flugprotokolle</h2></div>
+  <p class="ddesc">Drei Schritte: Dateien wählen (auch per Ziehen in das Fenster) → Vorschau der erkannten Flüge → übernehmen. Bekannte Geräte werden über die Seriennummer einem Modell zugeordnet, unbekannte über den Auswahldialog. Mögliche Duplikate sind gelb und abgewählt. „Übernehmen“ bleibt gesperrt, bis jeder gewählte Flug ein Modell hat.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/import</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Berichte &amp; Export</a></div>
+    <div class="dmain" style="grid-template-columns:3fr 1fr">
+      <div>
+        <div class="wx-steps"><div class="done"><i class="bi bi-check-lg"></i> 1 Dateien gewählt (6)</div><div class="on">2 Vorschau &amp; Modelle zuordnen</div><div>3 Fertig</div></div>
+        <div class="card">
+          <div class="hrow"><h3>5 Flüge erkannt</h3><small class="mut">1 Datei ohne Flug (nur Kalibrierung) übersprungen</small></div>
+          <table class="dt">
+            <tr><th></th><th>Datum</th><th>Start–Landung</th><th>Min.</th><th>Gerät (Protokoll)</th><th>Modell *</th><th>Ort</th></tr>
+            <tr><td><i class="bi bi-check-square-fill" style="color:var(--g)"></i></td><td>10.11.2026</td><td>15:02–15:21</td><td>19</td><td>DJI Mini 4 Pro<br><small class="mut">SN 1581F5FHD…</small></td><td><span class="pickf">Mini 4 Pro <i class="bi bi-chevron-down"></i></span><br><span class="badge b-g">per Seriennummer</span></td><td>Vereinsgelände <small class="mut">GPS</small></td></tr>
+            <tr><td><i class="bi bi-check-square-fill" style="color:var(--g)"></i></td><td>10.11.2026</td><td>15:40–15:58</td><td>18</td><td>DJI Mini 4 Pro<br><small class="mut">SN 1581F5FHD…</small></td><td><span class="pickf">Mini 4 Pro <i class="bi bi-chevron-down"></i></span><br><span class="badge b-g">per Seriennummer</span></td><td>Vereinsgelände <small class="mut">GPS</small></td></tr>
+            <tr class="dup off"><td><i class="bi bi-square"></i></td><td>09.11.2026</td><td>11:12–11:36</td><td>24</td><td>DJI Mini 4 Pro<br><small>SN 1581F5FHD…</small></td><td colspan="2"><i class="bi bi-files"></i> <b>Mögliches Duplikat</b> – bereits im Flugbuch: 09.11. · Mini 4 Pro · 24 min · Wolfgangsberg</td></tr>
+            <tr><td><i class="bi bi-check-square-fill" style="color:var(--g)"></i></td><td>01.11.2026</td><td>14:05–14:16</td><td>11</td><td>DJI Avata 2<br><small class="mut">SN 1581F6Q… · unbekannt</small></td><td><span class="pickf need">bitte zuordnen <i class="bi bi-chevron-down"></i></span></td><td>Vereinsgelände <small class="mut">GPS</small></td></tr>
+            <tr><td><i class="bi bi-check-square-fill" style="color:var(--g)"></i></td><td>26.10.2026</td><td>16:30–16:42</td><td>12</td><td>DJI Neo 2<br><small class="mut">SN 1581F8K…</small></td><td><span class="pickf">DJI Neo 2 <i class="bi bi-chevron-down"></i></span><br><span class="badge b-g">per Seriennummer</span></td><td>49.4318, 11.2511<br><small class="mut">kein bekannter Ort</small></td></tr>
+          </table>
+        </div>
+        <span class="assume">Annahme: Duplikat = gleiches Modell und Startzeit ±5 min. Originaldatei wird am Flug gespeichert, Flug als „importiert“ gekennzeichnet.</span>
+        <span class="assume">Offen: Neuere DJI-Protokolle sind verschlüsselt – Lesbarkeit im Feindesign Teil 3 klären.</span>
+      </div>
+      <div>
+        <div class="card"><h3>Übernehmen</h3>
+          <dl class="kv2" style="grid-template-columns:90px 1fr"><dt>Gewählt</dt><dd>4 Flüge · 1:00 Std.</dd><dt>Ausgelassen</dt><dd>1 (Duplikat)</dd><dt>Flugart</dt><dd>Training <i class="bi bi-chevron-down mut"></i></dd></dl>
+          <div class="alert" style="margin:8px 0"><i class="bi bi-exclamation-circle"></i> 1 Flug braucht noch ein Modell.</div>
+          <span class="ibtn dis">4 Flüge übernehmen</span>
+        </div>
+        <div class="card" style="font-size:12.5px"><b>Auswahldialog „Modell zuordnen“</b><br><small class="mut">Eigene Luftfahrzeuge und Vereinsmodelle, die am Flugtag für dich ausgeliehen waren. Die Seriennummer wird am Modell gespeichert.</small></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 3 MEINE DATEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Meine Daten herunterladen (Auskunft)</h2></div>
+  <p class="ddesc">Im Profil unter „Datenschutz“. Zeigt vorab, was im Archiv steckt, verlangt eine erneute Bestätigung (Passkey/Passwort) und erstellt das Archiv im Hintergrund. Nach Fertigstellung E-Mail und Download-Link mit Ablaufdatum.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/datenschutz</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a class="on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dbody">
+      <div class="dside"><div class="h">Profil</div><a>Persönliche Daten</a><a>Nachweise</a><a>Anmeldung &amp; Sicherheit</a><a>Benachrichtigungen</a><a>Freigaben</a><a class="on">Datenschutz</a></div>
+      <div class="dcontent" style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px">
+        <div class="card" style="padding:10px 14px;margin:0">
+          <div class="hrow"><h3>Meine Daten herunterladen</h3><small class="mut">Letzte Anforderung: 02.03.2026</small></div>
+          <table class="dt"><tr><th>Inhalt</th><th>Umfang</th><th>Format</th></tr>
+            <tr><td>Profil, Kontakt, Rollen, Bereiche</td><td>–</td><td>JSON</td></tr>
+            <tr><td>Nachweise inkl. Dateien</td><td>4</td><td>JSON, Originale</td></tr>
+            <tr><td>Flüge inkl. stornierter</td><td>39</td><td>JSON, CSV, PDF</td></tr>
+            <tr><td>Modelle, Zubehör, Wartung</td><td>8</td><td>JSON, CSV</td></tr>
+            <tr><td>Vorfälle, Ausleihen, Übergabeprotokolle</td><td>7</td><td>JSON, Fotos</td></tr>
+            <tr><td>Teilnahmen, Schulungen, VM-Ergebnisse</td><td>12</td><td>JSON</td></tr>
+            <tr><td>Freigaben, Änderungsprotokoll, Anmeldungen</td><td>–</td><td>JSON</td></tr>
+          </table>
+          <div class="note" style="text-align:left;margin-top:6px">Nicht enthalten: Daten anderer Personen, auch wenn sie mit dir geteilt wurden.</div>
+          <span class="assume">Annahme: ZIP-Archiv, 7 Tage abrufbar, dann automatisch gelöscht.</span>
+        </div>
+        <div>
+          <div class="card" style="padding:10px 14px">
+            <h3>Archiv</h3>
+            <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="ico" style="background:var(--gl);color:var(--g);width:40px;height:40px;font-size:20px"><i class="bi bi-file-earmark-zip"></i></span><span><b>TSV-RC_Markus-B_2026-11-14.zip</b><br><small class="mut">4,2 MB · verfügbar bis 21.11.2026</small></span></div>
+            <div style="margin-top:10px"><span class="ibtn"><i class="bi bi-download"></i> Herunterladen</span> <span class="ibtn out">Neu anfordern</span></div>
+          </div>
+          <div class="card" style="padding:10px 14px;font-size:13px"><h3>Austritt</h3>Konto auflösen: was gelöscht und was bis Fristende aufbewahrt wird, siehst du vorher.<div style="margin-top:8px"><span class="ibtn out" style="color:var(--red);border-color:var(--red)"><i class="bi bi-person-x"></i> Austritt …</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 4 AUSTRITT ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Austritt mit doppelter Bestätigung</h2></div>
+  <p class="ddesc">Erste Stufe: Übersicht in drei Spalten (sofort gelöscht · bis Fristende aufbewahrt · anonymisiert) plus „vorher zu klären“. Zweite Stufe: Dialog mit Häkchen, Eingabe „AUSTRETEN“ und Bestätigung per Passkey. Dargestellt ist der geöffnete Dialog.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/austritt</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a class="on"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div style="padding:16px 22px">
+      <div class="card" style="padding:10px 14px;font-size:13px">Dein Konto wird <b>deaktiviert</b>. Nicht aufbewahrungspflichtige Daten werden <b>sofort gelöscht</b>. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (<b>3 Jahre</b> laut Regelwerk) gesperrt erhalten und werden danach gelöscht bzw. anonymisiert. Die Mitgliedschaft im TSV 1927 endet dadurch <b>nicht</b>.</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div class="card" style="padding:10px 14px"><h3 style="color:var(--warn)"><i class="bi bi-exclamation-triangle-fill"></i> Vorher klären</h3>
+          <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>TRX-4M ausgeliehen</b><small class="mut">Rückgabe bis 17.11.</small></span></div>
+          <div class="wx-grp"><i class="bi bi-person-gear" style="color:var(--g)"></i><span><b>Rollen werden entfernt</b><small class="mut">weiterer Admin vorhanden ✓</small></span></div></div>
+        <div class="card" style="padding:10px 14px"><h3 style="color:var(--red)"><i class="bi bi-trash3"></i> Sofort gelöscht</h3>
+          <div class="wx-grp"><span>Kontaktdaten</span></div><div class="wx-grp"><span>Benachrichtigungen, Push</span></div><div class="wx-grp"><span>Passwort, Passkeys, 2FA, Tokens</span></div><div class="wx-grp"><span>Freigaben, ICS-Link</span></div><div class="wx-grp"><span>Eigene Orte, Checklisten</span></div></div>
+        <div class="card" style="padding:10px 14px"><h3 style="color:var(--warn)"><i class="bi bi-hourglass-split"></i> Bis Fristende</h3>
+          <div class="wx-grp"><span>39 Flüge <small class="mut">letzter bis 14.11.2029</small></span></div><div class="wx-grp"><span>Vorfälle (Luftfahrzeuge)</span></div><div class="wx-grp"><span>Änderungsprotokoll</span></div><div class="wx-grp"><span>Modelle aus Flügen <span class="assume" style="margin:2px 0 0">Annahme</span></span></div><div class="wx-grp"><span>Ausleihen, Protokolle <span class="assume" style="margin:2px 0 0">Annahme</span></span></div></div>
+        <div class="card" style="padding:10px 14px"><h3 style="color:var(--mut)"><i class="bi bi-incognito"></i> Anonymisiert</h3>
+          <div class="wx-grp"><span>VM-Ergebnisse <small class="mut">als „ehemaliges Mitglied“</small></span></div><div class="wx-grp"><span>Teilnehmerzahlen bei Events</span></div><span class="assume">Annahme: mit dem Verein abstimmen</span></div>
+      </div>
+    </div>
+    <div class="modal"><div class="box">
+      <h3>Austritt bestätigen</h3>
+      <div class="legal"><b>Das kann nicht rückgängig gemacht werden.</b> Danach ist keine Anmeldung mehr möglich; für ein neues Konto braucht es eine neue Einladung.</div>
+      <div class="ckl"><i class="bi bi-check-square-fill"></i><span>Ich habe verstanden, welche Daten gelöscht und welche aufbewahrt werden.</span></div>
+      <div class="ckl"><i class="bi bi-check-square-fill"></i><span>Ich gebe den Vereins-Crawler TRX-4M bis 17.11. zurück.</span></div>
+      <label>Zur Bestätigung <b>AUSTRETEN</b> eingeben <span class="req">*</span></label><div class="inp">AUSTRETEN</div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><span class="ibtn out">Abbrechen</span><span class="ibtn red"><i class="bi bi-fingerprint"></i> Konto deaktivieren</span></div>
+    </div></div>
+  </div></div></div>
+</section>
+
+<!-- ============ 5 HILFE ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Hilfe &amp; FAQ, Links</h2></div>
+  <p class="ddesc">Rechts oben im Menü „Hilfe“. Links Kategorien und Anleitungen, Mitte FAQ als aufklappbare Liste mit Suche und Bereichsfilter, rechts Links. Alle Inhalte pflegt der Admin (Admin › Inhalte).</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/hilfe</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dbody">
+      <div class="dside"><div class="h">Hilfe</div><a class="on">Häufige Fragen</a><a>Erste Schritte</a><a>App installieren</a><a>Flug erfassen</a><a>Offline &amp; Synchronisierung</a><a>Ausleihe &amp; Übergabe</a><a>Vereinsmeisterschaft</a><a>Datenschutz</a></div>
+      <div class="dcontent" style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+        <div class="card" style="padding:10px 14px;margin:0">
+          <div class="hrow"><h3>Häufige Fragen</h3><div class="chips" style="margin:0"><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div></div>
+          <div class="inp ph" style="margin-bottom:6px"><span>Frage suchen …</span><i class="bi bi-search"></i></div>
+          <div class="wx-fq"><div class="wx-q">Muss ich jeden Flug eintragen?<i class="bi bi-chevron-up"></i></div><div class="wx-a">In der offenen Kategorie gibt es keine gesetzliche Flugbuchpflicht. Am Vereinsgelände tragen wir Flüge trotzdem ein, weil der Verein für die Versicherung einen Überblick braucht. Ob ein Ort flugbuchpflichtig ist, siehst du in der Ortsauswahl. <span class="assume">Annahme: Beispieltext, Inhalt liefert der Verein</span></div></div>
+          <div class="wx-fq"><div class="wx-q">Kann ich ohne Netz erfassen?<i class="bi bi-chevron-down"></i></div></div>
+          <div class="wx-fq"><div class="wx-q">Ich habe einen Flug falsch eingetragen.<i class="bi bi-chevron-down"></i></div></div>
+          <div class="wx-fq"><div class="wx-q">Wie leihe ich ein Vereinsmodell aus?<i class="bi bi-chevron-down"></i></div></div>
+          <div class="wx-fq"><div class="wx-q">Wer sieht meine Flüge?<i class="bi bi-chevron-down"></i></div></div>
+          <div class="wx-fq"><div class="wx-q">Wie komme ich in die Vereinsmeisterschaft?<i class="bi bi-chevron-down"></i></div></div>
+        </div>
+        <div>
+          <div class="card" style="padding:10px 14px"><h3>Links</h3>
+            <table class="dt">
+              <tr><td><i class="bi bi-house-door"></i> Vereinswebsite TSV 1927</td><td><i class="bi bi-box-arrow-up-right mut"></i></td></tr>
+              <tr><td><i class="bi bi-map"></i> dipul – Geozonen-Karte</td><td><i class="bi bi-box-arrow-up-right mut"></i></td></tr>
+              <tr><td><i class="bi bi-bank"></i> Luftfahrt-Bundesamt – Drohnen</td><td><i class="bi bi-box-arrow-up-right mut"></i></td></tr>
+              <tr><td><i class="bi bi-award"></i> Modellflugverband (DMFV/DAeC offen)</td><td><i class="bi bi-box-arrow-up-right mut"></i></td></tr>
+            </table></div>
+          <div class="card" style="padding:10px 14px;font-size:13px"><h3>Nicht gefunden?</h3>Frage an die Abteilungsleitung stellen.<div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-envelope"></i> Nachricht</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 6 WETTER ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Drohnenwetter</h2></div>
+  <p class="ddesc">Ort per Auswahldialog (GPS-Nähe, Vereinsorte, eigene Orte). Oben die Ampel mit Begründung und Vorschau, wann es schlechter wird, darunter die aktuellen Werte und der Stundenverlauf mit farbigen Zellen. Rechts die Grenzwerte der Ampel – ausdrücklich als Annahme. Bei Hallen erscheint kein Wetter.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/wetter</span></div>
+  <div class="app" style="height:620px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Drohnenwetter</a></div>
+    <div class="dmain" style="grid-template-columns:2.4fr 1fr">
+      <div>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><div class="inp" style="min-width:280px"><span><i class="bi bi-geo-alt-fill" style="color:var(--air)"></i> <b>Vereinsgelände</b> <small class="mut">· per GPS erkannt</small></span><i class="bi bi-chevron-down"></i></div><div class="chips" style="margin:0"><span class="chip on">Heute</span><span class="chip">Morgen</span><span class="chip">Übermorgen</span></div></div>
+        <div class="wx-amp g"><span class="lamp"><i class="bi bi-check-lg"></i></span><span><b>fliegbar</b>Alle Werte im grünen Bereich. Ab 14 Uhr schlechter (gelb), ab 16 Uhr nicht empfohlen (Böen, Regen).</span></div>
+        <div class="wx-grid"><div><b>14 km/h</b>Wind SW</div><div><b>22 km/h</b>Böen</div><div><b>0 mm/h</b>Niederschlag</div><div><b>12 km</b>Sicht</div><div><b>6 °C</b>Temperatur</div><div><b>3</b>Kp-Index</div></div>
+        <div class="card"><h3>Stundenverlauf</h3>
+          <table class="hrs">
+            <tr><th>Uhr</th><td><b>Jetzt</b></td><td><b>11</b></td><td><b>12</b></td><td><b>13</b></td><td><b>14</b></td><td><b>15</b></td><td><b>16</b></td><td><b>17</b></td><td><b>18</b></td><td><b>19</b></td><td><b>20</b></td></tr>
+            <tr><th>Ampel</th><td><span class="wx-dot"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot y"></span></td><td><span class="wx-dot y"></span></td><td><span class="wx-dot r"></span></td><td><span class="wx-dot r"></span></td><td><span class="wx-dot y"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot y"></span></td></tr>
+            <tr><th>Wind km/h</th><td>14</td><td>15</td><td>16</td><td>18</td><td class="y">21</td><td class="y">23</td><td class="y">22</td><td>19</td><td>15</td><td>12</td><td>10</td></tr>
+            <tr><th>Böen km/h</th><td>22</td><td>24</td><td>26</td><td>30</td><td class="y">34</td><td class="y">38</td><td class="r">41</td><td class="y">35</td><td>28</td><td>22</td><td>18</td></tr>
+            <tr><th>Regen mm/h</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="y">0,1</td><td class="r">0,6</td><td class="r">0,9</td><td class="y">0,4</td><td>0</td><td>0</td></tr>
+            <tr><th>Sicht km</th><td>12</td><td>12</td><td>12</td><td>10</td><td>9</td><td>8</td><td>5</td><td class="y">3</td><td class="y">4</td><td>8</td><td>10</td></tr>
+            <tr><th>Temp. °C</th><td>6</td><td>6</td><td>7</td><td>7</td><td>7</td><td>6</td><td>5</td><td class="y">4</td><td class="y">4</td><td class="y">3</td><td class="y">2</td></tr>
+            <tr><th>Kp</th><td>3</td><td>3</td><td>3</td><td>3</td><td>4</td><td>4</td><td>4</td><td>4</td><td>3</td><td>3</td><td>3</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Grenzwerte der Ampel</h3>
+          <table class="dt"><tr><th>Wert</th><th>grün</th><th>gelb</th><th>rot</th></tr>
+            <tr><td>Wind</td><td>≤ 20</td><td>≤ 30</td><td>&gt; 30</td></tr>
+            <tr><td>Böen</td><td>≤ 30</td><td>≤ 40</td><td>&gt; 40</td></tr>
+            <tr><td>Regen</td><td>0</td><td>≤ 0,5</td><td>&gt; 0,5</td></tr>
+            <tr><td>Sicht</td><td>≥ 5</td><td>≥ 1</td><td>&lt; 1</td></tr>
+            <tr><td>Temp.</td><td>5–30</td><td>−5–38</td><td>sonst</td></tr>
+            <tr><td>Kp</td><td>≤ 4</td><td>5</td><td>≥ 6</td></tr>
+          </table>
+          <span class="assume">Annahme: Vorschlagswerte, vom Admin einstellbar, vorerst nicht je Modell. Die Ampel ist eine Empfehlung, die Entscheidung trifft der Pilot.</span>
+        </div>
+        <div class="card" style="font-size:12.5px"><h3>Datenquelle</h3>Stand 10:00 · aktualisiert stündlich<br><span class="assume">Annahme: DWD-Daten (z. B. über Open-Meteo), Kp-Index von NOAA, serverseitig abgefragt – der Browser spricht keinen Fremddienst an.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 7 DIPUL ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Orte &amp; dipul-Karte</h2></div>
+  <p class="ddesc">Ob sich die dipul-Karte einbetten lässt, ist offen. Bis dahin ein Platzhalter mit dem Link „In dipul öffnen (mit aktuellem Standort)“ und einem deutlichen Hinweis auf Geozonen. Rechts die Orte des Vereins und die eigenen Orte.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/orte</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Orte &amp; dipul-Karte</a></div>
+    <div class="dmain" style="grid-template-columns:2fr 1fr;height:100%">
+      <div class="wx-map"><div class="road"></div><div class="zone z1"></div><div class="zone z2"></div><i class="bi bi-geo-alt-fill pin"></i>
+        <div class="ph"><i class="bi bi-map"></i> <b>Platzhalter dipul-Karte</b><br><small class="mut">Einbindung wird geprüft (Gesamtdesign Teil 4)</small><div style="margin-top:8px"><span class="ibtn"><i class="bi bi-box-arrow-up-right"></i> In dipul öffnen (mit aktuellem Standort)</span></div><small class="mut">49.4127° N, 11.2034° E (± 8 m)</small></div>
+      </div>
+      <div>
+        <div class="alert"><i class="bi bi-sign-stop"></i> <b>Geozonen prüfen.</b> Vor jedem Flug außerhalb des Vereinsgeländes selbst prüfen, ob Geozonen gelten (z. B. Kontrollzonen von Flugplätzen, Naturschutzgebiete, Wohngrundstücke). TSV RC prüft Geozonen nicht.</div>
+        <span class="assume" style="margin:0 0 10px">Annahme: dipul übernimmt den Standort per Link, sonst öffnet nur die Karte.</span>
+        <div class="card"><h3>Orte des Vereins</h3>
+          <table class="dt"><tr><td><b>Vereinsgelände</b><br><small class="mut">Radius 150 m</small></td><td><span class="badge b-g">flugbuchpflichtig</span></td></tr><tr><td><b>Sporthalle</b><br><small class="mut">Halle, Winter</small></td><td><span class="badge b-all">Halle</span></td></tr></table></div>
+        <div class="card"><h3>Meine Orte</h3>
+          <table class="dt"><tr><td><b>Wolfgangsberg</b></td><td><small class="mut">3 Flüge</small></td></tr><tr><td><b>Garten</b></td><td><small class="mut">2 Flüge</small></td></tr></table></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 8 SAISON ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">8</span><h2>Vereinsmeisterschaft – Saisonübersicht</h2></div>
+  <p class="ddesc">Unter RC Cars › Meisterschaft (FPV-Race zusätzlich unter Luftsport, vorgefiltert). Reiter je Disziplin, Tabelle mit allen Läufen, Streichergebnisse durchgestrichen, Summe rechts. Hier Glattbahn: Saison abgeschlossen, das schlechteste Ergebnis ist gestrichen. Rechts die Läufe der Disziplin und das Punkteschema.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/meisterschaft/2026/glattbahn</span></div>
+  <div class="app" style="height:620px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 car"><a>Modelle</a><a>Ausleihe</a><a class="on">Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain">
+      <div>
+        <div class="hrow"><h3>Vereinsmeisterschaft 2026</h3><span><span class="badge b-g"><i class="bi bi-broadcast"></i> live</span> <span class="ibtn out">Saison 2025</span></span></div>
+        <div class="tabs car"><div>Offroad <small class="mut">4/5</small></div><div>Crawler <small class="mut">4/6</small></div><div class="on">Glattbahn <small class="mut">6/6</small></div><div><i class="bi bi-airplane"></i> FPV-Race <small class="mut">2/4</small></div></div>
+        <div class="card">
+          <div class="hrow"><span style="font-size:13px">Saison abgeschlossen · Meister: <b>Jonas B.</b> · 1 Streichergebnis</span><span class="ibtn out"><i class="bi bi-file-earmark-pdf"></i> Tabelle als PDF</span></div>
+          <table class="dt st"><tr><th>Pl.</th><th class="n">Fahrer</th><th>L1<br>03.05.</th><th>L2<br>31.05.</th><th>L3<br>28.06.</th><th>L4<br>26.07.</th><th>L5<br>23.08.</th><th>L6<br>13.09.</th><th>Siege</th><th>Punkte</th></tr>
+            <tr><td>1.</td><td class="n"><b>Jonas B.</b></td><td>25</td><td>25</td><td>20</td><td>25</td><td class="x">16</td><td>25</td><td>4</td><td class="s">120</td></tr>
+            <tr><td>2.</td><td class="n"><b>Max R.</b></td><td>20</td><td class="x">16</td><td>25</td><td>20</td><td>25</td><td>20</td><td>2</td><td class="s">110</td></tr>
+            <tr class="me"><td>3.</td><td class="n"><b>Markus B.</b></td><td>16</td><td>20</td><td>16</td><td>16</td><td>20</td><td class="x">–</td><td>0</td><td class="s">88</td></tr>
+            <tr><td>4.</td><td class="n"><b>Felix W.</b></td><td class="x">13</td><td>13</td><td>13</td><td>13</td><td>13</td><td>16</td><td>0</td><td class="s">68</td></tr>
+          </table>
+          <div class="note" style="text-align:left;margin-top:6px">Durchgestrichen = Streichergebnis (ein verpasster Lauf wird zuerst gestrichen) · – = nicht gefahren</div>
+        </div>
+        <span class="assume">Annahme: Disziplinen, Anzahl Läufe, Punkteschema und Streichregel sind Platzhalter – offener Punkt 6 im Gesamtdesign.</span>
+      </div>
+      <div>
+        <div class="card"><h3>Läufe Glattbahn</h3>
+          <table class="dt"><tr><td>L1 03.05.</td><td>Jonas B.</td></tr><tr><td>L2 31.05.</td><td>Jonas B.</td></tr><tr><td>L3 28.06.</td><td>Max R.</td></tr><tr><td>L4 26.07.</td><td>Jonas B.</td></tr><tr><td>L5 23.08.</td><td>Max R.</td></tr><tr><td>L6 13.09.</td><td>Jonas B.</td></tr></table></div>
+        <div class="card"><h3>Punkteschema</h3>
+          <table class="dt"><tr><td>1. / 2. / 3.</td><td>25 / 20 / 16</td></tr><tr><td>4. / 5. / 6.</td><td>13 / 11 / 10</td></tr><tr><td>7.–10.</td><td>9 / 8 / 7 / 6</td></tr><tr><td>ab 11.</td><td>5</td></tr><tr><td>Schnellste Runde</td><td>+1</td></tr><tr><td>Streichergebnis</td><td>ab 5 Läufen</td></tr></table>
+          <span class="assume">Annahme: komplettes Schema, pflegt die Abteilungsleitung je Saison.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 9 RENN-EVENT ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">9</span><h2>Renn-Event „VM Lauf 5 · Crawler“ mit Ergebnissen</h2></div>
+  <p class="ddesc">Ein Renn-Event ist eine Sonderform des Events aus dem Kalender: Termin, Ort, Teilnahme wie gewohnt, dazu Disziplin, Wertung und Ergebnisse. Dargestellt ist der Zustand am Renntag nach dem Eintragen (vorläufig). Vor dem Lauf zeigt der Reiter „Ergebnisse“ einen Leerzustand und die Anmeldungen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/vm-2026-crawler-5</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 car"><a>Modelle</a><a>Ausleihe</a><a class="on">Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1fr 2fr">
+      <div>
+        <div class="card"><div class="hrow"><h3>VM Lauf 5 · Crawler</h3><span class="badge b-car">RC Cars</span></div>
+          <dl class="kv2" style="grid-template-columns:90px 1fr"><dt>Datum</dt><dd>Di 24.11.2026, 10:00</dd><dt>Ort</dt><dd>Crawler-Strecke</dd><dt>Klasse</dt><dd>Mini-Crawler bis 1:18</dd><dt>Wertung</dt><dd>Strafpunkte, dann Zeit</dd><dt>Rennleitung</dt><dd>Max R.</dd><dt>Teilnehmer</dt><dd>5 (davon 1 nachgemeldet)</dd></dl>
+          <span class="assume">Annahme: Rennleitung = Verantwortliche des Events, keine eigene Rolle.</span></div>
+        <div class="card"><h3>Ablauf</h3><table class="dt"><tr><td>9:30</td><td>Fahrerbesprechung</td></tr><tr><td>10:00</td><td>Durchgang 1 · Parcours A</td></tr><tr><td>13:00</td><td>Durchgang 2 · Parcours B</td></tr><tr><td>15:30</td><td>Siegerehrung</td></tr></table></div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="tabs car"><div class="on">Ergebnisse</div><div>Teilnehmer (5)</div><div>Fotos</div></div>
+          <div class="hrow"><span style="font-size:13px"><span class="badge b-w">vorläufig</span> eingetragen von Max R. · 24.11., 15:40</span><span><span class="ibtn out"><i class="bi bi-pencil-square"></i> Bearbeiten</span> <span class="ibtn">Endgültig machen</span></span></div>
+          <table class="dt"><tr><th>Pl.</th><th>Fahrer</th><th>Modell</th><th>Strafpunkte</th><th>Zeit</th><th>Punkte</th><th>Tabelle neu</th></tr>
+            <tr><td>1.</td><td><b>Max R.</b></td><td>TRX-4M <span class="badge b-g">Verein</span></td><td>8</td><td>4:55</td><td><b>25</b></td><td>1. · 95</td></tr>
+            <tr class="me"><td>2.</td><td><b>Markus B.</b></td><td>Axial SCX24</td><td>12</td><td>4:31</td><td><b>20</b></td><td>2. · 90</td></tr>
+            <tr><td>3.</td><td><b>Jonas B.</b></td><td>Axial SCX24</td><td>12</td><td>4:48</td><td><b>16</b></td><td>4. · 56 <i class="bi bi-arrow-up" style="color:var(--g)"></i></td></tr>
+            <tr><td>4.</td><td><b>Lena K.</b></td><td>FMS FCX24</td><td>15</td><td>5:10</td><td><b>13</b></td><td>3. · 62</td></tr>
+            <tr><td>5.</td><td><b>Tim S.</b></td><td>Axial SCX24</td><td>20</td><td>6:02</td><td><b>11</b></td><td>5. · 51 <i class="bi bi-arrow-down" style="color:var(--red)"></i></td></tr>
+          </table>
+          <div class="note" style="text-align:left;margin-top:6px">Gleichstand bei 12 Strafpunkten: Markus B. vor Jonas B. wegen der kürzeren Zeit. Ab Lauf 5 greift das Streichergebnis.</div>
+          <span class="assume">Annahme: vorläufige Ergebnisse sind sofort für alle sichtbar und noch änderbar (Einspruch), „endgültig“ sperrt sie.</span>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 10 ERGEBNISSE EINTRAGEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">10</span><h2>Ergebnisse eintragen (Rennleitung)</h2></div>
+  <p class="ddesc">Nur für Rennleitung und Abteilungsleitung. Teilnehmer kommen aus den Anmeldungen, Nachmeldungen über den Auswahldialog. Eingegeben werden nur die Rohwerte der Disziplin (hier Strafpunkte und Zeit); Platz und Punkte rechnet TSV RC nach dem Punkteschema sofort aus. Speichern erst, wenn alle Zeilen vollständig oder als „nicht angetreten“ markiert sind.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/vm-2026-crawler-5/ergebnisse</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Max R.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 car"><a>Modelle</a><a>Ausleihe</a><a class="on">Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:2.2fr 1fr">
+      <div class="card">
+        <div class="hrow"><h3>Ergebnisse eintragen · VM Lauf 5 · Crawler</h3><span class="ibtn out"><i class="bi bi-person-plus"></i> Teilnehmer hinzufügen</span></div>
+        <table class="dt"><tr><th>Fahrer</th><th>Strafpunkte *</th><th>Zeit (m:ss) *</th><th>Status</th><th>Platz</th><th>Punkte</th></tr>
+          <tr><td><b>Markus B.</b></td><td><input value="12"></td><td><input value="4:31"></td><td><small class="mut">angetreten</small></td><td><b>2.</b></td><td><b>20</b></td></tr>
+          <tr><td><b>Max R.</b></td><td><input value="8"></td><td><input value="4:55"></td><td><small class="mut">angetreten</small></td><td><b>1.</b></td><td><b>25</b></td></tr>
+          <tr><td><b>Lena K.</b></td><td><input value="15"></td><td><input value="5:10"></td><td><small class="mut">angetreten</small></td><td><b>4.</b></td><td><b>13</b></td></tr>
+          <tr><td><b>Jonas B.</b></td><td><input value="12"></td><td><input value="4:48"></td><td><small class="mut">angetreten</small></td><td><b>3.</b></td><td><b>16</b></td></tr>
+          <tr><td><b>Tim S.</b> <span class="badge b-all">nachgemeldet</span></td><td><input value="20"></td><td><input placeholder="m:ss" style="border-color:var(--red)"></td><td><small class="mut">angetreten</small></td><td class="mut">–</td><td class="mut">–</td></tr>
+        </table>
+        <div class="alert" style="margin:10px 0 0"><i class="bi bi-exclamation-circle"></i> Noch offen: Tim S. (Zeit fehlt).</div>
+      </div>
+      <div>
+        <div class="card"><h3>Veröffentlichen</h3>
+          <label>Status</label><div class="chips"><span class="chip on">vorläufig</span><span class="chip">endgültig</span></div>
+          <span class="ibtn dis">Ergebnisse speichern</span>
+          <div><span class="assume">Annahme: Änderungen nach dem Speichern landen im Änderungsprotokoll.</span></div></div>
+        <div class="card" style="font-size:12.5px"><h3>So wird gewertet</h3>Crawler: weniger Strafpunkte vorn, bei Gleichstand kürzere Zeit. Punkte nach Schema 25 / 20 / 16 / 13 / 11 …<br><small class="mut">Später: Rohwerte automatisch über die Zeitmessung (API).</small></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 11 ORT-DETAIL ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">11</span><h2>Ort-Detail (Vereinsort und eigener Ort)</h2></div>
+  <p class="ddesc">Ein Bildschirm für alle Orte, befüllt aus den Ortsdaten. Links ein eigener Ort: bearbeiten und löschen darf nur der Besitzer, deutlicher Geozonen-Hinweis mit dipul-Link. Rechts zum Vergleich der Vereinsort „Vereinsgelände“: nur lesen, Admins sehen zusätzlich „Als Admin bearbeiten“ (führt in Admin › Orte). Darunter jeweils die letzten Flüge an diesem Ort.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/orte/wolfgangsberg</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Orte &amp; dipul-Karte</a></div>
+    <div class="dmain" style="grid-template-columns:1.6fr 1fr">
+      <div>
+        <div class="hrow"><h3><i class="bi bi-pin-map"></i> Wolfgangsberg <span class="badge b-all">eigener Ort</span></h3><span><span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out red"><i class="bi bi-trash3"></i> Löschen</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="wx-map" style="min-height:200px;height:200px"><div class="road"></div><div style="position:absolute;left:52%;top:45%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:2px dashed var(--air);background:rgba(30,90,153,.1)"></div><i class="bi bi-geo-alt-fill pin"></i></div>
+          <div class="card" style="margin:0"><dl class="kv2"><dt>Koordinaten</dt><dd>49.4206° N, 11.2412° E</dd><dt>Radius</dt><dd>100 m</dd><dt>Sichtbar für</dt><dd>nur mich</dd><dt>Notiz</dt><dd>Wiese oberhalb des Wanderparkplatzes. Erlaubnis des Eigentümers liegt vor.</dd></dl></div>
+        </div>
+        <div class="alert" style="margin-top:12px"><i class="bi bi-sign-stop"></i> <b>Geozonen prüfen.</b> Eigener Ort: Vor jedem Flug selbst prüfen, ob Geozonen gelten. TSV RC prüft Geozonen nicht. <span class="ibtn out" style="margin-left:6px"><i class="bi bi-box-arrow-up-right"></i> In dipul öffnen</span></div>
+        <div class="card"><div class="hrow"><h3>Letzte Flüge hier</h3><span class="ibtn out"><i class="bi bi-cloud-sun"></i> Drohnenwetter hier</span></div>
+          <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Flugart</th><th>Dauer</th></tr><tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Foto/Video</td><td>24 min</td></tr><tr><td>18.10.2026</td><td>DJI Neo 2</td><td>Training</td><td>12 min</td></tr><tr><td>27.09.2026</td><td>FPV Quad 5″</td><td>Training</td><td>8 min</td></tr></table></div>
+        <span class="assume">Annahme: Eigene Orte sieht nur der Besitzer. Ändern oder Löschen wirkt nur auf künftige Flüge; erfasste Flüge behalten Ortsname und Koordinaten.</span>
+      </div>
+      <div>
+        <div class="card"><div class="hrow"><h3><i class="bi bi-geo-alt-fill" style="color:var(--g)"></i> Vereinsgelände</h3><span class="badge b-g">Vereinsort</span></div>
+          <div style="margin-bottom:6px"><span class="badge b-air">Luftsport</span> <span class="badge b-g">Vereinsgelände</span> <span class="badge b-g">flugbuchpflichtig</span></div>
+          <dl class="kv2"><dt>Koordinaten</dt><dd>49.4127° N, 11.2034° E</dd><dt>Radius</dt><dd>150 m</dd><dt>Gemeinde</dt><dd>Röthenbach</dd><dt>Gepflegt von</dt><dd>Admin</dd></dl>
+          <div class="note" style="text-align:left"><i class="bi bi-lock"></i> Vereinsorte pflegt der Admin; Mitglieder sehen sie nur.</div>
+          <div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-gear"></i> Als Admin bearbeiten</span> <small class="mut">nur für Admins</small></div>
+          <span class="assume">Annahme: Luftraum und Geozonen des Vereinsgeländes hat der Verein geprüft; welche Orte Vereinsgelände bzw. flugbuchpflichtig sind, ist offen (13.2).</span></div>
+        <div class="card"><h3>Sporthalle <span class="badge b-all">Halle</span></h3><small class="mut">Hallenregeln des Vereins, kein Drohnenwetter, keine Geozonen-Prüfung.</small><br><span class="assume">Annahme: Rechtslage in Hallen mit dem Verein abstimmen.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 12 HILFE-ARTIKEL ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">12</span><h2>Hilfe-Artikel (Offline &amp; Synchronisierung, Ausleihe &amp; Übergabe, Datenschutz)</h2></div>
+  <p class="ddesc">Alle Anleitungen nutzen dieselbe Artikelseite, Inhalte pflegt der Admin. Links die Themenliste, rechts der Artikel „Offline &amp; Synchronisierung“ mit Sprung in den Synchronisierungsstatus. Die Artikel „Ausleihe &amp; Übergabe“ (Schritte, Sprung in die Ausleihe) und „Datenschutz“ (wer sieht was, Freigaben, Datenexport, Austritt) sind gleich aufgebaut.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/hilfe/offline</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:260px 1fr">
+      <div class="card"><h3>Anleitungen</h3><table class="dt"><tr><td>Erste Schritte</td></tr><tr><td>App installieren</td></tr><tr><td>Flug erfassen</td></tr><tr class="me"><td><b>Offline &amp; Synchronisierung</b></td></tr><tr><td>Ausleihe &amp; Übergabe</td></tr><tr><td>Datenschutz</td></tr></table>
+        <div style="margin-top:10px"><span class="ibtn out"><i class="bi bi-envelope"></i> Frage an die Abteilungsleitung</span></div></div>
+      <div class="card">
+        <div class="hrow"><h3>Offline &amp; Synchronisierung</h3><span class="ibtn"><i class="bi bi-arrow-repeat"></i> Synchronisierungsstatus öffnen</span></div>
+        <p style="font-size:13px;margin:0 0 8px">TSV RC funktioniert am Platz auch ohne Netz. Was du offline erfasst, bleibt zuerst auf deinem Gerät und wird automatisch übertragen, sobald wieder Netz da ist.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px">
+          <div><b>Geht ohne Netz</b><ul style="margin:4px 0;padding-left:18px"><li>Flüge erfassen, mit Checkliste und GPS-Ortserkennung</li><li>Vorfälle melden (Fotos werden nachgeladen)</li><li>Eigene Modelle, Orte, Checklisten, Nachweise ansehen</li></ul></div>
+          <div><b>Braucht Netz</b><ul style="margin:4px 0;padding-left:18px"><li>Ausleihe beantragen und genehmigen</li><li>Kalender, Zusagen, Schulungsanmeldung</li><li>DJI-Import, Export, Datenarchiv</li><li>Leitung und Admin</li></ul></div>
+        </div>
+        <p style="font-size:13px;margin:8px 0"><b>Wenn etwas kollidiert:</b> Hat jemand denselben Eintrag inzwischen geändert, überschreibt TSV RC nichts. Du siehst beide Stände und entscheidest. <b>Anmeldung:</b> bleibt 30 Tage gültig; läuft sie offline ab, bleiben wartende Einträge erhalten.</p>
+        <span class="assume">Annahme: Kalender und Zusagen nur online; beim Abmelden mit wartenden Einträgen warnt TSV RC.</span>
+        <div class="note" style="text-align:left">Zuletzt geändert vom Admin am 02.11.2026</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 13 KONTAKT ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">13</span><h2>Frage an die Abteilungsleitung (Kontaktformular)</h2></div>
+  <p class="ddesc">Aus Hilfe &amp; FAQ („Frage nicht dabei?“). Thema per Auswahldialog, Nachricht ist Pflicht; „Senden“ wird erst aktiv, wenn beides gefüllt ist. Die Antwort kommt per E-Mail.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/hilfe/kontakt</span></div>
+  <div class="app" style="height:500px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1.4fr 1fr">
+      <div class="card">
+        <h3>Frage an die Abteilungsleitung</h3>
+        <div class="two"><div><label>Thema <span class="req">*</span></label><div class="inp">Flugbuch &amp; Regeln <i class="bi bi-chevron-down"></i></div></div><div><label>Bereich <span class="opt">optional</span></label><div class="chips" style="margin:0"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="chip">beide</span></div></div></div>
+        <label>Nachricht <span class="req">*</span></label><div class="inp" style="min-height:110px;align-items:flex-start">Darf ich am Wolfgangsberg mit der Mini 4 Pro fliegen, oder brauche ich dafür eine Erlaubnis?</div>
+        <div class="hint" style="text-align:right">94 / 1000 Zeichen</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span style="font-size:13px"><span class="tg on"></span> Kopie an mich per E-Mail</span><span class="ibtn"><i class="bi bi-send"></i> Senden</span></div>
+      </div>
+      <div>
+        <div class="card" style="font-size:13px"><h3>Was passiert dann?</h3>Die Nachricht geht an die Abteilungsleitung. Die Antwort kommt per E-Mail an <b>markus@…</b>.</div>
+        <div class="card"><h3>Themen (Auswahldialog)</h3><table class="dt"><tr><td>Mitgliedschaft &amp; Konto</td></tr><tr><td>Flugbuch &amp; Regeln</td></tr><tr><td>Ausleihe &amp; Vereinsmodelle</td></tr><tr><td>Termine &amp; Schulungen</td></tr><tr><td>Vereinsmeisterschaft</td></tr><tr><td>Fehler in der App <small class="mut">(auch an Admin)</small></td></tr><tr><td>Sonstiges</td></tr></table></div>
+        <span class="assume">Annahme: Versand per E-Mail an alle mit Rolle Abteilungsleitung; kein Chat und keine Ablage in der App.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 14 ARCHIV ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">14</span><h2>Meisterschaftsarchiv Saison 2025 und Lauf-Ergebnis</h2></div>
+  <p class="ddesc">Abgeschlossene Saisons sind nur lesbar. Reiter je Disziplin (FPV-Race erst ab 2026), Endstand mit Streichergebnis, rechts die Läufe; ein Klick auf einen Lauf öffnet dessen Ergebnis (gleicher Bildschirm auch für vergangene Läufe der laufenden Saison). Kommende Läufe der laufenden Saison öffnen das Event im Kalender.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/meisterschaft/2025/offroad</span></div>
+  <div class="app" style="height:560px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 car"><a>Modelle</a><a>Ausleihe</a><a class="on">Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain">
+      <div>
+        <div class="hrow"><h3>Vereinsmeisterschaft 2025 <span class="badge b-all">Archiv</span></h3><span><span class="ibtn out"><i class="bi bi-file-earmark-pdf"></i> Endstand als PDF</span> <span class="ibtn out">Saison 2026</span></span></div>
+        <div class="tabs car"><div class="on">Offroad</div><div>Crawler</div><div>Glattbahn</div></div>
+        <div class="card">
+          <div class="hrow"><span style="font-size:13px"><i class="bi bi-trophy-fill" style="color:#c99a06"></i> Vereinsmeister Offroad 2025: <b>Jonas B.</b> · 95 Punkte · 3 Siege</span></div>
+          <table class="dt st"><tr><th>Pl.</th><th class="n">Fahrer</th><th>L1<br>27.04.</th><th>L2<br>25.05.</th><th>L3<br>22.06.</th><th>L4<br>21.09.</th><th>L5<br>12.10.</th><th>Punkte</th></tr>
+            <tr><td>1.</td><td class="n"><b>Jonas B.</b></td><td>20</td><td>25</td><td class="x">16</td><td>25</td><td>25</td><td class="s">95</td></tr>
+            <tr><td>2.</td><td class="n"><b>Max R.</b></td><td>25</td><td>20</td><td>25</td><td class="x">16</td><td>20</td><td class="s">90</td></tr>
+            <tr class="me"><td>3.</td><td class="n"><b>Markus B.</b></td><td class="x">16</td><td>16</td><td>20</td><td>20</td><td>16</td><td class="s">72</td></tr>
+            <tr><td>4.</td><td class="n"><b>Lena K.</b></td><td class="x">13</td><td>13</td><td>13</td><td>13</td><td>13</td><td class="s">52</td></tr>
+            <tr><td>5.</td><td class="n"><b>Felix W.</b></td><td>11</td><td class="x">–</td><td>11</td><td>11</td><td>11</td><td class="s">44</td></tr>
+            <tr><td>6.</td><td class="n"><i>ehem. Mitglied</i></td><td>10</td><td>11</td><td class="x">–</td><td>10</td><td>–</td><td class="s">31</td></tr>
+          </table>
+        </div>
+        <span class="assume">Annahme: Ausgetretene Mitglieder erscheinen anonymisiert als „ehemaliges Mitglied“; Archiv nur lesbar.</span>
+      </div>
+      <div>
+        <div class="card"><h3>Läufe Offroad 2025</h3><table class="dt"><tr><td>L1 Mo 27.04.</td><td>Max R.</td></tr><tr class="me"><td><b>L2 Mo 25.05.</b></td><td>Jonas B.</td></tr><tr><td>L3 Mo 22.06.</td><td>Max R.</td></tr><tr><td>L4 Mo 21.09.</td><td>Jonas B.</td></tr><tr><td>L5 Mo 12.10.</td><td>Jonas B.</td></tr></table></div>
+        <div class="card"><div class="hrow"><h3>Ergebnis Lauf 2 · So 25.05.2025</h3><span class="badge b-g"><i class="bi bi-lock"></i> endgültig</span></div>
+          <table class="dt"><tr><th>Pl.</th><th>Fahrer</th><th>Punkte</th></tr><tr><td>1.</td><td>Jonas B.</td><td><b>25</b></td></tr><tr><td>2.</td><td>Max R.</td><td><b>20</b></td></tr><tr class="me"><td>3.</td><td>Markus B.</td><td><b>16</b></td></tr><tr><td>4.</td><td>Lena K.</td><td><b>13</b></td></tr><tr><td>5.</td><td>ehem. Mitglied</td><td><b>11</b></td></tr><tr><td>–</td><td>Felix W.</td><td class="mut">nicht angetreten</td></tr></table>
+          <small class="mut">Sand-Rennstrecke · Rennleitung Jonas B.</small><br><span class="assume">Annahme: ältere Läufe nur mit Platz und Punkten, Rohwerte nur wenn erfasst.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>
