@@ -860,6 +860,10 @@
     </div>
     <h3>Kalender</h3>
     <div class="card pad" style="font-size:13px"><i class="bi bi-calendar-plus"></i> Persönlicher Kalender-Link (ICS)<br><small class="mut">Termine im eigenen Kalender, vorgefiltert nach deinen Bereichen</small><div style="margin-top:6px"><span class="chg" id="ics-copy">Link kopieren</span> · <span class="chg" id="ics-new">neu erzeugen</span></div></div>
+    <h3>Hilfe</h3>
+    <div class="card">
+      <div class="row" id="pf-nx-show"><span><i class="bi bi-list-check"></i> Erste Schritte wieder anzeigen<br><small id="pf-nx-sub">Checkliste „Als Nächstes“ auf der Startseite</small></span><i class="bi bi-arrow-counterclockwise mut"></i></div>
+    </div>
     <h3>Datenschutz</h3>
     <div class="card">
       <div class="row" data-go="wx-daten"><span><i class="bi bi-download"></i> Meine Daten herunterladen</span><i class="bi bi-chevron-right mut"></i></div>
@@ -2237,7 +2241,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Modell bearbeiten ---------- */
   let edMd = null;
-  const WIND_STD = '20'; // Standard vom Admin (Ampel Drohnenwetter: grün bis 20 km/h)
+  const WIND_STD = '30'; // Standard vom Admin (Böen, Ampel Drohnenwetter: grün bis 30 km/h)
   function renderEdit(){
     edMd = curMd; const m = MD[edMd];
     byId('md-e-t2').textContent = m.name;
@@ -6136,7 +6140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="row"><span class="li"><span class="lt-av">MB</span><span><b>Markus B.</b> <span class="badge b-w">41 Tage</span><br><small>Fernpilotenzeugnis A2 · 25.12.2026</small></span></span><span class="chg lt-rem" data-who="Markus B.">Erinnern</span></div>
         <div class="row"><span class="li"><span class="lt-av">MR</span><span><b>Max R.</b> <span class="badge b-w">57 Tage</span><br><small>Erste-Hilfe-Kurs · 10.01.2027</small></span></span><span class="chg lt-rem" data-who="Max R.">Erinnern</span></div>
       </div>
-      <div class="note" style="text-align:left">„fehlt“ heißt: Das Mitglied besitzt oder leiht Luftfahrzeuge oder erfasst Flüge, und der laut Regelwerk dafür nötige Nachweis ist nicht hinterlegt. Wer nur RC Cars fährt, bekommt keine Warnung.</div>
+      <div class="note" style="text-align:left">„fehlt“ heißt: Das Mitglied besitzt Luftfahrzeuge, hat eine genehmigte Ausleihe eines Luftfahrzeugs oder erfasst Flüge, und der laut Regelwerk dafür nötige Nachweis ist nicht hinterlegt. Ein bloßer Antrag zählt noch nicht. Wer nur RC Cars fährt, bekommt keine Warnung.</div>
       <h3>Schulung planen</h3>
       <div class="card">
         <div class="row" data-go="lt-schulung" data-ltthema="Vorbereitung A1/A3"><span><b>A1/A3</b> · 2 Personen<br><small>Lena K., Sophie M.</small></span><i class="bi bi-calendar-plus" style="color:var(--g)"></i></div>
@@ -6829,9 +6833,9 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#lt-md-modlbl').textContent = 'Eigene Modelle (' + p.mods.length + ')';
     $('#lt-md-mod').innerHTML = p.mods.length ? p.mods.map(m => '<div class="row"><span class="li"><span class="ico ' + m[0] + '"><i class="bi ' + (m[0] === 'air' ? 'bi-airplane' : 'bi-car-front') + '"></i></span><span>' + esc(m[1]) + '<br><small>' + esc(modTxt(m[2])) + '</small></span></span><span class="badge b-' + m[0] + '">' + AREA_L[m[0]] + '</span></div>').join('') : '<div class="pk-empty" style="padding:10px 0">Noch keine Modelle angelegt.</div>';
     $('#lt-md-nw').innerHTML = p.nw.length ? p.nw.map(n => '<div class="row"><span class="li"><span class="ico neu"><i class="bi ' + n[0] + '"></i></span><span><b>' + esc(n[1]) + '</b><br><small>' + esc(n[2]) + '</small></span></span><span class="badge ' + n[3] + '">' + esc(n[4]) + '</span></div>').join('') : '<div class="pk-empty" style="padding:10px 0">' + esc(p.nwEmpty || 'Keine Nachweise hinterlegt.') + '</div>';
-    // „fehlt“ nur, wenn Luftfahrzeuge besessen/ausgeliehen oder Flüge erfasst werden
+    // „fehlt“ nur, wenn Luftfahrzeuge besessen, genehmigt ausgeliehen oder Flüge erfasst werden
     const nwAir = p.mods.filter(m => m[0] === 'air').map(m => m[1]), nwFl = p.fl && p.fl.n ? p.fl.n : 0, nwOut = /Avata|Tinywhoop|Drohne|FPV/.test(p.leave.out || '') ? p.leave.out : '';
-    const nwWhy = [nwAir.length ? 'besitzt ' + nwAir.join(', ') : '', nwOut ? 'leiht ' + nwOut : '', nwFl ? 'hat ' + nwFl + ' Flüge erfasst' : ''].filter(Boolean);
+    const nwWhy = [nwAir.length ? 'besitzt ' + nwAir.join(', ') : '', nwOut ? 'hat ' + nwOut + ' genehmigt ausgeliehen' : '', nwFl ? 'hat ' + nwFl + ' Flüge erfasst' : ''].filter(Boolean);
     const nwJoin = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' und ' + a[a.length - 1] : a.join('');
     if (p.nw.some(n => n[4] === 'fehlt')) $('#lt-md-nw').innerHTML += '<div class="pk-empty" style="padding:8px 0;text-align:left"><i class="bi bi-info-circle"></i> „fehlt“: ' + esc(first(p)) + ' ' + esc(nwJoin(nwWhy)) + ' – dafür verlangt das Regelwerk den Nachweis.</div>';
     $('#lt-md-nwnote').textContent = 'Die Leitung sieht nur Typ, Nummer und Gültigkeit. Dateien sehen ' + fn + (minor ? ', die Erziehungsberechtigten' : '') + ' und Personen mit Freigabe.';
@@ -12371,7 +12375,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* ---------- Modelle (Klasse, Gewicht, eigene Wind-Grenze) ---------- */
-  const WIND_STD = 20;
+  const WIND_STD = 30; // Admin-Standard für Böen (wie Drohnenwetter)
   const MDL = {
     'DJI Neo 2': { cls:'C0', g:151, wind:15, md:'neo2', sub:'C0 · eigenes' },
     'Mini 4 Pro': { cls:'C0', g:249, md:'mini4', sub:'C0 · eigenes' },
@@ -13408,7 +13412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const f = FL[flCur] || FL.base, dl = flCanDel(f) ? flDelUntil(f) : null;
     $('#del-kv').innerHTML = '<dt>Flug</dt><dd>'+esc(f.date === 'heute' ? 'heute' : f.date)+' · '+esc(f.von)+' – '+esc(f.bis)+'</dd><dt>Modell</dt><dd>'+esc(f.model)+'</dd><dt>Ort</dt><dd>'+esc(f.ort)+'</dd>'+(f.owner ? '<dt>Pilot</dt><dd>'+esc(f.pilot)+'</dd><dt>Besitzer</dt><dd>'+(f.owner === ME ? 'du (Markus B.)' : esc(f.owner))+'</dd>' : '');
     $('#del-who').style.display = f.owner ? '' : 'none';
-    $('#del-who').textContent = f.owner ? (f.owner === ME ? 'Du löschst als Besitzer des Modells. ' : 'Der Flug ist mit dem Modell von '+f.owner+' geflogen. ')+'Bei Flügen mit fremdem Modell dürfen Pilot und Besitzer innerhalb der Frist löschen.' : '';
+    $('#del-who').textContent = f.owner ? (f.owner === ME ? 'Du löschst als Besitzer des Modells. ' : 'Der Flug ist mit dem Modell von '+f.owner+' geflogen. ')+'Bei Flügen mit fremdem Modell dürfen Pilot und Besitzer innerhalb der Frist löschen.'+(f.pilot !== ME ? ' '+f.pilot+' wird über die Löschung benachrichtigt.' : ' '+f.owner+' wird über die Löschung benachrichtigt.') : '';
     $('#del-until').textContent = dl || '–';
     $('#btn-del').classList.toggle('dis', !dl);
     $('#del-hint').textContent = dl ? '' : 'Die Löschfrist ist abgelaufen. Bitte stattdessen als ungültig markieren.';
@@ -13422,7 +13426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const c = $('#st-count'); c.textContent = +c.textContent - 1;
       $('#m-sum').textContent = $('#flightlist').children.length + ' Flüge';
       show('l-flugbuch','reset'); toast('Flug gelöscht.');
-    } else { back(); back(); toast('Flug gelöscht. '+f.pilot+' sieht ihn nicht mehr in seinem Flugbuch.'); }
+    } else { back(); back(); toast('Flug gelöscht. '+f.pilot+' wurde benachrichtigt und sieht ihn nicht mehr im Flugbuch.'); }
   });
 
   // ---------- Meisterschaft aus dem ⋯-Menü Luftsport: Disziplin FPV-Race vorwählen ----------
@@ -13455,6 +13459,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#st-nx-list').innerHTML = NX_ITEMS.filter(i => !N.done.has(i[0])).map(i => '<div class="row" data-go="'+i[2]+'" data-nx="'+i[0]+'"><span><i class="bi bi-circle"></i>'+i[1]+'</span><i class="bi bi-chevron-right mut"></i></div>').join('');
   }
   window.__nx.sub(nxRender);
+  // Profil: Checkliste wieder einblenden (erledigte Punkte bleiben erledigt)
+  function nxProf(){ const N = window.__nx, n = N.count(), all = NX_ITEMS.length; $('#pf-nx-sub').textContent = n === all ? 'alle ' + all + ' Schritte erledigt' : (N.hidden ? 'ausgeblendet · ' : 'auf der Startseite · ') + n + ' von ' + all + ' erledigt'; }
+  window.__nx.sub(nxProf); nxProf();
+  $('#pf-nx-show').addEventListener('click', () => {
+    const N = window.__nx;
+    if (N.count() === NX_ITEMS.length) { toast('Alle ersten Schritte sind erledigt – es gibt nichts mehr anzuzeigen.'); return; }
+    if (!N.hidden) { toast('Die Checkliste steht schon auf der Startseite.'); return; }
+    N.hide(false); toast('Die Checkliste „Als Nächstes“ steht wieder auf der Startseite.');
+  });
   $('#st-nx-list').addEventListener('click', e => { const r = e.target.closest('[data-nx]'); if (r) window.__nx.mark(r.dataset.nx); });
   $('#st-nx-hide').addEventListener('click', () => { window.__nx.hide(); toast('Checkliste ausgeblendet.'); });
   nxRender();
