@@ -972,7 +972,7 @@
   <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
   <div class="top"><i class="bi bi-arrow-left" style="font-size:20px" data-back></i><div><div class="t1">Tim S. (14)</div><div class="t2">Erziehungsberechtigung · nur lesen</div></div></div>
   <div class="body">
-    <div class="card pad" style="font-size:13px;background:var(--airbg);border-color:#c9dcf0"><i class="bi bi-eye"></i> Du siehst alle Daten deines Kindes, kannst aber nichts ändern. Die Verknüpfung endet automatisch mit dem 18. Geburtstag.</div>
+    <div class="card pad" style="font-size:13px;background:var(--airbg);border-color:#c9dcf0"><i class="bi bi-eye"></i> Du siehst alle Daten deines Kindes, kannst aber nichts ändern. Die Verknüpfung endet automatisch mit dem 18. Geburtstag.<br><small class="mut">Einwilligung: online bestätigt am 02.09.2026 von Sandra S. (Textversion 1)</small></div>
     <div class="tabs"><div class="on" data-pane="k-fl">Flüge</div><div data-pane="k-nw">Nachweise</div><div data-pane="k-md">Modelle</div><div data-pane="k-ev">Termine</div></div>
     <div class="pane on" id="k-fl"><div class="card">
       <div class="row"><span><b>12.11.</b> Tinywhoop-Set <span class="badge b-g">Verein</span><br><small>Sporthalle · Schulung · Ausbilder Max R.</small></span><span>8 min</span></div>
@@ -980,7 +980,6 @@
     </div></div>
     <div class="pane" id="k-nw"><div class="card">
       <div class="row"><span><b>Kompetenznachweis A1/A3</b><br><small>gültig bis 10/2031</small></span><span class="badge b-g">gültig</span></div>
-      <div class="row"><span><b>Einwilligung Erziehungsberechtigte</b><br><small>erteilt am 01.09.2026</small></span><span class="badge b-g">ok</span></div>
     </div></div>
     <div class="pane" id="k-md"><div class="card"><div class="row"><span><b>Axial SCX24</b><br><small>Crawler · RC Cars</small></span><i class="bi bi-chevron-right mut"></i></div></div></div>
     <div class="pane" id="k-ev"><div class="card"><div class="row" data-go="ev-eltern" data-ev="hallen19"><span><b>Do 19.11.</b> Hallenfliegen<br><small>zugesagt von Tim · antippen zum Zurücknehmen</small></span><span class="badge b-air">Luftsport</span></div></div></div>
@@ -1198,7 +1197,10 @@
     <div class="hint">Wird dein Anmeldename. Auch Minderjährige brauchen eine eigene Adresse.</div>
     <label>Geburtsdatum <span class="req">*</span></label><input class="inp an-rg-req" id="an-rg-geb" type="date">
     <div class="an-minor w" id="an-rg-minor" style="display:none"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten mit deinem Konto. Nach der Freischaltung kannst du die App sofort nutzen – auch bevor ein Erziehungsberechtigter verknüpft ist; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
-      <label style="margin-top:8px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><input class="inp" type="email" autocomplete="off"></div>
+      <label style="margin-top:8px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><input class="inp" id="an-rg-ebmail" type="email" autocomplete="off"></div>
+    <label>Nachricht an die Abteilungsleitung <span class="opt">optional</span></label>
+    <textarea class="inp" id="an-rg-msg" rows="3" maxlength="500" placeholder="z. B. woher du uns kennst oder was du fliegen bzw. fahren möchtest"></textarea>
+    <div class="hint" id="an-rg-msgcnt" style="text-align:right;margin-top:-4px">0 / 500 Zeichen</div>
     <div class="card pad" style="font-size:12.5px;margin-top:10px"><i class="bi bi-grid"></i> <b>Alle Bereiche stehen dir offen</b> (Luftsport, RC Cars). Welche dich besonders interessieren („Meine Bereiche“ für Startseite, Vorfilter und Benachrichtigungen), stellst du später im Profil ein.</div>
     <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
     <div class="chips" data-single id="an-rg-how"><span class="chip on" data-v="pk"><i class="bi bi-fingerprint"></i> Passkey (empfohlen)</span><span class="chip" data-v="pw">Passwort</span></div>
@@ -1235,6 +1237,7 @@
       <div class="an-step" id="an-ro-minor" style="display:none"><span class="n">5</span><span><b>Erziehungsberechtigte verknüpfen</b><br><small class="mut">macht die Abteilungsleitung, weil du unter 18 bist; bis zur Zustimmung warten z. B. Ausleihen</small></span></div>
     </div>
     <div class="note">Bis zur Freischaltung ist dein Konto gesperrt. Du bekommst eine Mail, sobald es aktiv ist; dann meldest du dich mit deinem <span id="an-ro-acc2">Passkey</span> an.</div>
+    <div class="note" id="an-ro-7">Bestätigst du deine E-Mail-Adresse nicht innerhalb von 7 Tagen, wird der Antrag automatisch gelöscht. Lehnt die Abteilungsleitung ab, bekommst du eine kurze E-Mail und deine Angaben werden gelöscht.</div>
     <button class="btn out" id="an-ro-try" style="margin-top:14px">Anmelden versuchen <small>(Demo vor der Freischaltung)</small></button>
     <button class="btn out" id="an-ro-go" style="margin-top:8px">Zur Anmeldung</button>
   </div>
@@ -1677,6 +1680,14 @@ document.addEventListener('DOMContentLoaded', () => {
   ['an-rg-vn','an-rg-nn','an-rg-mail','an-rg-geb','an-rg-pw'].forEach(id => $('#'+id).addEventListener('input', rgCheck));
   $('#an-rg-geb').addEventListener('change', rgCheck);
   $('#an-rg-dsgvo').addEventListener('change', rgCheck);
+  // Nachricht an die Abteilungsleitung: höchstens 500 Zeichen, Zähler
+  function rgMsgCount(){
+    const el = $('#an-rg-msg'); if (el.value.length > 500) el.value = el.value.slice(0, 500);
+    const n = el.value.length, c = $('#an-rg-msgcnt');
+    c.textContent = n + ' / 500 Zeichen' + (n >= 500 ? ' – Höchstlänge erreicht' : n >= 450 ? ' – noch ' + (500 - n) : '');
+    c.style.color = n >= 450 ? 'var(--warn)' : '';
+  }
+  $('#an-rg-msg').addEventListener('input', rgMsgCount);
   function rgDone(){
     const pk = rgHow() === 'pk';
     osClose('an-rg-os');
@@ -5815,6 +5826,11 @@ document.addEventListener('DOMContentLoaded', () => {
   .lt-msg.lt-me{background:var(--gl);border-color:#b9dcbf;margin-left:24px}
   .lt-msg small{display:block;color:var(--mut);margin-bottom:2px}
   .lt-two3{display:grid;grid-template-columns:1.3fr 1fr;gap:8px}
+  .lt-rad{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #eef0ee;font-size:13.5px;cursor:pointer}
+  .lt-rad:last-child{border-bottom:0}
+  .lt-rad>i{font-size:18px;color:#bbb;margin-top:-1px}
+  .lt-rad.on>i{color:var(--g)}
+  .lt-rad small{display:block}
 </style>
 
 <!-- ---------- Leitungs-Übersicht ---------- -->
@@ -5901,7 +5917,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="top"><i class="bi bi-arrow-left" style="font-size:20px" data-back></i><div><div class="t1">Registrierung</div><div class="t2">wartet auf Freischaltung</div></div></div>
   <div class="body">
     <div class="hero"><div class="lt-av lt-min lt-big">PW</div><div><b>Paul W. (16)</b><small class="mut">registriert am 12.11.2026</small></div></div>
-    <div class="card pad"><dl class="kv2"><dt>E-Mail</dt><dd>paul.w@… <span class="badge b-g">bestätigt</span></dd><dt>Geburtsdatum</dt><dd>02.03.2010</dd><dt>Vorliebe</dt><dd>Luftsport <small class="mut">(„meine Bereiche“, änderbar im Profil)</small></dd><dt>Nachricht</dt><dd>„War beim Schnupperfliegen, Mutter Karin W.“</dd></dl></div>
+    <div class="card pad"><dl class="kv2"><dt>E-Mail</dt><dd>paul.w@… <span class="badge b-g">bestätigt</span></dd><dt>Geburtsdatum</dt><dd>02.03.2010</dd><dt>Vorliebe</dt><dd>Luftsport <small class="mut">(„meine Bereiche“, änderbar im Profil)</small></dd><dt>E-Mail Erziehungsberechtigte</dt><dd id="lt-rg-ebmail">karin.w@… <small class="mut">(freiwillig angegeben)</small></dd><dt>Nachricht an die Abteilungsleitung</dt><dd id="lt-rg-msg">„War beim Schnupperfliegen, meine Mutter heißt Karin W.“</dd></dl></div>
     <h3>Voraussetzungen</h3>
     <div class="card">
       <div class="row"><span><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> E-Mail bestätigt</span></div>
@@ -5913,6 +5929,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <button class="btn" id="lt-rg-btn">Freischalten</button>
     <div class="note" id="lt-rg-hint" style="text-align:left">Paul ist minderjährig. Nach der Freischaltung kann er die App sofort nutzen; was eine Zustimmung braucht (z. B. Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist.</div>
     <button class="btn out" id="lt-rg-no" style="margin-top:10px">Ablehnen</button>
+    <div class="note" style="text-align:left">Ablehnen schickt Paul eine neutrale E-Mail und löscht den Antrag. Anträge, deren E-Mail-Adresse nicht innerhalb von 7 Tagen bestätigt wird, löscht das System automatisch.</div>
   </div>
 </section>
 
@@ -5962,11 +5979,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="card">
         <div class="row"><span>Mitglied<br><small>Grundrolle der Abteilung</small></span><i class="bi bi-lock mut"></i></div>
         <div class="row"><span>Ausbilder<br><small>sieht Flüge und Nachweise seiner Schulungsteilnehmer</small></span><span class="tg" data-ltrole="Ausbilder" data-rk="ausbilder"></span></div>
-        <div class="row"><span>Abteilungsleitung<br><small>verwaltet Mitglieder, Gerät, Ausleihen</small></span><span class="tg" data-ltrole="Abteilungsleitung" data-rk="leitung"></span></div>
+        <div class="row" id="lt-md-leitrow"><span>Abteilungsleitung<br><small>verwaltet Mitglieder, Gerät, Ausleihen · vergibt nur ein Admin</small></span><span id="lt-md-leit"><i class="bi bi-lock mut"></i></span></div>
         <div class="row"><span>Admin<br><small>global, vergibt nur ein Admin</small></span><span id="lt-md-admin"><i class="bi bi-lock mut"></i></span></div>
         <div class="row" data-go="lt-aufsliste"><span>Aufsichts-Liste<br><small id="lt-md-aufs">steht nicht auf der Liste · keine Rolle</small></span><span class="chg">pflegen</span></div>
       </div>
-      <div class="note" style="text-align:left;margin-top:-4px;margin-bottom:8px">Rollenänderungen werden im Änderungsprotokoll festgehalten.</div>
+      <div class="note" style="text-align:left;margin-top:-4px;margin-bottom:8px">Die Abteilungsleitung vergibt und entzieht nur die Rolle Ausbilder. Abteilungsleitung und Admin vergibt oder entzieht nur ein Admin. Rollenänderungen werden im Änderungsprotokoll festgehalten.</div>
       <label>Aktuell</label>
       <div class="card" id="lt-md-cur"></div>
       <label id="lt-md-modlbl">Eigene Modelle</label>
@@ -6056,18 +6073,19 @@ document.addEventListener('DOMContentLoaded', () => {
     <label>Person <span class="req">*</span></label>
     <div class="inp" data-pick="ltEb"><span id="lt-eb-person" class="mut">Konto wählen oder neu anlegen</span><i class="bi bi-chevron-down"></i></div>
     <div id="lt-eb-newbox" style="display:none">
-      <div class="two"><div><label>Name <span class="req">*</span></label><input class="inp" id="lt-eb-nname" placeholder="Vor- und Nachname"></div></div>
+      <div class="two"><div><label>Vorname <span class="req">*</span></label><input class="inp" id="lt-eb-nvn"></div><div><label>Nachname <span class="req">*</span></label><input class="inp" id="lt-eb-nnn"></div></div>
       <label>E-Mail <span class="req">*</span></label><input class="inp" id="lt-eb-nmail" type="email" placeholder="name@beispiel.de">
       <div class="hint">Bekommt eine Einladung für ein eigenes Konto (keine Mitgliedschaft).</div>
     </div>
     <label>Beziehung <span class="req">*</span></label>
     <div class="chips" data-single id="lt-eb-rel"><span class="chip">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
-    <label>Einwilligung erteilt am <span class="req">*</span></label>
-    <input class="inp" id="lt-eb-ew" type="date">
-    <div class="card" style="margin-top:10px">
-      <div class="ck lt-ck" id="lt-eb-ck"><i class="bi bi-square"></i><span>Unterschriebene Einwilligungserklärung liegt vor<small class="mut">wird mit Datum dokumentiert, nicht als Datei</small></span></div>
+    <label>Einwilligung <span class="req">*</span></label>
+    <div class="card" id="lt-eb-cons">
+      <div class="lt-rad on" data-c="online"><i class="bi bi-record-circle-fill"></i><span>Elternteil bestätigt online beim Annehmen (Standard)<small class="mut">Gespeichert werden Datum, Textversion und Konto. Bis zur Bestätigung ist die Verknüpfung offen.</small></span></div>
+      <div class="lt-rad" data-c="paper"><i class="bi bi-circle"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><small class="mut">Das Papier bleibt beim Verein. Die App speichert nur das Datum und wer es erfasst hat, keine Datei.</small></span></div>
     </div>
-    <span class="lt-assume">Annahme: Einwilligungstext liefert der Verein (offener Punkt); die App speichert nur Datum und wer es erfasst hat.</span>
+    <div id="lt-eb-paperbox" style="display:none"><label>Papier-Einwilligung erteilt am <span class="req">*</span></label><input class="inp" id="lt-eb-ew" type="date" max="2026-11-14"></div>
+    <span class="lt-assume">Annahme: Den Einwilligungstext liefert der Verein (offener Punkt 13.3).</span>
     <button class="btn dis" id="lt-eb-btn">Verknüpfen</button>
     <div class="hint" id="lt-eb-hint" style="text-align:center"></div>
   </div>
@@ -6080,7 +6098,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="body">
     <div class="legal"><b><i class="bi bi-slash-circle"></i> Was eine Sperre bewirkt</b>Anmelden ist nicht mehr möglich; alle Sitzungen und API-Tokens enden sofort. Flugbuch, Modelle, Nachweise und Ausleihen bleiben erhalten. Eine befristete Sperre endet automatisch, Entsperren geht jederzeit.</div>
     <label>Grund <span class="req">*</span></label>
-    <div class="chips" data-single id="lt-sp-why"><span class="chip">Verstoß gegen Platzregeln</span><span class="chip">Beitrag offen</span><span class="chip">Verdacht auf Missbrauch</span><span class="chip">Gerät verloren</span><span class="chip">Sonstiges</span></div>
+    <div class="chips" data-single id="lt-sp-why"><span class="chip">Verdacht auf Missbrauch</span><span class="chip">Verstoß gegen Platzregeln</span><span class="chip">Beitrag offen</span><span class="chip">Gerät verloren</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Sonstiges</span></div>
     <label>Dauer <span class="req">*</span></label>
     <div class="chips" data-single id="lt-sp-dur"><span class="chip on" data-d="0">unbefristet</span><span class="chip" data-d="7">1 Woche</span><span class="chip" data-d="30">1 Monat</span><span class="chip" data-d="x">bis Datum …</span></div>
     <div id="lt-sp-datebox" style="display:none"><label>Gesperrt bis <span class="req">*</span></label><input class="inp" type="date" id="lt-sp-date" min="2026-11-15"></div>
@@ -6088,8 +6106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card pad lt-sm"><i class="bi bi-envelope"></i> Die Person erhält eine E-Mail mit Grund, Dauer und deiner Nachricht.<span id="lt-sp-minor" style="display:none"> Minderjährig: Die Erziehungsberechtigten erhalten sie ebenfalls.</span></div>
     <button class="btn dis lt-danger" id="lt-sp-btn">Sperren</button>
     <div class="hint" id="lt-sp-hint" style="text-align:center"></div>
-    <div class="note">Die Abteilungsleitung kann Mitglieder sperren, aber keine Admins. Jede Sperre wird protokolliert.</div>
-    <span class="lt-assume">Annahme: Eine Leitungsperson kann sich nicht selbst sperren.</span>
+    <div class="note">Die Abteilungsleitung sperrt nur gewöhnliche Mitglieder – keine Admins, keine Leitungspersonen und nicht sich selbst; das macht nur ein Admin. Jede Sperre wird protokolliert.</div>
   </div>
 </section>
 
@@ -6136,16 +6153,24 @@ document.addEventListener('DOMContentLoaded', () => {
       <label>Person <span class="req">*</span></label>
       <div class="inp" data-pick="ltEiEb"><span id="lt-ei-eb" class="mut">Konto wählen oder neu anlegen</span><i class="bi bi-chevron-down"></i></div>
       <div id="lt-ei-ebnew" style="display:none">
-        <label>Name <span class="req">*</span></label><input class="inp" id="lt-ei-ebname" placeholder="Vor- und Nachname">
+        <div class="two"><div><label>Vorname <span class="req">*</span></label><input class="inp" id="lt-ei-ebvn"></div><div><label>Nachname <span class="req">*</span></label><input class="inp" id="lt-ei-ebnn"></div></div>
         <label>E-Mail <span class="req">*</span></label><input class="inp" id="lt-ei-ebmail" type="email">
       </div>
-      <label>Einwilligung erteilt am <span class="req">*</span></label><input class="inp" id="lt-ei-ew" type="date">
-      <div class="hint">Das Kinder-Konto ist sofort nutzbar. Zustimmungspflichtige Aktionen (z. B. Ausleihe) warten, bis das Eltern-Konto aktiv ist.</div>
+      <label>Beziehung <span class="req">*</span></label>
+      <div class="chips" data-single id="lt-ei-rel"><span class="chip">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
+      <label>Einwilligung <span class="req">*</span></label>
+      <div class="card" id="lt-ei-cons">
+        <div class="lt-rad on" data-c="online"><i class="bi bi-record-circle-fill"></i><span>Elternteil bestätigt online beim Annehmen (Standard)<small class="mut">Gespeichert werden Datum, Textversion und Konto.</small></span></div>
+        <div class="lt-rad" data-c="paper"><i class="bi bi-circle"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><small class="mut">Das Papier bleibt beim Verein, keine Datei in der App.</small></span></div>
+      </div>
+      <div id="lt-ei-paperbox" style="display:none"><label>Papier-Einwilligung erteilt am <span class="req">*</span></label><input class="inp" id="lt-ei-ew" type="date" max="2026-11-14"></div>
+      <div class="hint">Das Kinder-Konto ist sofort nutzbar. Zustimmungspflichtige Aktionen (z. B. Ausleihe) warten, bis die Verknüpfung wirksam ist.</div>
     </div>
     <div class="fsec">Abteilung<span class="ln"></span></div>
     <div class="card pad lt-sm"><i class="bi bi-grid"></i> Alle Mitglieder sehen alle Bereiche. „Meine Bereiche“ wählt die Person nach der Anmeldung selbst.</div>
     <label>Rollen</label>
-    <div class="chips" id="lt-ei-roles"><span class="badge b-all" style="padding:5px 10px;font-size:12px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span><span class="chip">Abteilungsleitung</span></div>
+    <div class="chips" id="lt-ei-roles"><span class="badge b-all" style="padding:5px 10px;font-size:12px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span></div>
+    <div class="hint">Abteilungsleitung und Admin vergibt nur ein Admin.</div>
     <div class="card pad lt-sm"><i class="bi bi-envelope"></i> Einladungslink per E-Mail, gültig 7 Tage, lässt sich neu senden. Die Person setzt Passwort und/oder Passkey.</div>
     <button class="btn dis" id="lt-ei-btn">Einladung senden</button>
     <div class="hint" id="lt-ei-hint" style="text-align:center"></div>
@@ -6612,6 +6637,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetCk(el) { el.classList.remove('done'); el.querySelector('i').className = 'bi bi-square'; }
   function clearChips(sel) { $$(sel + ' .chip').forEach(c => c.classList.remove('on')); }
   const chipOn = sel => { const c = $(sel + ' .chip.on'); return c ? c.textContent.trim() : ''; };
+  // ---------- Einwilligung: online beim Annehmen (Standard) oder Papier mit Datum ----------
+  const CONS_V = 'Textversion 1';
+  function consSet(box, c) {
+    $$(box + ' .lt-rad').forEach(x => { const on = x.dataset.c === c; x.classList.toggle('on', on); x.querySelector('i').className = 'bi ' + (on ? 'bi-record-circle-fill' : 'bi-circle'); });
+    $(box.replace('-cons', '-paperbox')).style.display = c === 'paper' ? '' : 'none';
+  }
+  const consMode = box => { const r = $(box + ' .lt-rad.on'); return r ? r.dataset.c : 'online'; };
+  function consBind(box, cb) { $(box).addEventListener('click', e => { const r = e.target.closest('.lt-rad'); if (!r) return; consSet(box, r.dataset.c); cb(); }); }
+  const consOpen = n => 'Einwilligung: offen – ' + n + ' bestätigt online beim Annehmen';
+  const consOnline = (d, n) => 'Einwilligung: online bestätigt am ' + d + ' von ' + n;
+  const consPaper = (d, by) => 'Papier-Einwilligung vom ' + d + ' (erfasst von ' + by + ')';
 
   const S = { me: 'Markus B.', fl: null, checked: false, ebCtx: 'tim', regEb: null, eiEbNew: false, ebNew: false, scPreset: null, vf: null, flRow: null, aufs: ['Max R.', 'Jonas B.', 'Markus B.'], mk: 'tim', mdFresh: false, pk: 'tim', fk: 'jonas1411', regRel: '' };
 
@@ -6760,7 +6796,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const M = {
     tim: { n: 'Tim S.', geb: '2012-03-18', age: 14, since: '09/2026', adult: '03/2030', created: '01.09.2026', areas: ['air', 'car'], roles: [],
       nw: [NW('Kompetenznachweis A1/A3', 'LBA · gültig bis 10/2031', 'b-g', 'gültig'), NW('Betreiber-Registrierung (e-ID)', 'nicht hinterlegt', 'b-all', '–', 'bi-person-vcard')],
-      fam: [{ n: 'Sandra S.', rel: 'Mutter', sub: 'Einwilligung am 01.09.2026 · eigenes Konto, kein Mitglied' }],
+      fam: [{ n: 'Sandra S.', rel: 'Mutter', sub: consOnline('02.09.2026', 'Sandra S.') + ' (' + CONS_V + ') · eigenes Konto, kein Mitglied' }],
       cur: [{ ic: 'air', icon: 'bi-airplane', t: 'Tinywhoop-Set <span class="badge b-g">Verein</span>', sub: 'reserviert für Hallenfliegen 19.11.', go: 'aus-item' }],
       fl: { n: 0, sub: 'Hallenflüge sind für die Leitung nicht sichtbar' },
       mods: [['air', 'Mobula 7', 'FPV · Whoop · 28 g'], ['car', 'WLtoys K989', 'Glattbahn · 1:28']],
@@ -6769,7 +6805,7 @@ document.addEventListener('DOMContentLoaded', () => {
       leave: { out: '', res: ['Reservierung Tinywhoop-Set (19.11.) wird storniert'] } },
     felix: { n: 'Felix H.', geb: '2010-08-22', age: 16, since: '04/2025', adult: '08/2028', created: '12.04.2025', areas: ['car'], roles: [],
       nw: [], nwEmpty: 'Kein Nachweis nötig: Felix besitzt und leiht keine Luftfahrzeuge und erfasst keine Flüge. Für RC Cars schreibt das Regelwerk keine Nachweise vor.',
-      fam: [{ n: 'Frank H.', rel: 'Vater', sub: 'Einwilligung am 12.04.2025 · eigenes Konto, kein Mitglied' }],
+      fam: [{ n: 'Frank H.', rel: 'Vater', sub: consPaper('12.04.2025', 'Markus B.') + ' · eigenes Konto, kein Mitglied' }],
       cur: [{ ic: 'car', icon: 'bi-geo-alt', t: 'Heute am Platz', sub: 'Sand-Rennstrecke · seit 12:10', go: 'anwesenheit' }],
       fl: null,
       mods: [['car', 'Arrma Granite Grom', 'Offroad · 1:18 · elektrisch'], ['car', 'Axial SCX24 Deadbolt', 'Crawler · 1:24']],
@@ -6850,8 +6886,9 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#lt-md-stammbtn').style.display = p.gone ? 'none' : '';
     const pend = p.fam.filter(f => f.pend);
     $('#lt-md-pend').style.display = pend.length && !p.gone ? '' : 'none';
-    if (pend.length) $('#lt-md-pend').innerHTML = '<i class="bi bi-hourglass-split"></i> <b>Eltern-Konto noch nicht aktiv.</b> ' + esc(pend.map(f => f.n).join(', ')) + ' hat die Einladung noch nicht angenommen. ' + esc(fn) + ' kann die App schon nutzen; Ausleihen und andere zustimmungspflichtige Aktionen warten, bis das Eltern-Konto aktiv ist. <span class="chg" id="lt-md-reinv">Einladung erneut senden</span>';
+    if (pend.length) $('#lt-md-pend').innerHTML = '<i class="bi bi-hourglass-split"></i> <b>Verknüpfung noch nicht wirksam.</b> ' + esc(pend.map(f => f.n).join(', ')) + ' hat die Einladung noch nicht angenommen bzw. die Einwilligung noch nicht online bestätigt. ' + esc(fn) + ' kann die App schon nutzen; Ausleihen und andere zustimmungspflichtige Aktionen warten, bis die Verknüpfung wirksam ist. <span class="chg" id="lt-md-reinv">Einladung erneut senden</span>';
     $$('#lt-mitglied [data-rk]').forEach(t => t.classList.toggle('on', p.roles.includes(t.dataset.rk)));
+    $('#lt-md-leit').innerHTML = p.roles.includes('leitung') ? '<span class="badge b-g">ja</span> <i class="bi bi-lock mut"></i>' : '<i class="bi bi-lock mut"></i>';
     $('#lt-md-admin').innerHTML = p.roles.includes('admin') ? '<span class="badge b-g">ja</span> <i class="bi bi-lock mut"></i>' : '<i class="bi bi-lock mut"></i>';
     $('#lt-md-aufs').textContent = S.aufs.includes(p.n) ? 'steht auf der Liste · darf Aufsicht übernehmen' : minor ? 'minderjährig – nicht vorgesehen' : 'steht nicht auf der Liste · keine Rolle';
     const cur = p.cur.slice();
@@ -6874,21 +6911,23 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#lt-md-noeb').style.display = minor && !p.fam.length && !p.gone ? '' : 'none';
     $('#lt-md-noebtxt').innerHTML = p.ebNew ? '<b>Noch keine Erziehungsberechtigten verknüpft.</b> ' + esc(first(p)) + ' kann die App nutzen; was eine Zustimmung braucht (z. B. Ausleihe, Zusagen mit Zustimmungspflicht), wartet auf ein verknüpftes Eltern-Konto.'
       : '<b>Keine Erziehungsberechtigten verknüpft.</b> Das Konto ist gesperrt, bis wieder jemand verknüpft ist. Die Abteilungsleitung wurde benachrichtigt.';
-    $('#lt-md-faminfo').textContent = 'Erziehungsberechtigte lesen alle Daten des Kindes. Die Verknüpfung endet automatisch am 18. Geburtstag' + (p.adult ? ' (' + p.adult + ')' : '') + '; vorher wird benachrichtigt.';
+    const remV = (KD.REM && KD.REM.v) || 30;
+    $('#lt-md-faminfo').textContent = 'Erziehungsberechtigte lesen alle Daten des Kindes. Die Verknüpfung endet automatisch am 18. Geburtstag' + (p.adult ? ' (' + p.adult + ')' : '') + '; ' + remV + ' Tage vorher erhalten ' + fn + ' und die Erziehungsberechtigten den Hinweis „Bald volljährig“ (Einstellung des Admins).';
     $('#lt-md-addeb').style.display = p.gone ? 'none' : '';
     const st = p.gone ? 'deaktiviert' : (p.lock || famLocked(p)) ? 'gesperrt' : p.state;
     $('#lt-md-kv').innerHTML = '<dt>E-Mail</dt><dd>' + esc(p.kv.mail) + ' (Anmeldename)</dd><dt>Status</dt><dd><span class="badge ' + STATE_B[st] + '">' + st + '</span>' + (famLocked(p) && !p.lock ? ' <small class="mut">bis Erziehungsberechtigte verknüpft sind</small>' : '') + '</dd><dt>' + (p.state === 'eingeladen' ? 'Eingeladen' : 'Angelegt') + '</dt><dd>' + esc(p.kv.inv) + '</dd><dt>Letzte Anmeldung</dt><dd>' + esc(p.kv.last) + '</dd><dt>Anmeldung</dt><dd>' + esc(p.kv.login) + '</dd>';
     $('#lt-md-log').dataset.ltpk = k;
-    $('#lt-md-leave').style.display = p.gone || k === 'markus' ? 'none' : '';
-    $('#lt-md-leavenote').style.display = k === 'markus' && !p.gone ? '' : 'none';
-    $('#lt-md-leavenote').textContent = 'Markus B. ist der letzte Admin und kann nicht austreten. Erst muss ein weiterer Admin bestimmt werden.';
-    const isAdmin = p.roles.includes('admin'), self = p.n === S.me, canLock = !p.gone && p.state !== 'eingeladen' && !isAdmin && !self;
+    const isAdmin = p.roles.includes('admin'), isLeit = p.roles.includes('leitung'), self = p.n === S.me;
+    const canLock = !p.gone && p.state !== 'eingeladen' && !isAdmin && !isLeit && !self;
+    $('#lt-md-leave').style.display = p.gone || isAdmin || isLeit ? 'none' : '';
+    $('#lt-md-leavenote').style.display = (isAdmin || isLeit) && !p.gone ? '' : 'none';
+    $('#lt-md-leavenote').textContent = k === 'markus' ? 'Markus B. ist der letzte Admin und kann nicht austreten. Erst muss ein weiterer Admin bestimmt werden.' : 'Den Austritt von Leitungspersonen und Admins erfasst nur ein Admin.';
     $('#lt-md-lockbox').style.display = p.lock ? '' : 'none';
     if (p.lock) $('#lt-md-lockbox').innerHTML = '<i class="bi bi-slash-circle" style="color:var(--red)"></i> <b>Gesperrt</b> ' + (p.lock.until ? 'bis ' + esc(p.lock.until) : 'unbefristet') + '<br><small class="mut">Grund: ' + esc(p.lock.why) + ' · gesperrt von ' + esc(S.me) + ' am 14.11.2026</small>';
     $('#lt-md-lock').style.display = canLock && !p.lock ? '' : 'none';
     $('#lt-md-unlock').style.display = p.lock ? '' : 'none';
-    const ln = $('#lt-md-locknote'); ln.style.display = (isAdmin || self) && !p.gone ? '' : 'none';
-    ln.textContent = self ? 'Das eigene Konto kann nicht gesperrt werden.' : 'Admins kann nur ein Admin sperren.';
+    const ln = $('#lt-md-locknote'); ln.style.display = (isAdmin || isLeit || self) && !p.gone ? '' : 'none';
+    ln.textContent = self ? 'Das eigene Konto kann nicht gesperrt werden.' : 'Leitungspersonen und Admins kann nur ein Admin sperren.';
     if (fresh) {
       $$('#lt-md-tabs div').forEach((d, i) => d.classList.toggle('on', i === 0));
       $$('#lt-mitglied .pane').forEach((d, i) => d.classList.toggle('on', i === 0));
@@ -6923,7 +6962,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#lt-sp-date').addEventListener('input', spCheck);
   $('#lt-sp-btn').addEventListener('click', () => {
     if ($('#lt-sp-btn').classList.contains('dis')) return;
-    const p = M[S.mk], until = spUntil(); p.lock = { why: chipOn('#lt-sp-why'), until };
+    const p = M[S.mk], until = spUntil();
+    if (p.roles.includes('admin') || p.roles.includes('leitung') || p.n === S.me) { KD.back(); KD.toast('Leitungspersonen, Admins und das eigene Konto kann nur ein Admin sperren.'); return; }
+    p.lock = { why: chipOn('#lt-sp-why'), until };
     addLog(S.mk, 'konto', 'Konto gesperrt ' + (until ? 'bis ' + until : 'unbefristet') + ' (Grund: ' + p.lock.why + '); Sitzungen und Tokens beendet');
     KD.back(); KD.toast(p.n + ' ist gesperrt' + (until ? ' bis ' + until : '') + '. Sitzungen und Tokens beendet.');
   });
@@ -6939,7 +6980,6 @@ document.addEventListener('DOMContentLoaded', () => {
   $$('#lt-mitglied [data-ltrole]').forEach(t => t.addEventListener('click', () => {
     const p = M[S.mk], rk = t.dataset.rk, on = t.classList.contains('on');
     if (p.gone) { t.classList.toggle('on'); KD.toast('Ausgetreten – keine Änderungen mehr möglich.'); return; }
-    if (S.mk === 'markus' && rk === 'leitung' && !on) { t.classList.add('on'); KD.toast('Die eigene Leitungsrolle entzieht nur eine andere Leitungsperson oder ein Admin.'); return; }
     const before = ['Mitglied'].concat(p.roles.map(r => ROLE_L[r])).join(', ');
     if (on && !p.roles.includes(rk)) p.roles.push(rk);
     if (!on) p.roles = p.roles.filter(r => r !== rk);
@@ -6947,6 +6987,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mdRender(false); mlRowSync(S.mk);
     KD.toast('Rolle ' + t.dataset.ltrole + (on ? ' zugewiesen' : ' entzogen') + ' (protokolliert).');
   }));
+  $('#lt-md-leitrow').addEventListener('click', () => {
+    KD.toast('Die Rolle Abteilungsleitung vergibt und entzieht nur ein Admin (Admin › Konten). Die Abteilungsleitung verwaltet nur die Rolle Ausbilder.');
+  });
   $('#lt-md-remind').addEventListener('click', () => {
     const p = M[S.mk];
     if (!p.nw.length) { KD.toast(p.nwEmpty || 'Keine Nachweise hinterlegt.'); return; }
@@ -6986,14 +7029,16 @@ document.addEventListener('DOMContentLoaded', () => {
       { d: '15.10.2026 17:05', who: 'Tim S.', cat: 'nachweis', t: 'Nachweis Kompetenznachweis A1/A3 angelegt (vorher: – · nachher: gültig bis 10/2031)' },
       { d: '01.10.2026 20:02', who: 'Tim S.', cat: 'konto', t: 'Profil: „meine Bereiche“ (Vorliebe) geändert (vorher: Luftsport · nachher: Luftsport, RC Cars)' },
       { d: '02.09.2026 20:15', who: 'Tim S.', cat: 'konto', t: 'Einladung angenommen, Passkey registriert, Konto aktiv' },
-      { d: '01.09.2026 10:31', who: 'Markus B.', cat: 'familie', t: 'Erziehungsberechtigte Sandra S. (Mutter) verknüpft, Einwilligung vom 01.09.2026 dokumentiert' },
+      { d: '02.09.2026 19:31', who: 'Sandra S.', cat: 'familie', t: 'Einwilligung online bestätigt (Textversion 1), Verknüpfung mit Sandra S. wirksam' },
+      { d: '01.09.2026 10:31', who: 'Markus B.', cat: 'familie', t: 'Erziehungsberechtigte Sandra S. (Mutter) verknüpft – Einwilligung: Sandra S. bestätigt online beim Annehmen' },
       { d: '01.09.2026 10:28', who: 'Markus B.', cat: 'konto', t: 'Konto angelegt: Mitglied RC-Modellsport (Name, Geburtsdatum, E-Mail – Werte nicht im Protokoll), Einladung gesendet' }
     ],
     sandra: [
       { d: '02.11.2026 21:04', who: 'Sandra S.', cat: 'konto', t: 'Anmeldung mit Passwort + TOTP' },
       { d: '05.10.2026 08:47', who: 'Sandra S.', cat: 'konto', t: 'Profil: E-Mail-Adresse geändert (Wert wird nicht protokolliert), neue Adresse bestätigt' },
+      { d: '02.09.2026 19:31', who: 'Sandra S.', cat: 'familie', t: 'Einwilligung für Tim S. online bestätigt (Textversion 1)' },
       { d: '02.09.2026 19:30', who: 'Sandra S.', cat: 'konto', t: 'Einladung angenommen, Passwort gesetzt, TOTP eingerichtet' },
-      { d: '01.09.2026 10:31', who: 'Markus B.', cat: 'familie', t: 'Mit Tim S. verknüpft (Mutter), Einwilligung vom 01.09.2026 dokumentiert' },
+      { d: '01.09.2026 10:31', who: 'Markus B.', cat: 'familie', t: 'Mit Tim S. verknüpft (Mutter), Einwilligung online beim Annehmen angefordert' },
       { d: '01.09.2026 10:30', who: 'Markus B.', cat: 'konto', t: 'Konto angelegt: Erziehungsberechtigte, kein Mitglied (Name, E-Mail – Werte nicht im Protokoll), Einladung gesendet' }
     ]
   };
@@ -7002,7 +7047,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p.kv.last !== '–') L.push({ d: (p.kv.last === 'heute' ? '14.11.2026' : p.kv.last) + ' 08:15', who: p.n, cat: 'konto', t: 'Anmeldung (' + p.kv.login + ')' });
     p.nw.forEach((n, i) => L.push({ d: '1' + i + '.03.2026 19:0' + i, who: p.n, cat: 'nachweis', t: 'Nachweis ' + n[1] + ' eingetragen (nachher: ' + n[2] + ')' }));
     p.roles.forEach(r => L.push({ d: p.created + ' 10:05', who: 'Markus B.', cat: 'rolle', t: 'Rolle ' + ROLE_L[r] + ' zugewiesen (vorher: Mitglied)' }));
-    p.fam.forEach(f => L.push({ d: p.created + ' 10:03', who: 'Markus B.', cat: 'familie', t: 'Erziehungsberechtigte(r) ' + f.n + ' (' + f.rel + ') verknüpft, Einwilligung dokumentiert' }));
+    p.fam.forEach(f => L.push({ d: p.created + ' 10:03', who: 'Markus B.', cat: 'familie', t: 'Erziehungsberechtigte(r) ' + f.n + ' (' + f.rel + ') verknüpft – ' + f.sub.split(' · ')[0] }));
     L.push({ d: p.created + ' 10:00', who: 'Markus B.', cat: 'konto', t: 'Konto angelegt: Mitglied RC-Modellsport (Kontaktdaten – Werte nicht im Protokoll)' });
     return L;
   }
@@ -7069,13 +7114,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 
   // ---------- Erziehungsberechtigte verknüpfen ----------
+  const ebNewName = () => ($('#lt-eb-nvn').value.trim() + ' ' + $('#lt-eb-nnn').value.trim()).trim();
   function ebCheck() {
     const miss = [];
     if (isMut('lt-eb-person')) miss.push('Person');
-    else if (S.ebNew && (!$('#lt-eb-nname').value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#lt-eb-nmail').value.trim()))) miss.push('Name und E-Mail');
+    else if (S.ebNew && (!$('#lt-eb-nvn').value.trim() || !$('#lt-eb-nnn').value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#lt-eb-nmail').value.trim()))) miss.push('Vorname, Nachname und E-Mail');
     if (!$('#lt-eb-rel .chip.on')) miss.push('Beziehung');
-    if (!$('#lt-eb-ew').value) miss.push('Datum der Einwilligung');
-    if (!$('#lt-eb-ck').classList.contains('done')) miss.push('Bestätigung der Einwilligung');
+    if (consMode('#lt-eb-cons') === 'paper' && !$('#lt-eb-ew').value) miss.push('Datum der Papier-Einwilligung');
     setBtn($('#lt-eb-btn'), $('#lt-eb-hint'), miss);
   }
   KD.enter['lt-eb'] = () => {
@@ -7083,41 +7128,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const mp = M[S.mk];
     $('#lt-eb-kind').textContent = reg ? 'für Paul W. (16) · Registrierung' : 'für ' + mp.n + (mp.age ? ' (' + mp.age + ')' : '');
     P.ltEb.secs = reg
-      ? [['Aus der Registrierung', [['Karin W.', 'als Mutter angegeben · noch kein Konto', 'bi-person-plus', '<span class="badge b-w">neu</span>', { act: 1, neu: 1, name: 'Karin W.' }]]]].concat(ebPersons)
+      ? [['Aus der Registrierung', [['Karin W.', 'E-Mail karin.w@… aus dem Antrag · noch kein Konto', 'bi-person-plus', '<span class="badge b-w">neu</span>', { act: 1, neu: 1, vn: 'Karin', nn: 'W.', mail: 'karin.w@beispiel.de' }]]]].concat(ebPersons)
       : ebPersons;
     resetPick('lt-eb-person', 'Konto wählen oder neu anlegen');
     S.ebNew = false; $('#lt-eb-newbox').style.display = 'none';
-    $('#lt-eb-nname').value = ''; $('#lt-eb-nmail').value = '';
-    clearChips('#lt-eb-rel'); $('#lt-eb-ew').value = ISO_TODAY; resetCk($('#lt-eb-ck'));
+    $('#lt-eb-nvn').value = ''; $('#lt-eb-nnn').value = ''; $('#lt-eb-nmail').value = '';
+    clearChips('#lt-eb-rel'); consSet('#lt-eb-cons', 'online'); $('#lt-eb-ew').value = '';
     ebCheck();
   };
-  // Karin W. aus der Registrierung: Name vorbelegen
+  // Karin W. aus der Registrierung: Name und E-Mail vorbelegen
   const ebOnPick = P.ltEb.onPick;
   P.ltEb.onPick = (i, o) => {
     ebOnPick(i, o);
-    if (o.name) { $('#lt-eb-person').textContent = o.name; $('#lt-eb-nname').value = o.name; $$('#lt-eb-rel .chip').forEach(c => c.classList.toggle('on', c.textContent === 'Mutter')); ebCheck(); }
+    if (o.vn) { $('#lt-eb-person').textContent = i[0]; $('#lt-eb-nvn').value = o.vn; $('#lt-eb-nnn').value = o.nn; $('#lt-eb-nmail').value = o.mail; $$('#lt-eb-rel .chip').forEach(c => c.classList.toggle('on', c.textContent === 'Mutter')); ebCheck(); }
   };
-  ['#lt-eb-nname', '#lt-eb-nmail', '#lt-eb-ew'].forEach(s => { $(s).addEventListener('input', ebCheck); $(s).addEventListener('change', ebCheck); });
+  ['#lt-eb-nvn', '#lt-eb-nnn', '#lt-eb-nmail', '#lt-eb-ew'].forEach(s => { $(s).addEventListener('input', ebCheck); $(s).addEventListener('change', ebCheck); });
   $('#lt-eb-rel').addEventListener('change', ebCheck);
-  bindCk($('#lt-eb-ck'), ebCheck);
+  consBind('#lt-eb-cons', ebCheck);
   $('#lt-eb-btn').addEventListener('click', () => {
-    const name = S.ebNew ? $('#lt-eb-nname').value.trim() : $('#lt-eb-person').textContent;
-    const rel = chipOn('#lt-eb-rel'), ew = deDate($('#lt-eb-ew').value);
+    if ($('#lt-eb-btn').classList.contains('dis')) return;
+    const name = S.ebNew ? ebNewName() : $('#lt-eb-person').textContent;
+    const rel = chipOn('#lt-eb-rel'), paper = consMode('#lt-eb-cons') === 'paper', ew = paper ? deDate($('#lt-eb-ew').value) : '';
+    const cons = paper ? consPaper(ew, S.me) : consOpen(name);
+    const pend = !paper || S.ebNew;
+    const logT = 'Erziehungsberechtigte(r) ' + name + ' (' + rel + ') verknüpft – ' + (paper ? 'Papier-Einwilligung vom ' + ew + ' erfasst' : 'Einwilligung: ' + name + ' bestätigt online beim Annehmen (' + CONS_V + ')');
     if (S.ebCtx === 'reg') {
-      S.regEb = name; S.regRel = rel; S.regNew = S.ebNew;
-      $('#lt-rg-ebtxt').innerHTML = '<i class="bi bi-check-circle-fill" style="color:var(--g)"></i> ' + esc(name) + ' (' + esc(rel) + ') · Einwilligung ' + ew;
+      S.regEb = name; S.regRel = rel; S.regNew = S.ebNew; S.regCons = cons; S.regPend = pend; S.regLog = logT;
+      $('#lt-rg-ebtxt').innerHTML = '<i class="bi bi-check-circle-fill" style="color:var(--g)"></i> ' + esc(name) + ' (' + esc(rel) + ')<br><small class="mut">' + esc(cons) + '</small>';
       $('#lt-rg-eblink').style.display = 'none';
       rgCheck();
     } else {
       const mp = M[S.mk], wasLocked = famLocked(mp);
-      mp.fam.push({ n: name, rel, sub: 'Einwilligung am ' + ew + (S.ebNew ? ' · Einladung gesendet' : ''), pend: S.ebNew }); mp.ebNew = false;
-      addLog(S.mk, 'familie', 'Erziehungsberechtigte(r) ' + name + ' (' + rel + ') verknüpft, Einwilligung vom ' + ew + ' dokumentiert');
+      mp.fam.push({ n: name, rel, sub: cons + (S.ebNew ? ' · Einladung gesendet' : !paper ? ' · Anfrage per E-Mail gesendet' : ''), pend }); mp.ebNew = false;
+      addLog(S.mk, 'familie', logT);
       if (wasLocked) addLog(S.mk, 'konto', 'Konto entsperrt (Erziehungsberechtigte verknüpft)');
-      if (name === 'Sandra S.') addLog('sandra', 'familie', 'Mit ' + mp.n + ' verknüpft (' + rel + ')');
+      if (name === 'Sandra S.') addLog('sandra', 'familie', 'Mit ' + mp.n + ' verknüpft (' + rel + ')' + (paper ? ', Papier-Einwilligung vom ' + ew : ', Einwilligung online angefordert'));
       mdRender(false);
     }
     KD.back();
-    KD.toast(name + ' verknüpft. ' + (S.ebNew ? 'Einladung für ein eigenes Konto ist unterwegs.' : 'Sieht ab sofort die Daten des Kindes.'));
+    KD.toast(name + ' verknüpft. ' + (paper ? (S.ebNew ? 'Papier-Einwilligung erfasst; Einladung für ein eigenes Konto ist unterwegs.' : 'Papier-Einwilligung erfasst – sieht ab sofort die Daten des Kindes.')
+      : (S.ebNew ? 'Einladung ist unterwegs; die Verknüpfung wird wirksam, sobald ' + name + ' sie annimmt und die Einwilligung online bestätigt.' : name + ' bestätigt die Einwilligung online (E-Mail ist unterwegs); bis dahin ist die Verknüpfung offen.')));
   });
 
   // ---------- Registrierung ----------
@@ -7134,13 +7184,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const areas = ['air'];
       M.paul = { n: 'Paul W.', geb: '2010-03-02', age: 16, since: '11/2026', adult: '03/2028', created: '14.11.2026', areas, roles: [],
         nw: [], nwEmpty: 'Noch keine Nachweise hinterlegt – Paul trägt sie nach der Anmeldung selbst ein.',
-        fam: S.regEb ? [{ n: S.regEb, rel: S.regRel, sub: 'Einwilligung am 14.11.2026', pend: S.regNew }] : [], ebNew: !S.regEb, cur: [], fl: { n: 0, sub: 'noch keine Flüge' }, mods: [],
+        fam: S.regEb ? [{ n: S.regEb, rel: S.regRel, sub: S.regCons + (S.regNew ? ' · Einladung gesendet' : ''), pend: S.regPend }] : [], ebNew: !S.regEb, cur: [], fl: { n: 0, sub: 'noch keine Flüge' }, mods: [],
         kv: { mail: 'paul.w@…', inv: 'Selbstregistrierung 12.11.2026, freigeschaltet 14.11.2026 von Markus B.', last: '12.11.2026', login: 'Passwort' }, state: 'aktiv',
         tfa: ['Paul hat keinen zweiten Faktor eingerichtet.', 0], leave: { out: '', res: [] } };
       nkSync();
       LOG.paul = [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'konto', t: 'Registrierung freigeschaltet' + (S.regEb ? '' : ' (noch ohne Erziehungsberechtigte; zustimmungspflichtige Aktionen warten)') }].concat(
-        S.regEb ? [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'familie', t: 'Erziehungsberechtigte(r) ' + S.regEb + ' (' + S.regRel + ') verknüpft, Einwilligung dokumentiert' }] : [],
-        [{ d: '12.11.2026 16:20', who: 'Paul W.', cat: 'konto', t: 'Selbstregistrierung, E-Mail-Adresse bestätigt (Wert nicht im Protokoll)' }]);
+        S.regEb ? [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'familie', t: S.regLog }] : [],
+        [{ d: '12.11.2026 16:20', who: 'Paul W.', cat: 'konto', t: 'Selbstregistrierung mit Nachricht an die Abteilungsleitung und E-Mail eines Erziehungsberechtigten, E-Mail-Adresse bestätigt (Werte nicht im Protokoll)' }]);
       p.querySelector('.badge').className = 'badge b-g'; p.querySelector('.badge').textContent = 'aktiv'; p.querySelector('small:last-child').textContent = areas.map(a => AREA_L[a]).join(', ') + ' · Mitglied';
       p.dataset.go = 'lt-mitglied'; p.dataset.ltm = 'paul'; p.dataset.ar = areas.length === 2 ? 'both' : areas[0];
     }
@@ -7148,7 +7198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mlFilter();
   }
   $('#lt-rg-btn').addEventListener('click', () => { const eb = S.regEb; regDone('ok'); KD.back(); KD.toast('Paul W. freigeschaltet und sofort nutzbar. ' + (eb ? 'Paul und ' + eb + ' werden benachrichtigt.' : 'Paul wird benachrichtigt; Ausleihen u. Ä. warten auf ein verknüpftes Eltern-Konto.')); });
-  $('#lt-rg-no').addEventListener('click', () => { regDone('no'); KD.back(); KD.toast('Registrierung abgelehnt. Die Daten werden gelöscht.'); });
+  $('#lt-rg-no').addEventListener('click', () => { regDone('no'); KD.back(); KD.toast('Registrierung abgelehnt. Paul erhält eine neutrale E-Mail; der Antrag wird gelöscht.'); });
 
   // ---------- Austritt ----------
   function auCheck() {
@@ -7192,6 +7242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (m < 0 || (m === 0 && TODAY.getDate() < b.getDate())) a--;
     return a;
   }
+  const eiEbName = () => S.eiEbNew ? ($('#lt-ei-ebvn').value.trim() + ' ' + $('#lt-ei-ebnn').value.trim()).trim() : $('#lt-ei-eb').textContent;
   function eiCheck() {
     const miss = [];
     if (!$('#lt-ei-vn').value.trim()) miss.push('Vorname');
@@ -7203,21 +7254,24 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#lt-ei-age').textContent = age === null ? '' : (minor ? 'Minderjährig (' + age + '): Erziehungsberechtigte gleich mit anlegen.' : 'Volljährig (' + age + ').');
     if (minor) {
       if (isMut('lt-ei-eb')) miss.push('Erziehungsberechtigte');
-      else if (S.eiEbNew && (!$('#lt-ei-ebname').value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#lt-ei-ebmail').value.trim()))) miss.push('Name und E-Mail der Erziehungsberechtigten');
-      if (!$('#lt-ei-ew').value) miss.push('Datum der Einwilligung');
+      else if (S.eiEbNew && (!$('#lt-ei-ebvn').value.trim() || !$('#lt-ei-ebnn').value.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#lt-ei-ebmail').value.trim()))) miss.push('Vorname, Nachname und E-Mail der Erziehungsberechtigten');
+      if (!$('#lt-ei-rel .chip.on')) miss.push('Beziehung');
+      if (consMode('#lt-ei-cons') === 'paper' && !$('#lt-ei-ew').value) miss.push('Datum der Papier-Einwilligung');
     }
     setBtn($('#lt-ei-btn'), $('#lt-ei-hint'), miss);
     return minor;
   }
   KD.enter['lt-einladen'] = () => {
     $$('#lt-einladen input').forEach(i => { i.value = ''; });
-    $('#lt-ei-ew').value = ISO_TODAY;
     resetPick('lt-ei-eb', 'Konto wählen oder neu anlegen'); S.eiEbNew = false; $('#lt-ei-ebnew').style.display = 'none';
-    clearChips('#lt-ei-roles');
+    clearChips('#lt-ei-roles'); clearChips('#lt-ei-rel'); consSet('#lt-ei-cons', 'online');
     eiCheck();
   };
   $$('#lt-einladen input').forEach(i => { i.addEventListener('input', eiCheck); i.addEventListener('change', eiCheck); });
+  $('#lt-ei-rel').addEventListener('change', eiCheck);
+  consBind('#lt-ei-cons', eiCheck);
   $('#lt-ei-btn').addEventListener('click', () => {
+    if ($('#lt-ei-btn').classList.contains('dis')) return;
     const minor = eiCheck();
     const name = $('#lt-ei-vn').value.trim() + ' ' + ($('#lt-ei-nn').value.trim()[0] || '') + '.';
     const ar = 'none';
@@ -7225,23 +7279,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const r = document.createElement('div'); r.className = 'row new-row';
     r.dataset.name = name; r.dataset.ar = ar; r.dataset.minor = minor ? '1' : '0'; r.dataset.nw = 'none';
     r.dataset.roles = 'mitglied ' + roles.map(x => ROLE_KEY[x]).join(' ');
-    const key = 'inv' + (Object.keys(M).length + 1), ebName = minor ? (S.eiEbNew ? $('#lt-ei-ebname').value.trim() : $('#lt-ei-eb').textContent) : '';
+    const key = 'inv' + (Object.keys(M).length + 1), ebName = minor ? eiEbName() : '';
+    const rel = chipOn('#lt-ei-rel'), paper = consMode('#lt-ei-cons') === 'paper', ew = paper ? deDate($('#lt-ei-ew').value) : '';
+    const cons = paper ? consPaper(ew, S.me) : consOpen(ebName);
     const gb = $('#lt-ei-geb').value.split('-');
     M[key] = { n: name, geb: $('#lt-ei-geb').value, age: minor ? eiAge() : null, since: '–', adult: minor ? gb[1] + '/' + (+gb[0] + 18) : '', created: '14.11.2026', areas: [], roles: roles.map(x => ROLE_KEY[x]),
       nw: [], nwEmpty: 'Noch keine Nachweise – die Person trägt sie nach der Anmeldung selbst ein.',
-      fam: minor ? [{ n: ebName, rel: 'Erziehungsberechtigte(r)', sub: 'Einwilligung am ' + deDate($('#lt-ei-ew').value) + (S.eiEbNew ? ' · Einladung gesendet' : ''), pend: S.eiEbNew }] : [],
+      fam: minor ? [{ n: ebName, rel, sub: cons + (S.eiEbNew ? ' · Einladung gesendet' : !paper ? ' · Anfrage per E-Mail gesendet' : ''), pend: !paper || S.eiEbNew }] : [],
       cur: [], fl: { n: 0, sub: 'noch keine Flüge' }, mods: [],
       kv: { mail: $('#lt-ei-mail').value.trim(), inv: '14.11.2026 von ' + S.me + ' · Link gültig bis 21.11.2026', last: '–', login: 'noch nicht eingerichtet' }, state: 'eingeladen',
       tfa: ['Noch keine Anmeldung – nichts zurückzusetzen.', 0], leave: { out: '', res: [] } };
     nkSync();
     LOG[key] = [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'konto', t: 'Konto angelegt, Einladung gesendet (Kontaktdaten – Werte nicht im Protokoll)' }];
+    if (minor) LOG[key].unshift({ d: '14.11.2026 · gerade eben', who: S.me, cat: 'familie', t: 'Erziehungsberechtigte(r) ' + ebName + ' (' + rel + ') verknüpft – ' + (paper ? 'Papier-Einwilligung vom ' + ew + ' erfasst' : 'Einwilligung: ' + ebName + ' bestätigt online beim Annehmen (' + CONS_V + ')') });
     r.dataset.go = 'lt-mitglied'; r.dataset.ltm = key;
     r.innerHTML = '<span class="li"><span class="lt-av' + (minor ? ' lt-min' : '') + '">' + esc(initials(name)) + '</span><span><b>' + esc(name) + '</b>' + (minor ? ' <small>(' + eiAge() + ')</small>' : '') + '<br><small>keine Vorliebe · ' + esc(['Mitglied'].concat(roles).join(', ')) + '</small></span></span><span class="badge b-w">eingeladen</span>';
     $('#lt-ml-list').prepend(r);
     mlFilter();
-    const eb = minor ? (S.eiEbNew ? $('#lt-ei-ebname').value.trim() : $('#lt-ei-eb').textContent) : '';
     KD.back();
-    KD.toast('Einladung an ' + $('#lt-ei-mail').value.trim() + ' gesendet' + (minor ? ', ' + eb + ' verknüpft. Das Kinder-Konto ist sofort nutzbar' + (S.eiEbNew ? '; Ausleihen warten auf das Eltern-Konto.' : '.') : '. Link 7 Tage gültig.'));
+    KD.toast('Einladung an ' + $('#lt-ei-mail').value.trim() + ' gesendet' + (minor ? ', ' + ebName + ' verknüpft. Das Kinder-Konto ist sofort nutzbar' + (paper && !S.eiEbNew ? '.' : '; Ausleihen warten, bis ' + ebName + ' die Einwilligung online bestätigt hat.') : '. Link 7 Tage gültig.'));
   });
 
   // ---------- Nachweis-Übersicht ----------
@@ -8080,6 +8136,15 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card menu">
       <div class="row" data-pick="adLoesch"><span><i class="bi bi-trash3"></i> Löschfrist für eigene Flüge<br><small>danach nur noch „ungültig markieren“</small></span><span><b id="ad-loesch">30 Minuten</b> <i class="bi bi-chevron-down mut"></i></span></div>
     </div>
+    <h3>Erinnerungen</h3>
+    <div class="card pad" id="ad-er">
+      <label style="margin-top:0">Nachweis läuft ab <span class="req">*</span></label>
+      <div class="ad-add" style="font-size:13px"><input class="inp ad-er-in" id="ad-er-n1" inputmode="numeric" value="60" autocomplete="off" style="flex:0 0 60px;margin:0"> und <input class="inp ad-er-in" id="ad-er-n2" inputmode="numeric" value="14" autocomplete="off" style="flex:0 0 60px;margin:0"> Tage vorher</div>
+      <label>Bald volljährig <span class="req">*</span></label>
+      <div class="ad-add" style="font-size:13px"><input class="inp ad-er-in" id="ad-er-v" inputmode="numeric" value="30" autocomplete="off" style="flex:0 0 60px;margin:0"> Tage vor dem 18. Geburtstag</div>
+      <div class="hint">„Nachweis läuft ab“ geht an das Mitglied, bei Minderjährigen in Kopie an die Erziehungsberechtigten. „Bald volljährig“ geht an das Kind und seine Erziehungsberechtigten. Je 1 bis 365 Tage; die erste Nachweis-Erinnerung liegt vor der zweiten.</div>
+      <div class="ad-add" style="margin-top:8px"><span class="ad-mbtn dis" id="ad-er-save">Speichern</span><small class="mut" id="ad-er-hint">Keine Änderung.</small></div>
+    </div>
     <div class="note">Am PC zeigt die Admin-Ansicht mehr auf einmal (Seitenleiste, Tabellen).</div>
   </div>
 </section>
@@ -8103,19 +8168,27 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
   <div class="top"><i class="bi bi-x-lg" style="font-size:18px" data-back></i><div class="t1">Person einladen</div></div>
   <div class="body">
-    <label>Name <span class="req">*</span></label><input class="inp" id="ad-inv-name" placeholder="Vorname Nachname" autocomplete="off">
+    <div class="two"><div><label>Vorname <span class="req">*</span></label><input class="inp" id="ad-inv-vn" autocomplete="off"></div><div><label>Nachname <span class="req">*</span></label><input class="inp" id="ad-inv-nn" autocomplete="off"></div></div>
     <label>E-Mail (Anmeldename) <span class="req">*</span></label><input class="inp" id="ad-inv-mail" type="email" placeholder="name@beispiel.de" autocomplete="off">
     <div class="hint">Muss systemweit eindeutig sein – auch Kinder brauchen eine eigene Adresse.</div>
     <label>Geburtsdatum <span class="req">*</span></label><input class="inp" id="ad-inv-geb" placeholder="TT.MM.JJJJ" inputmode="numeric" autocomplete="off">
     <div id="ad-inv-erow" style="display:none">
       <label>Erziehungsberechtigte <span class="req">*</span></label>
       <div class="inp" data-pick="adElternInv"><span id="ad-inv-eltern" class="mut">Person wählen</span><i class="bi bi-chevron-down"></i></div>
-      <div class="hint">Unter 18: Das Konto wird erst aktiv, wenn die Einwilligung dokumentiert ist.</div>
+      <label>Beziehung <span class="req">*</span></label>
+      <div class="chips" data-single id="ad-inv-rel"><span class="chip">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
+      <label>Einwilligung <span class="req">*</span></label>
+      <div class="card" id="ad-inv-cons">
+        <div class="ad-opt on" data-c="online"><i class="bi bi-record-circle-fill"></i><span>Elternteil bestätigt online beim Annehmen (Standard)<br><small class="mut">Gespeichert werden Datum, Textversion und Konto.</small></span></div>
+        <div class="ad-opt" data-c="paper"><i class="bi bi-circle"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><br><small class="mut">Das Papier bleibt beim Verein, keine Datei in der App.</small></span></div>
+      </div>
+      <div id="ad-inv-paperbox" style="display:none"><label>Papier-Einwilligung erteilt am <span class="req">*</span></label><input class="inp" id="ad-inv-ew" placeholder="TT.MM.JJJJ" inputmode="numeric" autocomplete="off"></div>
+      <div class="hint">Das Kinder-Konto ist nach der Einladung sofort nutzbar; zustimmungspflichtige Aktionen (z. B. Ausleihe) warten, bis die Verknüpfung wirksam ist.</div>
     </div>
     <div class="card pad" style="font-size:12.5px"><i class="bi bi-grid"></i> Alle Mitglieder sehen alle Bereiche. „Meine Bereiche“ wählt die Person nach der Anmeldung selbst.</div>
     <label>Rollen in der Abteilung</label>
     <div class="chips" id="ad-inv-role"><span class="chip on">Mitglied</span><span class="chip">Ausbilder</span><span class="chip">Abteilungsleitung</span></div>
-    <div class="hint">Admin wird nur im Konto vergeben (verlangt zweiten Faktor).</div>
+    <div class="hint">Mitglied, Ausbilder und Abteilungsleitung lassen sich hier vergeben; Admin nur im Konto (verlangt zweiten Faktor). Die Einladung der Abteilungsleitung bietet nur Mitglied und Ausbilder.</div>
     <button class="btn dis" id="ad-inv-save" style="margin-top:12px">Einladung senden</button>
     <div class="note" id="ad-inv-hint"></div>
     <div class="note">Einladungslink 7 Tage gültig, lässt sich neu senden.</div>
@@ -8137,6 +8210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <h3 style="display:flex;justify-content:space-between;align-items:center">Rollen <span class="chg" data-pick="adRolle"><i class="bi bi-plus-lg"></i> Rolle</span></h3>
     <span id="ad-rolle-t" hidden></span>
     <div class="card" id="ad-ko-roles"></div>
+    <div class="alert" id="ad-ko-lwarn" style="display:none"><i class="bi bi-exclamation-triangle-fill"></i> <span id="ad-ko-lwarntx"></span><div class="btns" style="margin:8px 0 0"><button class="btn ad-red" id="ad-ko-lwarn-go">Trotzdem entfernen</button><button class="btn out" id="ad-ko-lwarn-no">Abbrechen</button></div></div>
     <div class="alert" id="ad-ko-2fa" style="display:none"><i class="bi bi-shield-exclamation"></i> Admins brauchen einen zweiten Faktor oder Passkey. Die Admin-Rolle wird erst wirksam, wenn einer eingerichtet ist; bis dahin ist sie unwirksam.</div>
     <div id="ad-ko-fam"></div>
     <span id="ad-ko-eltern-t" hidden></span>
@@ -8147,7 +8221,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="row"><span><i class="bi bi-clock"></i> Letzte Anmeldung</span><span id="ad-ko-last">–</span></div>
       <div class="row" id="ad-ko-resetrow"><span class="chg" id="ad-ko-reset">Zweite Faktoren zurücksetzen</span><small class="mut">wird protokolliert</small></div>
     </div>
+    <h3>API-Tokens</h3>
+    <div class="card" id="ad-ko-tok"></div>
+    <div class="note" style="text-align:left;margin-top:-4px">Der Admin sieht Name, Präfix, Scopes, Ablauf und letzte Nutzung – nie den Token selbst. Widerrufen wirkt sofort, wird protokolliert und dem Besitzer per E-Mail mitgeteilt.</div>
     <div id="ad-ko-act"></div>
+    <div id="ad-ko-leave"></div>
   </div>
 </section>
 
@@ -8157,14 +8235,56 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="body">
     <div class="legal"><b><i class="bi bi-slash-circle"></i> <span id="ad-sp-name">Konto</span> sperren?</b>Alle Sitzungen und API-Tokens werden sofort beendet. Flugbuch, Modelle und Nachweise bleiben erhalten. Entsperren ist jederzeit möglich; eine befristete Sperre endet automatisch.</div>
     <label>Grund <span class="req">*</span></label>
-    <div class="chips" data-single id="ad-sp-why"><span class="chip">Verdacht auf Missbrauch</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Gerät verloren</span><span class="chip">Sonstiges</span></div>
+    <div class="chips" data-single id="ad-sp-why"><span class="chip">Verdacht auf Missbrauch</span><span class="chip">Verstoß gegen Platzregeln</span><span class="chip">Beitrag offen</span><span class="chip">Gerät verloren</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Sonstiges</span></div>
     <label>Dauer <span class="req">*</span></label>
     <div class="chips" data-single id="ad-sp-dur"><span class="chip on" data-d="0">unbefristet</span><span class="chip" data-d="7">1 Woche</span><span class="chip" data-d="30">1 Monat</span><span class="chip" data-d="x">bis Datum …</span></div>
     <div id="ad-sp-datebox" style="display:none"><label>Gesperrt bis <span class="req">*</span></label><input class="inp" type="date" id="ad-sp-date" min="2026-11-15"></div>
     <label>Nachricht an die Person <span class="opt">optional</span></label><textarea class="inp" rows="2" id="ad-sp-msg" placeholder="Wird per E-Mail mitgeschickt"></textarea>
     <button class="btn dis ad-red" id="ad-sp-go" style="margin-top:12px">Sperren</button>
     <div class="note" id="ad-sp-hint">Bitte einen Grund wählen.</div>
-    <div class="note" style="text-align:left">Die Person erhält eine E-Mail mit Grund, Dauer und deiner Nachricht; bei Minderjährigen auch die Erziehungsberechtigten. Eine Sperre löscht keine Daten.</div>
+    <div class="note" style="text-align:left">Die Person erhält eine E-Mail mit Grund, Dauer und deiner Nachricht; bei Minderjährigen auch die Erziehungsberechtigten. Eine Sperre löscht keine Daten. Leitungspersonen und Admins kann nur ein Admin sperren.</div>
+  </div>
+</section>
+
+<section class="scr notab" id="ad-austritt" data-notab>
+  <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+  <div class="top"><i class="bi bi-x-lg" style="font-size:18px" data-back></i><div><div class="t1">Austritt erfassen</div><div class="t2" id="ad-au-who">–</div></div></div>
+  <div class="body">
+    <div class="legal"><b><i class="bi bi-info-circle-fill"></i> Was beim Austritt passiert</b>
+      Konto wird deaktiviert, Anmeldung nicht mehr möglich; Sitzungen und API-Tokens enden.<br>
+      Flüge, Vorfälle, Nachweise bleiben bis zum Ende der Aufbewahrungsfrist (Regelwerk: 3 Jahre) und werden danach gelöscht bzw. anonymisiert.<br>
+      Vor dem Löschen der Adresse geht eine Bestätigung per E-Mail an die Person (bei Minderjährigen auch an die Erziehungsberechtigten); danach werden Kontaktdaten und Benachrichtigungs-Einstellungen gelöscht.</div>
+    <div class="card" id="ad-au-list"></div>
+    <div class="note" style="text-align:left">Offene Ausleihen blockieren den Austritt nicht: Die Rückgabe wird eingefordert und erscheint bei der Leitung als Mahnfall „Rückgabe offen“. Bis zur Rückgabe bleibt nur die E-Mail-Adresse gespeichert. Der letzte Admin kann nicht austreten.</div>
+    <label>Austritt zum <span class="req">*</span></label>
+    <input class="inp" id="ad-au-date" type="date">
+    <label>Grund <span class="opt">optional</span></label>
+    <div class="chips" data-single id="ad-au-why"><span class="chip">Eigener Wunsch</span><span class="chip">Vereinsaustritt</span><span class="chip">anderer</span></div>
+    <div class="card">
+      <div class="ad-opt" id="ad-au-ck"><i class="bi bi-square"></i><span>Auswirkungen geprüft, Mitglied bzw. Erziehungsberechtigte informiert</span></div>
+    </div>
+    <button class="btn dis ad-red" id="ad-au-go" style="margin-top:12px">Austritt durchführen</button>
+    <div class="note" id="ad-au-hint"></div>
+  </div>
+</section>
+
+<section class="scr notab" id="ad-eltern-link" data-notab>
+  <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+  <div class="top"><i class="bi bi-x-lg" style="font-size:18px" data-back></i><div><div class="t1">Erziehungsberechtigte verknüpfen</div><div class="t2" id="ad-el-kind">–</div></div></div>
+  <div class="body">
+    <label>Person <i class="bi bi-lock lock"></i></label>
+    <div class="inp" style="background:#f6f7f6" id="ad-el-person">–</div>
+    <label>Beziehung <span class="req">*</span></label>
+    <div class="chips" data-single id="ad-el-rel"><span class="chip">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
+    <label>Einwilligung <span class="req">*</span></label>
+    <div class="card" id="ad-el-cons">
+      <div class="ad-opt on" data-c="online"><i class="bi bi-record-circle-fill"></i><span>Elternteil bestätigt online beim Annehmen (Standard)<br><small class="mut">Gespeichert werden Datum, Textversion und Konto. Bis zur Bestätigung ist die Verknüpfung offen.</small></span></div>
+      <div class="ad-opt" data-c="paper"><i class="bi bi-circle"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><br><small class="mut">Das Papier bleibt beim Verein, keine Datei in der App.</small></span></div>
+    </div>
+    <div id="ad-el-paperbox" style="display:none"><label>Papier-Einwilligung erteilt am <span class="req">*</span></label><input class="inp" id="ad-el-ew" type="date" max="2026-11-14"></div>
+    <div class="card pad" style="font-size:12.5px"><i class="bi bi-shield-lock"></i> Die Verknüpfung legen nur Abteilungsleitung oder Admin an. Sie endet automatisch mit dem 18. Geburtstag des Kindes.</div>
+    <button class="btn dis" id="ad-el-save" style="margin-top:12px">Verknüpfen</button>
+    <div class="note" id="ad-el-hint"></div>
   </div>
 </section>
 
@@ -8177,8 +8297,9 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card pad">
       <label style="margin-top:0">Abteilungsleitung</label>
       <div id="ad-al"></div>
+      <div class="alert" id="ad-al-warn" style="display:none;margin:6px 0"><i class="bi bi-exclamation-triangle-fill"></i> <span id="ad-al-warntx"></span><div class="btns" style="margin:8px 0 0"><button class="btn ad-red" id="ad-al-warn-go">Trotzdem entfernen</button><button class="btn out" id="ad-al-warn-no">Abbrechen</button></div></div>
       <span class="chg" data-pick="adLeitung"><i class="bi bi-plus-lg"></i> Person zuweisen</span><span id="ad-al-t" hidden></span>
-      <div class="hint">Zuständig für beide Bereiche (keine Bereichsleitung).</div>
+      <div class="hint">Zuständig für beide Bereiche (keine Bereichsleitung). Die Rolle vergibt und entzieht nur ein Admin.</div>
     </div>
     <h3 style="display:flex;justify-content:space-between;align-items:center">Bereiche <span class="chg ad-b-open" data-b="new" data-go="ad-bereich"><i class="bi bi-plus-lg"></i> Bereich</span></h3>
     <div class="card" id="ad-b-list"></div>
@@ -8601,8 +8722,16 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="row ad-v-open" data-v="1" data-go="ad-vorlage"><span><b>Einladung</b><br><small>E-Mail</small></span><span class="badge b-all">Standard</span></div>
       <div class="row ad-v-open" data-v="2" data-go="ad-vorlage"><span><b>Ausleihe genehmigt / abgelehnt</b><br><small>E-Mail + Push</small></span><span class="badge b-all">Standard</span></div>
       <div class="row ad-v-open" data-v="3" data-go="ad-vorlage"><span><b>Rückgabe fällig</b><br><small>E-Mail + Push</small></span><span class="badge b-all">Standard</span></div>
-      <div class="row ad-v-open" data-v="4" data-go="ad-vorlage"><span><b>Bald volljährig</b><br><small>an Erziehungsberechtigte</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="4" data-go="ad-vorlage"><span><b>Bald volljährig</b><br><small>an Kind und Erziehungsberechtigte · Vorlauf unter „Erinnerungen“</small></span><span class="badge b-all">Standard</span></div>
       <div class="row ad-v-open" data-v="5" data-go="ad-vorlage"><span><b>Fehlgeschlagene Anmeldeversuche</b><br><small>E-Mail an den Kontoinhaber, höchstens 1× in 24 Stunden</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="6" data-go="ad-vorlage"><span><b>Konto gesperrt</b><br><small>E-Mail, bei Minderjährigen auch an die Erziehungsberechtigten</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="7" data-go="ad-vorlage"><span><b>Konto entsperrt</b><br><small>E-Mail</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="8" data-go="ad-vorlage"><span><b>Konto freigeschaltet</b><br><small>E-Mail nach der Freischaltung einer Registrierung</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="9" data-go="ad-vorlage"><span><b>Registrierung abgelehnt</b><br><small>neutrale E-Mail, danach wird der Antrag gelöscht</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="10" data-go="ad-vorlage"><span><b>Austritt bestätigt</b><br><small>E-Mail vor dem Löschen der Adresse</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="11" data-go="ad-vorlage"><span><b>Zweite Faktoren zurückgesetzt</b><br><small>E-Mail an den Kontoinhaber</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="12" data-go="ad-vorlage"><span><b>Einladung Erziehungsberechtigte</b><br><small>E-Mail mit Einladungslink</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="13" data-go="ad-vorlage"><span><b>Einwilligung bestätigen</b><br><small>E-Mail an Erziehungsberechtigte mit Konto</small></span><span class="badge b-all">Standard</span></div>
     </div>
     <div class="note">Ohne Anpassung gelten die mitgelieferten Texte.</div>
   </div>
@@ -8614,7 +8743,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="body">
     <label>Betreff <span class="req">*</span></label><input class="inp" id="ad-v-subj" autocomplete="off">
     <label>Text <span class="req">*</span></label><textarea class="inp" id="ad-v-text" rows="6"></textarea>
-    <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}}, {{modell}}, {{zeit}}, {{ort}}. Push nutzt nur den Betreff.</div>
+    <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}}, {{modell}}, {{zeit}}, {{ort}}, {{grund}}, {{dauer}}, {{nachricht}}, {{datum}}, {{kind}}, {{link}}. Push nutzt nur den Betreff.</div>
     <button class="btn" id="ad-v-save" style="margin-top:12px">Speichern</button>
     <button class="btn out" id="ad-v-reset" style="margin-top:8px">Auf Standard zurücksetzen</button>
   </div>
@@ -8647,16 +8776,22 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
   <div class="top"><i class="bi bi-x-lg" style="font-size:18px" data-back></i><div><div class="t1">Erziehungsberechtigte einladen</div><div class="t2">Konto ohne Mitgliedschaft</div></div></div>
   <div class="body">
-    <label>Name <span class="req">*</span></label><input class="inp" id="ad-en-name" placeholder="Vorname Nachname" autocomplete="off">
+    <div class="two"><div><label>Vorname <span class="req">*</span></label><input class="inp" id="ad-en-vn" autocomplete="off"></div><div><label>Nachname <span class="req">*</span></label><input class="inp" id="ad-en-nn" autocomplete="off"></div></div>
     <label>E-Mail (Anmeldename) <span class="req">*</span></label><input class="inp" id="ad-en-mail" type="email" placeholder="name@beispiel.de" autocomplete="off">
     <div class="hint">Eigene Adresse, nicht die des Kindes – systemweit eindeutig.</div>
     <label>Verknüpftes Kind <span class="req">*</span></label>
     <div class="inp" data-pick="adEnKind"><span id="ad-en-kind" class="mut">Kind wählen</span><i class="bi bi-chevron-down"></i></div>
     <label>Beziehung <span class="req">*</span></label>
     <div class="chips" data-single id="ad-en-rel"><span class="chip">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
-    <div class="card pad" style="font-size:12.5px"><i class="bi bi-shield-lock"></i> Die Verknüpfung legen nur Abteilungsleitung oder Admin an. Sie wird wirksam, sobald die Person die Einladung annimmt und die Einwilligung dokumentiert ist, und endet automatisch mit dem 18. Geburtstag des Kindes.</div>
+    <label>Einwilligung <span class="req">*</span></label>
+    <div class="card" id="ad-en-cons">
+      <div class="ad-opt on" data-c="online"><i class="bi bi-record-circle-fill"></i><span>Elternteil bestätigt online beim Annehmen (Standard)<br><small class="mut">Gespeichert werden Datum, Textversion und Konto.</small></span></div>
+      <div class="ad-opt" data-c="paper"><i class="bi bi-circle"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><br><small class="mut">Das Papier bleibt beim Verein, keine Datei in der App.</small></span></div>
+    </div>
+    <div id="ad-en-paperbox" style="display:none"><label>Papier-Einwilligung erteilt am <span class="req">*</span></label><input class="inp" id="ad-en-ew" type="date" max="2026-11-14"></div>
+    <div class="card pad" style="font-size:12.5px"><i class="bi bi-shield-lock"></i> Die Verknüpfung legen nur Abteilungsleitung oder Admin an. Sie wird wirksam, sobald die Person die Einladung annimmt (bei „online“ mit Bestätigung der Einwilligung), und endet automatisch mit dem 18. Geburtstag des Kindes.</div>
     <div class="note" style="text-align:left">Einladungslink 7 Tage gültig, lässt sich neu senden.</div>
-    <span class="ad-assume">Annahme: Die Einwilligung bestätigt die Person beim Annehmen der Einladung; den Text liefert der Verein (offener Punkt 13.3).</span>
+    <span class="ad-assume">Annahme: Den Einwilligungstext liefert der Verein (offener Punkt 13.3).</span>
     <button class="btn dis" id="ad-en-save" style="margin-top:6px">Einladung senden</button>
     <div class="note" id="ad-en-hint"></div>
   </div>
@@ -8822,27 +8957,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ================= Konten ================= */
+  // Einwilligung je Verknüpfung: cons 'online' (Elternteil bestätigt beim Annehmen) oder 'paper' (Datum, erfasst von)
   const KO = {
-    markus:{ n:'Markus B.', ini:'MB', mail:'markus@…', geb:'12.05.1980', age:46, roles:[['Admin','global','03/2024'],['Abteilungsleitung','Abteilung RC-Modellsport','03/2024'],['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['air','car'], pk:2, totp:1, st:'aktiv', last:'heute', self:true },
-    max:{ n:'Max R.', ini:'MR', mail:'max@…', geb:'02.02.1975', age:51, roles:[['Ausbilder','Abteilung RC-Modellsport','04/2024'],['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['air'], pk:1, totp:0, st:'aktiv', last:'gestern' },
-    jonas:{ n:'Jonas B.', ini:'JB', mail:'jonas@…', geb:'19.08.1990', age:36, roles:[['Ausbilder','Abteilung RC-Modellsport','06/2025'],['Mitglied','Abteilung RC-Modellsport','05/2024']], areas:['air','car'], pk:0, totp:0, st:'aktiv', last:'10.11.', fail:{ n:7, at:'14:12', until:'14:16', ip:'89.204.137.0/24 (Mobilfunk, Raum Nürnberg)' } },
-    lena:{ n:'Lena K.', ini:'LK', mail:'lena@…', geb:'04.07.1998', age:28, roles:[['Mitglied','Abteilung RC-Modellsport','09/2025']], areas:['car'], pk:0, totp:0, st:'aktiv', last:'08.11.' },
-    tim:{ n:'Tim S.', ini:'TS', mail:'tim@…', geb:'03.2012', age:14, roles:[['Mitglied','Abteilung RC-Modellsport','09/2026']], areas:['air'], pk:0, totp:0, st:'aktiv', last:'12.11.', eltern:['Sandra S.'] },
-    sandra:{ n:'Sandra S.', ini:'SS', mail:'sandra@…', geb:'11.10.1983', age:43, roles:[['Erziehungsberechtigte','je Kind: Tim S.','09/2026']], areas:[], pk:0, totp:0, st:'aktiv', last:'12.11.', kind:'Tim S.' },
-    paul:{ n:'Paul W.', ini:'PW', mail:'paul@…', geb:'21.05.2010', age:16, roles:[], areas:['car'], pk:0, totp:0, st:'wartet', last:'–', eltern:[] },
-    eva:{ n:'Eva M.', ini:'EM', mail:'eva@…', geb:'30.01.1995', age:31, roles:[['Mitglied','Abteilung RC-Modellsport','neu']], areas:['air'], pk:0, totp:0, st:'eingeladen', last:'–' },
-    felix:{ n:'Felix H.', ini:'FH', mail:'felix@…', geb:'14.03.1988', age:38, roles:[['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['car'], pk:0, totp:0, st:'gesperrt', last:'03/2026', why:'Austritt in Bearbeitung' }
+    markus:{ n:'Markus B.', ini:'MB', mail:'markus@…', geb:'12.05.1980', age:46, roles:[['Admin','global','03/2024'],['Abteilungsleitung','Abteilung RC-Modellsport','03/2024'],['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['air','car'], pk:2, totp:1, st:'aktiv', last:'heute', self:true,
+      tok:[{ n:'Auswertung Tabellenkalkulation', pre:'tsvrc_8f2a…', sc:'flights:read, models:read', exp:'31.03.2027', last:'gestern' }, { n:'Vereinsheim-Anzeige', pre:'tsvrc_77b0…', sc:'events:read', exp:'unbefristet', last:'heute 06:00' }] },
+    max:{ n:'Max R.', ini:'MR', mail:'max@…', geb:'02.02.1975', age:51, roles:[['Ausbilder','Abteilung RC-Modellsport','04/2024'],['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['air'], pk:1, totp:0, st:'aktiv', last:'gestern',
+      tok:[{ n:'Zeitmessung Sandbahn', pre:'tsvrc_7f3a…', sc:'results:write', exp:'31.03.2027', last:'08.11.2026 15:02' }] },
+    jonas:{ n:'Jonas B.', ini:'JB', mail:'jonas@…', geb:'19.08.1990', age:36, roles:[['Ausbilder','Abteilung RC-Modellsport','06/2025'],['Mitglied','Abteilung RC-Modellsport','05/2024']], areas:['air','car'], pk:0, totp:0, st:'aktiv', last:'10.11.', fail:{ n:7, at:'14:12', until:'14:16', ip:'89.204.137.0/24 (Mobilfunk, Raum Nürnberg)' }, tok:[] },
+    lena:{ n:'Lena K.', ini:'LK', mail:'lena@…', geb:'04.07.1998', age:28, roles:[['Mitglied','Abteilung RC-Modellsport','09/2025']], areas:['car'], pk:0, totp:0, st:'aktiv', last:'08.11.',
+      tok:[{ n:'Kalender-Abo Tablet', pre:'tsvrc_4e91…', sc:'events:read', exp:'unbefristet', last:'heute 06:10' }] },
+    tim:{ n:'Tim S.', ini:'TS', mail:'tim@…', geb:'03.2012', age:14, roles:[['Mitglied','Abteilung RC-Modellsport','09/2026']], areas:['air'], pk:0, totp:0, st:'aktiv', last:'12.11.', tok:[],
+      eltern:[{ n:'Sandra S.', rel:'Mutter', cons:'online', d:'02.09.2026' }] },
+    sandra:{ n:'Sandra S.', ini:'SS', mail:'sandra@…', geb:'11.10.1983', age:43, roles:[['Erziehungsberechtigte','je Kind: Tim S.','09/2026']], areas:[], pk:0, totp:0, st:'aktiv', last:'12.11.', kind:'Tim S.', tok:[] },
+    paul:{ n:'Paul W.', ini:'PW', mail:'paul@…', geb:'21.05.2010', age:16, roles:[], areas:['car'], pk:0, totp:0, st:'wartet', last:'–', eltern:[], tok:[] },
+    eva:{ n:'Eva M.', ini:'EM', mail:'eva@…', geb:'30.01.1995', age:31, roles:[['Mitglied','Abteilung RC-Modellsport','neu']], areas:['air'], pk:0, totp:0, st:'eingeladen', last:'–', tok:[] },
+    felix:{ n:'Felix H.', ini:'FH', mail:'felix@…', geb:'14.03.1988', age:38, roles:[['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['car'], pk:0, totp:0, st:'gesperrt', last:'03/2026', why:'Austritt in Bearbeitung', tok:[] }
   };
-  const ST = { aktiv:'b-g', wartet:'b-w', eingeladen:'b-all', gesperrt:'b-r' };
+  const ST = { aktiv:'b-g', wartet:'b-w', eingeladen:'b-all', gesperrt:'b-r', ausgetreten:'b-all' };
   const isAdm = p => p.roles.some(r => r[0] === 'Admin');
+  const isLeit = p => p.roles.some(r => r[0] === 'Abteilungsleitung');
   const has2 = p => p.pk + p.totp > 0;
+  const adminCount = () => Object.values(KO).filter(p => isAdm(p) && p.st !== 'ausgetreten').length;
+  const leitKeys = () => Object.keys(KO).filter(k => isLeit(KO[k]) && KO[k].st !== 'ausgetreten');
+  const keyOf = n => Object.keys(KO).find(k => KO[k].n === n);
+  const consTx = e => e.cons === 'paper' ? 'Papier-Einwilligung vom ' + e.d + ' (erfasst von ' + e.by + ')'
+    : e.pend ? 'Einwilligung: offen – ' + e.n + ' bestätigt online beim Annehmen' : 'Einwilligung: online bestätigt am ' + e.d + ' von ' + e.n;
+  const consLog = e => e.cons === 'paper' ? 'Papier-Einwilligung vom ' + e.d + ' erfasst' : 'Einwilligung: ' + e.n + ' bestätigt online beim Annehmen (Textversion 1)';
+  const deIso = iso => iso.split('-').reverse().join('.');
+  // Auswahl „online / Papier“ (gemeinsam für Einladen, Verknüpfen und Eltern einladen)
+  function consSet(id, c){
+    $$('#'+id+' .ad-opt').forEach(x => { const on = x.dataset.c === c; x.classList.toggle('on', on); x.querySelector('i').className = 'bi ' + (on ? 'bi-record-circle-fill' : 'bi-circle'); });
+    byId(id.replace('-cons', '-paperbox')).style.display = c === 'paper' ? '' : 'none';
+  }
+  const consMode = id => { const o = $('#'+id+' .ad-opt.on'); return o ? o.dataset.c : 'online'; };
+  function consBind(id, cb){ byId(id).addEventListener('click', e => { const o = e.target.closest('.ad-opt'); if (!o) return; consSet(id, o.dataset.c); cb(); }); }
   function cats(p){ const c = []; if (isAdm(p)) c.push('adm'); if (p.age < 18) c.push('minor'); if (p.st === 'wartet') c.push('wait'); if (p.st === 'eingeladen') c.push('inv'); if (p.st === 'gesperrt') c.push('lock'); return c; }
   function renderKList(){
     const q = byId('ad-k-q').value.trim().toLowerCase();
     const f = (chipsOn('ad-k-f')[0] || {}).dataset?.f || 'all';
     const keys = Object.keys(KO).filter(k => { const p = KO[k]; return (f === 'all' || cats(p).includes(f)) && (!q || (p.n + ' ' + p.mail).toLowerCase().includes(q)); });
     byId('ad-k-list').innerHTML = keys.length ? keys.map(k => { const p = KO[k];
-      const roles = p.roles.length ? p.roles.map(r => r[0]).join(' · ') : 'noch keine Rolle';
+      const roles = p.roles.length ? p.roles.map(r => r[0]).join(' · ') : (p.st === 'ausgetreten' ? 'ausgetreten zum ' + p.gone : 'noch keine Rolle');
       const adm = isAdm(p) ? (has2(p) ? ' <i class="bi bi-shield-check ad-ok" title="2FA-Pflicht erfüllt"></i>' : ' <i class="bi bi-shield-exclamation" style="color:var(--warn)" title="2FA fehlt"></i>') : '';
       return '<div class="row'+(p.fresh?' new-row':'')+'" data-k="'+k+'" data-go="ad-konto"><span class="li"><span class="ico neu ad-ini">'+esc(p.ini)+'</span><span><b>'+esc(p.n)+'</b>'+(p.age<18?' <span class="badge b-w">'+p.age+'</span>':'')+adm+'<br><small>'+esc(roles)+'</small></span></span><span class="badge '+ST[p.st]+'">'+p.st+'</span></div>';
     }).join('') : '<div class="row"><small class="mut">Keine Konten gefunden.</small></div>';
@@ -8873,38 +9028,47 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p.fail) fb.innerHTML = '<b><i class="bi bi-hourglass-split" style="color:var(--warn)"></i> Fehlversuche bei der Anmeldung</b>'
       + '<dl class="kv2" style="margin:6px 0 0"><dt>Fehlversuche</dt><dd>' + p.fail.n + '</dd><dt>Letzter Versuch</dt><dd>' + esc(p.fail.at) + ' Uhr</dd><dt>IP-Netz</dt><dd>' + esc(p.fail.ip) + '</dd>'
       + (p.fail.until ? '<dt>Status</dt><dd><b>Wartezeit bis ' + esc(p.fail.until) + ' Uhr</b></dd>' : '') + '</dl>'
-      + '<small class="mut">Gezählt je Konto und IP-Netz. Ab dem 5. Fehlversuch steigt die Wartezeit (1, 2, 4, 8, höchstens 15 Minuten). Passkey und „Passwort vergessen?“ bleiben immer möglich. Der Zähler verfällt nach erfolgreicher Anmeldung oder 24 Stunden ohne Fehlversuch.</small>'
+      + '<small class="mut">Gezählt je Konto und IP-Netz. Ab dem 5. Fehlversuch steigt die Wartezeit (1, 2, 4, 8, höchstens 15 Minuten). Passkey und „Passwort vergessen?“ bleiben immer möglich. Der Zähler verfällt nach erfolgreicher Anmeldung oder 24 Stunden ohne Fehlversuch. Fehlversuche sieht und gibt nur der Admin frei.</small>'
       + '<div class="btns" style="margin:8px 0 0"><button class="btn" id="ad-ko-failfree">Sofort freigeben</button></div><div class="hint" style="margin-bottom:0">Setzt den Zähler zurück und beendet die Wartezeit. Wird protokolliert.</div>';
     const stBox = byId('ad-ko-state'); let stTx = '';
     if (p.st === 'wartet') stTx = '<i class="bi bi-person-plus"></i> Hat sich selbst registriert, E-Mail bestätigt. ' + (p.age < 18 ? '<b>Minderjährig:</b> nach der Freischaltung sofort nutzbar; zustimmungspflichtige Aktionen warten, bis ein Erziehungsberechtigter verknüpft ist.' : 'Bitte prüfen und freischalten.');
     if (p.st === 'eingeladen') stTx = '<i class="bi bi-envelope"></i> Einladung gesendet, Link gültig bis 21.11.2026.';
     if (p.st === 'gesperrt') stTx = '<i class="bi bi-slash-circle" style="color:var(--red)"></i> Gesperrt. Grund: ' + esc(p.why || '–');
+    if (p.st === 'ausgetreten') stTx = '<i class="bi bi-person-x"></i> Ausgetreten zum ' + esc(p.gone) + '. Konto deaktiviert; Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist.';
     stBox.style.display = stTx ? '' : 'none'; stBox.innerHTML = stTx;
+    const lastAdm = adminCount() === 1;
     byId('ad-ko-roles').innerHTML = p.roles.length ? p.roles.map((r, i) => {
       const wait = r[0] === 'Admin' && !has2(p);
-      return '<div class="row"><span><b>'+esc(r[0])+'</b>'+(wait?' <span class="badge b-w">wartet auf 2FA</span>':'')+'<br><small>'+esc(r[1])+' · seit '+esc(r[2])+'</small></span>'+(p.self && r[0]==='Admin' ? '<i class="bi bi-lock mut" title="eigene Admin-Rolle"></i>' : '<i class="bi bi-x-lg mut ad-ko-rm" data-i="'+i+'" style="cursor:pointer"></i>')+'</div>';
+      const lock = r[0] === 'Admin' && (p.self || lastAdm);
+      return '<div class="row"><span><b>'+esc(r[0])+'</b>'+(wait?' <span class="badge b-w">wartet auf 2FA</span>':'')+'<br><small>'+esc(r[1])+' · seit '+esc(r[2])+(lock && lastAdm ? ' · letzter Admin, nicht entziehbar' : '')+'</small></span>'+(lock ? '<i class="bi bi-lock mut ad-ko-lock" title="'+(lastAdm ? 'letzter Admin' : 'eigene Admin-Rolle')+'"></i>' : '<i class="bi bi-x-lg mut ad-ko-rm" data-i="'+i+'" style="cursor:pointer"></i>')+'</div>';
     }).join('') : '<div class="row"><small class="mut">Noch keine Rolle.</small></div>';
+    byId('ad-ko-lwarn').style.display = 'none';
     byId('ad-ko-2fa').style.display = isAdm(p) && !has2(p) ? '' : 'none';
     let fam = '';
-    if (p.age < 18) fam = '<h3>Erziehungsberechtigte</h3><div class="card">' + (p.eltern.length ? p.eltern.map(n => '<div class="row"><span><b>'+esc(n)+'</b><br><small>Einwilligung dokumentiert · endet mit 18</small></span><i class="bi bi-check-circle-fill ad-ok"></i></div>').join('') : '<div class="row"><small class="mut">Noch niemand verknüpft.</small></div>')
-      + (p.elternInv || []).map(n => '<div class="row"><span><b>'+esc(n)+'</b><br><small>eingeladen · Einwilligung offen, noch nicht wirksam</small></span><span class="badge b-w">offen</span></div>').join('')
-      + '<div class="row"><span class="chg" data-pick="adEltern"><i class="bi bi-plus-lg"></i> Erziehungsberechtigte verknüpfen</span></div></div>';
+    if (p.age < 18) fam = '<h3>Erziehungsberechtigte</h3><div class="card">' + (p.eltern.length ? p.eltern.map(e => '<div class="row"><span><b>'+esc(e.n)+'</b> · '+esc(e.rel)+(e.inv ? ' <span class="badge b-w">eingeladen</span>' : '')+'<br><small>'+esc(consTx(e))+' · endet mit 18</small></span>'+(e.pend ? '<span class="badge b-w">offen</span>' : '<i class="bi bi-check-circle-fill ad-ok"></i>')+'</div>').join('') : '<div class="row"><small class="mut">Noch niemand verknüpft.</small></div>')
+      + (p.st === 'ausgetreten' ? '' : '<div class="row"><span class="chg" data-pick="adEltern"><i class="bi bi-plus-lg"></i> Erziehungsberechtigte verknüpfen</span></div>') + '</div>';
     if (p.kind) fam = '<h3>Familie</h3><div class="card pad" style="font-size:13px">Erziehungsberechtigte von <b>'+esc(p.kind)+'</b> · nur lesen, endet mit dessen 18. Geburtstag.</div>';
     byId('ad-ko-fam').innerHTML = fam;
     byId('ad-ko-pk').textContent = p.pk; byId('ad-ko-totp').textContent = p.totp; byId('ad-ko-last').textContent = p.last;
     byId('ad-ko-resetrow').style.display = p.self || !has2(p) ? 'none' : '';
+    byId('ad-ko-tok').innerHTML = p.tok.length ? p.tok.map((t, i) => '<div class="row"><span><b>'+esc(t.n)+'</b><br><small><span class="ad-hash">'+esc(t.pre)+'</span> · '+esc(t.sc)+'<br>'+(t.exp === 'unbefristet' ? '<span class="badge b-w">unbefristet</span>' : 'läuft ab '+esc(t.exp))+' · zuletzt '+esc(t.last)+'</small></span><span class="chg ad-tok-rev" data-i="'+i+'" style="color:var(--red)">Widerrufen</span></div>').join('')
+      : '<div class="row"><small class="mut">Keine API-Tokens.</small></div>';
     let act = '';
     if (p.st === 'wartet') act = '<button class="btn" id="ad-ko-free">Freischalten</button>' + (p.age<18 && !p.eltern.length ? '<div class="note">Noch kein Erziehungsberechtigter verknüpft: Das Konto ist trotzdem sofort nutzbar, zustimmungspflichtige Aktionen warten auf das Eltern-Konto.</div>' : '');
     if (p.st === 'eingeladen') act = '<button class="btn out" id="ad-ko-reinv"><i class="bi bi-envelope"></i> Einladung erneut senden</button>';
     if (p.st === 'aktiv') act = p.self ? '<div class="note">Das eigene Konto kann nicht gesperrt werden.</div>' : '<button class="btn out ad-redout" data-go="ad-sperren"><i class="bi bi-slash-circle"></i> Konto sperren</button>';
     if (p.st === 'gesperrt') act = '<button class="btn" id="ad-ko-unlock"><i class="bi bi-unlock"></i> Entsperren</button>';
     byId('ad-ko-act').innerHTML = act;
+    let lv = '';
+    if (!p.kind && (p.st === 'aktiv' || p.st === 'gesperrt')) lv = isAdm(p) && lastAdm ? '<div class="note" id="ad-ko-leavenote">' + esc(p.n) + ' ist der letzte Admin und kann nicht austreten. Erst muss ein weiterer Admin bestimmt werden.</div>'
+      : '<button class="btn out ad-redout" id="ad-ko-leavebtn" data-go="ad-austritt" style="margin-top:8px"><i class="bi bi-person-x"></i> Austritt erfassen</button>';
+    byId('ad-ko-leave').innerHTML = lv;
     byId('ad-sp-name').textContent = '„' + p.n + '“';
   }
   function openKonto(k){
     curK = k; const p = KO[k];
     if (!p.self) {
-      byId('ad-ko-bantx').textContent = 'Nur zur Unterstützung von ' + p.n + ' nutzen. Das Ansehen wird nicht protokolliert, Änderungen schon.';
+      byId('ad-ko-bantx').textContent = 'Nur zur Unterstützung von ' + p.n + ' nutzen. Das Ansehen wird nicht protokolliert, Änderungen und Exporte schon.';
     }
     renderKonto();
   }
@@ -8913,16 +9077,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const p = KO[curK], b = e.target.closest('button'); if (!b || !p.fail) return;
     if (b.id === 'ad-ko-failfree') { delete p.fail; log('ko', 'Fehlversuche zurückgesetzt (sofort freigegeben)', 'Konto ' + p.n); renderKonto(); KD.toast('Fehlversuche von ' + p.n + ' zurückgesetzt. Anmelden mit Passwort ist sofort wieder möglich.'); }
   });
+  // Rolle entfernen; die letzte Leitungsperson nur nach Warnung
+  function rmRole(k, idx){
+    const p = KO[k], r = p.roles.splice(idx, 1)[0];
+    log('ko', 'Rolle „' + r[0] + '“ entzogen', 'Konto ' + p.n + (r[0] === 'Abteilungsleitung' && !leitKeys().length ? ' · Abteilung jetzt ohne Leitung' : ''));
+    if (curK && KO[curK]) renderKonto(); renderKList(); renderAL();
+    KD.toast('Rolle „' + r[0] + '“ entzogen.' + (r[0] === 'Abteilungsleitung' && !leitKeys().length ? ' Die Abteilung hat jetzt keine Leitung.' : ''));
+  }
+  const lastLeitTx = n => n + ' ist die letzte Leitungsperson. Danach hat die Abteilung keine Leitung mehr: Freischaltungen, Ausleih-Genehmigungen, Platzsperren und Familien-Verknüpfungen übernimmt dann nur noch ein Admin.';
+  let lwarnIdx = -1;
   byId('ad-ko-roles').addEventListener('click', e => {
+    if (e.target.closest('.ad-ko-lock')) { KD.toast(adminCount() === 1 ? 'Die letzte Admin-Rolle lässt sich nicht entziehen. Erst einen weiteren Admin bestimmen.' : 'Die eigene Admin-Rolle entzieht nur ein anderer Admin.'); return; }
     const x = e.target.closest('.ad-ko-rm'); if (!x) return;
-    const p = KO[curK], r = p.roles.splice(+x.dataset.i, 1)[0];
-    log('ko', 'Rolle „' + r[0] + '“ entzogen', 'Konto ' + p.n); renderKonto(); renderKList();
-    KD.toast('Rolle „' + r[0] + '“ entzogen.');
+    const p = KO[curK], i = +x.dataset.i, r = p.roles[i];
+    if (r[0] === 'Admin' && adminCount() === 1) { KD.toast('Die letzte Admin-Rolle lässt sich nicht entziehen.'); return; }
+    if (r[0] === 'Abteilungsleitung' && leitKeys().length === 1) { lwarnIdx = i; byId('ad-ko-lwarntx').textContent = lastLeitTx(p.n); byId('ad-ko-lwarn').style.display = ''; return; }
+    rmRole(curK, i);
   });
+  byId('ad-ko-lwarn-go').addEventListener('click', () => { if (lwarnIdx >= 0) rmRole(curK, lwarnIdx); lwarnIdx = -1; });
+  byId('ad-ko-lwarn-no').addEventListener('click', () => { lwarnIdx = -1; byId('ad-ko-lwarn').style.display = 'none'; });
   byId('ad-ko-reset').addEventListener('click', () => {
     const p = KO[curK]; p.pk = 0; p.totp = 0; renderKonto(); renderKList();
     log('ko', 'Zweite Faktoren zurückgesetzt', 'Konto ' + p.n, 'Passkeys und TOTP entfernt; Person per E-Mail informiert.');
     KD.toast('Zurückgesetzt. ' + p.n + ' wird per E-Mail informiert.');
+  });
+  byId('ad-ko-tok').addEventListener('click', e => {
+    const x = e.target.closest('.ad-tok-rev'); if (!x) return;
+    const p = KO[curK], t = p.tok.splice(+x.dataset.i, 1)[0];
+    log('ko', 'API-Token widerrufen', 'Konto ' + p.n, 'Token „' + t.n + '“ (' + t.pre + ', ' + t.sc + ') widerrufen; ' + (p.self ? 'Bestätigung' : p.n + ' per E-Mail informiert') + '.');
+    renderKonto();
+    KD.toast('Token „' + t.n + '“ widerrufen.' + (p.self ? '' : ' ' + p.n + ' wird per E-Mail informiert.'));
   });
   byId('ad-ko-act').addEventListener('click', e => {
     const p = KO[curK], b = e.target.closest('button'); if (!b || b.classList.contains('dis')) return;
@@ -8932,23 +9116,56 @@ document.addEventListener('DOMContentLoaded', () => {
     renderKonto(); renderKList();
   });
   KD.PICK.adRolle = { title:'Rolle vergeben', target:'ad-rolle-t',
-    foot:'Rollen gelten je Abteilung, Admin gilt global und verlangt einen zweiten Faktor oder Passkey. Erziehungsberechtigung wird über „Familie“ verknüpft.',
+    foot:'Rollen gelten je Abteilung, Admin gilt global und verlangt einen zweiten Faktor oder Passkey. Abteilungsleitung und Admin vergibt nur ein Admin. Erziehungsberechtigung wird über „Familie“ verknüpft.',
     secs:[['Abteilung RC-Modellsport',[['Mitglied','Pilot/Fahrer, eigene Daten','bi-person',''],['Ausbilder','sieht Flüge und Nachweise seiner Schüler','bi-mortarboard',''],['Abteilungsleitung','Mitglieder, Gerät, Ausleihen, Kalender','bi-people','']]],
           ['Global',[['Admin','Konten, Regelwerk, Orte, Backup','bi-gear','<span class="badge b-w">2FA-Pflicht</span>']]]],
     onPick:(i) => {
       const p = KO[curK];
+      if (p.st === 'ausgetreten') { KD.toast(p.n + ' ist ausgetreten – keine Rollen mehr.'); return; }
       if (p.roles.some(r => r[0] === i[0])) { KD.toast(p.n + ' hat diese Rolle schon.'); return; }
       p.roles.push([i[0], i[0] === 'Admin' ? 'global' : 'Abteilung RC-Modellsport', 'neu']);
-      log('ko', 'Rolle „' + i[0] + '“ vergeben', 'Konto ' + p.n); renderKonto(); renderKList();
+      log('ko', 'Rolle „' + i[0] + '“ vergeben', 'Konto ' + p.n); renderKonto(); renderKList(); renderAL();
       KD.toast(i[0] === 'Admin' && !has2(p) ? 'Admin vergeben – wirksam, sobald ' + p.n + ' einen zweiten Faktor einrichtet.' : 'Rolle „' + i[0] + '“ vergeben.');
     } };
   const ELTERN = [['Erziehungsberechtigte mit Konto',[['Sandra S.','Mutter von Tim S.','bi-person',''],['Thomas W.','Konto ohne Mitgliedschaft','bi-person','']]],
                   ['Neu',[['Person einladen …','legt ein Konto ohne Mitgliedschaft an','bi-envelope-plus','',{act:true,inv:true}]]]];
   KD.PICK.adEltern = { title:'Erziehungsberechtigte', target:'ad-ko-eltern-t', secs:ELTERN,
-    foot:'Erziehungsberechtigte brauchen ein eigenes Konto, aber keine Mitgliedschaft. Die Einwilligung wird mit Datum dokumentiert.',
-    onPick:(i, o) => { if (o.inv) { enOpen('konto'); return; } const p = KO[curK]; if (!p.eltern.includes(i[0])) p.eltern.push(i[0]); log('ko', 'Erziehungsberechtigung verknüpft', 'Konto ' + p.n, i[0] + ' ↔ ' + p.n + ', Einwilligung 14.11.2026'); renderKonto(); KD.toast(i[0] + ' verknüpft. Einwilligung dokumentiert.'); } };
-  KD.PICK.adElternInv = { title:'Erziehungsberechtigte', target:'ad-inv-eltern', secs:ELTERN, foot:KD.PICK.adEltern.foot,
+    foot:'Erziehungsberechtigte brauchen ein eigenes Konto, aber keine Mitgliedschaft. Danach wählst du Beziehung und Einwilligung (online beim Annehmen oder Papier mit Datum).',
+    onPick:(i, o) => {
+      if (o.inv) { enOpen('konto'); return; }
+      const p = KO[curK];
+      if (p.eltern.some(e => e.n === i[0])) { KD.toast(i[0] + ' ist schon verknüpft.'); return; }
+      elOpen(i[0]);
+    } };
+  KD.PICK.adElternInv = { title:'Erziehungsberechtigte', target:'ad-inv-eltern', secs:ELTERN, foot:'Erziehungsberechtigte brauchen ein eigenes Konto, aber keine Mitgliedschaft. Beziehung und Einwilligung wählst du im Formular.',
     onPick:(i, o) => { if (o.inv) { const el = byId('ad-inv-eltern'); el.textContent = invElPrev[0]; el.classList.toggle('mut', invElPrev[1]); enOpen('inv'); return; } later(invCheck); } };
+
+  /* Erziehungsberechtigte (vorhandenes Konto) verknüpfen: Beziehung + Einwilligung */
+  let elName = '';
+  function elCheck(){
+    const miss = [];
+    if (!chipsOn('ad-el-rel').length) miss.push('Beziehung');
+    if (consMode('ad-el-cons') === 'paper' && !byId('ad-el-ew').value) miss.push('Datum der Papier-Einwilligung');
+    gate('ad-el-save', 'ad-el-hint', miss);
+  }
+  function elOpen(n){
+    elName = n; const p = KO[curK];
+    byId('ad-el-person').textContent = n; byId('ad-el-kind').textContent = 'für ' + p.n + ' (' + p.age + ')';
+    setChips('ad-el-rel', () => false); consSet('ad-el-cons', 'online'); byId('ad-el-ew').value = ''; elCheck();
+    KD.show('ad-eltern-link', 'push');
+  }
+  byId('ad-el-rel').addEventListener('change', elCheck);
+  byId('ad-el-ew').addEventListener('input', elCheck); byId('ad-el-ew').addEventListener('change', elCheck);
+  consBind('ad-el-cons', elCheck);
+  byId('ad-el-save').addEventListener('click', () => {
+    if (byId('ad-el-save').classList.contains('dis')) return;
+    const p = KO[curK], paper = consMode('ad-el-cons') === 'paper';
+    const e = { n:elName, rel:chipsOn('ad-el-rel')[0].textContent, cons:paper ? 'paper' : 'online', d:paper ? deIso(byId('ad-el-ew').value) : '', by:'Markus B.', pend:!paper };
+    p.eltern.push(e);
+    log('ko', 'Erziehungsberechtigung verknüpft', 'Konto ' + p.n, e.n + ' (' + e.rel + ') ↔ ' + p.n + '; ' + consLog(e));
+    renderKonto(); renderKList(); KD.back();
+    KD.toast(e.n + ' verknüpft. ' + (paper ? 'Papier-Einwilligung erfasst – die Verknüpfung ist wirksam.' : e.n + ' bestätigt die Einwilligung online (E-Mail ist unterwegs); bis dahin ist die Verknüpfung offen.'));
+  });
 
   /* Sperren */
   const spDur = () => { const c = byId('ad-sp-dur').querySelector('.chip.on'); return c ? c.dataset.d : '0'; };
@@ -8969,48 +9186,129 @@ document.addEventListener('DOMContentLoaded', () => {
     renderKonto(); renderKList(); KD.back(); KD.toast(p.n + ' ist gesperrt' + (until ? ' bis ' + until : '') + '. Sitzungen und Tokens beendet.');
   });
 
+  /* Austritt (gleicher Ablauf wie bei der Leitung) */
+  function auCheck(){
+    const miss = [];
+    if (!byId('ad-au-date').value) miss.push('Datum');
+    if (!byId('ad-au-ck').classList.contains('on')) miss.push('Bestätigung');
+    gate('ad-au-go', 'ad-au-hint', miss);
+  }
+  KD.enter['ad-austritt'] = () => {
+    const p = KO[curK], row = (c, col, t) => '<div class="row"><span><i class="bi ' + c + '" style="color:' + col + '"></i> ' + esc(t) + '</span></div>';
+    byId('ad-au-who').textContent = p.n + (p.age < 18 ? ' (' + p.age + ')' : '');
+    let h = row('bi-check-circle-fill', 'var(--g)', 'Offene Ausleihen und Reservierungen prüft das System beim Austritt; offene Rückgaben werden zum Mahnfall bei der Leitung');
+    if (p.roles.length) h += row('bi-person-badge', 'var(--mut)', 'Rollen enden: ' + p.roles.map(r => r[0]).join(', ') + (isLeit(p) && leitKeys().length === 1 ? ' – danach hat die Abteilung keine Leitung' : ''));
+    (p.eltern || []).forEach(e => { h += row('bi-people-fill', 'var(--mut)', 'Verknüpfung zu ' + e.n + ' endet – die Einsicht endet mit dem Austritt'); });
+    if (p.tok.length) h += row('bi-key', 'var(--mut)', p.tok.length + ' API-Token' + (p.tok.length > 1 ? 's enden' : ' endet'));
+    h += row('bi-envelope', 'var(--mut)', 'Bestätigung an ' + p.mail + ((p.eltern || []).length ? ' und ' + p.eltern.map(e => e.n).join(', ') : '') + ', danach wird die Adresse gelöscht');
+    byId('ad-au-list').innerHTML = h;
+    byId('ad-au-date').value = '2026-11-14'; setChips('ad-au-why', () => false);
+    const ck = byId('ad-au-ck'); ck.classList.remove('on'); ck.querySelector('i').className = 'bi bi-square'; auCheck();
+  };
+  byId('ad-au-date').addEventListener('input', auCheck); byId('ad-au-date').addEventListener('change', auCheck);
+  byId('ad-au-ck').addEventListener('click', function(){ this.classList.toggle('on'); this.querySelector('i').className = 'bi ' + (this.classList.contains('on') ? 'bi-check-square-fill' : 'bi-square'); auCheck(); });
+  byId('ad-au-go').addEventListener('click', () => {
+    if (byId('ad-au-go').classList.contains('dis')) return;
+    const p = KO[curK];
+    if (isAdm(p) && adminCount() === 1) { KD.back(); KD.toast('Der letzte Admin kann nicht austreten.'); return; }
+    const d = deIso(byId('ad-au-date').value), why = chipsOn('ad-au-why')[0], noLeit = isLeit(p) && leitKeys().length === 1;
+    p.st = 'ausgetreten'; p.gone = d; p.roles = []; p.tok = []; p.pk = 0; p.totp = 0; delete p.why;
+    log('ko', 'Austritt erfasst', 'Konto ' + p.n, 'Austritt zum ' + d + (why ? ' (Grund: ' + why.textContent + ')' : '') + '; Konto deaktiviert, Rollen, Sitzungen und Tokens beendet, Bestätigung gesendet, Kontaktdaten danach gelöscht' + (noLeit ? '; Abteilung jetzt ohne Leitung' : '') + '.');
+    renderKonto(); renderKList(); renderAL(); KD.back();
+    KD.toast('Austritt von ' + p.n + ' zum ' + d + ' erfasst. Bestätigung gesendet, danach werden die Kontaktdaten gelöscht.' + (noLeit ? ' Die Abteilung hat jetzt keine Leitung.' : ''));
+  });
+
   /* Einladen */
   function ageOf(s){ const m = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(s.trim()); if (!m) return null;
     const d = +m[1], mo = +m[2], y = +m[3]; if (mo < 1 || mo > 12 || d < 1 || d > 31 || y < 1900 || y > 2026) return null;
     let a = 2026 - y; if (mo > 11 || (mo === 11 && d > 14)) a--; return a; }
+  const invName = () => (byId('ad-inv-vn').value.trim() + ' ' + byId('ad-inv-nn').value.trim()).trim();
   function invCheck(){
     const a = ageOf(byId('ad-inv-geb').value), minor = a !== null && a < 18;
     byId('ad-inv-erow').style.display = minor ? '' : 'none';
     const miss = [];
-    if (!byId('ad-inv-name').value.trim()) miss.push('Name');
+    if (!byId('ad-inv-vn').value.trim()) miss.push('Vorname');
+    if (!byId('ad-inv-nn').value.trim()) miss.push('Nachname');
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(byId('ad-inv-mail').value.trim())) miss.push('gültige E-Mail');
     if (a === null) miss.push('Geburtsdatum (TT.MM.JJJJ)');
-    if (minor && byId('ad-inv-eltern').classList.contains('mut')) miss.push('Erziehungsberechtigte');
+    if (minor) {
+      if (byId('ad-inv-eltern').classList.contains('mut')) miss.push('Erziehungsberechtigte');
+      if (!chipsOn('ad-inv-rel').length) miss.push('Beziehung');
+      if (consMode('ad-inv-cons') === 'paper' && ageOf(byId('ad-inv-ew').value) === null) miss.push('Datum der Papier-Einwilligung (TT.MM.JJJJ)');
+    }
     gate('ad-inv-save', 'ad-inv-hint', miss);
   }
-  ['ad-inv-name','ad-inv-mail','ad-inv-geb'].forEach(id => byId(id).addEventListener('input', invCheck));
+  ['ad-inv-vn','ad-inv-nn','ad-inv-mail','ad-inv-geb','ad-inv-ew'].forEach(id => byId(id).addEventListener('input', invCheck));
+  byId('ad-inv-rel').addEventListener('change', invCheck);
+  consBind('ad-inv-cons', invCheck);
   KD.enter['ad-einladen'] = invCheck;
   byId('ad-inv-save').addEventListener('click', () => {
-    const n = byId('ad-inv-name').value.trim(), a = ageOf(byId('ad-inv-geb').value);
+    if (byId('ad-inv-save').classList.contains('dis')) return;
+    const n = invName(), a = ageOf(byId('ad-inv-geb').value);
     const key = 'n' + Date.now(), roles = chipsOn('ad-inv-role').map(c => [c.textContent, 'Abteilung RC-Modellsport', 'neu']);
+    let eltern;
+    if (a < 18) {
+      const en = byId('ad-inv-eltern').textContent, paper = consMode('ad-inv-cons') === 'paper', invited = Object.values(KO).some(p => p.n === en && p.st === 'eingeladen');
+      eltern = [{ n:en, rel:chipsOn('ad-inv-rel')[0].textContent, cons:paper ? 'paper' : 'online', d:paper ? byId('ad-inv-ew').value.trim() : '', by:'Markus B.', pend:!paper || invited, inv:invited }];
+    }
     KO[key] = { n, ini:n.split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase(), mail:byId('ad-inv-mail').value.trim(), geb:byId('ad-inv-geb').value.trim(), age:a, roles,
-      areas:[], pk:0, totp:0, st:'eingeladen', last:'–', fresh:true, eltern: a < 18 ? [byId('ad-inv-eltern').textContent] : undefined };
-    log('ko', 'Person eingeladen', 'Konto ' + n);
-    ['ad-inv-name','ad-inv-mail','ad-inv-geb'].forEach(id => byId(id).value = '');
-    setChips('ad-inv-role', c => c.textContent === 'Mitglied');
+      areas:[], pk:0, totp:0, st:'eingeladen', last:'–', fresh:true, eltern, tok:[] };
+    log('ko', 'Person eingeladen', 'Konto ' + n, 'Rollen: ' + (roles.map(r => r[0]).join(', ') || '–') + (eltern ? '; ' + eltern[0].n + ' (' + eltern[0].rel + ') verknüpft – ' + consLog(eltern[0]) : ''));
+    ['ad-inv-vn','ad-inv-nn','ad-inv-mail','ad-inv-geb','ad-inv-ew'].forEach(id => byId(id).value = '');
+    setChips('ad-inv-role', c => c.textContent === 'Mitglied'); setChips('ad-inv-rel', () => false); consSet('ad-inv-cons', 'online');
     byId('ad-inv-eltern').textContent = 'Person wählen'; byId('ad-inv-eltern').classList.add('mut');
     setChips('ad-k-f', c => c.dataset.f === 'all'); byId('ad-k-q').value = '';
-    renderKList(); KD.back(); KD.toast('Einladung an ' + n + ' gesendet (7 Tage gültig).');
+    renderKList(); renderAL(); KD.back(); KD.toast('Einladung an ' + n + ' gesendet (7 Tage gültig).' + (eltern ? ' Das Kinder-Konto ist sofort nutzbar.' : ''));
   });
 
   /* ================= Abteilung & Bereiche ================= */
-  let AL = ['Markus B.'];
+  // Abteilungsleitung = Konten mit der Rolle „Abteilungsleitung“ (nur der Admin vergibt und entzieht sie)
   function renderAL(){
-    byId('ad-al').innerHTML = AL.length ? AL.map((n, i) => '<span class="ad-pill">'+esc(n)+' <i class="bi bi-x-lg" data-i="'+i+'"></i></span>').join('') : '<div class="alert" style="margin:0 0 6px">Abteilung ohne Leitung.</div>';
+    const ks = leitKeys();
+    byId('ad-al').innerHTML = ks.length ? ks.map(k => '<span class="ad-pill">'+esc(KO[k].n)+' <i class="bi bi-x-lg" data-k="'+k+'"></i></span>').join('') : '<div class="alert" style="margin:0 0 6px">Abteilung ohne Leitung.</div>';
+    byId('ad-al-warn').style.display = 'none';
   }
+  let alWarnK = null;
   byId('ad-al').addEventListener('click', e => {
-    const x = e.target.closest('[data-i]'); if (!x) return;
-    const n = AL.splice(+x.dataset.i, 1)[0]; renderAL(); log('ko', 'Abteilungsleitung entfernt', n); KD.toast(n + ' ist nicht mehr Abteilungsleitung.');
+    const x = e.target.closest('[data-k]'); if (!x) return;
+    const k = x.dataset.k, i = KO[k].roles.findIndex(r => r[0] === 'Abteilungsleitung');
+    if (leitKeys().length === 1) { alWarnK = k; byId('ad-al-warntx').textContent = lastLeitTx(KO[k].n); byId('ad-al-warn').style.display = ''; return; }
+    rmRole(k, i);
   });
-  KD.PICK.adLeitung = { title:'Abteilungsleitung zuweisen', target:'ad-al-t',
-    foot:'Es erscheinen Mitglieder der Abteilung. Die Abteilungsleitung ist für beide Bereiche zuständig.',
-    secs:[['Mitglieder',[['Markus B.','Admin, Mitglied','bi-person',''],['Max R.','Ausbilder','bi-person',''],['Jonas B.','Ausbilder','bi-person',''],['Lena K.','Mitglied','bi-person','']]]],
-    onPick:(i) => { if (AL.includes(i[0])) { KD.toast(i[0] + ' ist bereits Abteilungsleitung.'); return; } AL.push(i[0]); renderAL(); log('ko', 'Abteilungsleitung zugewiesen', i[0]); KD.toast(i[0] + ' ist jetzt Abteilungsleitung.'); } };
+  byId('ad-al-warn-go').addEventListener('click', () => { if (alWarnK) rmRole(alWarnK, KO[alWarnK].roles.findIndex(r => r[0] === 'Abteilungsleitung')); alWarnK = null; });
+  byId('ad-al-warn-no').addEventListener('click', () => { alWarnK = null; byId('ad-al-warn').style.display = 'none'; });
+  function alPick(){
+    const m = Object.keys(KO).filter(k => KO[k].roles.some(r => r[0] === 'Mitglied') && KO[k].st !== 'ausgetreten' && KO[k].age >= 18)
+      .map(k => [KO[k].n, KO[k].roles.map(r => r[0]).filter(r => r !== 'Mitglied').join(', ') || 'Mitglied', 'bi-person', isLeit(KO[k]) ? '<span class="badge b-g">Leitung</span>' : '']);
+    KD.PICK.adLeitung = { title:'Abteilungsleitung zuweisen', target:'ad-al-t',
+      foot:'Es erscheinen Mitglieder der Abteilung. Die Abteilungsleitung ist für beide Bereiche zuständig. Die Rolle vergibt nur ein Admin.',
+      secs:[['Mitglieder', m]],
+      onPick:(i) => { const k = keyOf(i[0]); if (!k) return; if (isLeit(KO[k])) { KD.toast(i[0] + ' ist bereits Abteilungsleitung.'); return; }
+        KO[k].roles.unshift(['Abteilungsleitung','Abteilung RC-Modellsport','neu']); renderAL(); renderKList(); log('ko', 'Rolle „Abteilungsleitung“ vergeben', 'Konto ' + i[0]); KD.toast(i[0] + ' ist jetzt Abteilungsleitung.'); } };
+  }
+  alPick();
+  document.addEventListener('click', e => { if (e.target.closest('[data-pick="adLeitung"]')) alPick(); }, true);
+
+  /* ================= Erinnerungen (Systemeinstellung) ================= */
+  const REM = { n1:60, n2:14, v:30 }; KD.REM = REM;
+  const erNum = id => { const v = byId(id).value.trim(); return /^\d{1,3}$/.test(v) ? +v : null; };
+  function erCheck(){
+    const n1 = erNum('ad-er-n1'), n2 = erNum('ad-er-n2'), v = erNum('ad-er-v'), miss = [];
+    [[n1,'erste Nachweis-Erinnerung'],[n2,'zweite Nachweis-Erinnerung'],[v,'Bald volljährig']].forEach(([x, l]) => { if (x === null || x < 1 || x > 365) miss.push(l + ' (1–365 Tage)'); });
+    if (!miss.length && n1 <= n2) miss.push('erste Nachweis-Erinnerung muss vor der zweiten liegen');
+    const changed = n1 !== REM.n1 || n2 !== REM.n2 || v !== REM.v;
+    byId('ad-er-save').classList.toggle('dis', miss.length > 0 || !changed);
+    byId('ad-er-hint').textContent = miss.length ? 'Bitte prüfen: ' + miss.join(', ') + '.' : changed ? 'Geändert – noch nicht gespeichert.' : 'Keine Änderung.';
+  }
+  $$('#ad-er .ad-er-in').forEach(i => i.addEventListener('input', erCheck));
+  byId('ad-er-save').addEventListener('click', () => {
+    if (byId('ad-er-save').classList.contains('dis')) return;
+    const n1 = erNum('ad-er-n1'), n2 = erNum('ad-er-n2'), v = erNum('ad-er-v');
+    const diff = 'Nachweis läuft ab: ' + REM.n1 + ' und ' + REM.n2 + ' → ' + n1 + ' und ' + n2 + ' Tage vorher · Bald volljährig: ' + REM.v + ' → ' + v + ' Tage vorher';
+    REM.n1 = n1; REM.n2 = n2; REM.v = v;
+    log('sys', 'Erinnerungen geändert', 'Systemeinstellung', diff); erCheck();
+    KD.toast('Erinnerungen gespeichert: Nachweis ' + n1 + ' und ' + n2 + ' Tage, „Bald volljährig“ ' + v + ' Tage vorher (protokolliert).');
+  });
 
   const MODS = [
     ['flugbuch', 'Flugbuch', 'nur mit Luftfahrzeug-Typen'], ['modelle', 'Modelle', ''], ['ausleihe', 'Ausleihe', ''],
@@ -9025,7 +9323,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   function renderBR(){
     byId('ad-b-list').innerHTML = Object.keys(BR).map(k => { const b = BR[k];
-      return '<div class="row ad-b-open'+(b.fresh?' new-row':'')+'" data-b="'+k+'" data-go="ad-bereich"><span class="li"><span class="ico" style="background:'+b.col+'1f;color:'+b.col+'"><i class="bi '+b.icon+'"></i></span><span><b>'+esc(b.n)+'</b><br><small>'+b.cnt+' Mitglieder · '+b.mods.length+' Module · fest: '+(b.fix.length ? esc(b.fix.map(m => MODN[m]).join(', ')) : 'keine')+'</small></span></span><i class="bi bi-chevron-right mut"></i></div>'; }).join('');
+      return '<div class="row ad-b-open'+(b.fresh?' new-row':'')+'" data-b="'+k+'" data-go="ad-bereich"><span class="li"><span class="ico" style="background:'+b.col+'1f;color:'+b.col+'"><i class="bi '+b.icon+'"></i></span><span><b>'+esc(b.n)+'</b><br><small>'+b.cnt+' Mitglieder mit Vorliebe · '+b.mods.length+' Module · fest: '+(b.fix.length ? esc(b.fix.map(m => MODN[m]).join(', ')) : 'keine')+'</small></span></span><i class="bi bi-chevron-right mut"></i></div>'; }).join('');
     Object.values(BR).forEach(b => b.fresh = false);
   }
   let curB = null, bCol = null, bMods = [], bFix = [];
@@ -9095,7 +9393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderBR();
     log('ko', isNew ? 'Bereich angelegt' : 'Bereich geändert', 'Bereich ' + BR[k].n);
     if (!old || old.types.join() !== types.join()) rwChange('Typ-Zuordnung Bereich „' + BR[k].n + '“');
-    KD.back(); KD.toast(isNew ? 'Bereich „' + BR[k].n + '“ angelegt. Mitglieder zuordnen unter Konten.' : 'Bereich gespeichert.');
+    KD.back(); KD.toast(isNew ? 'Bereich „' + BR[k].n + '“ angelegt. Alle Mitglieder sehen ihn sofort; wer ihn unter „meine Bereiche“ wählt, zählt als Mitglied mit Vorliebe.' : 'Bereich gespeichert.');
   });
 
   /* ================= Drohnenwetter-Grenzwerte (global) ================= */
@@ -9226,7 +9524,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { n:'Kompetenznachweis A1/A3', a:'air', v:'5 Jahre', num:1 }, { n:'Fernpilotenzeugnis A2', a:'air', v:'5 Jahre', num:1 },
     { n:'STS-Zeugnis', a:'air', v:'5 Jahre', num:1 }, { n:'Betreiber-Registrierung (e-ID)', a:'air', v:'1 Jahr', num:1 },
     { n:'Verbandsnachweis', a:'air', v:'keine' }, { n:'Haftpflichtversicherung', a:'all', v:'bis 31.12.' },
-    { n:'Erste-Hilfe-Kurs', a:'all', v:'2 Jahre' }, { n:'Einwilligung Erziehungsberechtigte', a:'all', v:'bis 18. Geb.', file:1 }
+    { n:'Erste-Hilfe-Kurs', a:'all', v:'2 Jahre' }
   ];
   const AN = { air:'Luftsport', car:'RC Cars', all:'alle Bereiche' };
   function renderNT(){
@@ -9557,8 +9855,16 @@ document.addEventListener('DOMContentLoaded', () => {
     ['Einladung', 'Einladung zu TSV RC', 'Hallo {{vorname}},\ndu wurdest zu TSV RC eingeladen. Der Link ist 7 Tage gültig.'],
     ['Ausleihe genehmigt / abgelehnt', 'Deine Ausleihe: {{modell}}', 'Hallo {{vorname}},\ndeine Anfrage für {{modell}} wurde bearbeitet.'],
     ['Rückgabe fällig', 'Rückgabe {{modell}} fällig', 'Hallo {{vorname}},\nbitte gib {{modell}} bis morgen zurück.'],
-    ['Bald volljährig', '{{vorname}} wird bald 18', 'Hallo,\ndie Erziehungsberechtigung endet automatisch mit dem 18. Geburtstag.'],
-    ['Fehlgeschlagene Anmeldeversuche', 'Fehlgeschlagene Anmeldeversuche', 'Hallo {{vorname}},\nam {{zeit}} gab es mehrere fehlgeschlagene Anmeldeversuche mit Passwort für dein Konto bei TSV RC (ungefährer Ort: {{ort}}). Deshalb gilt vor dem nächsten Versuch mit Passwort eine kurze Wartezeit.\nWarst du das nicht, ändere bitte dein Passwort. Mit Passkey oder „Passwort vergessen?“ kannst du dich jederzeit anmelden.']
+    ['Bald volljährig', '{{kind}} wird in {{tage}} Tagen 18', 'Hallo {{vorname}},\nam {{datum}} wird {{kind}} 18 Jahre alt. Ab dann endet die Verknüpfung mit den Erziehungsberechtigten automatisch: Sie sehen die Daten von {{kind}} nicht mehr und müssen Ausleihen nicht mehr zustimmen. Es ist nichts zu tun.'],
+    ['Fehlgeschlagene Anmeldeversuche', 'Fehlgeschlagene Anmeldeversuche', 'Hallo {{vorname}},\nam {{zeit}} gab es mehrere fehlgeschlagene Anmeldeversuche mit Passwort für dein Konto bei TSV RC (ungefährer Ort: {{ort}}). Deshalb gilt vor dem nächsten Versuch mit Passwort eine kurze Wartezeit.\nWarst du das nicht, ändere bitte dein Passwort. Mit Passkey oder „Passwort vergessen?“ kannst du dich jederzeit anmelden.'],
+    ['Konto gesperrt', 'Dein Konto bei TSV RC ist gesperrt', 'Hallo {{vorname}},\ndein Konto bei TSV RC wurde gesperrt.\nGrund: {{grund}}\nDauer: {{dauer}}\n{{nachricht}}\nAlle Sitzungen und API-Tokens wurden beendet. Deine Daten bleiben erhalten. Bei Fragen wende dich bitte an die Abteilungsleitung.'],
+    ['Konto entsperrt', 'Dein Konto bei TSV RC ist wieder aktiv', 'Hallo {{vorname}},\ndie Sperre deines Kontos bei TSV RC ist aufgehoben. Du kannst dich wieder anmelden.'],
+    ['Konto freigeschaltet', 'Dein Konto bei TSV RC ist freigeschaltet', 'Hallo {{vorname}},\ndie Abteilungsleitung hat dein Konto freigeschaltet. Du kannst dich ab sofort mit deinem Passkey oder Passwort anmelden. Viel Spaß bei TSV RC!'],
+    ['Registrierung abgelehnt', 'Deine Registrierung bei TSV RC', 'Hallo {{vorname}},\ndeine Registrierung bei TSV RC wurde nicht freigeschaltet. Deine Angaben haben wir gelöscht. Bei Fragen wende dich bitte direkt an die Abteilung.'],
+    ['Austritt bestätigt', 'Bestätigung deines Austritts', 'Hallo {{vorname}},\nwir bestätigen deinen Austritt aus der Abteilung RC-Modellsport zum {{datum}}. Dein Konto ist deaktiviert. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist erhalten; deine Kontaktdaten löschen wir nach dieser E-Mail.'],
+    ['Zweite Faktoren zurückgesetzt', 'Deine zweiten Faktoren wurden zurückgesetzt', 'Hallo {{vorname}},\nein Admin hat am {{zeit}} die zweiten Faktoren (Passkeys bzw. Authenticator-App) deines Kontos zurückgesetzt. Richte sie bei der nächsten Anmeldung neu ein.\nHast du nicht darum gebeten, melde dich bitte bei der Abteilungsleitung.'],
+    ['Einladung Erziehungsberechtigte', 'Einladung zu TSV RC für {{kind}}', 'Hallo {{vorname}},\ndie Abteilung RC-Modellsport hat dich als Erziehungsberechtigte(n) von {{kind}} eingeladen. Mit deinem eigenen Konto siehst du die Daten von {{kind}} und stimmst z. B. Ausleihen zu. Eine Mitgliedschaft brauchst du dafür nicht.\nDer Link ist 7 Tage gültig: {{link}}'],
+    ['Einwilligung bestätigen', 'Bitte bestätige die Einwilligung für {{kind}}', 'Hallo {{vorname}},\nbitte lies die Einwilligungserklärung der Abteilung RC-Modellsport für {{kind}} und bestätige sie online: {{link}}\nGespeichert werden Datum, Textversion und dein Konto. Bis zur Bestätigung warten zustimmungspflichtige Aktionen wie Ausleihen.']
   ];
   let curV = 0;
   document.addEventListener('click', e => { const o = e.target.closest('.ad-v-open'); if (!o) return; curV = +o.dataset.v; byId('ad-v-t1').textContent = VL[curV][0]; byId('ad-v-subj').value = VL[curV][1]; byId('ad-v-text').value = VL[curV][2]; vCheck(); }, true);
@@ -9593,10 +9899,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ================= Erziehungsberechtigte einladen ================= */
   let enCtx = 'konto', invElPrev = ['Person wählen', true];
+  const enName = () => (byId('ad-en-vn').value.trim() + ' ' + byId('ad-en-nn').value.trim()).trim();
   function enKindPick(){
-    const minors = Object.keys(KO).filter(k => KO[k].age < 18).map(k => [KO[k].n, KO[k].age + ' Jahre · ' + KO[k].st + ((KO[k].eltern || []).length ? ' · verknüpft: ' + KO[k].eltern.join(', ') : ' · noch niemand verknüpft'), 'bi-person', '', { key:k }]);
+    const minors = Object.keys(KO).filter(k => KO[k].age < 18).map(k => [KO[k].n, KO[k].age + ' Jahre · ' + KO[k].st + ((KO[k].eltern || []).length ? ' · verknüpft: ' + KO[k].eltern.map(e => e.n).join(', ') : ' · noch niemand verknüpft'), 'bi-person', '', { key:k }]);
     const secs = [];
-    const nn = byId('ad-inv-name').value.trim();
+    const nn = invName();
     if (enCtx === 'inv') secs.push(['Wird gerade eingeladen', [[nn || 'neue Person', 'Einladung noch nicht gesendet', 'bi-person-plus', '', { key:'__inv' }]]]);
     secs.push(['Minderjährige mit Konto', minors]);
     KD.PICK.adEnKind = { title:'Kind wählen', target:'ad-en-kind', secs,
@@ -9606,41 +9913,52 @@ document.addEventListener('DOMContentLoaded', () => {
   let enKey = null;
   function enOpen(ctx){
     enCtx = ctx; enKey = null;
-    ['ad-en-name','ad-en-mail'].forEach(id => byId(id).value = '');
-    setChips('ad-en-rel', () => false);
+    ['ad-en-vn','ad-en-nn','ad-en-mail','ad-en-ew'].forEach(id => byId(id).value = '');
+    setChips('ad-en-rel', () => false); consSet('ad-en-cons', 'online');
     const k = byId('ad-en-kind'); k.textContent = 'Kind wählen'; k.classList.add('mut');
     if (ctx === 'konto' && KO[curK]) { enKey = curK; k.textContent = KO[curK].n; k.classList.remove('mut'); }
-    if (ctx === 'inv' && byId('ad-inv-name').value.trim()) { enKey = '__inv'; k.textContent = byId('ad-inv-name').value.trim(); k.classList.remove('mut'); }
+    if (ctx === 'inv' && invName()) { enKey = '__inv'; k.textContent = invName(); k.classList.remove('mut'); }
+    if (ctx === 'inv') { const r = chipsOn('ad-inv-rel')[0]; if (r) setChips('ad-en-rel', c => c.textContent === r.textContent); }
     enKindPick(); enCheck();
     KD.show('ad-eltern-neu', 'push');
   }
   function enCheck(){
     const miss = [];
-    if (!byId('ad-en-name').value.trim()) miss.push('Name');
+    if (!byId('ad-en-vn').value.trim()) miss.push('Vorname');
+    if (!byId('ad-en-nn').value.trim()) miss.push('Nachname');
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(byId('ad-en-mail').value.trim())) miss.push('gültige E-Mail');
     if (byId('ad-en-kind').classList.contains('mut')) miss.push('Kind');
     if (!chipsOn('ad-en-rel').length) miss.push('Beziehung');
+    if (consMode('ad-en-cons') === 'paper' && !byId('ad-en-ew').value) miss.push('Datum der Papier-Einwilligung');
     gate('ad-en-save', 'ad-en-hint', miss);
   }
-  ['ad-en-name','ad-en-mail'].forEach(id => byId(id).addEventListener('input', enCheck));
+  ['ad-en-vn','ad-en-nn','ad-en-mail','ad-en-ew'].forEach(id => { byId(id).addEventListener('input', enCheck); byId(id).addEventListener('change', enCheck); });
   byId('ad-en-rel').addEventListener('change', enCheck);
+  consBind('ad-en-cons', enCheck);
   document.addEventListener('click', e => {
     if (e.target.closest('[data-pick="adEnKind"]')) enKindPick();
     if (e.target.closest('[data-pick="adElternInv"]')) { const el = byId('ad-inv-eltern'); invElPrev = [el.textContent, el.classList.contains('mut')]; }
     const rv = e.target.closest('[data-go="ad-rwalt"]'); if (rv && rv.dataset.rv) curRV = +rv.dataset.rv;
   }, true);
   byId('ad-en-save').addEventListener('click', () => {
-    const n = byId('ad-en-name').value.trim(), mail = byId('ad-en-mail').value.trim(), kind = byId('ad-en-kind').textContent, rel = chipsOn('ad-en-rel')[0].textContent;
+    if (byId('ad-en-save').classList.contains('dis')) return;
+    const n = enName(), mail = byId('ad-en-mail').value.trim(), kind = byId('ad-en-kind').textContent, rel = chipsOn('ad-en-rel')[0].textContent;
+    const paper = consMode('ad-en-cons') === 'paper', ew = paper ? byId('ad-en-ew').value : '';
     if (Object.values(KO).some(p => p.mail === mail)) { KD.toast('Diese E-Mail-Adresse ist schon vergeben.'); return; }
     const key = 'e' + Date.now();
     KO[key] = { n, ini:n.split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase(), mail, geb:'nicht erfasst', age:'volljährig', roles:[['Erziehungsberechtigte','je Kind: ' + kind + ' (' + rel + ')','neu']],
-      areas:[], pk:0, totp:0, st:'eingeladen', last:'–', fresh:true, kind };
+      areas:[], pk:0, totp:0, st:'eingeladen', last:'–', fresh:true, kind, tok:[] };
     ELTERN[0][1].push([n, 'eingeladen · ' + rel + ' von ' + kind, 'bi-person', '<span class="badge b-all">eingeladen</span>']);
-    if (enKey && KO[enKey]) { const c = KO[enKey]; c.elternInv = (c.elternInv || []).concat(n); }
-    if (enCtx === 'inv') { const el = byId('ad-inv-eltern'); el.textContent = n; el.classList.remove('mut'); later(invCheck); }
-    log('ko', 'Erziehungsberechtigte eingeladen', 'Konto ' + n, n + ' → ' + kind + ' (' + rel + '); Verknüpfung wirksam nach Annahme und Einwilligung');
+    const link = { n, rel, cons:paper ? 'paper' : 'online', d:paper ? deIso(ew) : '', by:'Markus B.', pend:true, inv:true };
+    if (enKey && KO[enKey]) KO[enKey].eltern.push(link);
+    if (enCtx === 'inv') {
+      const el = byId('ad-inv-eltern'); el.textContent = n; el.classList.remove('mut');
+      setChips('ad-inv-rel', c => c.textContent === rel); consSet('ad-inv-cons', link.cons); byId('ad-inv-ew').value = paper ? deIso(ew) : '';
+      later(invCheck);
+    }
+    log('ko', 'Erziehungsberechtigte eingeladen', 'Konto ' + n, n + ' → ' + kind + ' (' + rel + '); ' + consLog(link) + '; Verknüpfung wirksam nach Annahme der Einladung');
     renderKList(); if (curK && KO[curK] && enCtx === 'konto') renderKonto();
-    KD.back(); KD.toast('Einladung an ' + n + ' gesendet. Verknüpfung mit ' + kind + ' wird mit der Annahme wirksam.');
+    KD.back(); KD.toast('Einladung an ' + n + ' gesendet. Verknüpfung mit ' + kind + ' wird mit der Annahme wirksam' + (paper ? ' (Papier-Einwilligung erfasst).' : '; dabei bestätigt ' + n + ' die Einwilligung online.'));
   });
 
   /* ================= Start ================= */

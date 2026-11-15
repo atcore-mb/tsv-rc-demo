@@ -287,7 +287,7 @@
 <!-- ========== 2 Einladung / Registrierung ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Einladung annehmen und Selbstregistrierung</h2></div>
-  <p class="ddesc">Standard ist die Einladung: Abteilungsleitung oder Admin legt die Person an, sie öffnet den Link (7 Tage gültig, einmal nutzbar; die Leitung kann ihn neu senden) und legt nur noch Zugang (Passkey oder Passwort) fest. Die Selbstregistrierung ist per Schalter zuschaltbar; der Passkey darf dabei sofort angelegt werden, das Konto bleibt aber bis zur Freischaltung durch die Abteilungsleitung gesperrt. Pflicht bei der Selbstregistrierung sind Name, E-Mail und Geburtsdatum; eine Bereichsauswahl gibt es nicht, weil alle Mitglieder alle Bereiche sehen („Meine Bereiche“ wählt man später im Profil als Vorliebe). Passwörter brauchen mindestens 10 Zeichen und dürfen nicht auf der lokalen Leak-Liste stehen; Sonderzeichen sind nicht vorgeschrieben. Bei Minderjährigen verknüpft die Leitung einen Erziehungsberechtigten; was eine Zustimmung braucht (z. B. Ausleihe), wartet bis dahin.</p>
+  <p class="ddesc">Standard ist die Einladung: Abteilungsleitung oder Admin legt die Person an, sie öffnet den Link (7 Tage gültig, einmal nutzbar; die Leitung kann ihn neu senden) und legt nur noch Zugang (Passkey oder Passwort) fest. Die Selbstregistrierung ist per Schalter zuschaltbar; der Passkey darf dabei sofort angelegt werden, das Konto bleibt aber bis zur Freischaltung durch die Abteilungsleitung gesperrt. Pflicht bei der Selbstregistrierung sind Vorname, Nachname, E-Mail und Geburtsdatum; freiwillig sind eine Nachricht an die Abteilungsleitung (höchstens 500 Zeichen) und bei Minderjährigen die E-Mail eines Erziehungsberechtigten. Unbestätigte Anträge löscht das System nach 7 Tagen; eine Ablehnung schickt eine neutrale E-Mail und löscht den Antrag; eine Bereichsauswahl gibt es nicht, weil alle Mitglieder alle Bereiche sehen („Meine Bereiche“ wählt man später im Profil als Vorliebe). Passwörter brauchen mindestens 10 Zeichen und dürfen nicht auf der lokalen Leak-Liste stehen; Sonderzeichen sind nicht vorgeschrieben. Bei Minderjährigen verknüpft die Leitung einen Erziehungsberechtigten; was eine Zustimmung braucht (z. B. Ausleihe), wartet bis dahin.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/einladung/7f3c…</span></div>
   <div class="app" style="height:640px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
@@ -308,7 +308,7 @@
         <span class="assume">Annahme: Datenschutztext liefert der Verein (offener Punkt 13.3)</span>
       </div>
       <div class="an-card wide">
-        <div class="an-step">Selbstregistrierung · nur wenn vom Admin zugeschaltet</div>
+        <div class="an-step">Selbstregistrierung · nur wenn von Abteilungsleitung oder Admin zugeschaltet</div>
         <h3>Konto beantragen</h3>
         <div class="two"><div><label>Vorname <span class="req">*</span></label><div class="inp">Tim</div></div><div><label>Nachname <span class="req">*</span></label><div class="inp">S.</div></div></div>
         <div class="two"><div><label>E-Mail <span class="req">*</span></label><div class="inp">tim@beispiel.de</div></div><div><label>Geburtsdatum <span class="req">*</span></label><div class="inp">03.03.2012</div></div></div>
@@ -318,6 +318,8 @@
         <div class="hint" style="margin-top:-4px">Der Passkey wird sofort angelegt. Anmelden kannst du dich erst nach der Freischaltung. Bei „Passwort“: mindestens 10 Zeichen, Sonderzeichen nicht nötig; bekannte, geleakte Passwörter werden abgelehnt (Liste auf dem Server, ohne externen Dienst).</div>
         <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten. Nach der Freischaltung kannst du die App sofort nutzen – auch bevor ein Erziehungsberechtigter verknüpft ist; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
           <label style="margin-top:6px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><div class="inp">sandra@beispiel.de</div></div>
+        <label>Nachricht an die Abteilungsleitung <span class="opt">optional, höchstens 500 Zeichen</span></label><div class="inp" style="min-height:46px;align-items:flex-start">Ich war beim Schnupperfliegen in der Halle und würde gern mit dem Tinywhoop weitermachen.</div>
+        <div class="hint" style="text-align:right;margin-top:-4px">89 / 500 Zeichen</div>
         <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Datenschutzhinweise gelesen <span style="color:var(--red)">*</span></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px"><i class="bi bi-fingerprint"></i> Passkey anlegen und registrieren</span>
       </div>
@@ -325,8 +327,8 @@
         <div class="an-card" style="width:auto">
           <h3 style="font-size:15px">Nach dem Absenden</h3>
           <div class="an-feat"><i class="bi bi-fingerprint"></i><span><b>Passkey angelegt</b><br><small class="mut">Konto bis zur Freischaltung gesperrt; Anmeldeversuche zeigen „Noch nicht freigeschaltet“</small></span></div>
-          <div class="an-feat"><i class="bi bi-envelope-check"></i><span><b>1. E-Mail bestätigen</b><br><small class="mut">Link in der Mail an tim@…</small></span></div>
-          <div class="an-feat"><i class="bi bi-person-check"></i><span><b>2. Freischaltung</b><br><small class="mut">durch die Abteilungsleitung</small></span></div>
+          <div class="an-feat"><i class="bi bi-envelope-check"></i><span><b>1. E-Mail bestätigen</b><br><small class="mut">Link in der Mail an tim@… · unbestätigte Anträge werden nach 7 Tagen gelöscht</small></span></div>
+          <div class="an-feat"><i class="bi bi-person-check"></i><span><b>2. Freischaltung</b><br><small class="mut">durch die Abteilungsleitung; bei Ablehnung kommt eine neutrale E-Mail und der Antrag wird gelöscht</small></span></div>
           <div class="an-feat"><i class="bi bi-people"></i><span><b>3. Erziehungsberechtigte</b><br><small class="mut">verknüpft die Leitung (nur unter 18); bis zur Zustimmung warten z. B. Ausleihen</small></span></div>
           <div class="an-feat"><i class="bi bi-envelope-paper"></i><span><b>4. Startklar</b><br><small class="mut">Mail „Dein Konto ist aktiv“, Anmeldung mit dem Passkey</small></span></div>
         </div>

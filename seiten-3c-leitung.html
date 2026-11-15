@@ -342,8 +342,8 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Mitglied-Detail (Tim S., 14)</h2></div>
   <p class="ddesc">Drei Spalten: links Person mit Stammdaten (Name und Geburtsdatum ändert die Leitung, protokolliert), Vorliebe des Mitglieds (nur Anzeige –
-     „meine Bereiche“ wählt Tim selbst) und Rollen (Schalter, protokolliert); Mitte Nachweis-Gültigkeit ohne Dateien und Erziehungsberechtigte mit
-     Einwilligungsdatum; rechts Konto und Austritt. Rechts oben als Dialog: Erziehungsberechtigte verknüpfen. Verliert ein Kind die letzte Verknüpfung,
+     „meine Bereiche“ wählt Tim selbst) und Rollen (Ausbilder als Schalter, protokolliert; Abteilungsleitung und Admin nur lesend – die vergibt nur ein Admin); Mitte Nachweis-Gültigkeit ohne Dateien und Erziehungsberechtigte mit
+     Einwilligung („online bestätigt am … von …“ oder „Papier-Einwilligung vom … (erfasst von …)“); rechts Konto und Austritt. Rechts oben als Dialog: Erziehungsberechtigte verknüpfen. Verliert ein Kind die letzte Verknüpfung,
      ist sein Konto gesperrt, bis neu verknüpft ist.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/mitglieder/tim-s</span></div>
   <div class="app" style="height:640px">
@@ -362,7 +362,7 @@
           <table class="dt">
             <tr><td>Mitglied</td><td><i class="bi bi-lock mut"></i></td></tr>
             <tr><td>Ausbilder</td><td><span class="tg"></span></td></tr>
-            <tr><td>Abteilungsleitung</td><td><span class="tg"></span></td></tr>
+            <tr class="lockrow"><td>Abteilungsleitung <small class="mut">vergibt nur ein Admin</small></td><td><i class="bi bi-lock mut"></i></td></tr>
             <tr class="lockrow"><td>Admin <small class="mut">vergibt nur ein Admin</small></td><td><i class="bi bi-lock mut"></i></td></tr>
           </table>
         </div>
@@ -381,7 +381,7 @@
         </div>
         <div class="card"><div class="hrow"><h3>Erziehungsberechtigte</h3><span class="ibtn"><i class="bi bi-link-45deg"></i> Verknüpfen</span></div>
           <table class="dt"><tr><th>Person</th><th>Beziehung</th><th>Einwilligung</th><th></th></tr>
-            <tr><td><span class="av gast">SS</span>Sandra S.<br><small class="mut">eigenes Konto, kein Mitglied</small></td><td>Mutter</td><td>01.09.2026</td><td><span class="ibtn out">Lösen</span></td></tr>
+            <tr><td><span class="av gast">SS</span>Sandra S.<br><small class="mut">eigenes Konto, kein Mitglied</small></td><td>Mutter</td><td>online bestätigt am 02.09.2026 von Sandra S.<br><small class="mut">Textversion 1</small></td><td><span class="ibtn out">Lösen</span></td></tr>
           </table>
           <div class="note" style="text-align:left;margin-top:6px">Endet automatisch am 18. Geburtstag (03/2030), vorher Benachrichtigung. Verknüpfung nur durch Leitung oder Admin.</div>
         </div>
@@ -393,7 +393,7 @@
         </div>
         <div class="card"><h3>Austritt</h3>
           <small class="mut">Konto wird deaktiviert. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (3 Jahre ab Erfassung). Vor dem Löschen der Adresse geht eine Bestätigung an Tim und Sandra S., danach werden die Kontaktdaten gelöscht.</small>
-          <div class="btnrow"><span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren …</span><span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span><small class="mut">Sperren auch befristet (1 Woche, 1 Monat, bis Datum); Admins kann nur ein Admin sperren.</small></div>
+          <div class="btnrow"><span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren …</span><span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span><small class="mut">Sperren auch befristet (1 Woche, 1 Monat, bis Datum). Grund aus derselben Liste wie beim Admin: Verdacht auf Missbrauch, Verstoß gegen Platzregeln, Beitrag offen, Gerät verloren, Austritt in Bearbeitung, Sonstiges. Leitungspersonen, Admins und das eigene Konto sperrt nur ein Admin.</small></div>
           <div class="note" style="text-align:left">Offene Ausleihen blockieren den Austritt nicht – die Rückgabe wird eingefordert und bleibt als „Rückgabe offen“ bei der Leitung. Bis zur Rückgabe bleibt nur die E-Mail-Adresse (ausschließlich für Rückgabe-Erinnerungen), danach wird sie gelöscht. Reservierungen werden storniert; die Einsicht der Erziehungsberechtigten endet mit dem Austritt. Der letzte Admin kann nicht austreten.</div>
         </div>
       </div>
@@ -402,8 +402,11 @@
       <div class="mbox"><h3>Erziehungsberechtigte verknüpfen · Tim S.</h3>
         <label>Person <span class="req">*</span></label><div class="inp"><span>Peter S. <small class="mut">· Konto ohne Mitgliedschaft</small></span><i class="bi bi-chevron-down"></i></div>
         <div class="hint">Auswahldialog: vorhandene Konten, Mitglieder oder „Neue Person anlegen“ (Name + E-Mail, Einladung geht mit).</div>
-        <div class="two"><div><label>Beziehung <span class="req">*</span></label><div class="chips"><span class="chip">Mutter</span><span class="chip on">Vater</span><span class="chip">Vormund</span></div></div><div><label>Einwilligung am <span class="req">*</span></label><div class="inp">14.11.2026</div></div></div>
-        <div class="chk"><i class="bi bi-check-square-fill"></i><span>Unterschriebene Einwilligungserklärung liegt vor<small class="mut">dokumentiert mit Datum und Erfasser, keine Datei</small></span></div>
+        <label>Beziehung <span class="req">*</span></label><div class="chips"><span class="chip">Mutter</span><span class="chip on">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
+        <label>Einwilligung <span class="req">*</span></label>
+        <div class="chk"><i class="bi bi-circle"></i><span>Elternteil bestätigt online beim Annehmen (Standard)<small class="mut">gespeichert werden Datum, Textversion und Konto; bis dahin ist die Verknüpfung offen</small></span></div>
+        <div class="chk"><i class="bi bi-record-circle-fill"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><small class="mut">das Papier bleibt beim Verein; die App speichert nur Datum und Erfasser, keine Datei</small></span></div>
+        <div class="inp" style="width:160px">12.11.2026</div>
         <span class="assume">Annahme: Einwilligungstext liefert der Verein (offener Punkt 13.3).</span>
         <div class="btnrow"><span class="ibtn">Verknüpfen</span><span class="ibtn out">Abbrechen</span></div>
       </div>
@@ -430,19 +433,20 @@
         <label>E-Mail <span class="req">*</span> <span class="opt">wird Anmeldename, systemweit eindeutig</span></label><div class="inp">anna.fuchs@…</div>
         <div class="hint"><i class="bi bi-info-circle"></i> Minderjährig (14): Erziehungsberechtigte gleich mit anlegen. Auch Kinder brauchen eine eigene E-Mail-Adresse.</div>
         <div class="fsec">Erziehungsberechtigte<span class="ln"></span></div>
-        <div class="two"><div><label>Person <span class="req">*</span></label><div class="inp"><span>Neue Person anlegen</span><i class="bi bi-chevron-down"></i></div></div><div><label>Name <span class="req">*</span></label><div class="inp">Eva Fuchs</div></div><div><label>E-Mail <span class="req">*</span></label><div class="inp ph">name@…</div></div></div>
-        <div class="two"><div><label>Einwilligung erteilt am <span class="req">*</span></label><div class="inp">14.11.2026</div></div><div><label>Rollen</label><div class="chips"><span class="badge b-all" style="padding:5px 8px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span></div></div></div>
-        <div class="btnrow"><span class="ibtn dis">Einladung senden</span><small style="color:var(--red)">Es fehlt: Name und E-Mail der Erziehungsberechtigten.</small></div>
+        <div class="two"><div><label>Person <span class="req">*</span></label><div class="inp"><span>Neue Person anlegen</span><i class="bi bi-chevron-down"></i></div></div><div><label>Vorname <span class="req">*</span></label><div class="inp">Eva</div></div><div><label>Nachname <span class="req">*</span></label><div class="inp">Fuchs</div></div><div><label>E-Mail <span class="req">*</span></label><div class="inp ph">name@…</div></div></div>
+        <div class="two"><div><label>Beziehung <span class="req">*</span></label><div class="chips"><span class="chip on">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div></div><div><label>Einwilligung <span class="req">*</span></label><div class="chk"><i class="bi bi-record-circle-fill"></i><span>Elternteil bestätigt online beim Annehmen (Standard)</span></div><div class="chk"><i class="bi bi-circle"></i><span>Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span> <small class="mut">(Datumsfeld erscheint bei Auswahl)</small></span></div></div></div>
+        <label>Rollen</label><div class="chips"><span class="badge b-all" style="padding:5px 8px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span> <small class="mut">Abteilungsleitung und Admin vergibt nur ein Admin.</small></div>
+        <div class="btnrow"><span class="ibtn dis">Einladung senden</span><small style="color:var(--red)">Es fehlt: E-Mail der Erziehungsberechtigten.</small></div>
         <div class="note" style="text-align:left;margin-top:8px">Einladungslink 7 Tage gültig, lässt sich neu senden.</div>
         <div class="note" style="text-align:left">Keine Bereichsauswahl: Alle sehen alle Bereiche, „meine Bereiche“ wählt die Person selbst. Das Kinder-Konto ist sofort nutzbar; zustimmungspflichtige Aktionen (z. B. Ausleihe) warten, bis das Eltern-Konto aktiv ist – das Mitglied-Detail zeigt dazu einen Hinweis.</div>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3>Registrierung prüfen</h3><span class="badge b-w">wartet</span></div>
-          <dl class="kv2"><dt>Name</dt><dd>Paul W. (16)</dd><dt>E-Mail</dt><dd>paul.w@… <span class="badge b-g">bestätigt</span></dd><dt>Geburtsdatum</dt><dd>02.03.2010</dd><dt>Vorliebe</dt><dd>Luftsport <small class="mut">(änderbar im Profil)</small></dd><dt>Nachricht</dt><dd>„War beim Schnupperfliegen, Mutter Karin W.“</dd></dl>
+          <dl class="kv2"><dt>Name</dt><dd>Paul W. (16)</dd><dt>E-Mail</dt><dd>paul.w@… <span class="badge b-g">bestätigt</span></dd><dt>Geburtsdatum</dt><dd>02.03.2010</dd><dt>Vorliebe</dt><dd>Luftsport <small class="mut">(änderbar im Profil)</small></dd><dt>E-Mail Erziehungsberechtigte</dt><dd>karin.w@… <small class="mut">(freiwillig angegeben)</small></dd><dt>Nachricht an die Abteilungsleitung</dt><dd>„War beim Schnupperfliegen, meine Mutter heißt Karin W.“</dd></dl>
           <div class="chk"><i class="bi bi-check-square-fill"></i><span>E-Mail bestätigt</span></div>
-          <div class="chk"><i class="bi bi-square off"></i><span>Erziehungsberechtigte verknüpft, Einwilligung dokumentiert <small class="mut">(für die Freischaltung nicht nötig)</small> <a style="color:var(--g);font-weight:700">verknüpfen</a></span></div>
+          <div class="chk"><i class="bi bi-square off"></i><span>Erziehungsberechtigte verknüpft (Einwilligung online oder Papier) <small class="mut">(für die Freischaltung nicht nötig)</small> <a style="color:var(--g);font-weight:700">verknüpfen</a></span></div>
           <div class="btnrow"><span class="ibtn">Freischalten</span><span class="ibtn out">Ablehnen</span></div>
-          <div class="hint">Minderjährig: Paul kann die App nach der Freischaltung sofort nutzen – wie eingeladene Kinder. Was eine Zustimmung braucht (z. B. Ausleihe), wartet, bis ein Eltern-Konto verknüpft ist.</div>
+          <div class="hint">Minderjährig: Paul kann die App nach der Freischaltung sofort nutzen – wie eingeladene Kinder. Was eine Zustimmung braucht (z. B. Ausleihe), wartet, bis ein Eltern-Konto verknüpft ist. „Ablehnen“ schickt eine neutrale E-Mail und löscht den Antrag; unbestätigte Anträge löscht das System nach 7 Tagen.</div>
         </div>
         <div class="card" style="font-size:13px"><span class="tg on"></span> Selbstregistrierung erlaubt<br><small class="mut">Den Schalter bedienen Abteilungsleitung und Admin (protokolliert).</small></div>
       </div>
@@ -681,7 +685,7 @@
           <table class="dt">
             <tr><td>Mitglied</td><td><i class="bi bi-lock mut"></i></td></tr>
             <tr><td>Ausbilder</td><td><span class="tg on"></span></td></tr>
-            <tr><td>Abteilungsleitung</td><td><span class="tg"></span></td></tr>
+            <tr><td>Abteilungsleitung <small class="mut">vergibt nur ein Admin</small></td><td><i class="bi bi-lock mut"></i></td></tr>
             <tr><td>Admin <small class="mut">vergibt nur ein Admin</small></td><td><i class="bi bi-lock mut"></i></td></tr>
             <tr><td>Aufsichts-Liste <small class="mut">keine Rolle</small></td><td><span class="badge b-g">ja</span> <a style="color:var(--g);font-weight:700">pflegen</a></td></tr>
           </table>
@@ -689,7 +693,7 @@
         <div class="card"><h3>Konto</h3>
           <dl class="kv2"><dt>E-Mail</dt><dd>max.r@… (Anmeldename)</dd><dt>Status</dt><dd><span class="badge b-g">aktiv</span></dd><dt>Angelegt</dt><dd>01.02.2024 · Markus B.</dd><dt>Letzte Anmeldung</dt><dd>heute</dd><dt>Anmeldung</dt><dd>Passkey (1)</dd></dl>
           <table class="dt"><tr><td><i class="bi bi-shield-lock"></i> Zweite Faktoren zurücksetzen</td><td><span class="badge b-all">nur Admin</span></td></tr><tr><td><i class="bi bi-clock-history"></i> Änderungsprotokoll</td><td>›</td></tr></table>
-          <div class="btnrow"><span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren …</span><span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span><small class="mut">Sperren auch befristet (1 Woche, 1 Monat, bis Datum); Admins kann nur ein Admin sperren.</small></div>
+          <div class="btnrow"><span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren …</span><span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span><small class="mut">Sperren auch befristet (1 Woche, 1 Monat, bis Datum). Grund aus derselben Liste wie beim Admin: Verdacht auf Missbrauch, Verstoß gegen Platzregeln, Beitrag offen, Gerät verloren, Austritt in Bearbeitung, Sonstiges. Leitungspersonen, Admins und das eigene Konto sperrt nur ein Admin.</small></div>
         </div>
       </div>
       <div>
@@ -730,7 +734,7 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">11</span><h2>Konto einer Erziehungsberechtigten (Sandra S.)</h2></div>
   <p class="ddesc">Erziehungsberechtigte haben ein eigenes Konto ohne Mitgliedschaft (Gesamtdesign 10): keine Rollen; sie sehen die Daten des Kindes und den ganzen
-     Vereinskalender. Die Seite zeigt die verknüpften Kinder (mit Einwilligungsdatum und automatischem Ende mit 18), was die Person sieht und darf, Kontodaten und
+     Vereinskalender. Die Seite zeigt die verknüpften Kinder (mit Einwilligung – online bestätigt oder Papier mit Datum – und automatischem Ende mit 18), was die Person sieht und darf, Kontodaten und
      das Änderungsprotokoll. Ist kein Kind mehr verknüpft, wird das Konto nach Ankündigung gelöscht – außer die Person ist selbst Mitglied: Dann bleibt das
      Konto und nur die Elternrolle endet.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/konten/sandra-s</span></div>
@@ -744,7 +748,7 @@
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><div class="avatar" style="background:#eceeec;color:#444">SS</div><div><b style="font-size:16px">Sandra S.</b><br><small class="mut">eigenes Konto seit 01.09.2026</small><br><span class="badge b-all">Erziehungsberechtigte · kein Mitglied</span></div></div>
           <h3>Verknüpfte Kinder</h3>
           <table class="dt"><tr><th>Kind</th><th>Beziehung</th><th>Einwilligung</th><th>endet</th></tr>
-            <tr><td><span class="av min">TS</span><b>Tim S.</b> (14)</td><td>Mutter</td><td>01.09.2026</td><td>03/2030</td></tr></table>
+            <tr><td><span class="av min">TS</span><b>Tim S.</b> (14)</td><td>Mutter</td><td>online bestätigt am 02.09.2026 von Sandra S.</td><td>03/2030</td></tr></table>
           <div class="note" style="text-align:left;margin-top:6px">Verknüpfen und Lösen im Mitglied-Detail des Kindes.</div>
         </div>
       </div>
@@ -790,7 +794,8 @@
           <tr><td>15.10.2026 17:05</td><td>Tim S.</td><td>Nachweis A1/A3 angelegt · vorher: – · nachher: gültig bis 10/2031</td><td>Oberfläche</td><td><code>19bd03e7</code></td></tr>
           <tr><td>01.10.2026 20:02</td><td>Tim S.</td><td>Profil: „meine Bereiche“ (Vorliebe) · vorher: Luftsport · nachher: Luftsport, RC Cars</td><td>Oberfläche</td><td><code>5a8c2e61</code></td></tr>
           <tr><td>02.09.2026 20:15</td><td>Tim S.</td><td>Einladung angenommen, Passkey registriert, Konto aktiv</td><td>Oberfläche</td><td><code>e4097b2d</code></td></tr>
-          <tr><td>01.09.2026 10:31</td><td>Markus B.</td><td>Erziehungsberechtigte Sandra S. (Mutter) verknüpft, Einwilligung vom 01.09.2026</td><td>Oberfläche</td><td><code>3fd1c88a</code></td></tr>
+          <tr><td>02.09.2026 19:31</td><td>Sandra S.</td><td>Einwilligung online bestätigt (Textversion 1), Verknüpfung wirksam</td><td>Oberfläche</td><td><code>3b7d90e1</code></td></tr>
+          <tr><td>01.09.2026 10:31</td><td>Markus B.</td><td>Erziehungsberechtigte Sandra S. (Mutter) verknüpft – Einwilligung: Sandra S. bestätigt online beim Annehmen</td><td>Oberfläche</td><td><code>3fd1c88a</code></td></tr>
           <tr><td>01.09.2026 10:28</td><td>Markus B.</td><td>Konto angelegt <small class="mut">(Name, Geburtsdatum, E-Mail – Werte nicht protokolliert)</small></td><td>Oberfläche</td><td><code>a91f0b34</code></td></tr>
         </table>
       </div>

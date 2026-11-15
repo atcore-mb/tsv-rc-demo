@@ -276,6 +276,11 @@
               <table class="dt"><tr><td>Löschfrist für eigene Flüge<br><small class="mut">danach nur „ungültig markieren“</small></td><td><span class="inp" style="display:inline-flex;margin:0;padding:4px 8px;gap:6px">30 Minuten <i class="bi bi-chevron-down"></i></span></td></tr></table>
               <div class="hint">Standard 30 Minuten; Auswahl: keine, 10 Min., 30 Min., 60 Min., 24 Std. Wirkt sofort, protokolliert.</div>
             </div>
+            <div class="card"><div class="hrow"><h3>Erinnerungen</h3><span class="ibtn dis">Speichern</span></div>
+              <table class="dt"><tr><td>Nachweis läuft ab<br><small class="mut">an das Mitglied, bei Minderjährigen in Kopie an die Eltern</small></td><td style="white-space:nowrap"><span class="inp" style="display:inline-flex;margin:0;padding:4px 8px;width:46px">60</span> und <span class="inp" style="display:inline-flex;margin:0;padding:4px 8px;width:46px">14</span> Tage vorher</td></tr>
+                <tr><td>Bald volljährig<br><small class="mut">an Kind und Erziehungsberechtigte</small></td><td style="white-space:nowrap"><span class="inp" style="display:inline-flex;margin:0;padding:4px 8px;width:46px">30</span> Tage vorher</td></tr></table>
+              <div class="hint">Je 1 bis 365 Tage; die erste Nachweis-Erinnerung liegt vor der zweiten. „Speichern“ wird erst bei einer Änderung aktiv; jede Änderung wird mit vorher/nachher protokolliert.</div>
+            </div>
             <div class="card" style="border-left:4px solid var(--warn)"><h3><i class="bi bi-hdd-network ad-warn"></i> Externe Backup-Ablage</h3><small>Noch nicht eingerichtet. Sicherungen liegen nur auf dem Vereinsserver.</small><br><span class="assume">Offener Punkt 14.3 (Projektinhaber)</span></div>
           </div>
         </div>
@@ -328,7 +333,7 @@
 <!-- ============ 3 KONTO DETAIL ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Konto: Detail mit Rollen und Sperre</h2></div>
-  <p class="ddesc">Oben ein Hinweisband: Das Öffnen fremder Personendaten wird protokolliert. Rollen mit Geltung (global oder Abteilung). Lena hat keinen zweiten Faktor; die Admin-Rolle ließe sich vergeben, wird aber erst wirksam, wenn ein zweiter Faktor oder Passkey eingerichtet ist. Rechts unten geöffnet: der Dialog „Konto sperren“.</p>
+  <p class="ddesc">Oben ein Hinweisband: Das reine Ansehen fremder Personendaten wird nicht protokolliert, Änderungen und Exporte schon. Rollen mit Geltung (global oder Abteilung). Lena hat keinen zweiten Faktor; die Admin-Rolle ließe sich vergeben, wird aber erst wirksam, wenn ein zweiter Faktor oder Passkey eingerichtet ist. Darunter die API-Tokens des Kontos (Name, Präfix, Scopes, Ablauf, letzte Nutzung) mit „Widerrufen“ – protokolliert und dem Besitzer per E-Mail mitgeteilt – sowie „Austritt erfassen“ mit demselben Dialog wie bei der Leitung (der letzte Admin kann nicht austreten). Rechts unten geöffnet: der Dialog „Konto sperren“; die Gründe sind dieselben wie bei der Leitung.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/konten/lena-k</span></div>
   <div class="app tall">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -342,7 +347,7 @@
       </div>
       <div class="dcontent">
         <div class="banner" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-eye"></i> <b>Personenbezogene Daten.</b> Nur zur Unterstützung von Lena K. nutzen. Das Ansehen wird nicht protokolliert, Änderungen schon. <span class="assume" style="margin:0">Annahme 7.3: Ob Admins Personendaten einsehen dürfen, ist mit dem Verein abzustimmen.</span></div>
-        <div class="hrow"><h3 style="font-size:18px">Lena K.</h3><span><span class="ibtn out"><i class="bi bi-envelope"></i> Passwort-Link senden</span> <span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren</span></span></div>
+        <div class="hrow"><h3 style="font-size:18px">Lena K.</h3><span><span class="ibtn out"><i class="bi bi-envelope"></i> Passwort-Link senden</span> <span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren</span> <span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span></span></div>
         <div style="display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:14px">
           <div class="card"><h3>Person</h3>
             <dl class="kv2"><dt>Kontotyp</dt><dd>Person</dd><dt>E-Mail (Login)</dt><dd>lena@…</dd><dt>Geburtsdatum</dt><dd>04.07.1998</dd><dt>Telefon</dt><dd>0911 …</dd><dt>Mitglied seit</dt><dd>09/2025</dd><dt>Vorliebe</dt><dd><span class="badge b-car">RC Cars</span> <small class="mut">wählt Lena selbst</small></dd></dl>
@@ -358,9 +363,14 @@
           </div>
           <div>
             <div class="card"><h3>Anmeldung</h3>
-              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>0</td></tr><tr><td>Fehlversuche</td><td>0 <small class="mut">(sonst mit letztem Versuch, IP-Netz, „Wartezeit bis …“ und „Sofort freigeben“: setzt den Zähler zurück, protokolliert)</small></td></tr></table>
+              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>1</td></tr><tr><td>Fehlversuche</td><td>0 <small class="mut">(sonst mit letztem Versuch, IP-Netz, „Wartezeit bis …“ und „Sofort freigeben“: setzt den Zähler zurück, protokolliert)</small></td></tr></table>
               <div style="margin-top:8px"><span class="ibtn out">Zweite Faktoren zurücksetzen</span></div>
               <div class="hint">Zurücksetzen wird protokolliert; Lena wird per E-Mail informiert.</div>
+            </div>
+            <div class="card"><h3>API-Tokens</h3>
+              <table class="dt"><tr><th>Name · Präfix</th><th>Scopes</th><th>Ablauf</th><th>zuletzt</th><th></th></tr>
+                <tr><td><b>Kalender-Abo Tablet</b><br><small class="mut" style="font-family:monospace">tsvrc_4e91…</small></td><td><span class="badge b-all">events:read</span></td><td><span class="badge b-w">unbefristet</span></td><td>heute 06:10</td><td><span class="ibtn out red">Widerrufen</span></td></tr></table>
+              <div class="hint">Den Token selbst sieht niemand. Widerrufen wirkt sofort, wird protokolliert und Lena per E-Mail mitgeteilt.</div>
             </div>
             <div class="card"><h3>Familie</h3><small class="mut">Volljährig – keine Erziehungsberechtigung nötig.</small></div>
           </div>
@@ -370,7 +380,7 @@
     <div class="ad-pop"><div class="box">
       <h3><i class="bi bi-slash-circle" style="color:var(--red)"></i> Konto „Lena K.“ sperren?</h3>
       <div style="font-size:13px">Alle Sitzungen und API-Tokens werden sofort beendet. Flugbuch, Modelle und Nachweise bleiben erhalten. Entsperren ist jederzeit möglich; eine befristete Sperre endet automatisch.</div>
-      <label>Grund <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Verdacht auf Missbrauch</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Sonstiges …</span></div>
+      <label>Grund <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Verdacht auf Missbrauch</span><span class="chip">Verstoß gegen Platzregeln</span><span class="chip">Beitrag offen</span><span class="chip">Gerät verloren</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Sonstiges</span></div>
       <label>Dauer <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip">unbefristet</span><span class="chip on">1 Woche</span><span class="chip">1 Monat</span><span class="chip">bis Datum …</span></div>
       <div style="font-size:13px;margin-top:6px" class="mut">Endet automatisch am Sa 21.11.2026.</div>
       <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><span class="ibtn out">Abbrechen</span><span class="ibtn red">Sperren</span></div>
@@ -400,12 +410,12 @@
             <div class="card"><h3>Abteilung RC-Modellsport</h3>
               <label>Abteilungsleitung</label>
               <div class="chips" style="margin:0"><span class="chip on">Markus B. <span class="x">✕</span></span><span class="chip"><i class="bi bi-plus-lg"></i> Person zuweisen</span></div>
-              <div class="hint">Zuständig für beide Bereiche. Eine Bereichsleitung gibt es nicht.</div>
+              <div class="hint">Zuständig für beide Bereiche. Eine Bereichsleitung gibt es nicht. Die Rolle vergibt und entzieht nur ein Admin; entfernt er die letzte Leitungsperson, warnt die App, dass die Abteilung dann keine Leitung mehr hat.</div>
             </div>
             <div class="card"><div class="hrow"><h3>Bereiche</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Bereich</span></div>
               <table class="dt">
-                <tr class="sel"><td><span class="ico air"><i class="bi bi-airplane"></i></span></td><td><b>Luftsport</b><br><small class="mut">24 Mitglieder · fest: Flugbuch, Modelle, Ausleihe</small></td><td><span class="badge b-g">aktiv</span></td></tr>
-                <tr><td><span class="ico car"><i class="bi bi-car-front"></i></span></td><td><b>RC Cars</b><br><small class="mut">21 Mitglieder · fest: Modelle, Ausleihe, Meisterschaft</small></td><td><span class="badge b-g">aktiv</span></td></tr>
+                <tr class="sel"><td><span class="ico air"><i class="bi bi-airplane"></i></span></td><td><b>Luftsport</b><br><small class="mut">24 Mitglieder mit Vorliebe · fest: Flugbuch, Modelle, Ausleihe</small></td><td><span class="badge b-g">aktiv</span></td></tr>
+                <tr><td><span class="ico car"><i class="bi bi-car-front"></i></span></td><td><b>RC Cars</b><br><small class="mut">21 Mitglieder mit Vorliebe · fest: Modelle, Ausleihe, Meisterschaft</small></td><td><span class="badge b-g">aktiv</span></td></tr>
               </table>
               <div class="hint">Reihenfolge = Reihenfolge in der Tab-Leiste. Bereiche lassen sich deaktivieren, nicht löschen.</div>
             </div>
@@ -574,9 +584,8 @@
               <tr><td><b>Verbandsnachweis</b></td><td><span class="badge b-air">Luft</span></td><td>keine</td><td>optional</td><td>optional</td></tr>
               <tr><td><b>Haftpflichtversicherung</b></td><td><span class="badge b-all">alle</span></td><td>bis 31.12.</td><td>optional</td><td>optional</td></tr>
               <tr><td><b>Erste-Hilfe-Kurs</b></td><td><span class="badge b-all">alle</span></td><td>2 Jahre</td><td>–</td><td>optional</td></tr>
-              <tr><td><b>Einwilligung Erziehungsberechtigte</b></td><td><span class="badge b-all">alle</span></td><td>bis 18. Geb.</td><td>–</td><td>Pflicht</td></tr>
             </table>
-            <div class="hint">Erinnerung 60 und 14 Tage vor Ablauf (systemweit einstellbar).</div>
+            <div class="hint">Erinnerung 60 und 14 Tage vor Ablauf (Übersicht › Einstellungen › Erinnerungen). Die Einwilligung der Erziehungsberechtigten ist kein Nachweistyp: Sie wird an der Verknüpfung festgehalten (online bestätigt oder Papier mit Datum, keine Datei).</div>
             <span class="assume">Gültigkeiten (z. B. e-ID 1 Jahr, Versicherung bis Jahresende) und Nummer-Pflicht sind Annahmen – mit dem Verein abzustimmen</span>
           </div>
         </div>
@@ -889,13 +898,21 @@
               <tr><td>Fehlgeschlagene Anmeldeversuche <small class="mut">(höchstens 1× in 24 h)</small></td><td><span class="badge b-all">Standard</span></td></tr>
               <tr><td>Ausleihe genehmigt / abgelehnt</td><td><span class="badge b-all">Standard</span></td></tr>
               <tr><td>Rückgabe fällig</td><td><span class="badge b-all">Standard</span></td></tr>
-              <tr><td>Bald volljährig (an Eltern)</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Bald volljährig (an Kind und Eltern, Vorlauf unter „Erinnerungen“)</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Konto gesperrt</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Konto entsperrt</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Konto freigeschaltet</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Registrierung abgelehnt <small class="mut">(neutral, Antrag wird gelöscht)</small></td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Austritt bestätigt</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Zweite Faktoren zurückgesetzt</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Einladung Erziehungsberechtigte</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Einwilligung bestätigen</td><td><span class="badge b-all">Standard</span></td></tr>
             </table>
           </div>
           <div class="card"><div class="hrow"><h3>Nachweis läuft ab</h3><span><span class="ibtn out">Zurücksetzen</span> <span class="ibtn">Speichern</span></span></div>
             <label>Betreff (E-Mail) <span class="req">*</span></label><div class="inp">Dein {{nachweis}} läuft in {{tage}} Tagen ab</div>
             <label>Text <span class="req">*</span></label><div class="ad-ta" style="min-height:70px">Hallo {{vorname}},<br>dein {{nachweis}} ist noch bis {{gueltig_bis}} gültig. Termine für Schulungen findest du im Kalender.</div>
-            <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}} · Push nutzt nur den Betreff.</div>
+            <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}}, {{grund}}, {{dauer}}, {{nachricht}}, {{datum}}, {{kind}}, {{link}} · Push nutzt nur den Betreff.</div>
           </div>
         </div>
       </div>
@@ -941,7 +958,7 @@
 <!-- ============ 16 ERZIEHUNGSBERECHTIGTE EINLADEN ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">16</span><h2>Erziehungsberechtigte einladen</h2></div>
-  <p class="ddesc">Aus dem Konto eines Minderjährigen oder beim Einladen eines Kindes: im Auswahldialog „Erziehungsberechtigte“ der Eintrag <b>Person einladen …</b>. Das Formular legt ein Konto ohne Mitgliedschaft an und verknüpft es mit dem Kind. Die Verknüpfung legen nur Abteilungsleitung oder Admin an; sie wird mit Annahme der Einladung und dokumentierter Einwilligung wirksam. Bis dahin steht sie im Konto des Kindes als „offen“, und ein wartendes Kind kann noch nicht freigeschaltet werden.</p>
+  <p class="ddesc">Aus dem Konto eines Minderjährigen oder beim Einladen eines Kindes: im Auswahldialog „Erziehungsberechtigte“ der Eintrag <b>Person einladen …</b>. Das Formular legt ein Konto ohne Mitgliedschaft an und verknüpft es mit dem Kind. Die Verknüpfung legen nur Abteilungsleitung oder Admin an. Die Einwilligung bestätigt standardmäßig das Elternteil online beim Annehmen (gespeichert: Datum, Textversion, Konto); alternativ erfasst Leitung oder Admin das Datum einer Papier-Einwilligung, die beim Verein bleibt. Bis zur Annahme steht die Verknüpfung im Konto des Kindes als „offen“. Das Kind ist trotzdem sofort nutzbar und kann freigeschaltet werden; nur zustimmungspflichtige Aktionen (z. B. Ausleihe) warten.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/konten/paul-w/erziehungsberechtigte/einladen</span></div>
   <div class="app tall" style="height:560px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -956,18 +973,21 @@
         <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px">
           <div class="card">
             <h3>Erziehungsberechtigte einladen</h3>
-            <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Petra W.</div></div><div><label>E-Mail (Anmeldename) <span class="req">*</span></label><div class="inp">petra@beispiel.de</div></div></div>
+            <div class="two"><div><label>Vorname <span class="req">*</span></label><div class="inp">Petra</div></div><div><label>Nachname <span class="req">*</span></label><div class="inp">W.</div></div><div><label>E-Mail (Anmeldename) <span class="req">*</span></label><div class="inp">petra@beispiel.de</div></div></div>
             <div class="hint">Eigene Adresse, nicht die des Kindes – systemweit eindeutig.</div>
             <label>Verknüpftes Kind <span class="req">*</span></label><div class="inp">Paul W. (16, wartet auf Freischaltung) <i class="bi bi-chevron-down"></i></div>
             <label>Beziehung <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Mutter</span><span class="chip">Vater</span><span class="chip">Vormund</span><span class="chip">andere</span></div>
-            <div class="banner" style="margin-top:10px"><i class="bi bi-shield-lock"></i> Nur Abteilungsleitung oder Admin legen die Verknüpfung an. Wirksam nach Annahme und Einwilligung, endet automatisch mit dem 18. Geburtstag.</div>
+            <label>Einwilligung <span class="req">*</span></label>
+            <div class="card" style="padding:4px 10px;margin:0"><table class="dt"><tr><td><i class="bi bi-record-circle-fill ad-ok"></i> Elternteil bestätigt online beim Annehmen (Standard)<br><small class="mut">gespeichert werden Datum, Textversion und Konto</small></td></tr><tr><td><i class="bi bi-circle mut"></i> Papier-Einwilligung liegt vor, erteilt am <span class="req">*</span><br><small class="mut">mit Datumsfeld; das Papier bleibt beim Verein, keine Datei in der App</small></td></tr></table></div>
+            <div class="banner" style="margin-top:10px"><i class="bi bi-shield-lock"></i> Nur Abteilungsleitung oder Admin legen die Verknüpfung an. Wirksam mit Annahme der Einladung (bei „online“ zusammen mit der Bestätigung), endet automatisch mit dem 18. Geburtstag.</div>
             <div style="display:flex;gap:8px"><span class="ibtn">Einladung senden</span><span class="ibtn out">Abbrechen</span></div>
-            <span class="assume">Annahme: Einwilligung bestätigt die Person beim Annehmen der Einladung; Text liefert der Verein (13.3).</span>
+            <span class="assume">Annahme: Den Einwilligungstext liefert der Verein (13.3).</span>
             <div class="note" style="text-align:left">Einladungslink 7 Tage gültig, lässt sich neu senden.</div>
           </div>
           <div>
-            <div class="card"><h3>Konto Paul W. · danach</h3><table class="dt"><tr><td><b>Petra W.</b><br><small class="mut">eingeladen · Einwilligung offen, noch nicht wirksam</small></td><td><span class="badge b-w">offen</span></td></tr></table>
-              <div style="margin-top:8px"><span class="ibtn dis">Freischalten</span> <small class="mut">erst nach wirksamer Verknüpfung</small></div></div>
+            <div class="card"><h3>Konto Paul W. · danach</h3><table class="dt"><tr><td><b>Petra W.</b> · Mutter <span class="badge b-w">eingeladen</span><br><small class="mut">Einwilligung: offen – Petra W. bestätigt online beim Annehmen</small></td><td><span class="badge b-w">offen</span></td></tr></table>
+              <div style="margin-top:8px"><span class="ibtn">Freischalten</span> <small class="mut">auch ohne wirksame Verknüpfung möglich; Ausleihen u. Ä. warten</small></div>
+              <div class="hint">Nach der Annahme: „Einwilligung: online bestätigt am … von Petra W.“; bei Papier: „Papier-Einwilligung vom … (erfasst von …)“.</div></div>
             <div class="card"><h3>Auswahldialog „Kind wählen“</h3><table class="dt"><tr><td>Tim S.</td><td class="mut">14 · verknüpft: Sandra S.</td></tr><tr class="sel"><td>Paul W.</td><td class="mut">16 · noch niemand verknüpft</td></tr></table><div class="hint">Beim Einladen eines Kindes erscheint oben zusätzlich „Wird gerade eingeladen“.</div></div>
           </div>
         </div>
