@@ -388,7 +388,7 @@
 <!-- ========== 3 Liste und Detail ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Flugliste und Flug-Detail</h2></div>
-  <p class="ddesc">Die Liste ist nach Monaten gruppiert und durchsuchbar. Im Detail steht der <b>Änderungsverlauf</b>: Flüge werden nicht still geändert. Korrekturen brauchen eine Begründung. <b>Löschen</b> geht nur kurz nach der Erfassung (Frist vom Admin einstellbar, Standard 30 Minuten), z. B. nach einem versehentlichen Start; danach nur noch „ungültig markieren“, mit Grund wieder aufhebbar.</p>
+  <p class="ddesc">Die Liste ist nach Monaten gruppiert und durchsuchbar. Im Detail steht der <b>Änderungsverlauf</b>: Flüge werden nicht still geändert. Korrekturen brauchen eine Begründung. <b>Löschen</b> geht nur kurz nach der Erfassung (Frist vom Admin einstellbar, Standard 30 Minuten), z. B. nach einem versehentlichen Start; bei Flügen mit fremdem Modell dürfen das sowohl Pilot <b>als auch</b> Besitzer. Danach nur noch „ungültig markieren“, mit Grund wieder aufhebbar.</p>
   <div class="phones">
     <div class="pcol"><p class="plabel">Flugliste</p>
       <div class="phone"><div class="screen">
@@ -468,7 +468,7 @@
           <div class="card pad" style="font-size:13px;border-color:#f3b4b4"><i class="bi bi-trash"></i> Versehentlich erfasst? <b>Löschen bis 14:52</b> möglich (30 Minuten nach der Erfassung). Danach nur noch „ungültig markieren“.</div>
           <div class="btns"><button class="btn out"><i class="bi bi-pencil"></i> Korrigieren</button><button class="btn out"><i class="bi bi-share"></i> Teilen</button></div>
           <button class="btn" style="background:var(--red)"><i class="bi bi-trash"></i> Löschen (bis 14:52)</button>
-          <div class="note">Danach Bestätigung „Flug endgültig löschen“. Der Flug verschwindet aus Flugbuch, Summen und Berichten.</div>
+          <div class="note">Danach Bestätigung „Flug endgültig löschen“. Der Flug verschwindet aus Flugbuch, Summen und Berichten. Bei Flügen mit fremdem Modell dürfen innerhalb der Frist Pilot und Besitzer löschen.</div>
           <span class="assume">Annahme: Im Änderungsprotokoll steht nur, dass und wann der Flug gelöscht wurde, nicht seine Daten.</span>
         </div>
       </div></div>
@@ -713,7 +713,7 @@
         <div class="note" style="text-align:left">Zählt in deinem Flugbuch und beim Modell; Max R. sieht den Flug auf der Modellseite unter „Flüge“.</div>
         <h3 style="margin-top:10px">Änderungsverlauf</h3>
         <div class="tl"><div class="e"><b>Erfasst · 07.11. 15:31</b><small>Freigabe zum Fliegen von Max R.</small></div></div>
-        <div class="note" style="text-align:left">Max R. darf als Besitzer ebenfalls korrigieren oder ungültig markieren; die Änderung steht mit Grund im Verlauf.</div>
+        <div class="note" style="text-align:left">Max R. darf als Besitzer ebenfalls korrigieren oder ungültig markieren und innerhalb der Löschfrist löschen; die Änderung steht mit Grund im Verlauf.</div>
       </div>
     </div>
   </div></div></div>
@@ -727,6 +727,7 @@
       <div class="card">
         <div class="hrow"><h3>DJI Neo 2 · Flüge</h3><span class="mut" style="font-size:12px">enthält Flüge mit Freigabe zum Fliegen</span></div>
         <table class="dt"><tr><th>Datum</th><th>Pilot</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+          <tr><td>14.11.2026</td><td>Jonas B. <span class="badge b-air">Freigabe</span> <span class="badge b-r">Löschen bis 15:00</span></td><td>Vereinsgelände</td><td>Training</td><td>5</td></tr>
           <tr><td>14.11.2026</td><td>Markus B.</td><td>Vereinsgelände</td><td>Training</td><td>18</td></tr>
           <tr class="sel"><td>11.11.2026</td><td>Jonas B. <span class="badge b-air">Freigabe</span></td><td>Vereinsgelände</td><td>Training</td><td>10</td></tr>
           <tr><td>05.11.2026</td><td>Markus B.</td><td>Vereinsgelände</td><td>Training</td><td>14</td></tr>
@@ -735,7 +736,7 @@
       <div class="detailpane">
         <div class="hrow"><h3>Flug am 11.11.2026</h3><span><span class="ibtn out"><i class="bi bi-pencil"></i> Korrigieren</span> <span class="ibtn out"><i class="bi bi-slash-circle"></i> Ungültig markieren</span></span></div>
         <dl class="kv2"><dt>Pilot</dt><dd>Jonas B.</dd><dt>Modell</dt><dd>DJI Neo 2 · C0</dd><dt>Besitzer</dt><dd>du (Markus B.)<br><small class="mut">Freigabe zum Fliegen an Jonas B.</small></dd><dt>Zeit</dt><dd>16:05 – 16:15 (10 min)</dd><dt>Flugart</dt><dd>Training</dd></dl>
-        <div class="note" style="text-align:left">Als Besitzer darfst du korrigieren oder ungültig markieren – mit Grund, sichtbar im Verlauf. Jonas B. sieht die Änderung bei seinem Flug. Löschen kann nur der Pilot innerhalb der Frist.</div>
+        <div class="note" style="text-align:left">Als Besitzer darfst du korrigieren oder ungültig markieren – mit Grund, sichtbar im Verlauf. Jonas B. sieht die Änderung bei seinem Flug. Löschen dürfen Pilot und Besitzer innerhalb der Löschfrist (30 Minuten nach der Erfassung) – bei diesem Flug ist sie abgelaufen; beim Flug von heute (erfasst 14:30) steht im Detail „Löschen bis 15:00“.</div>
         <h3 style="margin-top:10px">Änderungsverlauf</h3>
         <div class="tl"><div class="e c"><b>Korrigiert · 12.11. 09:05 · Markus B. (Besitzer)</b>Flugart <span class="diff"><s>Schulung</s> → <ins>Training</ins></span><br><small>„Falsche Flugart“</small></div><div class="e"><b>Erfasst · 11.11. 16:15 · Jonas B.</b><small>mit deinem Modell (Freigabe zum Fliegen)</small></div></div>
       </div>

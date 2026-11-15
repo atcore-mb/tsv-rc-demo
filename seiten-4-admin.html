@@ -314,12 +314,12 @@
             <tr class="sel"><td><b>Lena K.</b></td><td>lena@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>08.11.</td></tr>
             <tr><td><b>Tim S.</b> <span class="badge b-w">14</span></td><td>tim@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span> <small class="mut">Eltern: Sandra S.</small></td><td>12.11.</td></tr>
             <tr><td><b>Sandra S.</b></td><td>sandra@…</td><td>Erziehungsberechtigte <small class="mut">(kein Mitglied)</small></td><td>–</td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>12.11.</td></tr>
-            <tr><td><b>Paul W.</b> <span class="badge b-w">16</span></td><td>paul@…</td><td>–</td><td><span class="badge b-car">RC</span></td><td>–</td><td><span class="badge b-w">wartet: Eltern fehlen</span></td><td>–</td></tr>
+            <tr><td><b>Paul W.</b> <span class="badge b-w">16</span></td><td>paul@…</td><td>–</td><td><span class="badge b-car">RC</span></td><td>–</td><td><span class="badge b-w">wartet auf Freischaltung</span> <small class="mut">noch ohne Eltern</small></td><td>–</td></tr>
             <tr><td><b>Eva M.</b></td><td>eva@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>–</td><td><span class="badge b-all">eingeladen · bis 21.11.</span></td><td>–</td></tr>
             <tr style="color:#888"><td><b>Felix H.</b></td><td>felix@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-r">gesperrt</span></td><td>03/2026</td></tr>
           </table>
         </div>
-        <div class="hint">Eingeladene Kinder-Konten sind sofort nutzbar; zustimmungspflichtige Aktionen warten auf das Eltern-Konto. Selbstregistrierte Minderjährige werden erst nach Verknüpfung eines Erziehungsberechtigten freigeschaltet. Kontotyp „Dienst“ (Service Accounts) folgt in einer späteren Ausbaustufe.</div>
+        <div class="hint">Kinder-Konten sind – eingeladen wie selbst registriert – nach Einladung bzw. Freischaltung sofort nutzbar; zustimmungspflichtige Aktionen (z. B. Ausleihe) warten auf das Eltern-Konto. Kontotyp „Dienst“ (Service Accounts) folgt in einer späteren Ausbaustufe.</div>
       </div>
     </div>
   </div></div></div>
@@ -994,20 +994,19 @@
         <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:14px">
           <div class="card"><div class="hrow"><h3>Standard für alle Modelle</h3><span><span class="ibtn out"><i class="bi bi-arrow-counterclockwise"></i> Vorschlagswerte</span> <span class="ibtn dis">Speichern</span></span></div>
             <table class="dt"><tr><th>Wert</th><th>grün bis / ab</th><th>gelb bis / ab</th><th>rot</th></tr>
-              <tr><td>Wind</td><td><div class="inp">20</div></td><td><div class="inp">30</div></td><td class="mut">&gt; 30 km/h</td></tr>
               <tr><td>Böen</td><td><div class="inp">30</div></td><td><div class="inp">40</div></td><td class="mut">&gt; 40 km/h</td></tr>
               <tr><td>Niederschlag</td><td><div class="inp">0</div></td><td><div class="inp">0,5</div></td><td class="mut">&gt; 0,5 mm/h</td></tr>
               <tr><td>Sicht</td><td><div class="inp">5</div></td><td><div class="inp">1</div></td><td class="mut">&lt; 1 km</td></tr>
               <tr><td>Temperatur</td><td><div class="inp">5 bis 30</div></td><td><div class="inp">−5 bis 38</div></td><td class="mut">sonst °C</td></tr>
               <tr><td>Kp-Index</td><td><div class="inp">4</div></td><td><div class="inp">5</div></td><td class="mut">≥ 6</td></tr>
             </table>
-            <div class="hint">Speichern erst bei einer Änderung; gelb muss weiter gefasst sein als grün. Die Änderung wird protokolliert.</div>
+            <div class="hint">Die Wind-Grenze gilt für die Böen; der mittlere Wind wird nur angezeigt. Speichern erst bei einer Änderung; gelb muss weiter gefasst sein als grün. Die Änderung wird protokolliert.</div>
             <span class="assume">Annahme: Vorschlagswerte sind Erfahrungswerte, mit dem Verein abzustimmen; die Einstellung ist nicht Teil des versionierten Regelwerks.</span>
           </div>
           <div class="card"><h3>So wirkt es im Drohnenwetter</h3>
             <table class="dt"><tr><th>Grenzwerte für</th><th>es gilt</th></tr>
               <tr><td>alle Modelle</td><td>Standard des Vereins</td></tr>
-              <tr><td>DJI Neo 2 <small class="mut">(eigene Grenze Wind 15/22, Böen 20/28)</small></td><td><span class="badge b-air">eigene Grenze</span> für Wind und Böen, sonst Standard</td></tr>
+              <tr><td>DJI Neo 2 <small class="mut">(eigene Grenze Böen 20/28)</small></td><td><span class="badge b-air">eigene Grenze</span> für Böen, sonst Standard</td></tr>
               <tr><td>Mini 4 Pro <small class="mut">(keine eigene Grenze)</small></td><td>Standard des Vereins</td></tr>
             </table>
             <div class="hint">Eigene Grenzen pflegt der Besitzer am Modell; ohne eigene Grenze gilt der Standard links. Die Ampel ist eine Empfehlung, entscheiden muss der Pilot.</div>

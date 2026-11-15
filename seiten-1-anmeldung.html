@@ -276,7 +276,7 @@
         <h3 style="font-size:15px">Zu viele Fehlversuche</h3>
         <div class="hint" style="margin-top:4px">Vorher, nach jedem Fehlversuch: „E-Mail oder Passwort falsch. Noch 2 Versuche, danach ist die Anmeldung 15 Minuten gesperrt.“</div>
         <div class="alert" style="margin-top:6px"><i class="bi bi-lock-fill"></i> 5 Fehlversuche: Anmeldung für dieses Konto von diesem Netz aus <b>15 Minuten</b> gesperrt (bis 09:56 Uhr). Der Admin kann die Sperre verkürzen.</div>
-        <div class="hint">Anmelden mit Passkey bleibt möglich.</div>
+        <div class="hint">Anmelden mit Passkey und „Passwort vergessen?“ bleiben möglich – die Sperre gilt nur für die Passwort-Eingabe.</div>
       </div>
     </div>
   </div></div></div>
@@ -314,7 +314,7 @@
         <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
         <div class="chips"><span class="chip on"><i class="bi bi-fingerprint"></i> Passkey (empfohlen)</span><span class="chip">Passwort</span></div>
         <div class="hint" style="margin-top:-4px">Der Passkey wird sofort angelegt. Anmelden kannst du dich erst nach der Freischaltung. Bei „Passwort“: mindestens 10 Zeichen, Sonderzeichen nicht nötig; bekannte, geleakte Passwörter werden abgelehnt (Liste auf dem Server, ohne externen Dienst).</div>
-        <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten. Nach der Freischaltung kannst du die App nutzen; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
+        <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten. Nach der Freischaltung kannst du die App sofort nutzen – auch bevor ein Erziehungsberechtigter verknüpft ist; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
           <label style="margin-top:6px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><div class="inp">sandra@beispiel.de</div></div>
         <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Datenschutzhinweise gelesen <span style="color:var(--red)">*</span></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px"><i class="bi bi-fingerprint"></i> Passkey anlegen und registrieren</span>
@@ -336,7 +336,7 @@
 <!-- ========== 3 Passwort zurücksetzen / Wiederherstellungscode ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Passwort zurücksetzen und Anmeldung mit Wiederherstellungscode</h2></div>
-  <p class="ddesc">Der Reset-Link geht immer an die hinterlegte E-Mail, gilt 1 Stunde und nur einmal. Die Rückmeldung verrät nicht, ob die Adresse existiert. Ein zweiter Faktor bleibt nach dem Reset bestehen; ohne Zugriff darauf hilft ein Wiederherstellungscode.</p>
+  <p class="ddesc">Der Reset-Link geht immer an die hinterlegte E-Mail, gilt 1 Stunde und nur einmal. Die Rückmeldung verrät nicht, ob die Adresse existiert. Ein zweiter Faktor bleibt nach dem Reset bestehen; ohne Zugriff darauf hilft ein Wiederherstellungscode. Die Fehlversuch-Sperre der Anmeldung gilt hier nicht; der Link-Versand ist separat auf 3 pro Stunde und Adresse begrenzt.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/passwort-vergessen</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
@@ -347,6 +347,7 @@
         <label>E-Mail <span class="req">*</span></label><div class="inp">markus@beispiel.de</div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px;margin-top:12px">Link senden</span>
         <div class="ok" style="margin-top:12px"><i class="bi bi-envelope"></i><span>Wenn ein Konto zu dieser Adresse existiert, ist ein Link unterwegs.</span></div>
+        <div class="hint" style="margin-top:8px">Nach 3 Links in einer Stunde: „Für diese Adresse wurden in der letzten Stunde schon 3 Links verschickt. Der nächste ist ab 10:41 Uhr möglich.“</div>
       </div>
       <div class="an-mail">
         <div class="mh"><b>Von:</b> TSV RC &lt;noreply@rc.tsv1927…&gt;<br><b>Betreff:</b> Passwort zurücksetzen</div>
@@ -505,7 +506,7 @@
 <!-- ========== 7 Erster Start / Installieren ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">7</span><h2>Erster Login: Willkommen und „Als Nächstes“</h2></div>
-  <p class="ddesc">Nur beim ersten Login erscheint eine Willkommensseite mit der ausblendbaren Checkliste „Als Nächstes“ (Konto schützen, Bestätigungs-PIN festlegen, Meine Bereiche wählen, Nachweise, App installieren, Termine). Mitglieder ohne Admin-Rolle, die noch keinen Passkey und keinen zweiten Faktor haben, sehen dazu einmalig einen sanften, wegklickbaren Hinweis; dauerhaft steht die Empfehlung auf den Sicherheitsseiten im Profil. Am PC bietet der Browser die Installation in der Adressleiste an; der Hinweis lässt sich schließen und erscheint dann nicht mehr. Am Handy ist der Ablauf im Klickdummy.</p>
+  <p class="ddesc">Nur beim ersten Login erscheint eine Willkommensseite mit der ausblendbaren Checkliste „Als Nächstes“ (Konto schützen, Bestätigungs-PIN festlegen, Meine Bereiche wählen, Nachweise, App installieren, Termine). Dieselbe Checkliste steht mit demselben Stand als kompakte Karte oben auf der Startseite (Ansicht 8), bis alles erledigt oder sie ausgeblendet ist; eine gesetzte Bestätigungs-PIN zählt als erledigt. Mitglieder ohne Admin-Rolle, die noch keinen Passkey und keinen zweiten Faktor haben, sehen dazu einmalig einen sanften, wegklickbaren Hinweis; dauerhaft steht die Empfehlung auf den Sicherheitsseiten im Profil. Am PC bietet der Browser die Installation in der Adressleiste an; der Hinweis lässt sich schließen und erscheint dann nicht mehr. Am Handy ist der Ablauf im Klickdummy.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/willkommen</span><i class="bi bi-box-arrow-in-down an-inst" title="App installieren"></i></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Lena K.</div></div>
@@ -539,7 +540,7 @@
             <tr><td><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> <s class="mut">App installieren</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
             <tr><td><i class="bi bi-circle mut"></i> Nächste Termine ansehen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
           </table>
-          <div class="hint">2 von 6 erledigt. Ausgeblendet lässt sich die Liste wieder einblenden.</div>
+          <div class="hint">2 von 6 erledigt. Ausgeblendet lässt sich die Liste wieder einblenden. Ausblenden wirkt auch auf die Karte der Startseite.</div>
         </div>
       </div>
     </div>
@@ -549,7 +550,7 @@
 <!-- ========== 8 Startseite PC ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">8</span><h2>Startseite (Dashboard) für Markus</h2></div>
-  <p class="ddesc">Gleiche Inhalte wie die Handy-Startseite, am PC dreispaltig: Hinweise und „Flug erfassen“ oben, darunter Termine und Ausleihen, rechts die Bereiche mit Kennzahlen. Weil Markus Abteilungsleitung ist, gibt es eine kleine Leitungs-Kachel mit offenen Aufgaben; sie erscheint nur mit dieser Rolle.</p>
+  <p class="ddesc">Gleiche Inhalte wie die Handy-Startseite, am PC dreispaltig: Hinweise und „Flug erfassen“ oben, darunter Termine und Ausleihen, rechts die Bereiche mit Kennzahlen. Ganz oben steht die kompakte Karte „Als Nächstes“ mit Fortschritt und den offenen Punkten – bis alles erledigt oder ausgeblendet ist (gleicher Stand wie auf der Willkommensseite). Weil Markus Abteilungsleitung ist, gibt es eine kleine Leitungs-Kachel mit offenen Aufgaben; sie erscheint nur mit dieser Rolle.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-bell"></i> <span class="badge b-w">2</span> &nbsp; <i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -557,6 +558,10 @@
     <div class="dmain three" style="grid-template-columns:1.25fr 1fr 1fr">
       <div>
         <h3 style="font-size:18px">Hallo Markus</h3>
+        <div class="card" style="padding:10px 14px"><div class="hrow" style="margin-bottom:4px"><h3 style="margin:0"><i class="bi bi-list-check" style="color:var(--g)"></i> Als Nächstes <small class="mut" style="font-weight:400">3 von 6 erledigt</small></h3><span class="an-link"><i class="bi bi-eye-slash"></i> ausblenden</span></div>
+          <div style="height:6px;background:#e3e6e3;border-radius:3px;overflow:hidden;margin:4px 0 6px"><div style="width:50%;height:100%;background:var(--g)"></div></div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px"><span class="an-link"><i class="bi bi-circle"></i> Bestätigungs-PIN festlegen</span><span class="an-link"><i class="bi bi-circle"></i> Meine Bereiche wählen</span><span class="an-link"><i class="bi bi-circle"></i> App installieren</span></div>
+        </div>
         <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab. <span class="an-link">Schulung finden</span></div>
         <div class="bigact"><i class="bi bi-airplane"></i><div>Flug erfassen<small>Neo 2 · Vereinsgelände · Training</small></div><span style="margin-left:auto;font-size:13px;font-weight:700;background:rgba(255,255,255,.15);border-radius:4px;padding:4px 8px">Nachtragen</span></div>
         <div class="card"><div class="hrow"><h3>Nächste Termine</h3><span class="an-link">Kalender</span></div>

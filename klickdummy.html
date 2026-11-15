@@ -222,6 +222,12 @@
   .ck small{display:block}
   .progress{height:6px;background:#e3e6e3;border-radius:3px;overflow:hidden;margin:2px 0 10px}
   .progress div{height:100%;background:var(--g);transition:width .2s}
+  .st-nx{padding:10px 12px 4px}
+  .st-nx .hd{display:flex;align-items:center;gap:8px;font-size:13.5px}
+  .st-nx .hd b{flex:1}
+  .st-nx .progress{margin:6px 0 4px}
+  .st-nx .row{font-size:13.5px;padding:8px 0}
+  .st-nx .row i.bi-circle{color:#aaa;margin-right:8px}
   .seg{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;font-size:13px;font-weight:700;margin-bottom:10px}
   .seg div{flex:1 1 auto;text-align:center;padding:7px 8px;color:var(--g);background:#fff;white-space:nowrap;cursor:pointer}
   .seg div+div{border-left:1px solid var(--g)}
@@ -343,6 +349,11 @@
   <div class="body">
     <h3>Hallo Markus</h3>
     <div class="alert" data-go="nachweise"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab.</div>
+    <div class="card st-nx" id="st-nx">
+      <div class="hd"><i class="bi bi-list-check" style="color:var(--g);font-size:17px"></i><b>Als Nächstes</b><span class="mut" id="st-nx-cnt" style="font-size:12px">3 von 6 erledigt</span><span class="chg" id="st-nx-hide" style="font-size:12px"><i class="bi bi-eye-slash"></i> ausblenden</span></div>
+      <div class="progress"><div id="st-nx-prog" style="width:50%"></div></div>
+      <div id="st-nx-list"></div>
+    </div>
     <div id="start-sperre"></div>
     <div class="bigact" data-go="f-pre"><i class="bi bi-airplane"></i><div>Flug erfassen<small>Neo 2 · Vereinsgelände · Training</small></div><i class="bi bi-chevron-right" style="margin-left:auto;font-size:18px"></i></div>
     <button class="btn out" style="margin:-2px 0 10px" data-go="hf-start"><i class="bi bi-crosshair"></i> Hier fliegen – Ort prüfen</button>
@@ -652,6 +663,7 @@
     <div class="card pad"><dl class="kv2" id="del-kv"></dl></div>
     <div class="legal"><b><i class="bi bi-trash"></i> Löschen möglich bis <span id="del-until">14:52</span></b>Innerhalb der Löschfrist (Standard 30 Minuten nach der Erfassung, vom Admin einstellbar) kannst du einen versehentlich erfassten Flug löschen. Er verschwindet aus Flugbuch, Summen und Berichten. Danach geht nur noch „ungültig markieren“.</div>
     <button class="btn" style="background:var(--red)" id="btn-del"><i class="bi bi-trash"></i> Flug endgültig löschen</button>
+    <div class="note" id="del-who" style="text-align:left;display:none"></div>
     <div class="hint" id="del-hint" style="text-align:center"></div>
     <button class="btn out" style="margin-top:8px" data-back>Abbrechen</button>
     <span class="assume" style="margin-top:10px">Annahme: Im Änderungsprotokoll steht nur, dass und wann der Flug gelöscht wurde, nicht seine Daten.</span>
@@ -724,7 +736,7 @@
       </div>
       <div class="fgroup" id="t-wx"><div class="fsec"><i class="bi bi-cloud-sun"></i> Wetter <span class="ln"></span></div>
         <label>Eigene Wind-Grenze (km/h) <span class="opt">optional</span></label><input class="inp" id="mn-wind" inputmode="numeric" placeholder="–" autocomplete="off">
-        <div class="hint">Standard vom Admin: 20 km/h. Leer lassen, um den Standard zu verwenden. Ampel beim Drohnenwetter und bei „Hier fliegen“: grün bis zur Grenze, gelb bis 10 km/h darüber, darüber rot.</div></div>
+        <div class="hint">Standard vom Admin: 20 km/h. Die Grenze gilt für die Böen. Leer lassen, um den Standard zu verwenden. Ampel beim Drohnenwetter und bei „Hier fliegen“: grün bis zur Grenze, gelb bis 10 km/h darüber, darüber rot.</div></div>
       <div class="fgroup" id="t-drone"><div class="fsec">Felder des Typs Drohne <span class="ln"></span></div>
         <div class="two"><div><label>Kamera <span class="opt">opt.</span></label><div class="inp" data-pick="o-cam"><span id="mn-cam" class="mut">wählen</span><i class="bi bi-chevron-down"></i></div></div><div><label>Max. Flugzeit (min) <span class="opt">opt.</span></label><input class="inp" placeholder="–"></div></div></div>
       <div class="fgroup" id="t-fpv"><div class="fsec">Felder des Typs FPV <span class="ln"></span></div>
@@ -1043,7 +1055,7 @@
     <div class="an-pw"><input class="inp" id="an-l-pw" type="password" placeholder="Passwort" autocomplete="off"><i class="bi bi-eye an-eye"></i></div>
     <div style="text-align:right;margin:8px 0 4px"><span class="an-link" data-go="an-pw-vergessen">Passwort vergessen?</span></div>
     <div class="an-cb on" id="an-l-trust"><i class="bi bi-check-square-fill"></i><span><b>Diesem Gerät vertrauen</b><small class="mut" style="display:block">Angemeldet bleiben, 30 Tage ab der letzten Nutzung (als Admin höchstens 12 Stunden). Ohne Häkchen endet die Sitzung, wenn du den Browser schließt. In der installierten App ist das Häkchen vorbelegt.</small></span></div>
-    <div class="an-lock" id="an-l-lock" style="display:none"><i class="bi bi-lock-fill"></i><span><b>Anmeldung vorübergehend gesperrt</b><br>5 Fehlversuche: Für dieses Konto ist die Anmeldung von diesem Netz aus <b>15 Minuten</b> gesperrt (bis <span id="an-l-until">–</span>). Der Admin kann die Sperre verkürzen.<br><span class="an-link" id="an-l-wait">15 Minuten vorspulen <small class="mut">(Demo)</small></span></span></div>
+    <div class="an-lock" id="an-l-lock" style="display:none"><i class="bi bi-lock-fill"></i><span><b>Anmeldung vorübergehend gesperrt</b><br>5 Fehlversuche: Für dieses Konto ist die Anmeldung von diesem Netz aus <b>15 Minuten</b> gesperrt (bis <span id="an-l-until">–</span>). Der Admin kann die Sperre verkürzen.<br>Die Anmeldung mit <b>Passkey</b> und <span class="an-link" data-go="an-pw-vergessen" id="an-l-forgot">„Passwort vergessen?“</span> bleiben möglich.<br><span class="an-link" id="an-l-wait">15 Minuten vorspulen <small class="mut">(Demo)</small></span></span></div>
     <button class="btn dis" id="an-l-go">Weiter</button>
     <div class="note" id="an-l-hint">E-Mail und Passwort eingeben.</div>
     <div class="card pad" style="font-size:12.5px;margin-top:16px">
@@ -1100,7 +1112,8 @@
     <label>E-Mail <span class="req">*</span></label>
     <input class="inp" id="an-pv-mail" type="email" placeholder="name@beispiel.de" autocomplete="off">
     <button class="btn dis" id="an-pv-go" style="margin-top:14px">Link senden</button>
-    <div class="note">Dein zweiter Faktor bleibt nach dem Zurücksetzen bestehen.</div>
+    <div class="note an-err" id="an-pv-limit" style="display:none"></div>
+    <div class="note">Dein zweiter Faktor bleibt nach dem Zurücksetzen bestehen. Eine Sperre nach Fehlversuchen gilt hier nicht; der Link-Versand ist aber auf 3 pro Stunde und Adresse begrenzt. Der Link gilt 1 Stunde und nur einmal.</div>
   </div>
 </section>
 
@@ -1180,7 +1193,7 @@
     <label>E-Mail <span class="req">*</span></label><input class="inp an-rg-req" id="an-rg-mail" type="email" autocomplete="off">
     <div class="hint">Wird dein Anmeldename. Auch Minderjährige brauchen eine eigene Adresse.</div>
     <label>Geburtsdatum <span class="req">*</span></label><input class="inp an-rg-req" id="an-rg-geb" type="date">
-    <div class="an-minor w" id="an-rg-minor" style="display:none"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten mit deinem Konto. Nach der Freischaltung kannst du die App nutzen; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
+    <div class="an-minor w" id="an-rg-minor" style="display:none"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten mit deinem Konto. Nach der Freischaltung kannst du die App sofort nutzen – auch bevor ein Erziehungsberechtigter verknüpft ist; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
       <label style="margin-top:8px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><input class="inp" type="email" autocomplete="off"></div>
     <div class="card pad" style="font-size:12.5px;margin-top:10px"><i class="bi bi-grid"></i> <b>Alle Bereiche stehen dir offen</b> (Luftsport, RC Cars). Welche dich besonders interessieren („Meine Bereiche“ für Startseite, Vorfilter und Benachrichtigungen), stellst du später im Profil ein.</div>
     <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
@@ -1268,7 +1281,7 @@
     </div>
     <div class="card pad" id="an-wk-off" style="display:none;font-size:13px"><i class="bi bi-eye-slash"></i> Checkliste ausgeblendet. <span class="an-link" id="an-wk-show">Wieder einblenden</span></div>
     <button class="btn" id="an-wk-go" style="margin-top:10px">Zur Startseite</button>
-    <div class="note">Diese Seite erscheint nur beim ersten Login. Die Checkliste findest du danach auf der Startseite, bis du sie ausblendest.</div>
+    <div class="note">Diese Seite erscheint nur beim ersten Login. Die Checkliste steht danach als Karte oben auf der Startseite, bis alles erledigt ist oder du sie ausblendest.</div>
   </div>
 </section>
 
@@ -1519,17 +1532,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   $('#an-l-demo').addEventListener('click', () => { $('#an-l-mail').value = 'lena@beispiel.de'; $('#an-l-pw').value = 'demo-passwort-12'; lCheck(); KD.toast('Demo: Lena K. eingetragen, jetzt „Weiter“.'); });
   // ---------- Erster Login: Willkommen + Checkliste „Als Nächstes“ (ausblendbar) ----------
-  const WK = new Set();
+  // Zustand teilt sich die Willkommensseite mit der Karte „Als Nächstes“ auf der Startseite (window.__nx im Dummy)
+  const NX = window.__nx || { done: new Set(), hidden: false, mark(k){ this.done.add(k); }, hide(v){ this.hidden = v !== false; }, reset(){ this.done.clear(); this.hidden = false; }, sub(){} };
+  const WK = NX.done;
   function wkRender(){
     const rows = $$('#an-wk-list .an-nx'), n = rows.filter(r => WK.has(r.dataset.nx)).length;
     rows.forEach(r => { const d = WK.has(r.dataset.nx); r.classList.toggle('done', d); r.querySelector('i').className = 'bi ' + (d ? 'bi-check-circle-fill' : 'bi-circle'); });
     $('#an-wk-prog').style.width = (n / rows.length * 100) + '%';
     $('#an-wk-cnt').textContent = n + ' von ' + rows.length + ' erledigt.' + (n === rows.length ? ' Alles erledigt!' : ' Ein Punkt gilt als erledigt, sobald du ihn geöffnet hast.');
+    $('#an-wk-box').style.display = NX.hidden ? 'none' : ''; $('#an-wk-off').style.display = NX.hidden ? '' : 'none';
   }
-  function wkInit(nm){ wkSeen = true; tipSeen = true; $('#an-wk-hello').textContent = 'Willkommen, ' + nm + '!'; wkRender(); }
-  $('#an-wk-list').addEventListener('click', e => { const r = e.target.closest('.an-nx'); if (r) { WK.add(r.dataset.nx); wkRender(); } });
-  $('#an-wk-hide').addEventListener('click', () => { $('#an-wk-box').style.display = 'none'; $('#an-wk-off').style.display = ''; KD.toast('Checkliste ausgeblendet.'); });
-  $('#an-wk-show').addEventListener('click', () => { $('#an-wk-box').style.display = ''; $('#an-wk-off').style.display = 'none'; });
+  function wkInit(nm){ wkSeen = true; tipSeen = true; NX.reset(); $('#an-wk-hello').textContent = 'Willkommen, ' + nm + '!'; wkRender(); }
+  $('#an-wk-list').addEventListener('click', e => { const r = e.target.closest('.an-nx'); if (r) { NX.mark(r.dataset.nx); wkRender(); } });
+  $('#an-wk-hide').addEventListener('click', () => { NX.hide(true); wkRender(); KD.toast('Checkliste ausgeblendet – auch auf der Startseite.'); });
+  $('#an-wk-show').addEventListener('click', () => { NX.hide(false); wkRender(); });
   $('#an-wk-go').addEventListener('click', () => { KD.show('start','reset'); KD.toast('Los geht’s!'); });
   KD.enter['an-willkommen'] = wkRender;
   $('#an-l-pk').addEventListener('click', () => osOpen('an-l-os'));
@@ -1547,8 +1563,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ---------- Passwort zurücksetzen ----------
-  $('#an-pv-mail').addEventListener('input', () => dis('an-pv-go', !/.+@.+\..+/.test(val('an-pv-mail'))));
-  $('#an-pv-go').addEventListener('click', () => { $('#an-pm-addr').textContent = val('an-pv-mail'); KD.show('an-pw-mail','replace'); });
+  // Reset-Versand: unabhängig von der Fehlversuch-Sperre, aber höchstens 3 Links pro Stunde und Adresse
+  const pvSent = {}, PV_MAX = 3;
+  function pvCheck(){
+    const m = val('an-pv-mail').toLowerCase(), ok = /.+@.+\..+/.test(m), full = ok && (pvSent[m] || 0) >= PV_MAX;
+    dis('an-pv-go', !ok || full);
+    $('#an-pv-limit').style.display = full ? '' : 'none';
+    $('#an-pv-limit').textContent = full ? 'Für diese Adresse wurden in der letzten Stunde schon 3 Links verschickt. Der nächste ist ab 10:41 Uhr möglich – bitte den zuletzt verschickten Link verwenden.' : '';
+  }
+  $('#an-pv-mail').addEventListener('input', pvCheck);
+  KD.enter['an-pw-vergessen'] = pvCheck;
+  $('#an-pv-go').addEventListener('click', () => {
+    const m = val('an-pv-mail').toLowerCase(); if ($('#an-pv-go').classList.contains('dis')) return;
+    pvSent[m] = (pvSent[m] || 0) + 1;
+    $('#an-pm-addr').textContent = val('an-pv-mail'); KD.show('an-pw-mail','replace');
+  });
   function pnCheck(){
     const okLen = strength('an-pn-1','an-pn-bar'), same = $('#an-pn-1').value === $('#an-pn-2').value && $('#an-pn-2').value !== '';
     dis('an-pn-go', !(okLen && same));
@@ -1583,7 +1612,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function eiDone(){
     $('#an-in-tip').style.display = 'none';
     osClose('an-ei-os'); wkInit(val('an-ei-name').split(' ')[0]);
-    if (eiHow() === 'pk') WK.add('pk');
+    if (eiHow() === 'pk') NX.mark('pk');
     wkRender(); KD.show('an-willkommen','replace'); KD.toast('Konto aktiv. Willkommen, ' + esc(val('an-ei-name').split(' ')[0]) + '!');
   }
   const inTipOff = () => { tipSeen = true; $('#an-in-tip').style.display = 'none'; KD.toast('Okay. Passkey und zweiter Faktor findest du unter Profil › Sicherheit.'); };
@@ -1951,7 +1980,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ['Allgemein',0,[['Kaufdatum','01.03.2026'],['Kaufpreis (€)','']]],
         ['Eigene Angaben',0,[['Propeller','Ersatzsatz im Koffer']]] ],
       note:'',
-      uses:{ stats:[['22','Flüge 2026'],['5:12','Std.'],['3','Akkus']], rows:[['Sa 14.11.','Vereinsgelände · Training','18 min'],['Mi 11.11.','Jonas B. (Freigabe zum Fliegen) · Vereinsgelände','10 min','neo1111'],['Do 05.11.','Vereinsgelände · Training','14 min'],['Mi 28.10.','Vereinsgelände · Training','15 min'],['Mo 26.10.','Vereinsgelände · Training','12 min']] },
+      uses:{ stats:[['22','Flüge 2026'],['5:12','Std.'],['3','Akkus']], rows:[['Sa 14.11.','Jonas B. (Freigabe zum Fliegen) · Vereinsgelände','5 min','neo1411j'],['Sa 14.11.','Vereinsgelände · Training','18 min'],['Mi 11.11.','Jonas B. (Freigabe zum Fliegen) · Vereinsgelände','10 min','neo1111'],['Do 05.11.','Vereinsgelände · Training','14 min'],['Mi 28.10.','Vereinsgelände · Training','15 min'],['Mo 26.10.','Vereinsgelände · Training','12 min']] },
       flyTo:[['Jonas B.','unbefristet, seit Mo 02.11.']], wind:'15',
       zub:[['akku-neo1'],['akku-neo2'],['akku-neo3'],['rcn3']],
       wart:{ due:['Propeller tauschen','fällig seit So 01.11. (alle 6 Monate)'], tasks:[['Propeller tauschen','alle 6 Monate','b-w','fällig'],['Firmware prüfen','vor jedem Flugtag','b-g','ok']],
@@ -2121,7 +2150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       h += '<div class="pane" id="'+P('use')+'">';
       if (u.stats.length) h += '<div class="stats">'+u.stats.map(s => '<div class="stat"><b>'+esc(s[0])+'</b><span>'+esc(s[1])+'</span></div>').join('')+'</div>';
       if (u.rows.length){
-        h += '<div class="card">'+u.rows.map(r => isAir
+        h += '<div class="card">'+u.rows.filter(r => !(isAir && r[3] && window.__flGone && window.__flGone.has(r[3]))).map(r => isAir
           ? '<div class="row" data-go="f-detail"'+(r[3] ? ' data-fl="'+r[3]+'"' : '')+'><span><b>'+esc(r[0])+'</b><br><small>'+esc(r[1])+'</small></span><span>'+esc(r[2])+'</span></div>'
           : '<div class="row" data-go="'+r[3]+'"'+(r[4]?' data-ev="'+r[4]+'"':'')+'><span><b>'+esc(r[0])+'</b><br><small>'+esc(r[1])+'</small></span><span>'+esc(r[2])+'</span></div>').join('')+'</div>';
       } else h += '<div class="card"><div class="md-empty">'+(isAir ? 'Noch keine Flüge mit diesem Modell.' : 'Noch keine Einsätze.')+'</div></div>';
@@ -2230,7 +2259,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
     const own = (m.secs.find(s => s[0] === 'Eigene Angaben') || [0,0,[]])[2];
-    if (m.lfz) h += '<div class="fsec"><i class="bi bi-cloud-sun"></i> Wetter <span class="ln"></span></div><label>Eigene Wind-Grenze (km/h) <span class="opt">opt.</span></label><input class="inp" id="md-e-wind" inputmode="numeric" placeholder="–" value="'+esc(m.wind || '')+'"><div class="hint">Standard vom Admin: '+WIND_STD+' km/h. Leer lassen, um den Standard zu verwenden. Gilt beim Drohnenwetter und bei „Hier fliegen“, wenn dieses Modell gewählt ist: grün bis zur Grenze, gelb bis 10 km/h darüber, darüber rot.</div>';
+    if (m.lfz) h += '<div class="fsec"><i class="bi bi-cloud-sun"></i> Wetter <span class="ln"></span></div><label>Eigene Wind-Grenze (km/h) <span class="opt">opt.</span></label><input class="inp" id="md-e-wind" inputmode="numeric" placeholder="–" value="'+esc(m.wind || '')+'"><div class="hint">Standard vom Admin: '+WIND_STD+' km/h. Die Grenze gilt für die Böen. Leer lassen, um den Standard zu verwenden. Gilt beim Drohnenwetter und bei „Hier fliegen“, wenn dieses Modell gewählt ist: grün bis zur Grenze, gelb bis 10 km/h darüber, darüber rot.</div>';
     h += '<div class="fsec">Allgemein <span class="ln"></span></div><label>Bemerkungen <span class="opt">optional</span></label><textarea class="inp" rows="2" id="md-e-note" placeholder="…">'+esc(m.note)+'</textarea>';
     h += '<div class="fsec">Eigene Angaben <span class="ln"></span></div><div id="md-e-kv">'+own.map(kvHtml).join('')+'</div><div class="addlink" id="md-e-kvadd"><i class="bi bi-plus-circle"></i> Angabe hinzufügen</div>';
     byId('md-e-form').innerHTML = h; edCheck();
@@ -3277,7 +3306,7 @@ document.addEventListener('DOMContentLoaded', () => {
   byId('pf-pin-ok').addEventListener('click', function(){
     if (this.classList.contains('dis')) return;
     const change = !!prof.pin;
-    const finish = () => { prof.pin = 'heute'; pinUi(); K.back(); K.toast(change ? 'Neue PIN gespeichert. Die alte gilt nicht mehr.' : 'PIN festgelegt. Du kannst damit auf fremden Geräten bestätigen.'); };
+    const finish = () => { prof.pin = 'heute'; pinUi(); if (window.__nx) window.__nx.mark('pin'); K.back(); K.toast(change ? 'Neue PIN gespeichert. Die alte gilt nicht mehr.' : 'PIN festgelegt. Du kannst damit auf fremden Geräten bestätigen.'); };
     if (change) { this.classList.add('dis'); this.textContent = 'Passkey wird geprüft …'; setTimeout(finish, 600); } else finish();
   });
   pinUi();
@@ -3987,10 +4016,10 @@ document.addEventListener('DOMContentLoaded', () => {
       h += '<div class="hint">'+esc(M.first)+' sieht bei der Zusage den Hinweis: „Deine Erziehungsberechtigten werden informiert und können die Zusage zurücknehmen.“</div>';
     } else if (rev){
       h += '<div class="ev-ok"><b><i class="bi bi-check-circle-fill"></i> Zurückgenommen</b> am 14.11. um '+rev.hm+'<br><small>'+esc(M.first)+' steht nicht mehr auf der Teilnehmerliste. Die Verantwortlichen sind informiert.</small></div>';
-      h += '<h3>Hinweis bei '+esc(M.first)+'</h3><div class="card pad" style="font-size:13px"><i class="bi bi-info-circle"></i> „Deine Zusage zu '+esc(e.t)+' am '+dstr(e)+' wurde von '+esc(M.parent)+' zurückgenommen. Erneut zusagen kann nur ein Erziehungsberechtigter.“'+(rev.msg ? '<br><small class="mut">Nachricht: „'+esc(rev.msg)+'“</small>' : '')+'</div>';
+      h += '<h3>Hinweis bei '+esc(M.first)+'</h3><div class="card pad" style="font-size:13px"><i class="bi bi-info-circle"></i> „Deine Zusage zu '+esc(e.t)+' am '+dstr(e)+' wurde von '+esc(M.parent)+' zurückgenommen. Erneut zusagen kann nur ein Erziehungsberechtigter; „Vielleicht“ oder „Absage“ kannst du weiter setzen.“'+(rev.msg ? '<br><small class="mut">Nachricht: „'+esc(rev.msg)+'“</small>' : '')+'</div>';
       h += '<div class="card"><div class="row" data-go="ev-kind" data-ev="'+parEv+'"><span><i class="bi bi-person"></i> So sieht es '+esc(M.first)+'<br><small class="mut">Zusage-Knopf gesperrt</small></span><i class="bi bi-chevron-right mut"></i></div></div>';
       h += '<button class="btn" id="ev-par-again"><i class="bi bi-check-circle"></i> Für '+esc(M.first)+' erneut zusagen</button>';
-      h += '<div class="hint">Nach einer Rücknahme kann nur ein Erziehungsberechtigter erneut zusagen, '+esc(M.first)+' selbst nicht. Ist das Event inzwischen voll, kommt '+esc(M.first)+' auf die Warteliste.</div>';
+      h += '<div class="hint">Nach einer Rücknahme kann nur ein Erziehungsberechtigter erneut zusagen; '+esc(M.first)+' selbst kann nur noch „Vielleicht“ oder „Absage“ setzen. Ist das Event inzwischen voll, kommt '+esc(M.first)+' auf die Warteliste.</div>';
     } else {
       h += '<div class="card pad" style="font-size:13px">'+esc(M.first)+' ist für dieses Event nicht (mehr) eingetragen.</div>';
     }
@@ -4009,7 +4038,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#ev-kind-t1').textContent = e.t;
     let h = evOff() ? '<div class="ev-off"><i class="bi bi-cloud-slash"></i><span><b>Offline</b> · letzter Stand. Zusagen gehen erst wieder mit Netz.</span></div>' : '';
     h += '<div class="card pad"><dl class="kv2"><dt>Datum</dt><dd>'+dstr(e)+'2026</dd><dt>Zeit</dt><dd>'+esc(e.time)+' Uhr</dd><dt>Ort</dt><dd>'+esc(e.ort)+'</dd><dt>Plätze</dt><dd>'+e.yes.length+(e.max?' von '+e.max:'')+' zugesagt'+(e.wait.length?' · '+e.wait.length+' auf der Warteliste':'')+'</dd></dl></div>';
-    if (rev) h += '<div class="alert"><i class="bi bi-people-fill"></i> Deine Zusage wurde am 14.11. um '+rev.hm+' von <b>'+esc(M.parent)+'</b> zurückgenommen.'+(rev.msg?'<br><small>Nachricht: „'+esc(rev.msg)+'“</small>':'')+'<br><small>Erneut zusagen kann nur ein Erziehungsberechtigter. Sprich mit '+esc(M.parent)+'.</small></div>';
+    if (rev) h += '<div class="alert"><i class="bi bi-people-fill"></i> Deine Zusage wurde am 14.11. um '+rev.hm+' von <b>'+esc(M.parent)+'</b> zurückgenommen.'+(rev.msg?'<br><small>Nachricht: „'+esc(rev.msg)+'“</small>':'')+'<br><small>Erneut zusagen kann nur ein Erziehungsberechtigter – sprich mit '+esc(M.parent)+'. „Vielleicht“ oder „Absage“ kannst du weiter setzen.</small></div>';
     h += '<h3>Meine Teilnahme</h3><div class="ev-rsvp" id="ev-kind-rsvp">'+
       (rev ? '<div class="y lk" data-k="yes"><i class="bi bi-lock"></i>Zusage gesperrt</div>' : '<div class="y'+(st==='yes'?' on':'')+'" data-k="yes"><i class="bi bi-check-circle"></i>Zusage</div>')+
       '<div class="m'+(st==='maybe'?' on':'')+'" data-k="maybe"><i class="bi bi-question-circle"></i>Vielleicht</div><div class="n'+(st==='no'?' on':'')+'" data-k="no"><i class="bi bi-x-circle"></i>Absage</div></div>';
@@ -5762,7 +5791,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
   <div class="top"><i class="bi bi-arrow-left" style="font-size:20px" data-back></i><div><div class="t1">Abteilung</div><div class="t2">Leitung RC-Modellsport</div></div><div class="sp"></div><i class="bi bi-person-plus" style="font-size:20px" data-go="lt-einladen"></i></div>
   <div class="body">
-    <div class="alert" id="lt-o-reg" data-go="lt-reg"><i class="bi bi-person-plus-fill"></i> <b>Neue Registrierung:</b> Paul W. (16) wartet auf Freischaltung.<br><small>Minderjährig – erst nach Verknüpfung eines Erziehungsberechtigten.</small></div>
+    <div class="alert" id="lt-o-reg" data-go="lt-reg"><i class="bi bi-person-plus-fill"></i> <b>Neue Registrierung:</b> Paul W. (16) wartet auf Freischaltung.<br><small>Minderjährig – nach der Freischaltung sofort nutzbar; zustimmungspflichtige Aktionen warten auf ein Eltern-Konto.</small></div>
     <div class="lt-stats">
       <div class="stat lt-red" data-go="lt-nachweise"><b>4</b><span>Personen mit kritischen Nachweisen</span></div>
       <div class="stat lt-warn" data-go="aus-genehmigen"><b>2</b><span>offene Ausleih-Anträge</span></div>
@@ -5845,13 +5874,13 @@ document.addEventListener('DOMContentLoaded', () => {
     <h3>Voraussetzungen</h3>
     <div class="card">
       <div class="row"><span><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> E-Mail bestätigt</span></div>
-      <div class="row"><span id="lt-rg-ebtxt"><i class="bi bi-x-circle" style="color:var(--red)"></i> Erziehungsberechtigte verknüpft, Einwilligung dokumentiert</span><span class="chg" id="lt-rg-eblink" data-go="lt-eb">verknüpfen</span></div>
+      <div class="row"><span id="lt-rg-ebtxt"><i class="bi bi-exclamation-circle" style="color:var(--warn)"></i> Erziehungsberechtigte noch nicht verknüpft<br><small class="mut">für die Freischaltung nicht nötig</small></span><span class="chg" id="lt-rg-eblink" data-go="lt-eb">verknüpfen</span></div>
     </div>
     <div class="card pad lt-sm"><i class="bi bi-grid"></i> Alle Mitglieder sehen alle Bereiche. „Meine Bereiche“ wählt Paul selbst als Vorliebe.</div>
     <label>Rolle</label>
     <div class="card pad lt-sm"><i class="bi bi-lock"></i> Mitglied <small class="mut">– weitere Rollen nach der Freischaltung im Mitglied</small></div>
-    <button class="btn dis" id="lt-rg-btn">Freischalten</button>
-    <div class="hint" id="lt-rg-hint" style="text-align:center">Minderjährig: erst Erziehungsberechtigte verknüpfen.</div>
+    <button class="btn" id="lt-rg-btn">Freischalten</button>
+    <div class="note" id="lt-rg-hint" style="text-align:left">Paul ist minderjährig. Nach der Freischaltung kann er die App sofort nutzen; was eine Zustimmung braucht (z. B. Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist.</div>
     <button class="btn out" id="lt-rg-no" style="margin-top:10px">Ablehnen</button>
   </div>
 </section>
@@ -5921,7 +5950,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="pane" id="lt-md-p3">
       <div class="card" id="lt-md-fam"></div>
-      <div class="alert" id="lt-md-noeb" style="display:none"><i class="bi bi-exclamation-triangle-fill"></i> <b>Keine Erziehungsberechtigten verknüpft.</b> Das Konto ist gesperrt, bis wieder jemand verknüpft ist. Die Abteilungsleitung wurde benachrichtigt.</div>
+      <div class="alert" id="lt-md-noeb" style="display:none"><i class="bi bi-exclamation-triangle-fill"></i> <span id="lt-md-noebtxt"><b>Keine Erziehungsberechtigten verknüpft.</b> Das Konto ist gesperrt, bis wieder jemand verknüpft ist. Die Abteilungsleitung wurde benachrichtigt.</span></div>
       <div class="card pad lt-sm"><i class="bi bi-info-circle"></i> <span id="lt-md-faminfo">Erziehungsberechtigte lesen alle Daten des Kindes.</span></div>
       <button class="btn" id="lt-md-addeb" data-go="lt-eb"><i class="bi bi-link-45deg"></i> Erziehungsberechtigte verknüpfen</button>
       <div class="note">Verknüpfungen legen nur Abteilungsleitung oder Admin an.</div>
@@ -5968,8 +5997,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <button class="btn lt-dangerout" id="lt-ko-del"><i class="bi bi-person-dash"></i> Konto jetzt löschen</button>
     <div class="hint" id="lt-ko-delhint" style="text-align:center">Erst möglich, wenn kein Kind mehr verknüpft ist.</div>
-    <div class="note" style="text-align:left">Ein Eltern-Konto ohne verknüpftes Kind wird nach Ankündigung automatisch gelöscht – außer die Person ist selbst Mitglied: Dann bleibt das Konto, nur die Elternrolle endet. Die Verknüpfungen bleiben im Änderungsprotokoll nachvollziehbar.</div>
-    <span class="lt-assume">Annahme: Die Löschung wird 14 Tage vorher per E-Mail angekündigt.</span>
+    <div class="note" style="text-align:left">Ein Eltern-Konto ohne verknüpftes Kind wird automatisch gelöscht; die Löschung wird 14 Tage vorher per E-Mail angekündigt – außer die Person ist selbst Mitglied: Dann bleibt das Konto, nur die Elternrolle endet. Die Verknüpfungen bleiben im Änderungsprotokoll nachvollziehbar.</div>
   </div>
 </section>
 
@@ -6048,7 +6076,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="row"><span><i class="bi bi-exclamation-circle" style="color:var(--warn)"></i> Reservierung Tinywhoop-Set (19.11.) wird storniert</span></div>
       <div class="row"><span><i class="bi bi-people-fill" style="color:var(--mut)"></i> Verknüpfung zu Sandra S. endet</span></div>
     </div>
-    <div class="note" style="text-align:left" id="lt-au-note">Offene Ausleihen blockieren den Austritt nicht: Die Rückgabe wird eingefordert und erscheint bei der Leitung als Mahnfall „Rückgabe offen“. Mit dem Austritt eines Kindes endet die Einsicht der Erziehungsberechtigten. Der letzte Admin kann nicht austreten.</div>
+    <div class="note" style="text-align:left" id="lt-au-note">Offene Ausleihen blockieren den Austritt nicht: Die Rückgabe wird eingefordert und erscheint bei der Leitung als Mahnfall „Rückgabe offen“. Bis zur Rückgabe bleibt nur die E-Mail-Adresse gespeichert (ausschließlich für Rückgabe-Erinnerungen), danach wird auch sie gelöscht. Mit dem Austritt eines Kindes endet die Einsicht der Erziehungsberechtigten. Der letzte Admin kann nicht austreten.</div>
     <label>Austritt zum <span class="req">*</span></label>
     <input class="inp" id="lt-au-date" type="date">
     <label>Grund <span class="opt">optional</span></label>
@@ -6103,12 +6131,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="lt-count"><span>abgelaufen, fehlt oder ≤ 60 Tage</span><span class="chg" id="lt-nw-all">Alle erinnern</span></div>
       <div class="card" id="lt-nw-list">
         <div class="row"><span class="li"><span class="lt-av">LK</span><span><b>Lena K.</b> <span class="badge b-r">abgelaufen</span><br><small>Kompetenznachweis A1/A3 · 02.10.2026</small></span></span><span class="chg lt-rem" data-who="Lena K.">Erinnern</span></div>
-        <div class="row"><span class="li"><span class="lt-av">SM</span><span><b>Sophie M.</b> <span class="badge b-r">fehlt</span><br><small>Kompetenznachweis A1/A3 · nicht hinterlegt</small></span></span><span class="chg lt-rem" data-who="Sophie M.">Erinnern</span></div>
+        <div class="row"><span class="li"><span class="lt-av">SM</span><span><b>Sophie M.</b> <span class="badge b-r">fehlt</span><br><small>Kompetenznachweis A1/A3 · nicht hinterlegt · besitzt FPV Quad 3″, 4 Flüge</small></span></span><span class="chg lt-rem" data-who="Sophie M.">Erinnern</span></div>
         <div class="row"><span class="li"><span class="lt-av">SM</span><span><b>Sophie M.</b> <span class="badge b-w">20 Tage</span><br><small>Betreiber-Registrierung (e-ID) · 04.12.2026</small></span></span><span class="chg lt-rem" data-who="Sophie M.">Erinnern</span></div>
         <div class="row"><span class="li"><span class="lt-av">MB</span><span><b>Markus B.</b> <span class="badge b-w">41 Tage</span><br><small>Fernpilotenzeugnis A2 · 25.12.2026</small></span></span><span class="chg lt-rem" data-who="Markus B.">Erinnern</span></div>
         <div class="row"><span class="li"><span class="lt-av">MR</span><span><b>Max R.</b> <span class="badge b-w">57 Tage</span><br><small>Erste-Hilfe-Kurs · 10.01.2027</small></span></span><span class="chg lt-rem" data-who="Max R.">Erinnern</span></div>
       </div>
-      <span class="lt-assume">Annahme: „fehlt“ = ein laut Regelwerk erwarteter Nachweistyp ist nicht hinterlegt (z. B. A1/A3 bei eigenen oder ausgeliehenen Luftfahrzeugen).</span>
+      <div class="note" style="text-align:left">„fehlt“ heißt: Das Mitglied besitzt oder leiht Luftfahrzeuge oder erfasst Flüge, und der laut Regelwerk dafür nötige Nachweis ist nicht hinterlegt. Wer nur RC Cars fährt, bekommt keine Warnung.</div>
       <h3>Schulung planen</h3>
       <div class="card">
         <div class="row" data-go="lt-schulung" data-ltthema="Vorbereitung A1/A3"><span><b>A1/A3</b> · 2 Personen<br><small>Lena K., Sophie M.</small></span><i class="bi bi-calendar-plus" style="color:var(--g)"></i></div>
@@ -6120,7 +6148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="pane" id="lt-nw-p2">
       <div class="chips" data-filter="lt-nw-alllist"><span class="chip on" data-f="all">Alle</span><span class="chip" data-f="air"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip" data-f="car"><i class="bi bi-car-front"></i> RC Cars</span></div>
       <div class="card" id="lt-nw-alllist">
-        <div class="row" data-area="car" data-go="lt-mitglied" data-ltm="felix"><span><b>Felix H.</b> (16)<br><small>RC Cars: keine Nachweise vorgeschrieben</small></span><span class="badge b-all">–</span></div>
+        <div class="row" data-area="car" data-go="lt-mitglied" data-ltm="felix"><span><b>Felix H.</b> (16)<br><small>nur RC Cars: keine Luftfahrzeuge, keine Flüge – kein Nachweis nötig</small></span><span class="badge b-all">–</span></div>
         <div class="row" data-area="both" data-go="lt-mitglied" data-ltm="jonas"><span><b>Jonas B.</b><br><small><span class="badge b-g">A1/A3 06/2029</span> <span class="badge b-g">A2 03/2028</span> <span class="badge b-g">e-ID 08/2027</span></small></span><i class="bi bi-chevron-right mut"></i></div>
         <div class="row" data-area="both" data-go="lt-mitglied" data-ltm="lena"><span><b>Lena K.</b><br><small><span class="badge b-r">A1/A3 abgel.</span> <span class="badge b-g">e-ID 02/2027</span></small></span><i class="bi bi-chevron-right mut"></i></div>
         <div class="row" data-area="both" data-go="lt-mitglied" data-ltm="markus"><span><b>Markus B.</b><br><small><span class="badge b-g">A1/A3 03/2029</span> <span class="badge b-w">A2 25.12.</span> <span class="badge b-g">e-ID 05/2027</span></small></span><i class="bi bi-chevron-right mut"></i></div>
@@ -6395,13 +6423,12 @@ document.addEventListener('DOMContentLoaded', () => {
     <textarea class="inp" id="lt-sn-txt" rows="2" maxlength="300" placeholder="z. B. Handball-Turnier, Halle komplett belegt"></textarea>
     <label>Betroffene Bereiche <span class="req">*</span></label>
     <div class="chips" id="lt-sn-area"><span class="chip" data-a="air"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip" data-a="car"><i class="bi bi-car-front"></i> RC Cars</span></div>
-    <div class="card pad lt-sm" id="lt-sn-notbox"><i class="bi bi-bell"></i> <span id="lt-sn-not">Benachrichtigt werden die Mitglieder der gewählten Bereiche.</span></div>
+    <div class="card pad lt-sm" id="lt-sn-notbox"><i class="bi bi-bell"></i> <span id="lt-sn-not">Benachrichtigt werden alle, die einen gewählten Bereich unter „Meine Bereiche“ führen, und alle, die am Ort eingecheckt sind.</span></div>
     <div class="card" id="lt-sn-chgrow" style="display:none"><div class="row"><span>Mitglieder über die Änderung informieren<br><small>Push bzw. E-Mail laut ihren Einstellungen</small></span><span class="tg on" id="lt-sn-chgnot"></span></div></div>
-    <span class="lt-assume">Annahme: „Mitglieder der Bereiche“ sind alle, die den Bereich unter „meine Bereiche“ gewählt haben.</span>
     <button class="btn dis" id="lt-sn-btn">Sperre setzen</button>
     <div class="hint" id="lt-sn-hint" style="text-align:center"></div>
     <div id="lt-sn-editbox" style="display:none">
-      <div class="lt-confirm" id="lt-sn-delbox" style="display:none;margin-top:10px"><b>Sperre aufheben?</b><br>Die Mitglieder der betroffenen Bereiche werden informiert. Der Vorgang steht im Änderungsprotokoll.
+      <div class="lt-confirm" id="lt-sn-delbox" style="display:none;margin-top:10px"><b>Sperre aufheben?</b><br>Informiert werden alle mit einem betroffenen Bereich unter „Meine Bereiche“ und alle am Ort Eingecheckten. Der Vorgang steht im Änderungsprotokoll.
         <div class="btns"><button class="btn lt-danger" id="lt-sn-delyes">Aufheben</button><button class="btn out" id="lt-sn-delno">Abbrechen</button></div></div>
       <button class="btn lt-dangerout" id="lt-sn-del" style="margin-top:10px"><i class="bi bi-x-octagon"></i> Sperre aufheben</button>
     </div>
@@ -6524,7 +6551,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card pad"><div class="tl" id="lt-mh-tl"></div></div>
     <button class="btn out" id="lt-mh-remind"><i class="bi bi-envelope"></i> Erneut erinnern</button>
     <button class="btn" id="lt-mh-back" style="margin-top:8px"><i class="bi bi-box-arrow-in-left"></i> Rückgabe erfassen</button>
-    <span class="lt-assume">Annahme: Für den Mahnfall bleibt die E-Mail-Adresse bis zur Rückgabe gespeichert (sonst wäre keine Erinnerung möglich).</span>
+    <div class="note" style="text-align:left">Vom ehemaligen Mitglied bleibt nur die E-Mail-Adresse gespeichert – ausschließlich für Rückgabe-Erinnerungen. Mit der erfassten Rückgabe wird sie gelöscht.</div>
   </div>
 </section>
 
@@ -6710,7 +6737,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tfa: ['Tim nutzt nur einen Passkey – kein zweiter Faktor zum Zurücksetzen.', 0],
       leave: { out: '', res: ['Reservierung Tinywhoop-Set (19.11.) wird storniert'] } },
     felix: { n: 'Felix H.', geb: '2010-08-22', age: 16, since: '04/2025', adult: '08/2028', created: '12.04.2025', areas: ['car'], roles: [],
-      nw: [], nwEmpty: 'Für RC Cars schreibt das Regelwerk keine Nachweise vor.',
+      nw: [], nwEmpty: 'Kein Nachweis nötig: Felix besitzt und leiht keine Luftfahrzeuge und erfasst keine Flüge. Für RC Cars schreibt das Regelwerk keine Nachweise vor.',
       fam: [{ n: 'Frank H.', rel: 'Vater', sub: 'Einwilligung am 12.04.2025 · eigenes Konto, kein Mitglied' }],
       cur: [{ ic: 'car', icon: 'bi-geo-alt', t: 'Heute am Platz', sub: 'Sand-Rennstrecke · seit 12:10', go: 'anwesenheit' }],
       fl: null,
@@ -6767,7 +6794,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const isMinor = p => !!p.age && p.age < 18;
   const first = p => p.n.split(' ')[0];
   const STATE_B = { aktiv: 'b-g', eingeladen: 'b-w', deaktiviert: 'b-all', gesperrt: 'b-r' };
-  const famLocked = p => isMinor(p) && !p.fam.length && !p.gone;
+  // Gesperrt nur, wenn die letzte Verknüpfung weggefallen ist; ein neues Kinder-Konto (ebNew) ist ohne Eltern nutzbar, nur zustimmungspflichtige Aktionen warten
+  const famLocked = p => isMinor(p) && !p.fam.length && !p.gone && !p.ebNew;
   const areaTxt = a => a.length ? a.map(x => AREA_L[x]).join(', ') : 'keine Vorliebe';
   const ageAt = iso => { const b = new Date(iso + 'T00:00'); if (isNaN(b)) return null; let a = TODAY.getFullYear() - b.getFullYear(); const m = TODAY.getMonth() - b.getMonth(); if (m < 0 || (m === 0 && TODAY.getDate() < b.getDate())) a--; return a; };
   const modTxt = s => s.split(' · ').filter(x => !/\d\s*g$/.test(x) && !/^(Eigenbau|elektrisch)$/.test(x)).join(' · ');
@@ -6801,6 +6829,11 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#lt-md-modlbl').textContent = 'Eigene Modelle (' + p.mods.length + ')';
     $('#lt-md-mod').innerHTML = p.mods.length ? p.mods.map(m => '<div class="row"><span class="li"><span class="ico ' + m[0] + '"><i class="bi ' + (m[0] === 'air' ? 'bi-airplane' : 'bi-car-front') + '"></i></span><span>' + esc(m[1]) + '<br><small>' + esc(modTxt(m[2])) + '</small></span></span><span class="badge b-' + m[0] + '">' + AREA_L[m[0]] + '</span></div>').join('') : '<div class="pk-empty" style="padding:10px 0">Noch keine Modelle angelegt.</div>';
     $('#lt-md-nw').innerHTML = p.nw.length ? p.nw.map(n => '<div class="row"><span class="li"><span class="ico neu"><i class="bi ' + n[0] + '"></i></span><span><b>' + esc(n[1]) + '</b><br><small>' + esc(n[2]) + '</small></span></span><span class="badge ' + n[3] + '">' + esc(n[4]) + '</span></div>').join('') : '<div class="pk-empty" style="padding:10px 0">' + esc(p.nwEmpty || 'Keine Nachweise hinterlegt.') + '</div>';
+    // „fehlt“ nur, wenn Luftfahrzeuge besessen/ausgeliehen oder Flüge erfasst werden
+    const nwAir = p.mods.filter(m => m[0] === 'air').map(m => m[1]), nwFl = p.fl && p.fl.n ? p.fl.n : 0, nwOut = /Avata|Tinywhoop|Drohne|FPV/.test(p.leave.out || '') ? p.leave.out : '';
+    const nwWhy = [nwAir.length ? 'besitzt ' + nwAir.join(', ') : '', nwOut ? 'leiht ' + nwOut : '', nwFl ? 'hat ' + nwFl + ' Flüge erfasst' : ''].filter(Boolean);
+    const nwJoin = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' und ' + a[a.length - 1] : a.join('');
+    if (p.nw.some(n => n[4] === 'fehlt')) $('#lt-md-nw').innerHTML += '<div class="pk-empty" style="padding:8px 0;text-align:left"><i class="bi bi-info-circle"></i> „fehlt“: ' + esc(first(p)) + ' ' + esc(nwJoin(nwWhy)) + ' – dafür verlangt das Regelwerk den Nachweis.</div>';
     $('#lt-md-nwnote').textContent = 'Die Leitung sieht nur Typ, Nummer und Gültigkeit. Dateien sehen ' + fn + (minor ? ', die Erziehungsberechtigten' : '') + ' und Personen mit Freigabe.';
     $('#lt-md-remind').style.display = p.gone ? 'none' : '';
     $('#lt-md-remas').style.display = minor ? '' : 'none';
@@ -6808,6 +6841,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#lt-md-fam').innerHTML = p.fam.map(f => '<div class="row"><span class="li"><span class="lt-av lt-gast">' + esc(initials(f.n)) + '</span><span><b>' + esc(f.n) + '</b> · ' + esc(f.rel) + (f.pend ? ' <span class="badge b-w">Einladung offen</span>' : '') + '<br><small>' + esc(f.sub) + '</small></span></span>' + (p.gone ? '' : '<span class="chg lt-md-unlink" data-n="' + esc(f.n) + '">lösen</span>') + '</div>').join('');
     $('#lt-md-fam').style.display = p.fam.length ? '' : 'none';
     $('#lt-md-noeb').style.display = minor && !p.fam.length && !p.gone ? '' : 'none';
+    $('#lt-md-noebtxt').innerHTML = p.ebNew ? '<b>Noch keine Erziehungsberechtigten verknüpft.</b> ' + esc(first(p)) + ' kann die App nutzen; was eine Zustimmung braucht (z. B. Ausleihe, Zusagen mit Zustimmungspflicht), wartet auf ein verknüpftes Eltern-Konto.'
+      : '<b>Keine Erziehungsberechtigten verknüpft.</b> Das Konto ist gesperrt, bis wieder jemand verknüpft ist. Die Abteilungsleitung wurde benachrichtigt.';
     $('#lt-md-faminfo').textContent = 'Erziehungsberechtigte lesen alle Daten des Kindes. Die Verknüpfung endet automatisch am 18. Geburtstag' + (p.adult ? ' (' + p.adult + ')' : '') + '; vorher wird benachrichtigt.';
     $('#lt-md-addeb').style.display = p.gone ? 'none' : '';
     const st = p.gone ? 'deaktiviert' : (p.lock || famLocked(p)) ? 'gesperrt' : p.state;
@@ -7044,7 +7079,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rgCheck();
     } else {
       const mp = M[S.mk], wasLocked = famLocked(mp);
-      mp.fam.push({ n: name, rel, sub: 'Einwilligung am ' + ew + (S.ebNew ? ' · Einladung gesendet' : ''), pend: S.ebNew });
+      mp.fam.push({ n: name, rel, sub: 'Einwilligung am ' + ew + (S.ebNew ? ' · Einladung gesendet' : ''), pend: S.ebNew }); mp.ebNew = false;
       addLog(S.mk, 'familie', 'Erziehungsberechtigte(r) ' + name + ' (' + rel + ') verknüpft, Einwilligung vom ' + ew + ' dokumentiert');
       if (wasLocked) addLog(S.mk, 'konto', 'Konto entsperrt (Erziehungsberechtigte verknüpft)');
       if (name === 'Sandra S.') addLog('sandra', 'familie', 'Mit ' + mp.n + ' verknüpft (' + rel + ')');
@@ -7056,9 +7091,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Registrierung ----------
   function rgCheck() {
-    const miss = [];
-    if (!S.regEb) miss.push('Erziehungsberechtigte');
-    setBtn($('#lt-rg-btn'), $('#lt-rg-hint'), miss);
+    setBtn($('#lt-rg-btn'), $('#lt-rg-hint'), []);
+    $('#lt-rg-hint').textContent = S.regEb ? 'Erziehungsberechtigte(r) verknüpft – zustimmungspflichtige Aktionen sind nach deren Zustimmung möglich.'
+      : 'Paul ist minderjährig. Nach der Freischaltung kann er die App sofort nutzen; was eine Zustimmung braucht (z. B. Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist.';
   }
   $('#lt-rg-eblink').addEventListener('click', () => { S.ebCtx = 'reg'; });
   function regDone(row) {
@@ -7068,20 +7103,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const areas = ['air'];
       M.paul = { n: 'Paul W.', geb: '2010-03-02', age: 16, since: '11/2026', adult: '03/2028', created: '14.11.2026', areas, roles: [],
         nw: [], nwEmpty: 'Noch keine Nachweise hinterlegt – Paul trägt sie nach der Anmeldung selbst ein.',
-        fam: [{ n: S.regEb, rel: S.regRel, sub: 'Einwilligung am 14.11.2026', pend: S.regNew }], cur: [], fl: { n: 0, sub: 'noch keine Flüge' }, mods: [],
+        fam: S.regEb ? [{ n: S.regEb, rel: S.regRel, sub: 'Einwilligung am 14.11.2026', pend: S.regNew }] : [], ebNew: !S.regEb, cur: [], fl: { n: 0, sub: 'noch keine Flüge' }, mods: [],
         kv: { mail: 'paul.w@…', inv: 'Selbstregistrierung 12.11.2026, freigeschaltet 14.11.2026 von Markus B.', last: '12.11.2026', login: 'Passwort' }, state: 'aktiv',
         tfa: ['Paul hat keinen zweiten Faktor eingerichtet.', 0], leave: { out: '', res: [] } };
       nkSync();
-      LOG.paul = [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'konto', t: 'Registrierung freigeschaltet' },
-        { d: '14.11.2026 · gerade eben', who: S.me, cat: 'familie', t: 'Erziehungsberechtigte(r) ' + S.regEb + ' (' + S.regRel + ') verknüpft, Einwilligung dokumentiert' },
-        { d: '12.11.2026 16:20', who: 'Paul W.', cat: 'konto', t: 'Selbstregistrierung, E-Mail-Adresse bestätigt (Wert nicht im Protokoll)' }];
+      LOG.paul = [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'konto', t: 'Registrierung freigeschaltet' + (S.regEb ? '' : ' (noch ohne Erziehungsberechtigte; zustimmungspflichtige Aktionen warten)') }].concat(
+        S.regEb ? [{ d: '14.11.2026 · gerade eben', who: S.me, cat: 'familie', t: 'Erziehungsberechtigte(r) ' + S.regEb + ' (' + S.regRel + ') verknüpft, Einwilligung dokumentiert' }] : [],
+        [{ d: '12.11.2026 16:20', who: 'Paul W.', cat: 'konto', t: 'Selbstregistrierung, E-Mail-Adresse bestätigt (Wert nicht im Protokoll)' }]);
       p.querySelector('.badge').className = 'badge b-g'; p.querySelector('.badge').textContent = 'aktiv'; p.querySelector('small:last-child').textContent = areas.map(a => AREA_L[a]).join(', ') + ' · Mitglied';
       p.dataset.go = 'lt-mitglied'; p.dataset.ltm = 'paul'; p.dataset.ar = areas.length === 2 ? 'both' : areas[0];
     }
     else p.remove();
     mlFilter();
   }
-  $('#lt-rg-btn').addEventListener('click', () => { regDone('ok'); KD.back(); KD.toast('Paul W. freigeschaltet. Paul und ' + S.regEb + ' werden benachrichtigt.'); });
+  $('#lt-rg-btn').addEventListener('click', () => { const eb = S.regEb; regDone('ok'); KD.back(); KD.toast('Paul W. freigeschaltet und sofort nutzbar. ' + (eb ? 'Paul und ' + eb + ' werden benachrichtigt.' : 'Paul wird benachrichtigt; Ausleihen u. Ä. warten auf ein verknüpftes Eltern-Konto.')); });
   $('#lt-rg-no').addEventListener('click', () => { regDone('no'); KD.back(); KD.toast('Registrierung abgelehnt. Die Daten werden gelöscht.'); });
 
   // ---------- Austritt ----------
@@ -7097,7 +7132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let h = p.leave.out ? ic('bi-box-arrow-in-left', 'var(--warn)', 'Offene Ausleihe: ' + p.leave.out + ' – Rückgabe wird eingefordert, Mahnfall „Rückgabe offen“ bei der Leitung') : ic('bi-check-circle-fill', 'var(--g)', 'Keine offenen Ausleihen');
     p.leave.res.forEach(r => { h += ic('bi-exclamation-circle', 'var(--warn)', r); });
     p.fam.forEach(f => { h += ic('bi-people-fill', 'var(--mut)', 'Verknüpfung zu ' + f.n + ' endet – die Einsicht endet mit dem Austritt'); });
-    h += ic('bi-envelope', 'var(--mut)', 'Bestätigung an ' + p.kv.mail + (isMinor(p) && p.fam.length ? ' und ' + p.fam.map(f => f.n).join(', ') : '') + ', danach wird die Adresse gelöscht');
+    h += ic('bi-envelope', 'var(--mut)', 'Bestätigung an ' + p.kv.mail + (isMinor(p) && p.fam.length ? ' und ' + p.fam.map(f => f.n).join(', ') : '') + ', danach wird die Adresse gelöscht' + (p.leave.out ? ' – wegen der offenen Ausleihe erst nach der Rückgabe; bis dahin dient sie nur für Rückgabe-Erinnerungen' : ''));
     if (p.roles.length) h += ic('bi-person-badge', 'var(--mut)', 'Rollen enden: ' + p.roles.map(r => ROLE_L[r]).join(', '));
     if (S.aufs.includes(p.n)) h += ic('bi-list-check', 'var(--mut)', 'Wird von der Aufsichts-Liste entfernt');
     $('#lt-au-list').innerHTML = h;
@@ -7109,12 +7144,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const d = deDate($('#lt-au-date').value), p = M[S.mk];
     p.gone = d; p.leave.res = [];
     if (S.aufs.includes(p.n)) { S.aufs = S.aufs.filter(x => x !== p.n); alSync(); }
-    addLog(S.mk, 'konto', 'Austritt zum ' + d + ' erfasst, Konto deaktiviert, Bestätigung gesendet, Kontaktdaten gelöscht' + (chipOn('#lt-au-why') ? ' (Grund: ' + chipOn('#lt-au-why') + ')' : ''));
+    addLog(S.mk, 'konto', 'Austritt zum ' + d + ' erfasst, Konto deaktiviert, Bestätigung gesendet, Kontaktdaten gelöscht' + (p.leave.out ? ' (außer E-Mail bis zur Rückgabe)' : '') + (chipOn('#lt-au-why') ? ' (Grund: ' + chipOn('#lt-au-why') + ')' : ''));
     const out = p.leave.out;
-    if (out) { MAHN.push({ id: 'm' + (MAHN.length + 1), k: S.mk, n: p.n, item: out, d, log: [[d + ' · ' + S.me, 'Austritt erfasst, Rückgabe eingefordert (E-Mail mit der Austrittsbestätigung)']] }); addLog(S.mk, 'konto', 'Mahnfall „Rückgabe offen“ angelegt: ' + out); p.leave.out = ''; mahnRender(); }
+    if (out) { MAHN.push({ id: 'm' + (MAHN.length + 1), k: S.mk, n: p.n, mail: p.kv.mail, item: out, d, log: [[d + ' · ' + S.me, 'Austritt erfasst, Rückgabe eingefordert (E-Mail mit der Austrittsbestätigung)']] }); addLog(S.mk, 'konto', 'Mahnfall „Rückgabe offen“ angelegt: ' + out); p.leave.out = ''; mahnRender(); }
     mdRender(false);
     const r = $('#lt-ml-list [data-ltm="' + S.mk + '"]'); if (r) { const b = r.querySelector('.badge'); if (b) { b.className = 'badge b-all'; b.textContent = 'ausgetreten'; } }
-    KD.back(); KD.toast('Austritt erfasst. Bestätigung gesendet, danach werden die Kontaktdaten gelöscht.' + (out ? ' Rückgabe offen: ' + out.split(' (')[0] + ' – als Mahnfall bei der Leitung.' : ''));
+    KD.back(); KD.toast(out ? 'Austritt erfasst. Bestätigung gesendet; Kontaktdaten gelöscht, nur die E-Mail bleibt bis zur Rückgabe von ' + out.split(' (')[0] + ' (Mahnfall bei der Leitung).' : 'Austritt erfasst. Bestätigung gesendet, danach werden die Kontaktdaten gelöscht.');
   });
 
   // ---------- Einladen ----------
@@ -7591,6 +7626,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return '<div class="row" data-go="lt-sperre-info" data-ltsp="' + s.id + '"><span class="li"><span class="ico ' + (st === 'aktiv' ? '" style="background:#fde8e8;color:var(--red)' : 'neu') + '"><i class="bi bi-sign-stop' + (st === 'aktiv' ? '-fill' : '') + '"></i></span><span><b>' + esc(s.ort) + '</b> ' + spAreas(s) + '<br><small>' + esc(spRange(s)) + ' · ' + esc(s.grund) + '</small></span></span><span class="badge ' + SPB[st] + '">' + st + '</span></div>';
   }
   const memCount = areas => Object.keys(M).filter(k => !M[k].gone && M[k].areas.some(a => areas.includes(a))).length;
+  // Am Ort heute eingecheckte Mitglieder (ohne Gäste, die haben kein Konto)
+  const ciCount = ort => $$('#lt-an-list .row').filter(r => !r.querySelector('.lt-gast') && ((r.querySelector('small') || {}).textContent || '').indexOf(ort + ' ·') === 0).length;
+  const spNotTxt = (v, n, c) => 'Benachrichtigt werden ' + n + ' Mitglieder mit ' + v.areas.map(a => AREA_L[a]).join(' bzw. ') + ' unter „Meine Bereiche“' + (v.ort ? ' und ' + c + ' am Ort ' + v.ort + ' Eingecheckte' : ' und alle am Ort Eingecheckten') + ' – per Push bzw. E-Mail laut ihren Einstellungen.';
   function spOverview() {
     const cur = SP.filter(s => ['aktiv', 'geplant'].includes(spState(s))).sort((a, b) => a.from < b.from ? -1 : 1);
     $('#lt-o-sp').innerHTML = (cur.length ? cur.slice(0, 3).map(spRow).join('') : '<div class="pk-empty" style="padding:10px 0">Keine aktiven oder geplanten Sperren.</div>') + '<div class="row" data-go="lt-sperre"><span class="mut lt-sm">alle Platzsperren</span><i class="bi bi-chevron-right mut"></i></div>';
@@ -7658,7 +7696,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sonst && !v.txt) miss.push('Erläuterung');
     if (!v.areas.length) miss.push('mindestens ein Bereich');
     setBtn($('#lt-sn-btn'), $('#lt-sn-hint'), miss);
-    $('#lt-sn-not').textContent = v.areas.length ? 'Benachrichtigt werden ' + memCount(v.areas) + ' Mitglieder (' + v.areas.map(a => AREA_L[a]).join(', ') + ') per Push bzw. E-Mail laut ihren Einstellungen.' : 'Benachrichtigt werden die Mitglieder der gewählten Bereiche.';
+    $('#lt-sn-not').textContent = v.areas.length ? spNotTxt({ areas: v.areas, ort: isMut('lt-sn-ort') ? '' : v.ort }, memCount(v.areas), isMut('lt-sn-ort') ? 0 : ciCount(v.ort)) : 'Benachrichtigt werden alle, die einen gewählten Bereich unter „Meine Bereiche“ führen, und alle, die am Ort eingecheckt sind.';
   }
   KD.enter['lt-sperre-neu'] = () => {
     const s = S.spEdit ? SP.find(x => x.id === S.spEdit) : null;
@@ -7689,7 +7727,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function spSync() { spOverview(); anSp(); }
   $('#lt-sn-btn').addEventListener('click', () => {
     if ($('#lt-sn-btn').classList.contains('dis')) return;
-    const v = snVal(), s = S.spEdit ? SP.find(x => x.id === S.spEdit) : null, n = memCount(v.areas);
+    const v = snVal(), s = S.spEdit ? SP.find(x => x.id === S.spEdit) : null, c = ciCount(v.ort), n = memCount(v.areas) + c;
     if (s) {
       const notify = $('#lt-sn-chgnot').classList.contains('on');
       Object.assign(s, v);
@@ -7912,7 +7950,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const m = MAHN.find(x => x.id === S.mhk); if (!m) return;
     $('#lt-mh-t2').textContent = m.n + ' · ausgetreten zum ' + m.d;
     $('#lt-mh-info').innerHTML = '<i class="bi bi-person-x"></i> <b>' + esc(m.n) + ' ist ausgetreten</b>, die Ausleihe ist noch nicht zurückgegeben.' + (m.done ? ' <b>Erledigt.</b>' : '');
-    $('#lt-mh-kv').innerHTML = '<dt>Gerät</dt><dd>' + esc(m.item.split(' (')[0]) + ' <span class="badge b-g">Verein</span></dd><dt>Ausleihe</dt><dd>' + esc(m.item.replace(/^[^(]*\(?/, '').replace(/\)$/, '')) + '</dd><dt>Ehemaliges Mitglied</dt><dd>' + esc(m.n) + '</dd><dt>Status</dt><dd><span class="badge ' + (m.done ? 'b-g">zurückgegeben' : 'b-r">Rückgabe offen') + '</span></dd>';
+    $('#lt-mh-kv').innerHTML = '<dt>Gerät</dt><dd>' + esc(m.item.split(' (')[0]) + ' <span class="badge b-g">Verein</span></dd><dt>Ausleihe</dt><dd>' + esc(m.item.replace(/^[^(]*\(?/, '').replace(/\)$/, '')) + '</dd><dt>Ehemaliges Mitglied</dt><dd>' + esc(m.n) + '</dd><dt>E-Mail</dt><dd>' + (m.done ? '<span class="mut">gelöscht</span>' : esc(m.mail || '') + '<br><small class="mut">nur für Rückgabe-Erinnerungen</small>') + '</dd><dt>Status</dt><dd><span class="badge ' + (m.done ? 'b-g">zurückgegeben' : 'b-r">Rückgabe offen') + '</span></dd>';
     $('#lt-mh-tl').innerHTML = m.log.map(([h, t]) => '<div class="e"><b>' + esc(h) + '</b>' + esc(t) + '</div>').join('');
     $('#lt-mh-remind').style.display = $('#lt-mh-back').style.display = m.done ? 'none' : '';
   }
@@ -8026,7 +8064,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="chips" data-single id="ad-k-f"><span class="chip on" data-f="all">Alle</span><span class="chip" data-f="wait">Wartet</span><span class="chip" data-f="inv">Eingeladen</span><span class="chip" data-f="adm">Admin</span><span class="chip" data-f="minor">Minderjährig</span><span class="chip" data-f="lock">Gesperrt</span></div>
     <div class="card" id="ad-k-list"></div>
     <button class="btn" data-go="ad-einladen"><i class="bi bi-envelope-plus"></i> Person einladen</button>
-    <div class="note">Minderjährige werden erst aktiv, wenn ein Erziehungsberechtigter verknüpft ist.</div>
+    <div class="note">Minderjährige Konten sind nach Einladung bzw. Freischaltung sofort nutzbar; was eine Zustimmung braucht (z. B. Ausleihe), wartet auf ein verknüpftes Eltern-Konto.</div>
   </div>
 </section>
 
@@ -8183,8 +8221,8 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="top"><i class="bi bi-x-lg" style="font-size:18px" data-back></i><div><div class="t1">Drohnenwetter-Grenzwerte</div><div class="t2">Standard für alle Modelle</div></div></div>
   <div class="body">
     <div class="card pad" style="font-size:12.5px"><i class="bi bi-info-circle"></i> Diese Werte gelten global für die Ampel im Drohnenwetter. Am Modell kann eine eigene Grenze hinterlegt werden; dann gilt dort für diesen Wert die eigene Grenze.</div>
-    <div class="fsec">Wind und Böen (km/h) <span class="ln"></span></div>
-    <div class="two"><div><label>Wind grün bis <span class="req">*</span></label><input class="inp ad-wx" id="ad-wx-wind-g" inputmode="decimal"></div><div><label>Wind gelb bis <span class="req">*</span></label><input class="inp ad-wx" id="ad-wx-wind-y" inputmode="decimal"></div></div>
+    <div class="fsec">Böen (km/h) <span class="ln"></span></div>
+    <div class="hint" style="margin:0 0 6px">Die Wind-Grenze gilt für die Böen. Der mittlere Wind wird im Drohnenwetter nur zusätzlich angezeigt.</div>
     <div class="two"><div><label>Böen grün bis <span class="req">*</span></label><input class="inp ad-wx" id="ad-wx-boe-g" inputmode="decimal"></div><div><label>Böen gelb bis <span class="req">*</span></label><input class="inp ad-wx" id="ad-wx-boe-y" inputmode="decimal"></div></div>
     <div class="fsec">Niederschlag, Sicht, Kp <span class="ln"></span></div>
     <div class="two"><div><label>Regen grün bis (mm/h) <span class="req">*</span></label><input class="inp ad-wx" id="ad-wx-regen-g" inputmode="decimal"></div><div><label>Regen gelb bis <span class="req">*</span></label><input class="inp ad-wx" id="ad-wx-regen-y" inputmode="decimal"></div></div>
@@ -8803,7 +8841,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p.fail) fb.innerHTML = '<b><i class="bi bi-hourglass-split" style="color:var(--warn)"></i> Anmeldung vorübergehend gesperrt</b><br><small class="mut">' + p.fail.n + ' Fehlversuche um ' + esc(p.fail.at) + ' (' + esc(p.fail.ip) + ') · gesperrt bis ' + esc(p.fail.until) + ' · gilt je Konto und IP</small>'
       + '<div class="btns" style="margin:8px 0 0"><button class="btn" id="ad-ko-failfree">Sofort freigeben</button><button class="btn out" id="ad-ko-failshort">Auf 5 Min. verkürzen</button></div>';
     const stBox = byId('ad-ko-state'); let stTx = '';
-    if (p.st === 'wartet') stTx = '<i class="bi bi-person-plus"></i> Hat sich selbst registriert, E-Mail bestätigt. ' + (p.age < 18 ? '<b>Minderjährig:</b> erst Erziehungsberechtigte verknüpfen, dann freischalten.' : 'Bitte prüfen und freischalten.');
+    if (p.st === 'wartet') stTx = '<i class="bi bi-person-plus"></i> Hat sich selbst registriert, E-Mail bestätigt. ' + (p.age < 18 ? '<b>Minderjährig:</b> nach der Freischaltung sofort nutzbar; zustimmungspflichtige Aktionen warten, bis ein Erziehungsberechtigter verknüpft ist.' : 'Bitte prüfen und freischalten.');
     if (p.st === 'eingeladen') stTx = '<i class="bi bi-envelope"></i> Einladung gesendet, Link gültig bis 21.11.2026.';
     if (p.st === 'gesperrt') stTx = '<i class="bi bi-slash-circle" style="color:var(--red)"></i> Gesperrt. Grund: ' + esc(p.why || '–');
     stBox.style.display = stTx ? '' : 'none'; stBox.innerHTML = stTx;
@@ -8821,7 +8859,7 @@ document.addEventListener('DOMContentLoaded', () => {
     byId('ad-ko-pk').textContent = p.pk; byId('ad-ko-totp').textContent = p.totp; byId('ad-ko-last').textContent = p.last;
     byId('ad-ko-resetrow').style.display = p.self || !has2(p) ? 'none' : '';
     let act = '';
-    if (p.st === 'wartet') act = '<button class="btn'+(p.age<18 && !p.eltern.length?' dis':'')+'" id="ad-ko-free">Freischalten</button>' + (p.age<18 && !p.eltern.length ? '<div class="note">Erst Erziehungsberechtigte verknüpfen.</div>' : '');
+    if (p.st === 'wartet') act = '<button class="btn" id="ad-ko-free">Freischalten</button>' + (p.age<18 && !p.eltern.length ? '<div class="note">Noch kein Erziehungsberechtigter verknüpft: Das Konto ist trotzdem sofort nutzbar, zustimmungspflichtige Aktionen warten auf das Eltern-Konto.</div>' : '');
     if (p.st === 'eingeladen') act = '<button class="btn out" id="ad-ko-reinv"><i class="bi bi-envelope"></i> Einladung erneut senden</button>';
     if (p.st === 'aktiv') act = p.self ? '<div class="note">Das eigene Konto kann nicht gesperrt werden.</div>' : '<button class="btn out ad-redout" data-go="ad-sperren"><i class="bi bi-slash-circle"></i> Konto sperren</button>';
     if (p.st === 'gesperrt') act = '<button class="btn" id="ad-ko-unlock"><i class="bi bi-unlock"></i> Entsperren</button>';
@@ -8854,7 +8892,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   byId('ad-ko-act').addEventListener('click', e => {
     const p = KO[curK], b = e.target.closest('button'); if (!b || b.classList.contains('dis')) return;
-    if (b.id === 'ad-ko-free') { p.st = 'aktiv'; if (!p.roles.length) p.roles.push(['Mitglied','Abteilung RC-Modellsport','neu']); log('ko', 'Konto freigeschaltet', 'Konto ' + p.n); KD.toast(p.n + ' ist freigeschaltet und wird benachrichtigt.'); }
+    if (b.id === 'ad-ko-free') { p.st = 'aktiv'; if (!p.roles.length) p.roles.push(['Mitglied','Abteilung RC-Modellsport','neu']); log('ko', 'Konto freigeschaltet', 'Konto ' + p.n); KD.toast(p.n + ' ist freigeschaltet und wird benachrichtigt.' + (p.age < 18 && !p.eltern.length ? ' Zustimmungspflichtiges wartet auf ein Eltern-Konto.' : '')); }
     if (b.id === 'ad-ko-reinv') { log('ko', 'Einladung erneut gesendet', 'Konto ' + p.n); KD.toast('Neue Einladung an ' + p.mail + ' gesendet.'); }
     if (b.id === 'ad-ko-unlock') { p.st = 'aktiv'; delete p.why; log('ko', 'Konto entsperrt', 'Konto ' + p.n); KD.toast(p.n + ' ist entsperrt.'); }
     renderKonto(); renderKList();
@@ -9027,26 +9065,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ================= Drohnenwetter-Grenzwerte (global) ================= */
-  const WX_DEF = { wind:{ t:'max', g:20, y:30, u:'km/h' }, boe:{ t:'max', g:30, y:40, u:'km/h' }, regen:{ t:'max', g:0, y:0.5, u:'mm/h' }, sicht:{ t:'min', g:5, y:1, u:'km' }, temp:{ t:'range', g:[5, 30], y:[-5, 38], u:'°C' }, kp:{ t:'max', g:4, y:5, u:'' } };
+  const WX_DEF = { boe:{ t:'max', g:30, y:40, u:'km/h' }, regen:{ t:'max', g:0, y:0.5, u:'mm/h' }, sicht:{ t:'min', g:5, y:1, u:'km' }, temp:{ t:'range', g:[5, 30], y:[-5, 38], u:'°C' }, kp:{ t:'max', g:4, y:5, u:'' } };
   const wxNum = id => { const v = byId(id).value.trim().replace(',', '.').replace('−', '-'); return v === '' || isNaN(+v) ? null : +v; };
   const wxStr = v => String(v).replace('.', ',');
   let wxBase = null;
   function wxFill(o){
-    ['wind', 'boe', 'regen', 'sicht', 'kp'].forEach(k => { byId('ad-wx-' + k + '-g').value = wxStr(o[k].g); byId('ad-wx-' + k + '-y').value = wxStr(o[k].y); });
+    ['boe', 'regen', 'sicht', 'kp'].forEach(k => { byId('ad-wx-' + k + '-g').value = wxStr(o[k].g); byId('ad-wx-' + k + '-y').value = wxStr(o[k].y); });
     byId('ad-wx-temp-g0').value = o.temp.g[0]; byId('ad-wx-temp-g1').value = o.temp.g[1]; byId('ad-wx-temp-y0').value = o.temp.y[0]; byId('ad-wx-temp-y1').value = o.temp.y[1];
   }
   function wxRead(){
     const o = JSON.parse(JSON.stringify(WX_DEF));
-    ['wind', 'boe', 'regen', 'sicht', 'kp'].forEach(k => { o[k].g = wxNum('ad-wx-' + k + '-g'); o[k].y = wxNum('ad-wx-' + k + '-y'); });
+    ['boe', 'regen', 'sicht', 'kp'].forEach(k => { o[k].g = wxNum('ad-wx-' + k + '-g'); o[k].y = wxNum('ad-wx-' + k + '-y'); });
     o.temp.g = [wxNum('ad-wx-temp-g0'), wxNum('ad-wx-temp-g1')]; o.temp.y = [wxNum('ad-wx-temp-y0'), wxNum('ad-wx-temp-y1')];
     return o;
   }
-  const WXL = { wind:'Wind', boe:'Böen', regen:'Regen', sicht:'Sicht', kp:'Kp' };
+  const WXL = { boe:'Böen', regen:'Regen', sicht:'Sicht', kp:'Kp' };
   function wxCheck(){
     const o = wxRead(), miss = [];
     $$('#ad-wetter .ad-wx').forEach(i => { if (wxNum(i.id) === null) miss.push(i.closest('div').querySelector('label').firstChild.textContent.trim()); });
     if (!miss.length) {
-      ['wind', 'boe', 'regen', 'kp'].forEach(k => { if (o[k].y < o[k].g) miss.push(WXL[k] + ': gelb muss ≥ grün sein'); });
+      ['boe', 'regen', 'kp'].forEach(k => { if (o[k].y < o[k].g) miss.push(WXL[k] + ': gelb muss ≥ grün sein'); });
       if (o.sicht.y > o.sicht.g) miss.push('Sicht: gelb muss ≤ grün sein');
       if (o.temp.g[0] > o.temp.g[1] || o.temp.y[0] > o.temp.g[0] || o.temp.y[1] < o.temp.g[1]) miss.push('Temperatur: grün muss innerhalb von gelb liegen');
     }
@@ -9831,13 +9869,13 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card pad" style="font-size:13px">Dein Konto wird <b>deaktiviert</b>. Was nicht aufbewahrt werden muss, wird <b>sofort gelöscht</b>. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (<b>3 Jahre</b>, laut Regelwerk) gesperrt erhalten und werden danach gelöscht bzw. anonymisiert.</div>
     <div class="wx-gh"><i class="bi bi-exclamation-triangle-fill" style="color:var(--warn)"></i>Vorher zu klären</div>
     <div class="card">
-      <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>Offene Ausleihe: Vereins-Crawler TRX-4M</b><small class="mut">Rückgabe bis Di 17.11. – der Austritt ist trotzdem möglich; die Rückgabe wird eingefordert und bleibt bei der Abteilungsleitung als „Rückgabe offen“ stehen.</small></span></div>
+      <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>Offene Ausleihe: Vereins-Crawler TRX-4M</b><small class="mut">Rückgabe bis Di 17.11. – der Austritt ist trotzdem möglich; die Rückgabe wird eingefordert und bleibt bei der Abteilungsleitung als „Rückgabe offen“ stehen. Bis zur Rückgabe bleibt nur deine E-Mail-Adresse gespeichert (ausschließlich für Rückgabe-Erinnerungen), danach wird sie gelöscht.</small></span></div>
       <div class="wx-grp" id="wx-a-adm"></div>
     </div>
     <div class="note" style="text-align:left">Der letzte Admin kann nicht austreten – erst muss ein weiterer Admin bestimmt sein.</div>
     <div class="wx-gh"><i class="bi bi-trash3" style="color:var(--red)"></i>Sofort gelöscht</div>
     <div class="card">
-      <div class="wx-grp"><i class="bi bi-person-lines-fill mut"></i><span>Kontaktdaten (E-Mail, Telefon)</span></div>
+      <div class="wx-grp"><i class="bi bi-person-lines-fill mut"></i><span>Kontaktdaten (E-Mail, Telefon)<small class="mut">wegen der offenen Ausleihe bleibt die E-Mail bis zur Rückgabe – nur für Rückgabe-Erinnerungen</small></span></div>
       <div class="wx-grp"><i class="bi bi-bell mut"></i><span>Benachrichtigungseinstellungen, Push-Abos</span></div>
       <div class="wx-grp"><i class="bi bi-key mut"></i><span>Passwort, Passkeys, Zwei-Faktor, API-Tokens, Sitzungen</span></div>
       <div class="wx-grp"><i class="bi bi-share mut"></i><span>Deine Freigaben, Kalender-Link (ICS)</span></div>
@@ -9891,9 +9929,9 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="body">
     <div class="wx-big"><i class="bi bi-person-check" style="color:var(--g)"></i><b style="font-size:18px">Dein Konto ist deaktiviert</b></div>
     <div class="card">
-      <div class="wx-grp"><i class="bi bi-trash3" style="color:var(--red)"></i><span>Kontakt-, Anmelde- und Einstellungsdaten wurden gelöscht.</span></div>
+      <div class="wx-grp"><i class="bi bi-trash3" style="color:var(--red)"></i><span>Kontakt-, Anmelde- und Einstellungsdaten wurden gelöscht – bis auf die E-Mail-Adresse: Sie bleibt bis zur Rückgabe des Vereins-Crawlers TRX-4M, nur für Rückgabe-Erinnerungen.</span></div>
       <div class="wx-grp"><i class="bi bi-hourglass-split" style="color:var(--warn)"></i><span>Flugbuchdaten bleiben gesperrt bis längstens 14.11.2029 und werden dann automatisch gelöscht.</span></div>
-      <div class="wx-grp"><i class="bi bi-envelope" style="color:var(--g)"></i><span>Eine Bestätigung ging an deine bisherige E-Mail-Adresse – danach wird sie gelöscht.</span></div>
+      <div class="wx-grp"><i class="bi bi-envelope" style="color:var(--g)"></i><span>Eine Bestätigung ging an deine E-Mail-Adresse. Nach der Rückgabe wird sie gelöscht.</span></div>
     </div>
 
     <button class="btn out" id="wx-a-restart" style="margin-top:10px">Demo: zurück zum Start</button>
@@ -9982,7 +10020,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="card pad" style="font-size:12.5px">
       <div id="wx-w-thsrc" style="margin-bottom:6px"></div>
       <table class="tab" id="wx-w-th"></table>
-      <div class="mut" style="margin-top:6px">Der Standard gilt für alle Modelle und wird vom Admin eingestellt. Ist an einem Modell eine eigene Grenze hinterlegt, gilt für diesen Wert die eigene Grenze. Die Ampel ist eine Empfehlung – entscheiden muss der Pilot.</div>
+      <div class="mut" style="margin-top:6px">Der Standard gilt für alle Modelle und wird vom Admin eingestellt. Ist an einem Modell eine eigene Grenze hinterlegt, gilt für diesen Wert die eigene Grenze. Die Wind-Grenze gilt für die <b>Böen</b>; der mittlere Wind wird zusätzlich angezeigt, fließt aber nicht in die Ampel ein. Die Ampel ist eine Empfehlung – entscheiden muss der Pilot.</div>
     </div>
     <div class="note">Daten: Deutscher Wetterdienst über Open-Meteo, Kp-Index von NOAA – abgefragt und gepuffert über den Vereinsserver · Stand 10:00</div>
   </div>
@@ -10466,14 +10504,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   let wPlace = 'verein';
   // Grenzwerte: Standard (Admin, global) und eigene Grenzen je Modell
-  const TH_DEF = { wind:{ t:'max', g:20, y:30, u:'km/h' }, boe:{ t:'max', g:30, y:40, u:'km/h' }, regen:{ t:'max', g:0, y:0.5, u:'mm/h' }, sicht:{ t:'min', g:5, y:1, u:'km' }, temp:{ t:'range', g:[5, 30], y:[-5, 38], u:'°C' }, kp:{ t:'max', g:4, y:5, u:'' } };
+  const TH_DEF = { boe:{ t:'max', g:30, y:40, u:'km/h' }, regen:{ t:'max', g:0, y:0.5, u:'mm/h' }, sicht:{ t:'min', g:5, y:1, u:'km' }, temp:{ t:'range', g:[5, 30], y:[-5, 38], u:'°C' }, kp:{ t:'max', g:4, y:5, u:'' } };
   const thClone = o => JSON.parse(JSON.stringify(o));
   let thStd = thClone(TH_DEF), wMod = null;
   const MODLIM = {
-    neo:{ n:'DJI Neo 2', sub:'Drohne · C0 · 151 g', o:{ wind:{ g:15, y:22 }, boe:{ g:20, y:28 } } },
+    neo:{ n:'DJI Neo 2', sub:'Drohne · C0 · 151 g', o:{ boe:{ g:20, y:28 } } },
     mini:{ n:'Mini 4 Pro', sub:'Drohne · C0 · 249 g', o:{} },
-    fpv:{ n:'FPV Quad 5″', sub:'FPV · Eigenbau', o:{ wind:{ g:30, y:40 }, boe:{ g:45, y:55 } } },
-    whoop:{ n:'Tinywhoop 65 mm', sub:'FPV · Eigenbau · 28 g', o:{ wind:{ g:8, y:12 }, boe:{ g:12, y:18 }, regen:{ g:0, y:0 } } },
+    fpv:{ n:'FPV Quad 5″', sub:'FPV · Eigenbau', o:{ boe:{ g:45, y:55 } } },
+    whoop:{ n:'Tinywhoop 65 mm', sub:'FPV · Eigenbau · 28 g', o:{ boe:{ g:12, y:18 }, regen:{ g:0, y:0 } } },
     avata:{ n:'Avata 2', sub:'Verein · ausgeliehen bis 22.11.', club:1, o:{} }
   };
   const th = k => Object.assign({}, thStd[k], (wMod && MODLIM[wMod].o[k]) || {});
@@ -10485,7 +10523,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return (v >= t.g[0] && v <= t.g[1]) ? 0 : (v >= t.y[0] && v <= t.y[1]) ? 1 : 2;
   }
   const LV = [
-    ['Wind', 1, v => lev('wind', v), v => v + ' km/h', 'wind'],
+    ['Wind (Mittel)', 1, () => 0, v => v + ' km/h', null], // nur Anzeige, die Ampel bewertet die Böen
     ['Böen', 2, v => lev('boe', v), v => v + ' km/h', 'boe'],
     ['Niederschlag', 3, v => lev('regen', v), v => dec(v) + ' mm/h', 'regen'],
     ['Sicht', 4, v => lev('sicht', v), v => v + ' km', 'sicht'],
@@ -10499,13 +10537,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return [t.g[0] + '–' + t.g[1], String(t.y[0]).replace('-', '−') + '–' + t.y[1], 'sonst' + u];
   }
   function thRender(){
-    const ownK = LV.filter(l => own(l[4])).map(l => l[0]);
+    const ownK = LV.filter(l => l[4] && own(l[4])).map(l => l[0]);
     $('#wx-w-mod').textContent = wMod ? MODLIM[wMod].n : 'alle Modelle (Standard)';
     $('#wx-w-thsrc').innerHTML = !wMod ? '<i class="bi bi-sliders"></i> Es gilt der <b>Standard des Vereins</b> (vom Admin eingestellt).'
       : ownK.length ? '<i class="bi bi-person-gear"></i> Es gilt die <b>eigene Grenze Modell ' + esc(MODLIM[wMod].n) + '</b> für ' + ownK.join(', ') + '; alle anderen Werte nach Standard.'
       : '<i class="bi bi-sliders"></i> ' + esc(MODLIM[wMod].n) + ' hat keine eigene Grenze – es gilt der <b>Standard des Vereins</b>.';
     $('#wx-w-th').innerHTML = '<tr><td><b>Wert</b></td><td class="r"><span class="wx-dot"></span> grün</td><td class="r"><span class="wx-dot y"></span> gelb</td><td class="r"><span class="wx-dot r"></span> rot</td></tr>' +
-      LV.map(l => { const c = thCells(l[4]); return '<tr><td>' + l[0] + (own(l[4]) ? ' <span class="badge b-air">eigene Grenze</span>' : '') + '</td><td class="r">' + c[0] + '</td><td class="r">' + c[1] + '</td><td class="r">' + c[2] + '</td></tr>'; }).join('');
+      LV.filter(l => l[4]).map(l => { const c = thCells(l[4]); return '<tr><td>' + l[0] + (own(l[4]) ? ' <span class="badge b-air">eigene Grenze</span>' : '') + '</td><td class="r">' + c[0] + '</td><td class="r">' + c[1] + '</td><td class="r">' + c[2] + '</td></tr>'; }).join('');
   }
   K.wxStd = () => thClone(thStd);
   K.wxSetStd = v => { thStd = thClone(v); wRender(); };
@@ -12363,7 +12401,7 @@ document.addEventListener('DOMContentLoaded', () => {
       C.push(sc.club ? (SP.active ? { k:'sperre', t:'Platzsperre des Vereins', st:'bad', s:'gesperrt bis '+SP.bisKurz+' · '+SP.kurz } : { k:'sperre', t:'Platzsperre des Vereins', st:'ok', s:'keine Sperre' })
                      : { k:'sperre', t:'Platzsperre des Vereins', st:'ok', s:'kein Vereinsort – Platzsperren gelten nur dort' });
       const w = sc.wx, wst = w.g <= L ? 'ok' : w.g <= L + 10 ? 'warn' : 'bad';
-      C.push({ k:'wetter', t:'Wetter', st:wst, s:'Böen '+w.g+' km/h · Grenze '+L+' km/h ('+(m.wind ? 'eigene Grenze des Modells' : 'Standard')+')' });
+      C.push({ k:'wetter', t:'Wetter', st:wst, s:'Böen '+w.g+' km/h (Wind '+w.w+' km/h) · Grenze '+L+' km/h für Böen ('+(m.wind ? 'eigene Grenze des Modells' : 'Standard')+')' });
     }
     const mst = sub === 'A3' && sc.res ? 'bad' : 'ok';
     C.push({ k:'modell', t:'Modell und Unterkategorie', st:mst, s:S.model+' · '+m.cls+' · '+m.g+' g → '+sub+(mst === 'bad' ? ' – nicht in Wohngebieten' : '') });
@@ -12396,7 +12434,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function modelSub(){
     const m = MDL[S.model] || {};
-    byId('hf-model-sub').textContent = (S.model === 'DJI Neo 2' ? 'zuletzt genutzt · ' : '') + (m.cls || '') + (m.g ? ' · ' + m.g + ' g' : '') + ' · Wind-Grenze ' + (m.wind ? m.wind + ' km/h (eigene)' : WIND_STD + ' km/h (Standard)');
+    byId('hf-model-sub').textContent = (S.model === 'DJI Neo 2' ? 'zuletzt genutzt · ' : '') + (m.cls || '') + (m.g ? ' · ' + m.g + ' g' : '') + ' · Grenze für Böen ' + (m.wind ? m.wind + ' km/h (eigene)' : WIND_STD + ' km/h (Standard)');
   }
   // Einstieg merken (Startseite oder Flugbuch)
   document.addEventListener('click', e => {
@@ -12488,7 +12526,7 @@ document.addEventListener('DOMContentLoaded', () => {
     h += '<div class="hf-legal"><i class="bi bi-info-circle"></i><span><b>Keine Rechtsauskunft; verantwortlich ist der Fernpilot.</b> Die Prüfung ersetzt nicht den eigenen Blick in dipul und auf die Lage vor Ort.</span></div>';
     h += '<div class="hf-src">Geozonen: dipul (DFS/BMV), Stand Sa 14.11.2026 06:00 · Temporäre Beschränkungen: soweit maschinenlesbar verfügbar · Wetter: DWD über Open-Meteo, Kp-Index: NOAA · Platzsperren: TSV RC</div>';
     h += '<span class="assume" style="margin-top:6px">Annahme: dipul-Zugang (automatische Abfrage, Namensnennung) ist noch mit dem Betreiber zu klären (Gesamtdesign 14.4); bis dahin bleibt der Link zur dipul-Karte.</span>';
-    if (R.lvl === 'bad' && onlySperre) h += '<span class="assume">Annahme: Eine aktive Platzsperre färbt die Ampel rot (wie andere Verbote, aber mit eigener Überschrift).</span>';
+    if (R.lvl === 'bad' && onlySperre) h += '<div class="note">Eine aktive Platzsperre färbt die Ampel rot – mit eigenem Hinweis (Grund, Zeitraum). Fliegen bleibt technisch möglich.</div>';
     byId('hf-r-body').innerHTML = h;
   }
   K.enter['hf-result'] = renderResult;
@@ -12552,8 +12590,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (k === 'wetter') {
       if (sc.wx) {
         const g = sc.wx.g;
-        h += kv([['Wind', sc.wx.w+' km/h'], ['Böen', g+' km/h'], ['Grenze', R.L+' km/h · '+(m.wind ? 'eigene Grenze von '+esc(S.model) : 'Standard vom Admin')], ['Ampel', 'grün bis '+R.L+', gelb bis '+(R.L+10)+', darüber rot (km/h)'], ['Kp-Index', String(sc.wx.kp)+' (GPS-Störung unwahrscheinlich)'], ['Sonst', esc(sc.wx.t)]]);
-        h += '<span class="assume">Annahme: Für die Ampel zählen die Böen, nicht der mittlere Wind.</span>';
+        h += kv([['Böen', g+' km/h'], ['Wind (Mittel)', sc.wx.w+' km/h'], ['Grenze', R.L+' km/h für Böen · '+(m.wind ? 'eigene Grenze von '+esc(S.model) : 'Standard vom Admin')], ['Ampel', 'grün bis '+R.L+', gelb bis '+(R.L+10)+', darüber rot (km/h)'], ['Kp-Index', String(sc.wx.kp)+' (GPS-Störung unwahrscheinlich)'], ['Sonst', esc(sc.wx.t)]]);
+        h += '<div class="note" style="text-align:left">Die Grenze gilt für die Böen; der mittlere Wind wird zusätzlich gezeigt.</div>';
       } else h += kv([['Ergebnis', 'nicht prüfbar ohne Netz'], ['Zuletzt', 'Sa 14.11. 08:12 · Wind 9 km/h, Böen 13 km/h']]);
       h += '<button class="btn out" data-go="wx-wetter"><i class="bi bi-cloud-sun"></i> Drohnenwetter</button>';
     }
@@ -12595,7 +12633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     h += '<div class="btns" style="margin-top:10px"><button class="btn out" data-go="hf-start"><i class="bi bi-crosshair"></i> Hier fliegen</button><button class="btn out" data-go="anwesenheit"><i class="bi bi-geo-alt"></i> Einchecken</button></div>';
     h += '<div class="note">Setzen, Ändern und Aufheben stehen im Änderungsprotokoll. Gepflegt wird die Sperre von der Abteilungsleitung.</div>';
     h += '<div class="hf-demo"><div class="hf-sw"><span><b style="font-size:12.5px"><i class="bi bi-joystick"></i> Demo:</b> Platzsperre aktiv</span><span class="tg'+(SP.active?' on':'')+'" id="hf-sp-tg2"></span></div></div>';
-    h += '<span class="assume" style="margin-top:8px">Annahme: Benachrichtigt werden alle Mitglieder, die den betroffenen Bereich unter „Meine Bereiche“ gewählt haben.</span>';
+    h += '<div class="note">Benachrichtigt werden alle, die den betroffenen Bereich unter „Meine Bereiche“ führen, und alle, die dort gerade eingecheckt sind.</div>';
     byId('hf-sp-body').innerHTML = h;
   }
   K.enter['hf-sperre'] = renderSperre;
@@ -13269,6 +13307,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ck:'6/6 · 14:59', note:'', erf:'Regelwerk v4 · live', log:[['Erfasst · 28.10. 15:17 · Markus B.','live erfasst']] },
     neo2610: { date:'26.10.2026', model:'DJI Neo 2', cls:'C0', md:'neo2', pilot:ME, ort:'Vereinsgelände', von:'16:40', bis:'16:52', min:12, art:'Training',
       ck:'6/6 · 16:38', note:'', erf:'Regelwerk v4 · offline erfasst', log:[['Erfasst · 26.10. 16:52 · Markus B.','offline erfasst, übertragen 18:03']] },
+    neo1411j: { date:'14.11.2026', model:'DJI Neo 2', cls:'C0', owner:ME, md:'neo2', pilot:'Jonas B.', ort:'Vereinsgelände', von:'14:24', bis:'14:29', min:5, art:'Training',
+      ck:'6/6 · 14:24', note:'', erf:'Regelwerk v4 · live', delUntil:'15:00', log:[['Erfasst · 14.11. 14:30 · Jonas B.','mit deinem Modell (Freigabe zum Fliegen an Jonas B.)']] },
     neo1111: { date:'11.11.2026', model:'DJI Neo 2', cls:'C0', owner:ME, md:'neo2', pilot:'Jonas B.', ort:'Vereinsgelände', von:'16:05', bis:'16:15', min:10, art:'Training',
       ck:'6/6 · 16:02', note:'', erf:'Regelwerk v4 · live', log:[['Erfasst · 11.11. 16:15 · Jonas B.','mit deinem Modell (Freigabe zum Fliegen an Jonas B.)']] }
   };
@@ -13278,6 +13318,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const esc = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const flMin = (a, b) => { const [h1,m1] = String(a).split(':').map(Number), [h2,m2] = String(b).split(':').map(Number); return (h2*60+m2)-(h1*60+m1); };
   const flBy = f => f.pilot === ME ? ME : ME+' (Besitzer)';
+  // Löschen innerhalb der Frist: Pilot und – bei fremdem Modell – Besitzer
+  const flCanDel = f => f.pilot === ME || f.owner === ME;
+  window.__flGone = window.__flGone || new Set(); // gelöschte Flüge (für Listen in anderen Fragmenten)
   function flDelUntil(f){
     if (f.inv) return null;
     if (f.delUntil) return f.delUntil;
@@ -13295,7 +13338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   function flHtml(f){
-    const mine = f.pilot === ME, ownMd = f.owner === ME, canFix = mine || ownMd, dl = mine ? flDelUntil(f) : null;
+    const mine = f.pilot === ME, ownMd = f.owner === ME, canFix = mine || ownMd, dl = canFix ? flDelUntil(f) : null;
     const top = '<i class="bi bi-arrow-left" style="font-size:20px" data-back></i><div><div class="t1">'+(f.date === 'heute' ? 'Flug von heute' : 'Flug am '+esc(f.date))+'</div><div class="t2">'+esc(f.model)+' · '+esc(f.min)+' min'+(mine ? '' : ' · '+esc(f.pilot))+(f.inv ? ' · <span class="badge b-r">ungültig</span>' : '')+'</div></div>';
     let b = '';
     if (f.inv) b += '<div class="legal"><b><i class="bi bi-slash-circle"></i> Als ungültig markiert</b>'+esc(f.inv.when)+' von '+esc(f.inv.by)+' · Grund: „'+esc(f.inv.why)+'“. Der Flug bleibt sichtbar, zählt aber nicht in Summen, Berichten und Exporten.'+(canFix ? '<div style="margin-top:6px"><span class="chg" style="color:var(--red)" data-go="pf-ungueltig">Markierung aufheben</span></div>' : '')+'</div>';
@@ -13307,16 +13350,16 @@ document.addEventListener('DOMContentLoaded', () => {
     b += '<dt>Checkliste</dt><dd>'+esc(f.ck)+'</dd>';
     if (f.note) b += '<dt>Bemerkung</dt><dd>'+esc(f.note)+'</dd>';
     b += '<dt>Erfasst</dt><dd>'+esc(f.erf)+'</dd></dl></div>';
-    if (f.owner && mine) b += '<div class="note" style="text-align:left;margin:-4px 0 10px">Der Flug zählt in deinem Flugbuch und beim Modell. '+esc(f.owner)+' sieht ihn beim Modell unter „Flüge“ und darf ihn als Besitzer ebenfalls korrigieren oder ungültig markieren (mit Grund, im Verlauf).</div>';
-    if (ownMd) b += '<div class="note" style="text-align:left;margin:-4px 0 10px">Geflogen von '+esc(f.pilot)+' mit deinem Modell. Der Flug zählt in seinem Flugbuch und beim Modell. Als Besitzer darfst du ihn korrigieren oder ungültig markieren – mit Grund, sichtbar im Verlauf.</div>';
-    if (dl) b += '<div class="card pad" style="font-size:13px;border-color:#f3b4b4"><i class="bi bi-trash"></i> Versehentlich erfasst? <b>Löschen bis '+esc(dl)+'</b> möglich (30 Minuten nach der Erfassung). Danach nur noch „ungültig markieren“.</div>';
+    if (f.owner && mine) b += '<div class="note" style="text-align:left;margin:-4px 0 10px">Der Flug zählt in deinem Flugbuch und beim Modell. '+esc(f.owner)+' sieht ihn beim Modell unter „Flüge“ und darf ihn als Besitzer ebenfalls korrigieren oder ungültig markieren (mit Grund, im Verlauf) und innerhalb der Löschfrist löschen.</div>';
+    if (ownMd) b += '<div class="note" style="text-align:left;margin:-4px 0 10px">Geflogen von '+esc(f.pilot)+' mit deinem Modell. Der Flug zählt in seinem Flugbuch und beim Modell. Als Besitzer darfst du ihn korrigieren oder ungültig markieren – mit Grund, sichtbar im Verlauf. Innerhalb der Löschfrist darfst du ihn wie der Pilot auch löschen.</div>';
+    if (dl) b += '<div class="card pad" style="font-size:13px;border-color:#f3b4b4"><i class="bi bi-trash"></i> Versehentlich erfasst? <b>Löschen bis '+esc(dl)+'</b> möglich (30 Minuten nach der Erfassung)'+(f.owner ? ' – durch Pilot oder Besitzer' : '')+'. Danach nur noch „ungültig markieren“.</div>';
     b += '<h3>Änderungsverlauf</h3><div class="card pad"><div class="tl" id="d-tl">'+f.log.map(e => '<div class="e'+(e[3] ? ' '+e[3] : '')+'"><b>'+esc(e[0])+'</b>'+(e[2] || '')+(e[1] ? '<small>'+esc(e[1])+'</small>' : '')+'</div>').join('')+'</div></div>';
     if (canFix) {
       b += '<div class="btns"><button class="btn out" data-go="f-fix"><i class="bi bi-pencil"></i> Korrigieren</button>'+
         (mine ? '<button class="btn out" data-go="fg-neu" data-fg-obj="Flug '+esc(f.date === 'heute' ? 'von heute' : f.date.slice(0,6))+' · '+esc(f.model)+'"><i class="bi bi-share"></i> Teilen</button>'
               : '<button class="btn out" data-go="pf-ungueltig"><i class="bi bi-slash-circle"></i> '+(f.inv ? 'Markierung aufheben' : 'Ungültig markieren')+'</button>')+'</div>';
       if (dl) b += '<button class="btn" style="background:var(--red)" data-go="f-del"><i class="bi bi-trash"></i> Löschen (bis '+esc(dl)+')</button>';
-      else if (mine && !f.inv) b += '<div class="note">Löschfrist abgelaufen (30 Minuten nach der Erfassung). Falsche Flüge markierst du unter „Korrigieren“ als ungültig.</div>';
+      else if (!f.inv) b += '<div class="note">Löschfrist abgelaufen (30 Minuten nach der Erfassung). Falsche Flüge markierst du '+(mine ? 'unter „Korrigieren“' : 'mit „Ungültig markieren“')+' als ungültig.</div>';
     } else b += '<div class="note">Nur lesen.</div>';
     return { top, body: b };
   }
@@ -13362,19 +13405,24 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   // Löschen innerhalb der Frist
   enter['f-del'] = () => {
-    const f = FL[flCur] || FL.base, dl = f.pilot === ME ? flDelUntil(f) : null;
-    $('#del-kv').innerHTML = '<dt>Flug</dt><dd>'+esc(f.date === 'heute' ? 'heute' : f.date)+' · '+esc(f.von)+' – '+esc(f.bis)+'</dd><dt>Modell</dt><dd>'+esc(f.model)+'</dd><dt>Ort</dt><dd>'+esc(f.ort)+'</dd>';
+    const f = FL[flCur] || FL.base, dl = flCanDel(f) ? flDelUntil(f) : null;
+    $('#del-kv').innerHTML = '<dt>Flug</dt><dd>'+esc(f.date === 'heute' ? 'heute' : f.date)+' · '+esc(f.von)+' – '+esc(f.bis)+'</dd><dt>Modell</dt><dd>'+esc(f.model)+'</dd><dt>Ort</dt><dd>'+esc(f.ort)+'</dd>'+(f.owner ? '<dt>Pilot</dt><dd>'+esc(f.pilot)+'</dd><dt>Besitzer</dt><dd>'+(f.owner === ME ? 'du (Markus B.)' : esc(f.owner))+'</dd>' : '');
+    $('#del-who').style.display = f.owner ? '' : 'none';
+    $('#del-who').textContent = f.owner ? (f.owner === ME ? 'Du löschst als Besitzer des Modells. ' : 'Der Flug ist mit dem Modell von '+f.owner+' geflogen. ')+'Bei Flügen mit fremdem Modell dürfen Pilot und Besitzer innerhalb der Frist löschen.' : '';
     $('#del-until').textContent = dl || '–';
     $('#btn-del').classList.toggle('dis', !dl);
     $('#del-hint').textContent = dl ? '' : 'Die Löschfrist ist abgelaufen. Bitte stattdessen als ungültig markieren.';
   };
   $('#btn-del').addEventListener('click', () => {
-    const k = flCur, f = FL[k]; if (!f || !flDelUntil(f)) return;
-    $$('#flightlist [data-fl="'+k+'"], #l-flugbuch [data-fl="'+k+'"]').forEach(r => r.remove());
-    const c = $('#st-count'); c.textContent = +c.textContent - 1;
-    $('#m-sum').textContent = $('#flightlist').children.length + ' Flüge';
+    const k = flCur, f = FL[k]; if (!f || !flCanDel(f) || !flDelUntil(f)) return;
+    window.__flGone.add(k);
+    $$('[data-fl="'+k+'"]').forEach(r => r.remove());
     delete FL[k]; flCur = 'base';
-    show('l-flugbuch','reset'); toast('Flug gelöscht.');
+    if (f.pilot === ME) {
+      const c = $('#st-count'); c.textContent = +c.textContent - 1;
+      $('#m-sum').textContent = $('#flightlist').children.length + ' Flüge';
+      show('l-flugbuch','reset'); toast('Flug gelöscht.');
+    } else { back(); back(); toast('Flug gelöscht. '+f.pilot+' sieht ihn nicht mehr in seinem Flugbuch.'); }
   });
 
   // ---------- Meisterschaft aus dem ⋯-Menü Luftsport: Disziplin FPV-Race vorwählen ----------
@@ -13385,6 +13433,32 @@ document.addEventListener('DOMContentLoaded', () => {
     scr.dataset.tab = fpv ? 'luft' : 'car';
     if (fpv) setTimeout(() => { const c = document.querySelector('#wx-s-disc [data-d="fpv"]'); if (c && !c.classList.contains('on')) c.click(); }, 0);
   }, true);
+  // ---------- Checkliste „Als Nächstes“: gemeinsamer Zustand für Startseite und Willkommensseite (kd-1) ----------
+  // Ein Punkt gilt als erledigt, sobald er geöffnet wurde; die gesetzte Bestätigungs-PIN (pf-pin) zählt ebenfalls.
+  const NX_ITEMS = [['pk','Konto schützen','an-passkey'],['pin','Bestätigungs-PIN festlegen','pf-pin'],['ber','Meine Bereiche wählen','pf-daten'],
+    ['nw','Nachweise eintragen','nachweise'],['app','App auf den Startbildschirm','an-install'],['kal','Termine ansehen','ev-kalender']];
+  const nxSubs = [];
+  window.__nx = {
+    items: NX_ITEMS, done: new Set(['pk','nw','kal']), hidden: false,
+    emit(){ nxSubs.forEach(f => f()); },
+    sub(f){ nxSubs.push(f); },
+    mark(k){ if (!this.done.has(k)) { this.done.add(k); this.emit(); } },
+    hide(v){ this.hidden = v !== false; this.emit(); },
+    reset(){ this.done.clear(); this.hidden = false; this.emit(); },
+    count(){ return NX_ITEMS.filter(i => this.done.has(i[0])).length; }
+  };
+  function nxRender(){
+    const N = window.__nx, n = N.count(), all = NX_ITEMS.length, box = $('#st-nx');
+    box.style.display = (N.hidden || n === all) ? 'none' : '';
+    $('#st-nx-cnt').textContent = n + ' von ' + all + ' erledigt';
+    $('#st-nx-prog').style.width = Math.round(n / all * 100) + '%';
+    $('#st-nx-list').innerHTML = NX_ITEMS.filter(i => !N.done.has(i[0])).map(i => '<div class="row" data-go="'+i[2]+'" data-nx="'+i[0]+'"><span><i class="bi bi-circle"></i>'+i[1]+'</span><i class="bi bi-chevron-right mut"></i></div>').join('');
+  }
+  window.__nx.sub(nxRender);
+  $('#st-nx-list').addEventListener('click', e => { const r = e.target.closest('[data-nx]'); if (r) window.__nx.mark(r.dataset.nx); });
+  $('#st-nx-hide').addEventListener('click', () => { window.__nx.hide(); toast('Checkliste ausgeblendet.'); });
+  nxRender();
+
   window.KD = { show, back, toast, openPicker, closePicker, PICK, stack, enter, $, $$ };
   ckUpdate();
 })();

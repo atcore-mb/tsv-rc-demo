@@ -394,7 +394,7 @@
 <!-- ============ 4 AUSTRITT ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">4</span><h2>Austritt mit doppelter Bestätigung</h2></div>
-  <p class="ddesc">Erste Stufe: Übersicht in drei Spalten (sofort gelöscht · bis Fristende aufbewahrt · anonymisiert) plus „vorher zu klären“. Eine offene Ausleihe blockiert nicht – die Rückgabe wird eingefordert und bleibt bei der Leitung als „Rückgabe offen“. Der letzte Admin kann nicht austreten (dann ist „Weiter“ gesperrt, bis ein weiterer Admin bestimmt ist). Vor dem Löschen der Adresse geht eine Bestätigung per E-Mail raus. Zweite Stufe: Dialog mit Häkchen, Eingabe „AUSTRETEN“ und Bestätigung per Passkey. Dargestellt ist der geöffnete Dialog.</p>
+  <p class="ddesc">Erste Stufe: Übersicht in drei Spalten (sofort gelöscht · bis Fristende aufbewahrt · anonymisiert) plus „vorher zu klären“. Eine offene Ausleihe blockiert nicht – die Rückgabe wird eingefordert und bleibt bei der Leitung als „Rückgabe offen“; bis zur Rückgabe bleibt nur die E-Mail-Adresse (ausschließlich für Rückgabe-Erinnerungen), danach wird sie gelöscht. Der letzte Admin kann nicht austreten (dann ist „Weiter“ gesperrt, bis ein weiterer Admin bestimmt ist). Vor dem Löschen der Adresse geht eine Bestätigung per E-Mail raus. Zweite Stufe: Dialog mit Häkchen, Eingabe „AUSTRETEN“ und Bestätigung per Passkey. Dargestellt ist der geöffnete Dialog.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/austritt</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -403,10 +403,10 @@
       <div class="card" style="padding:10px 14px;font-size:13px">Dein Konto wird <b>deaktiviert</b>. Nicht aufbewahrungspflichtige Daten werden <b>sofort gelöscht</b>. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (<b>3 Jahre</b> laut Regelwerk) gesperrt erhalten und werden danach gelöscht bzw. anonymisiert. Die Mitgliedschaft im TSV 1927 endet dadurch <b>nicht</b>.</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--warn)"><i class="bi bi-exclamation-triangle-fill"></i> Vorher klären</h3>
-          <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>TRX-4M ausgeliehen</b><small class="mut">Rückgabe bis 17.11. – Austritt trotzdem möglich, Rückgabe wird eingefordert</small></span></div>
+          <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>TRX-4M ausgeliehen</b><small class="mut">Rückgabe bis 17.11. – Austritt trotzdem möglich, Rückgabe wird eingefordert; nur die E-Mail bleibt bis zur Rückgabe (für Erinnerungen)</small></span></div>
           <div class="wx-grp"><i class="bi bi-person-gear" style="color:var(--g)"></i><span><b>Rollen werden entfernt</b><small class="mut">weiterer Admin vorhanden (Max R.) ✓</small></span></div></div>
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--red)"><i class="bi bi-trash3"></i> Sofort gelöscht</h3>
-          <div class="wx-grp"><span>Kontaktdaten</span></div><div class="wx-grp"><span>Benachrichtigungen, Push</span></div><div class="wx-grp"><span>Passwort, Passkeys, 2FA, Tokens</span></div><div class="wx-grp"><span>Freigaben, ICS-Link</span></div><div class="wx-grp"><span>Eigene Orte, Checklisten</span></div></div>
+          <div class="wx-grp"><span>Kontaktdaten <small class="mut">E-Mail erst nach Rückgabe des TRX-4M</small></span></div><div class="wx-grp"><span>Benachrichtigungen, Push</span></div><div class="wx-grp"><span>Passwort, Passkeys, 2FA, Tokens</span></div><div class="wx-grp"><span>Freigaben, ICS-Link</span></div><div class="wx-grp"><span>Eigene Orte, Checklisten</span></div></div>
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--warn)"><i class="bi bi-hourglass-split"></i> Bis Fristende</h3>
           <div class="wx-grp"><span>39 Flüge <small class="mut">3 Jahre ab Erfassung · letzter bis 14.11.2029</small></span></div><div class="wx-grp"><span>Vorfälle (Luftfahrzeuge)</span></div><div class="wx-grp"><span>Änderungsprotokoll</span></div><div class="wx-grp"><span>Modelle aus Flügen <span class="assume" style="margin:2px 0 0">Annahme</span></span></div><div class="wx-grp"><span>Ausleihen, Protokolle <span class="assume" style="margin:2px 0 0">Annahme</span></span></div></div>
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--mut)"><i class="bi bi-incognito"></i> Anonymisiert</h3>
@@ -473,12 +473,12 @@
       <div>
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><div class="inp" style="min-width:280px"><span><i class="bi bi-geo-alt-fill" style="color:var(--air)"></i> <b>Vereinsgelände</b> <small class="mut">· per GPS erkannt</small></span><i class="bi bi-chevron-down"></i></div><div class="inp" style="min-width:230px"><span><i class="bi bi-sliders"></i> Grenzwerte für <b>alle Modelle (Standard)</b></span><i class="bi bi-chevron-down"></i></div><div class="chips" style="margin:0"><span class="chip on">Heute</span><span class="chip">Morgen</span><span class="chip">Übermorgen</span></div></div>
         <div class="wx-amp g"><span class="lamp"><i class="bi bi-check-lg"></i></span><span><b>fliegbar</b>Alle Werte im grünen Bereich. Ab 14 Uhr schlechter (gelb), ab 16 Uhr nicht empfohlen (Böen, Regen).</span></div>
-        <div class="wx-grid"><div><b>14 km/h</b>Wind SW</div><div><b>22 km/h</b>Böen</div><div><b>0 mm/h</b>Niederschlag</div><div><b>12 km</b>Sicht</div><div><b>6 °C</b>Temperatur</div><div><b>3</b>Kp-Index</div></div>
+        <div class="wx-grid"><div><b>14 km/h</b>Wind SW (Mittel)</div><div><b>22 km/h</b>Böen</div><div><b>0 mm/h</b>Niederschlag</div><div><b>12 km</b>Sicht</div><div><b>6 °C</b>Temperatur</div><div><b>3</b>Kp-Index</div></div>
         <div class="card"><h3>Stundenverlauf</h3>
           <table class="hrs">
             <tr><th>Uhr</th><td><b>Jetzt</b></td><td><b>11</b></td><td><b>12</b></td><td><b>13</b></td><td><b>14</b></td><td><b>15</b></td><td><b>16</b></td><td><b>17</b></td><td><b>18</b></td><td><b>19</b></td><td><b>20</b></td></tr>
             <tr><th>Ampel</th><td><span class="wx-dot"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot y"></span></td><td><span class="wx-dot y"></span></td><td><span class="wx-dot r"></span></td><td><span class="wx-dot r"></span></td><td><span class="wx-dot y"></span></td><td><span class="wx-dot"></span></td><td><span class="wx-dot y"></span></td></tr>
-            <tr><th>Wind km/h</th><td>14</td><td>15</td><td>16</td><td>18</td><td class="y">21</td><td class="y">23</td><td class="y">22</td><td>19</td><td>15</td><td>12</td><td>10</td></tr>
+            <tr><th>Wind km/h <small class="mut">(Mittel)</small></th><td>14</td><td>15</td><td>16</td><td>18</td><td>21</td><td>23</td><td>22</td><td>19</td><td>15</td><td>12</td><td>10</td></tr>
             <tr><th>Böen km/h</th><td>22</td><td>24</td><td>26</td><td>30</td><td class="y">34</td><td class="y">38</td><td class="r">41</td><td class="y">35</td><td>28</td><td>22</td><td>18</td></tr>
             <tr><th>Regen mm/h</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="y">0,1</td><td class="r">0,6</td><td class="r">0,9</td><td class="y">0,4</td><td>0</td><td>0</td></tr>
             <tr><th>Sicht km</th><td>12</td><td>12</td><td>12</td><td>10</td><td>9</td><td>8</td><td>5</td><td class="y">3</td><td class="y">4</td><td>8</td><td>10</td></tr>
@@ -491,19 +491,17 @@
         <div class="card"><h3>Grenzwerte der Ampel</h3>
           <div style="font-size:12.5px;margin-bottom:6px"><i class="bi bi-sliders"></i> Es gilt der <b>Standard des Vereins</b> (vom Admin eingestellt).</div>
           <table class="dt"><tr><th>Wert</th><th>grün</th><th>gelb</th><th>rot</th></tr>
-            <tr><td>Wind</td><td>≤ 20</td><td>≤ 30</td><td>&gt; 30</td></tr>
             <tr><td>Böen</td><td>≤ 30</td><td>≤ 40</td><td>&gt; 40</td></tr>
             <tr><td>Regen</td><td>0</td><td>≤ 0,5</td><td>&gt; 0,5</td></tr>
             <tr><td>Sicht</td><td>≥ 5</td><td>≥ 1</td><td>&lt; 1</td></tr>
             <tr><td>Temp.</td><td>5–30</td><td>−5–38</td><td>sonst</td></tr>
             <tr><td>Kp</td><td>≤ 4</td><td>5</td><td>≥ 6</td></tr>
           </table>
-          <div class="hint">Die Ampel ist eine Empfehlung, die Entscheidung trifft der Pilot.</div>
+          <div class="hint">Die Wind-Grenze gilt für die Böen; der mittlere Wind wird zusätzlich angezeigt, fließt aber nicht in die Ampel ein. Die Ampel ist eine Empfehlung, die Entscheidung trifft der Pilot.</div>
         </div>
         <div class="card" style="font-size:12.5px"><h3>Mit Modell „DJI Neo 2“</h3>
-          <div style="margin-bottom:6px"><i class="bi bi-person-gear"></i> Es gilt die <b>eigene Grenze Modell DJI Neo 2</b> für Wind und Böen; alle anderen Werte nach Standard.</div>
+          <div style="margin-bottom:6px"><i class="bi bi-person-gear"></i> Es gilt die <b>eigene Grenze Modell DJI Neo 2</b> für Böen; alle anderen Werte nach Standard.</div>
           <table class="dt"><tr><th>Wert</th><th>grün</th><th>gelb</th><th>rot</th></tr>
-            <tr><td>Wind <span class="badge b-air">eigene Grenze</span></td><td>≤ 15</td><td>≤ 22</td><td>&gt; 22</td></tr>
             <tr><td>Böen <span class="badge b-air">eigene Grenze</span></td><td>≤ 20</td><td>≤ 28</td><td>&gt; 28</td></tr>
             <tr><td class="mut">übrige Werte</td><td colspan="3" class="mut">Standard</td></tr>
           </table>
