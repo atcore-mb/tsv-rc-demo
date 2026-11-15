@@ -242,7 +242,7 @@
 <!-- ========== 1 Login ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">1</span><h2>Login: Passwort, zweiter Faktor, Passkey</h2></div>
-  <p class="ddesc">Anmeldename ist die E-Mail-Adresse. Nach dem Passwort folgt der TOTP-Code, falls ein Faktor eingerichtet ist. Ein Passkey ersetzt Passwort und zweiten Faktor (ein Klick, das Betriebssystem fragt Fingerabdruck/Gesicht). Kein Hinweis, ob eine E-Mail existiert. Nach 5 Fehlversuchen ist die Anmeldung für dieses Konto von diesem Netz aus 15 Minuten gesperrt; der Admin kann die Sperre verkürzen. „Diesem Gerät vertrauen“ hält die Sitzung 30 Tage ab der letzten Nutzung (Admins 12 Stunden), sonst endet sie mit dem Browser; in der installierten App ist das Häkchen vorbelegt.</p>
+  <p class="ddesc">Anmeldename ist die E-Mail-Adresse. Nach dem Passwort folgt der TOTP-Code, falls ein Faktor eingerichtet ist. Ein Passkey ersetzt Passwort und zweiten Faktor (ein Klick, das Betriebssystem fragt Fingerabdruck/Gesicht). Kein Hinweis, ob eine E-Mail existiert. Fehlversuche zählen je Konto und IP-Netz (IPv4 /24, IPv6 /64), damit Fremde niemanden von anderswo aussperren können. Die ersten 4 Fehlversuche bleiben ohne Wartezeit; ab dem 5. wartet man vor dem nächsten Passwort-Versuch 1, 2, 4, 8, dann höchstens 15 Minuten. Der Zähler verfällt nach erfolgreicher Anmeldung oder 24 Stunden ohne Fehlversuch. Zusätzlich gilt je IP-Netz über alle Konten: 30 Fehlversuche in 15 Minuten führen zu 15 Minuten Wartezeit für dieses Netz. Passkey und „Passwort vergessen?“ bleiben immer möglich; der Admin kann mit „Sofort freigeben“ den Zähler zurücksetzen. „Diesem Gerät vertrauen“ hält die Sitzung 30 Tage ab der letzten Nutzung (Admins 12 Stunden), sonst endet sie mit dem Browser; in der installierten App ist das Häkchen vorbelegt.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/anmelden</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
@@ -265,7 +265,7 @@
         <h3>Bestätigungscode</h3>
         <p class="lead">Öffne deine Authenticator-App und gib den 6-stelligen Code ein.</p>
         <div class="an-otp"><span>4</span><span>8</span><span>1</span><span class="f">2</span><span></span><span></span></div>
-        <div class="hint">Faktor: <b>Authenticator iPhone</b> · <span class="an-link">anderen Faktor wählen</span></div>
+        <div class="hint">Code aus: <b>Authenticator iPhone</b> · bei mehreren Faktoren stehen alle Namen hier; der Code jedes Faktors gilt, eine Auswahl ist nicht nötig</div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px">Anmelden</span>
         <div class="an-or">kein Zugriff auf die App?</div>
         <span class="an-link"><i class="bi bi-life-preserver"></i> Mit Wiederherstellungscode anmelden</span>
@@ -274,9 +274,11 @@
       </div>
       <div class="an-card" style="width:250px">
         <h3 style="font-size:15px">Zu viele Fehlversuche</h3>
-        <div class="hint" style="margin-top:4px">Vorher, nach jedem Fehlversuch: „E-Mail oder Passwort falsch. Noch 2 Versuche, danach ist die Anmeldung 15 Minuten gesperrt.“</div>
-        <div class="alert" style="margin-top:6px"><i class="bi bi-lock-fill"></i> 5 Fehlversuche: Anmeldung für dieses Konto von diesem Netz aus <b>15 Minuten</b> gesperrt (bis 09:56 Uhr). Der Admin kann die Sperre verkürzen.</div>
-        <div class="hint">Anmelden mit Passkey und „Passwort vergessen?“ bleiben möglich – die Sperre gilt nur für die Passwort-Eingabe.</div>
+        <div class="hint" style="margin-top:4px">Vorher, ohne Wartezeit: „E-Mail oder Passwort falsch.“ Ab dem 3. Fehlversuch zusätzlich: „Nach 2 weiteren Fehlversuchen musst du kurz warten.“</div>
+        <div class="alert" style="margin-top:6px"><i class="bi bi-hourglass-split"></i> <b>Bitte kurz warten</b><br>Zu viele Fehlversuche. Nächster Versuch mit Passwort ab 09:43 Uhr. Die Wartezeit wird mit jedem weiteren Fehlversuch länger (höchstens 15 Minuten). Mit Passkey oder „Passwort vergessen?“ geht es sofort weiter.</div>
+        <span class="ibtn" style="display:block;text-align:center;padding:9px;opacity:.45">Weiter</span>
+        <div class="hint">„Weiter“ bleibt bis 09:43 Uhr deaktiviert. Wartezeit ab dem 5. Fehlversuch: 1, 2, 4, 8, dann 15 Minuten.</div>
+        <div class="hint">Beim ersten Warten geht eine E-Mail „Fehlgeschlagene Anmeldeversuche“ an den Kontoinhaber (höchstens 1× in 24 Stunden) mit Zeit und ungefährem Ort; wer es nicht war, soll das Passwort ändern. Die Anmeldeseite verrät davon nichts.</div>
       </div>
     </div>
   </div></div></div>
@@ -336,7 +338,7 @@
 <!-- ========== 3 Passwort zurücksetzen / Wiederherstellungscode ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Passwort zurücksetzen und Anmeldung mit Wiederherstellungscode</h2></div>
-  <p class="ddesc">Der Reset-Link geht immer an die hinterlegte E-Mail, gilt 1 Stunde und nur einmal. Die Rückmeldung verrät nicht, ob die Adresse existiert. Ein zweiter Faktor bleibt nach dem Reset bestehen; ohne Zugriff darauf hilft ein Wiederherstellungscode. Die Fehlversuch-Sperre der Anmeldung gilt hier nicht; der Link-Versand ist separat auf 3 pro Stunde und Adresse begrenzt.</p>
+  <p class="ddesc">Der Reset-Link geht immer an die hinterlegte E-Mail, gilt 1 Stunde und nur einmal. Die Rückmeldung verrät nicht, ob die Adresse existiert. Ein zweiter Faktor bleibt nach dem Reset bestehen; ohne Zugriff darauf hilft ein Wiederherstellungscode. Die Wartezeit nach Fehlversuchen bei der Anmeldung gilt hier nicht; der Link-Versand ist separat auf 3 pro Stunde und Adresse begrenzt.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/passwort-vergessen</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>

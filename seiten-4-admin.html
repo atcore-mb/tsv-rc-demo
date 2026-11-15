@@ -270,7 +270,7 @@
           </div>
           <div>
             <div class="card"><h3>Sicherheit</h3>
-              <table class="dt"><tr><td>Admins mit 2FA/Passkey</td><td><span class="badge b-g">1 / 1</span></td></tr><tr><td>Gesperrte Konten</td><td>1</td></tr><tr><td>Fehlversuche (24 h)</td><td>3</td></tr><tr><td>Anmeldung vorübergehend gesperrt</td><td>1 <small class="mut">Jonas B.</small></td></tr></table>
+              <table class="dt"><tr><td>Admins mit 2FA/Passkey</td><td><span class="badge b-g">1 / 1</span></td></tr><tr><td>Gesperrte Konten</td><td>1</td></tr><tr><td>Fehlversuche (24 h)</td><td>7</td></tr><tr><td>Wartezeit nach Fehlversuchen aktiv</td><td>1 <small class="mut">Jonas B.</small></td></tr></table>
             </div>
             <div class="card"><h3>Einstellungen</h3>
               <table class="dt"><tr><td>Löschfrist für eigene Flüge<br><small class="mut">danach nur „ungültig markieren“</small></td><td><span class="inp" style="display:inline-flex;margin:0;padding:4px 8px;gap:6px">30 Minuten <i class="bi bi-chevron-down"></i></span></td></tr></table>
@@ -310,7 +310,7 @@
           <table class="dt"><tr><th>Name</th><th>E-Mail</th><th>Rollen</th><th>Vorliebe</th><th>Anmeldung</th><th>Status</th><th>Letzte Anmeldung</th></tr>
             <tr><td><b>Markus B.</b></td><td>markus@…</td><td>Admin <small class="mut">(global)</small>, Abteilungsleitung, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td><i class="bi bi-fingerprint"></i> 2 · <i class="bi bi-shield-lock"></i> 1 <span class="badge b-g">Admin-Pflicht erfüllt</span></td><td><span class="badge b-g">aktiv</span></td><td>heute</td></tr>
             <tr><td><b>Max R.</b></td><td>max@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-fingerprint"></i> 1</td><td><span class="badge b-g">aktiv</span></td><td>gestern</td></tr>
-            <tr><td><b>Jonas B.</b></td><td>jonas@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td>Passwort <small class="mut">(2FA zurückgesetzt)</small> <span class="badge b-w">5 Fehlversuche · bis 14:27</span></td><td><span class="badge b-g">aktiv</span></td><td>10.11.</td></tr>
+            <tr><td><b>Jonas B.</b></td><td>jonas@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td>Passwort <small class="mut">(2FA zurückgesetzt)</small> <span class="badge b-w">7 Fehlversuche · Wartezeit bis 14:16</span></td><td><span class="badge b-g">aktiv</span></td><td>10.11.</td></tr>
             <tr class="sel"><td><b>Lena K.</b></td><td>lena@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>08.11.</td></tr>
             <tr><td><b>Tim S.</b> <span class="badge b-w">14</span></td><td>tim@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span> <small class="mut">Eltern: Sandra S.</small></td><td>12.11.</td></tr>
             <tr><td><b>Sandra S.</b></td><td>sandra@…</td><td>Erziehungsberechtigte <small class="mut">(kein Mitglied)</small></td><td>–</td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>12.11.</td></tr>
@@ -358,7 +358,7 @@
           </div>
           <div>
             <div class="card"><h3>Anmeldung</h3>
-              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>0</td></tr><tr><td>Fehlversuche</td><td>0 <small class="mut">(bei Sperre: „Sofort freigeben“ / „Verkürzen“)</small></td></tr></table>
+              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>0</td></tr><tr><td>Fehlversuche</td><td>0 <small class="mut">(sonst mit letztem Versuch, IP-Netz, „Wartezeit bis …“ und „Sofort freigeben“: setzt den Zähler zurück, protokolliert)</small></td></tr></table>
               <div style="margin-top:8px"><span class="ibtn out">Zweite Faktoren zurücksetzen</span></div>
               <div class="hint">Zurücksetzen wird protokolliert; Lena wird per E-Mail informiert.</div>
             </div>
@@ -886,6 +886,7 @@
               <tr class="sel"><td><b>Nachweis läuft ab</b></td><td><span class="badge b-w">angepasst</span></td></tr>
               <tr><td>Einladung</td><td><span class="badge b-all">Standard</span></td></tr>
               <tr><td>Passwort zurücksetzen</td><td><span class="badge b-all">Standard</span></td></tr>
+              <tr><td>Fehlgeschlagene Anmeldeversuche <small class="mut">(höchstens 1× in 24 h)</small></td><td><span class="badge b-all">Standard</span></td></tr>
               <tr><td>Ausleihe genehmigt / abgelehnt</td><td><span class="badge b-all">Standard</span></td></tr>
               <tr><td>Rückgabe fällig</td><td><span class="badge b-all">Standard</span></td></tr>
               <tr><td>Bald volljährig (an Eltern)</td><td><span class="badge b-all">Standard</span></td></tr>

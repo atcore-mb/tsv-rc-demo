@@ -1059,7 +1059,7 @@
     <div class="an-pw"><input class="inp" id="an-l-pw" type="password" placeholder="Passwort" autocomplete="off"><i class="bi bi-eye an-eye"></i></div>
     <div style="text-align:right;margin:8px 0 4px"><span class="an-link" data-go="an-pw-vergessen">Passwort vergessen?</span></div>
     <div class="an-cb on" id="an-l-trust"><i class="bi bi-check-square-fill"></i><span><b>Diesem Gerät vertrauen</b><small class="mut" style="display:block">Angemeldet bleiben, 30 Tage ab der letzten Nutzung (als Admin höchstens 12 Stunden). Ohne Häkchen endet die Sitzung, wenn du den Browser schließt. In der installierten App ist das Häkchen vorbelegt.</small></span></div>
-    <div class="an-lock" id="an-l-lock" style="display:none"><i class="bi bi-lock-fill"></i><span><b>Anmeldung vorübergehend gesperrt</b><br>5 Fehlversuche: Für dieses Konto ist die Anmeldung von diesem Netz aus <b>15 Minuten</b> gesperrt (bis <span id="an-l-until">–</span>). Der Admin kann die Sperre verkürzen.<br>Die Anmeldung mit <b>Passkey</b> und <span class="an-link" data-go="an-pw-vergessen" id="an-l-forgot">„Passwort vergessen?“</span> bleiben möglich.<br><span class="an-link" id="an-l-wait">15 Minuten vorspulen <small class="mut">(Demo)</small></span></span></div>
+    <div class="an-lock" id="an-l-lock" style="display:none"><i class="bi bi-hourglass-split"></i><span><b>Bitte kurz warten</b><br>Zu viele Fehlversuche. Nächster Versuch mit Passwort ab <span id="an-l-until">–</span>. Die Wartezeit wird mit jedem weiteren Fehlversuch länger (höchstens 15 Minuten). Mit <b>Passkey</b> oder <span class="an-link" data-go="an-pw-vergessen" id="an-l-forgot">„Passwort vergessen?“</span> geht es sofort weiter.<br><b id="an-l-count"></b> · <span class="an-link" id="an-l-wait">Wartezeit überspringen <small class="mut">(Demo)</small></span></span></div>
     <button class="btn dis" id="an-l-go">Weiter</button>
     <div class="note" id="an-l-hint">E-Mail und Passwort eingeben.</div>
     <div class="card pad" style="font-size:12.5px;margin-top:16px">
@@ -1067,7 +1067,7 @@
       <div style="margin-top:6px"><span class="an-link" data-go="an-einladung">Einladungslink öffnen <small class="mut">(Demo)</small></span> · <span class="an-link" data-go="an-register">Selbst registrieren</span></div>
       <div style="margin-top:6px"><span class="an-link" data-go="an-einladung-alt">Abgelaufenen Einladungslink öffnen <small class="mut">(Demo)</small></span></div>
       <div style="margin-top:6px"><span class="an-link" id="an-l-demo">Als Mitglied ohne Passkey anmelden <small class="mut">(Demo Lena K.)</small></span></div>
-      <div class="hint" style="margin-top:6px">Demo: Das Passwort „falsch“ gilt als falsch, so lassen sich Fehlversuche und Sperre ausprobieren.</div>
+      <div class="hint" style="margin-top:6px">Demo: Das Passwort „falsch“ gilt als falsch, so lassen sich Fehlversuche und Wartezeit ausprobieren (ab dem 5. Fehlversuch 1, 2, 4, 8, höchstens 15 Minuten).</div>
     </div>
   </div>
   <div class="an-os" id="an-l-os"><div class="p">
@@ -1086,7 +1086,7 @@
     <p style="font-size:14px;margin:4px 0 10px">Öffne deine Authenticator-App und gib den 6-stelligen Code ein.</p>
     <label>Code <span class="req">*</span></label>
     <input class="inp an-otp" id="an-2l-code" inputmode="numeric" maxlength="6" placeholder="······" autocomplete="off">
-    <div class="hint">Faktor: <b>Authenticator iPhone</b></div>
+    <div class="hint">Code aus: <b>Authenticator iPhone</b></div>
     <button class="btn dis" id="an-2l-go" style="margin-top:14px">Anmelden</button>
     <div class="note" id="an-2l-note">Als Admin bleibst du höchstens 12 Stunden angemeldet.</div>
     <div class="an-or">kein Zugriff auf die App?</div>
@@ -1117,7 +1117,7 @@
     <input class="inp" id="an-pv-mail" type="email" placeholder="name@beispiel.de" autocomplete="off">
     <button class="btn dis" id="an-pv-go" style="margin-top:14px">Link senden</button>
     <div class="note an-err" id="an-pv-limit" style="display:none"></div>
-    <div class="note">Dein zweiter Faktor bleibt nach dem Zurücksetzen bestehen. Eine Sperre nach Fehlversuchen gilt hier nicht; der Link-Versand ist aber auf 3 pro Stunde und Adresse begrenzt. Der Link gilt 1 Stunde und nur einmal.</div>
+    <div class="note">Dein zweiter Faktor bleibt nach dem Zurücksetzen bestehen. Die Wartezeit nach Fehlversuchen bei der Anmeldung gilt hier nicht; der Link-Versand ist aber auf 3 pro Stunde und Adresse begrenzt. Der Link gilt 1 Stunde und nur einmal.</div>
   </div>
 </section>
 
@@ -1502,23 +1502,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const now = () => new Date().toLocaleDateString('de-DE',{month:'2-digit',year:'numeric'});
 
   // ---------- Login ----------
-  // Fehlversuche: 5 falsche Passwörter -> 15 Minuten Sperre (je Konto und Netz); Demo: Passwort „falsch“
-  let lFails = 0, lLocked = false;
+  // Fehlversuche (je Konto und IP-Netz /24 bzw. /64): die ersten 4 ohne Wartezeit, ab dem 5. steigt die
+  // Wartezeit vor dem nächsten Passwort-Versuch: 1, 2, 4, 8, höchstens 15 Minuten. Zähler verfällt nach
+  // erfolgreicher Anmeldung oder 24 h ohne Fehlversuch. Passkey und „Passwort vergessen?“ bleiben möglich.
+  // Demo: Passwort „falsch“; Demo-Uhr startet 09:42, der Countdown läuft in Echtzeit (oder überspringen).
+  const L_WAITS = [1, 2, 4, 8, 15];
+  let lFails = 0, lNow = 9 * 60 + 42, lUntil = 0, lLeft = 0, lTimer = null;
+  const lHm = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  const lWaiting = () => lUntil > lNow;
+  const lWaitFor = n => L_WAITS[Math.min(n - 5, L_WAITS.length - 1)];
+  const lMin = m => m + (m === 1 ? ' Minute' : ' Minuten');
+  function lCount(){ $('#an-l-count').textContent = 'Noch ' + Math.floor(lLeft / 60) + ':' + String(lLeft % 60).padStart(2, '0') + ' Min.'; }
+  function lStop(){ if (lTimer) { clearInterval(lTimer); lTimer = null; } }
+  function lStart(){ lStop(); if (lWaiting()) lTimer = setInterval(lTick, 1000); }
+  function lTick(){
+    if (!$('#login').classList.contains('active')) { lStop(); return; }   // läuft nur, solange die Anmeldung offen ist
+    lLeft--; if (lLeft <= 0) { lExpire(); return; } lCount();
+  }
+  function lExpire(){
+    lStop(); lNow = lUntil; lLeft = 0; lCheck();
+    $('#an-l-hint').textContent = 'Wartezeit vorbei. Nach einem weiteren Fehlversuch wartest du ' + lMin(lWaitFor(lFails + 1)) + '.';
+    KD.toast('Wartezeit vorbei. Du kannst es wieder mit Passwort versuchen.');
+  }
+  function lReset(){ lStop(); lFails = 0; lUntil = 0; lLeft = 0; }
   function lCheck(){
-    const okM = /.+@.+\..+/.test(val('an-l-mail')), okP = $('#an-l-pw').value.length > 0;
-    dis('an-l-go', lLocked || !(okM && okP));
-    $('#an-l-lock').style.display = lLocked ? '' : 'none';
+    const okM = /.+@.+\..+/.test(val('an-l-mail')), okP = $('#an-l-pw').value.length > 0, w = lWaiting();
+    dis('an-l-go', w || !(okM && okP));
+    $('#an-l-lock').style.display = w ? '' : 'none';
     $('#an-l-hint').classList.remove('an-err');
-    $('#an-l-hint').textContent = lLocked ? 'Anmeldung mit Passwort ist gesperrt. Mit Passkey geht es weiter.' : okM && okP ? '' : (!okM ? 'Gültige E-Mail eingeben.' : 'Passwort eingeben.');
+    $('#an-l-hint').textContent = w ? 'Anmelden mit Passwort ab ' + lHm(lUntil) + ' Uhr wieder möglich.' : okM && okP ? '' : (!okM ? 'Gültige E-Mail eingeben.' : 'Passwort eingeben.');
   }
   const trusted = () => $('#an-l-trust').classList.contains('on');
   function lFail(){
     lFails++; $('#an-l-pw').value = '';
-    if (lFails >= 5) { lLocked = true; $('#an-l-until').textContent = '09:56 Uhr'; lCheck(); KD.toast('5 Fehlversuche: 15 Minuten gesperrt.'); return; }
+    if (lFails >= 5) {
+      const m = lWaitFor(lFails); lUntil = lNow + m; lLeft = m * 60;
+      $('#an-l-until').textContent = lHm(lUntil) + ' Uhr'; lCount(); lStart(); lCheck();
+      KD.toast(lFails + '. Fehlversuch: ' + lMin(m) + ' warten.'); return;
+    }
     lCheck(); $('#an-l-hint').classList.add('an-err');
-    $('#an-l-hint').textContent = 'E-Mail oder Passwort falsch. Noch ' + (5 - lFails) + ' Versuch' + (5 - lFails === 1 ? '' : 'e') + ', danach ist die Anmeldung 15 Minuten gesperrt.';
+    const left = 5 - lFails;
+    $('#an-l-hint').textContent = 'E-Mail oder Passwort falsch.' + (lFails >= 3 ? ' Nach ' + (left === 1 ? 'einem weiteren Fehlversuch' : left + ' weiteren Fehlversuchen') + ' musst du kurz warten.' : '');
   }
-  $('#an-l-wait').addEventListener('click', () => { lLocked = false; lFails = 0; lCheck(); KD.toast('Sperre abgelaufen. Du kannst es wieder versuchen.'); });
+  $('#an-l-wait').addEventListener('click', () => { if (lWaiting()) lExpire(); });
+  KD.enter['login'] = () => { if (lWaiting() && !lTimer) lStart(); };
   ['an-l-mail','an-l-pw'].forEach(id => $('#'+id).addEventListener('input', lCheck));
   // Demo: markus@… ist Admin mit TOTP; jede andere Adresse ist ein Mitglied ohne Passkey/zweiten Faktor
   const isAdminMail = () => val('an-l-mail').toLowerCase() === 'markus@beispiel.de';
@@ -1527,7 +1554,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#an-l-go').addEventListener('click', () => {
     if ($('#an-l-go').classList.contains('dis')) return;
     if ($('#an-l-pw').value === 'falsch') { lFail(); return; }
-    lFails = 0;
+    lReset();
     if (isAdminMail()) { $('#an-2l-code').value = ''; dis('an-2l-go', true); $('#an-2l-note').textContent = trusted() ? 'Als Admin bleibst du auch auf einem vertrauten Gerät höchstens 12 Stunden angemeldet.' : 'Die Sitzung endet, wenn du den Browser schließt.'; KD.show('an-login-2fa','push'); return; }
     const first = val('an-l-mail').split('@')[0]; const nm = first.charAt(0).toUpperCase() + first.slice(1);
     $('#an-l-pw').value = ''; lCheck();
@@ -1553,7 +1580,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#an-wk-go').addEventListener('click', () => { KD.show('start','reset'); KD.toast('Los geht’s!'); });
   KD.enter['an-willkommen'] = wkRender;
   $('#an-l-pk').addEventListener('click', () => osOpen('an-l-os'));
-  function loggedIn(msg){ $('#an-l-pw').value = ''; lCheck(); osClose('an-l-os'); KD.show('start','reset'); KD.toast(msg || 'Angemeldet. Willkommen zurück, Markus!'); }
+  function loggedIn(msg){ lReset(); $('#an-l-pw').value = ''; lCheck(); osClose('an-l-os'); KD.show('start','reset'); KD.toast(msg || 'Angemeldet. Willkommen zurück, Markus!'); }
   $('#an-l-os-ok').addEventListener('click', () => loggedIn('Mit Passkey angemeldet.'));
   $('#an-2l-code').addEventListener('input', () => dis('an-2l-go', !digits('an-2l-code')));
   $('#an-2l-go').addEventListener('click', () => loggedIn());
@@ -1567,7 +1594,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ---------- Passwort zurücksetzen ----------
-  // Reset-Versand: unabhängig von der Fehlversuch-Sperre, aber höchstens 3 Links pro Stunde und Adresse
+  // Reset-Versand: unabhängig von der Wartezeit nach Fehlversuchen, aber höchstens 3 Links pro Stunde und Adresse
   const pvSent = {}, PV_MAX = 3;
   function pvCheck(){
     const m = val('an-pv-mail').toLowerCase(), ok = /.+@.+\..+/.test(m), full = ok && (pvSent[m] || 0) >= PV_MAX;
@@ -8575,6 +8602,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="row ad-v-open" data-v="2" data-go="ad-vorlage"><span><b>Ausleihe genehmigt / abgelehnt</b><br><small>E-Mail + Push</small></span><span class="badge b-all">Standard</span></div>
       <div class="row ad-v-open" data-v="3" data-go="ad-vorlage"><span><b>Rückgabe fällig</b><br><small>E-Mail + Push</small></span><span class="badge b-all">Standard</span></div>
       <div class="row ad-v-open" data-v="4" data-go="ad-vorlage"><span><b>Bald volljährig</b><br><small>an Erziehungsberechtigte</small></span><span class="badge b-all">Standard</span></div>
+      <div class="row ad-v-open" data-v="5" data-go="ad-vorlage"><span><b>Fehlgeschlagene Anmeldeversuche</b><br><small>E-Mail an den Kontoinhaber, höchstens 1× in 24 Stunden</small></span><span class="badge b-all">Standard</span></div>
     </div>
     <div class="note">Ohne Anpassung gelten die mitgelieferten Texte.</div>
   </div>
@@ -8586,7 +8614,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="body">
     <label>Betreff <span class="req">*</span></label><input class="inp" id="ad-v-subj" autocomplete="off">
     <label>Text <span class="req">*</span></label><textarea class="inp" id="ad-v-text" rows="6"></textarea>
-    <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}}, {{modell}}. Push nutzt nur den Betreff.</div>
+    <div class="hint">Platzhalter: {{vorname}}, {{nachweis}}, {{tage}}, {{gueltig_bis}}, {{modell}}, {{zeit}}, {{ort}}. Push nutzt nur den Betreff.</div>
     <button class="btn" id="ad-v-save" style="margin-top:12px">Speichern</button>
     <button class="btn out" id="ad-v-reset" style="margin-top:8px">Auf Standard zurücksetzen</button>
   </div>
@@ -8797,7 +8825,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const KO = {
     markus:{ n:'Markus B.', ini:'MB', mail:'markus@…', geb:'12.05.1980', age:46, roles:[['Admin','global','03/2024'],['Abteilungsleitung','Abteilung RC-Modellsport','03/2024'],['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['air','car'], pk:2, totp:1, st:'aktiv', last:'heute', self:true },
     max:{ n:'Max R.', ini:'MR', mail:'max@…', geb:'02.02.1975', age:51, roles:[['Ausbilder','Abteilung RC-Modellsport','04/2024'],['Mitglied','Abteilung RC-Modellsport','03/2024']], areas:['air'], pk:1, totp:0, st:'aktiv', last:'gestern' },
-    jonas:{ n:'Jonas B.', ini:'JB', mail:'jonas@…', geb:'19.08.1990', age:36, roles:[['Ausbilder','Abteilung RC-Modellsport','06/2025'],['Mitglied','Abteilung RC-Modellsport','05/2024']], areas:['air','car'], pk:0, totp:0, st:'aktiv', last:'10.11.', fail:{ n:5, at:'14:12', until:'14:27', ip:'Mobilfunk, Raum Nürnberg' } },
+    jonas:{ n:'Jonas B.', ini:'JB', mail:'jonas@…', geb:'19.08.1990', age:36, roles:[['Ausbilder','Abteilung RC-Modellsport','06/2025'],['Mitglied','Abteilung RC-Modellsport','05/2024']], areas:['air','car'], pk:0, totp:0, st:'aktiv', last:'10.11.', fail:{ n:7, at:'14:12', until:'14:16', ip:'89.204.137.0/24 (Mobilfunk, Raum Nürnberg)' } },
     lena:{ n:'Lena K.', ini:'LK', mail:'lena@…', geb:'04.07.1998', age:28, roles:[['Mitglied','Abteilung RC-Modellsport','09/2025']], areas:['car'], pk:0, totp:0, st:'aktiv', last:'08.11.' },
     tim:{ n:'Tim S.', ini:'TS', mail:'tim@…', geb:'03.2012', age:14, roles:[['Mitglied','Abteilung RC-Modellsport','09/2026']], areas:['air'], pk:0, totp:0, st:'aktiv', last:'12.11.', eltern:['Sandra S.'] },
     sandra:{ n:'Sandra S.', ini:'SS', mail:'sandra@…', geb:'11.10.1983', age:43, roles:[['Erziehungsberechtigte','je Kind: Tim S.','09/2026']], areas:[], pk:0, totp:0, st:'aktiv', last:'12.11.', kind:'Tim S.' },
@@ -8842,8 +8870,11 @@ document.addEventListener('DOMContentLoaded', () => {
     byId('ad-ko-mail').textContent = p.mail; byId('ad-ko-geb').textContent = p.geb + ' (' + p.age + ')';
     byId('ad-ko-areas').innerHTML = p.areas.length ? areaBadges(p.areas).replace(/>Luft</g, '>Luftsport<').replace(/>RC</g, '>RC Cars<') : '<span class="mut">keine Vorliebe gewählt</span>';
     const fb = byId('ad-ko-fail'); fb.style.display = p.fail ? '' : 'none';
-    if (p.fail) fb.innerHTML = '<b><i class="bi bi-hourglass-split" style="color:var(--warn)"></i> Anmeldung vorübergehend gesperrt</b><br><small class="mut">' + p.fail.n + ' Fehlversuche um ' + esc(p.fail.at) + ' (' + esc(p.fail.ip) + ') · gesperrt bis ' + esc(p.fail.until) + ' · gilt je Konto und IP</small>'
-      + '<div class="btns" style="margin:8px 0 0"><button class="btn" id="ad-ko-failfree">Sofort freigeben</button><button class="btn out" id="ad-ko-failshort">Auf 5 Min. verkürzen</button></div>';
+    if (p.fail) fb.innerHTML = '<b><i class="bi bi-hourglass-split" style="color:var(--warn)"></i> Fehlversuche bei der Anmeldung</b>'
+      + '<dl class="kv2" style="margin:6px 0 0"><dt>Fehlversuche</dt><dd>' + p.fail.n + '</dd><dt>Letzter Versuch</dt><dd>' + esc(p.fail.at) + ' Uhr</dd><dt>IP-Netz</dt><dd>' + esc(p.fail.ip) + '</dd>'
+      + (p.fail.until ? '<dt>Status</dt><dd><b>Wartezeit bis ' + esc(p.fail.until) + ' Uhr</b></dd>' : '') + '</dl>'
+      + '<small class="mut">Gezählt je Konto und IP-Netz. Ab dem 5. Fehlversuch steigt die Wartezeit (1, 2, 4, 8, höchstens 15 Minuten). Passkey und „Passwort vergessen?“ bleiben immer möglich. Der Zähler verfällt nach erfolgreicher Anmeldung oder 24 Stunden ohne Fehlversuch.</small>'
+      + '<div class="btns" style="margin:8px 0 0"><button class="btn" id="ad-ko-failfree">Sofort freigeben</button></div><div class="hint" style="margin-bottom:0">Setzt den Zähler zurück und beendet die Wartezeit. Wird protokolliert.</div>';
     const stBox = byId('ad-ko-state'); let stTx = '';
     if (p.st === 'wartet') stTx = '<i class="bi bi-person-plus"></i> Hat sich selbst registriert, E-Mail bestätigt. ' + (p.age < 18 ? '<b>Minderjährig:</b> nach der Freischaltung sofort nutzbar; zustimmungspflichtige Aktionen warten, bis ein Erziehungsberechtigter verknüpft ist.' : 'Bitte prüfen und freischalten.');
     if (p.st === 'eingeladen') stTx = '<i class="bi bi-envelope"></i> Einladung gesendet, Link gültig bis 21.11.2026.';
@@ -8880,8 +8911,7 @@ document.addEventListener('DOMContentLoaded', () => {
   byId('ad-k-list').addEventListener('click', e => { const r = e.target.closest('[data-k]'); if (r) openKonto(r.dataset.k); });
   byId('ad-ko-fail').addEventListener('click', e => {
     const p = KO[curK], b = e.target.closest('button'); if (!b || !p.fail) return;
-    if (b.id === 'ad-ko-failfree') { delete p.fail; log('ko', 'Fehlversuch-Sperre vorzeitig aufgehoben', 'Konto ' + p.n); renderKonto(); KD.toast('Anmeldesperre von ' + p.n + ' aufgehoben. Anmelden ist sofort wieder möglich.'); }
-    if (b.id === 'ad-ko-failshort') { if (p.fail.until === '14:25') { KD.toast('Die Wartezeit ist bereits verkürzt.'); return; } p.fail.until = '14:25'; log('ko', 'Fehlversuch-Sperre verkürzt (bis 14:25)', 'Konto ' + p.n); renderKonto(); KD.toast('Wartezeit von ' + p.n + ' verkürzt: Anmelden ab 14:25 möglich.'); }
+    if (b.id === 'ad-ko-failfree') { delete p.fail; log('ko', 'Fehlversuche zurückgesetzt (sofort freigegeben)', 'Konto ' + p.n); renderKonto(); KD.toast('Fehlversuche von ' + p.n + ' zurückgesetzt. Anmelden mit Passwort ist sofort wieder möglich.'); }
   });
   byId('ad-ko-roles').addEventListener('click', e => {
     const x = e.target.closest('.ad-ko-rm'); if (!x) return;
@@ -9527,7 +9557,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ['Einladung', 'Einladung zu TSV RC', 'Hallo {{vorname}},\ndu wurdest zu TSV RC eingeladen. Der Link ist 7 Tage gültig.'],
     ['Ausleihe genehmigt / abgelehnt', 'Deine Ausleihe: {{modell}}', 'Hallo {{vorname}},\ndeine Anfrage für {{modell}} wurde bearbeitet.'],
     ['Rückgabe fällig', 'Rückgabe {{modell}} fällig', 'Hallo {{vorname}},\nbitte gib {{modell}} bis morgen zurück.'],
-    ['Bald volljährig', '{{vorname}} wird bald 18', 'Hallo,\ndie Erziehungsberechtigung endet automatisch mit dem 18. Geburtstag.']
+    ['Bald volljährig', '{{vorname}} wird bald 18', 'Hallo,\ndie Erziehungsberechtigung endet automatisch mit dem 18. Geburtstag.'],
+    ['Fehlgeschlagene Anmeldeversuche', 'Fehlgeschlagene Anmeldeversuche', 'Hallo {{vorname}},\nam {{zeit}} gab es mehrere fehlgeschlagene Anmeldeversuche mit Passwort für dein Konto bei TSV RC (ungefährer Ort: {{ort}}). Deshalb gilt vor dem nächsten Versuch mit Passwort eine kurze Wartezeit.\nWarst du das nicht, ändere bitte dein Passwort. Mit Passkey oder „Passwort vergessen?“ kannst du dich jederzeit anmelden.']
   ];
   let curV = 0;
   document.addEventListener('click', e => { const o = e.target.closest('.ad-v-open'); if (!o) return; curV = +o.dataset.v; byId('ad-v-t1').textContent = VL[curV][0]; byId('ad-v-subj').value = VL[curV][1]; byId('ad-v-text').value = VL[curV][2]; vCheck(); }, true);
