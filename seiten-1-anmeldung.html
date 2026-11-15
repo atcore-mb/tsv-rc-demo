@@ -242,7 +242,7 @@
 <!-- ========== 1 Login ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">1</span><h2>Login: Passwort, zweiter Faktor, Passkey</h2></div>
-  <p class="ddesc">Anmeldename ist die E-Mail-Adresse. Nach dem Passwort folgt der TOTP-Code, falls ein Faktor eingerichtet ist. Ein Passkey ersetzt Passwort und zweiten Faktor (ein Klick, das Betriebssystem fragt Fingerabdruck/Gesicht). Kein Hinweis, ob eine E-Mail existiert. Nach Fehlversuchen greift die Ratenbegrenzung.</p>
+  <p class="ddesc">Anmeldename ist die E-Mail-Adresse. Nach dem Passwort folgt der TOTP-Code, falls ein Faktor eingerichtet ist. Ein Passkey ersetzt Passwort und zweiten Faktor (ein Klick, das Betriebssystem fragt Fingerabdruck/Gesicht). Kein Hinweis, ob eine E-Mail existiert. Nach 5 Fehlversuchen ist die Anmeldung für dieses Konto von diesem Netz aus 15 Minuten gesperrt; der Admin kann die Sperre verkürzen. „Diesem Gerät vertrauen“ hält die Sitzung 30 Tage ab der letzten Nutzung (Admins 12 Stunden), sonst endet sie mit dem Browser; in der installierten App ist das Häkchen vorbelegt.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/anmelden</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
@@ -255,7 +255,8 @@
         <div class="an-or">oder mit Passwort</div>
         <label>E-Mail <span class="req">*</span></label><div class="inp">markus@beispiel.de</div>
         <label>Passwort <span class="req">*</span></label><div class="inp">••••••••••••<i class="bi bi-eye mut"></i></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0 12px"><span class="an-link">Passwort vergessen?</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0 4px"><span class="an-link">Passwort vergessen?</span></div>
+        <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Diesem Gerät vertrauen<small class="mut" style="display:block">angemeldet bleiben, 30 Tage ab der letzten Nutzung (Admins 12 Stunden); ohne Häkchen bis zum Schließen des Browsers</small></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px">Weiter</span>
         <div class="note" style="text-align:left;margin-top:12px">Noch kein Konto? Du bekommst eine Einladung von der Abteilungsleitung. <span class="an-link">Selbst registrieren</span> <small>(nur wenn freigeschaltet)</small></div>
       </div>
@@ -265,17 +266,17 @@
         <p class="lead">Öffne deine Authenticator-App und gib den 6-stelligen Code ein.</p>
         <div class="an-otp"><span>4</span><span>8</span><span>1</span><span class="f">2</span><span></span><span></span></div>
         <div class="hint">Faktor: <b>Authenticator iPhone</b> · <span class="an-link">anderen Faktor wählen</span></div>
-        <div class="an-check"><i class="bi bi-square off"></i><span>Diesem Gerät vertrauen<small class="mut" style="display:block">Sitzung bleibt 30 Tage aktiv (gleitend), Admins höchstens 12 Stunden.</small></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px">Anmelden</span>
         <div class="an-or">kein Zugriff auf die App?</div>
         <span class="an-link"><i class="bi bi-life-preserver"></i> Mit Wiederherstellungscode anmelden</span>
         <div class="hint">Jeder Code funktioniert nur einmal. Ohne Codes hilft der Admin (setzt den Faktor zurück, wird protokolliert).</div>
-        <span class="assume">Annahme: „Diesem Gerät vertrauen“ als Häkchen, sonst Sitzung bis Browser-Ende</span>
+        <div class="hint">Markus ist Admin: Die Sitzung hält höchstens 12 Stunden, auch auf einem vertrauten Gerät.</div>
       </div>
       <div class="an-card" style="width:250px">
         <h3 style="font-size:15px">Zu viele Fehlversuche</h3>
-        <div class="alert" style="margin-top:6px"><i class="bi bi-hourglass-split"></i> Anmeldung für dieses Konto <b>15 Minuten</b> gesperrt. Du kannst dein Passwort zurücksetzen.</div>
-        <span class="assume">Annahme: 5 Fehlversuche → 15 Min. Sperre</span>
+        <div class="hint" style="margin-top:4px">Vorher, nach jedem Fehlversuch: „E-Mail oder Passwort falsch. Noch 2 Versuche, danach ist die Anmeldung 15 Minuten gesperrt.“</div>
+        <div class="alert" style="margin-top:6px"><i class="bi bi-lock-fill"></i> 5 Fehlversuche: Anmeldung für dieses Konto von diesem Netz aus <b>15 Minuten</b> gesperrt (bis 09:56 Uhr). Der Admin kann die Sperre verkürzen.</div>
+        <div class="hint">Anmelden mit Passkey bleibt möglich.</div>
       </div>
     </div>
   </div></div></div>
@@ -284,7 +285,7 @@
 <!-- ========== 2 Einladung / Registrierung ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Einladung annehmen und Selbstregistrierung</h2></div>
-  <p class="ddesc">Standard ist die Einladung: Abteilungsleitung oder Admin legt die Person an, sie öffnet den Link (7 Tage gültig, einmal nutzbar; die Leitung kann ihn neu senden) und legt nur noch Zugang (Passkey oder Passwort) fest. Die Selbstregistrierung ist per Schalter zuschaltbar; der Passkey darf dabei sofort angelegt werden, das Konto bleibt aber bis zur Freischaltung durch die Abteilungsleitung gesperrt. Bei Minderjährigen wird das Konto erst aktiv, wenn die Leitung einen Erziehungsberechtigten verknüpft hat.</p>
+  <p class="ddesc">Standard ist die Einladung: Abteilungsleitung oder Admin legt die Person an, sie öffnet den Link (7 Tage gültig, einmal nutzbar; die Leitung kann ihn neu senden) und legt nur noch Zugang (Passkey oder Passwort) fest. Die Selbstregistrierung ist per Schalter zuschaltbar; der Passkey darf dabei sofort angelegt werden, das Konto bleibt aber bis zur Freischaltung durch die Abteilungsleitung gesperrt. Pflicht bei der Selbstregistrierung sind Name, E-Mail und Geburtsdatum; eine Bereichsauswahl gibt es nicht, weil alle Mitglieder alle Bereiche sehen („Meine Bereiche“ wählt man später im Profil als Vorliebe). Passwörter brauchen mindestens 10 Zeichen und dürfen nicht auf der lokalen Leak-Liste stehen; Sonderzeichen sind nicht vorgeschrieben. Bei Minderjährigen verknüpft die Leitung einen Erziehungsberechtigten; was eine Zustimmung braucht (z. B. Ausleihe), wartet bis dahin.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/einladung/7f3c…</span></div>
   <div class="app" style="height:640px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
@@ -292,7 +293,7 @@
       <div class="an-card wide">
         <div class="an-step">Einladung · gültig bis Sa 21.11.2026 (7 Tage)</div>
         <h3>Willkommen, Lena!</h3>
-        <p class="lead"><b>Markus B.</b> (Abteilungsleitung) hat dich zu TSV RC eingeladen. Bereiche: <span class="badge b-air">Luftsport</span></p>
+        <p class="lead"><b>Markus B.</b> (Abteilungsleitung) hat dich zu TSV RC eingeladen. Alle Bereiche (Luftsport, RC Cars) stehen dir offen; „Meine Bereiche“ stellst du später im Profil ein.</p>
         <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Lena K.</div></div><div><label>E-Mail <i class="bi bi-lock lock"></i></label><div class="inp" style="background:#f6f7f6">lena@beispiel.de</div></div></div>
         <div class="hint">Die E-Mail ist dein Anmeldename. Ändern kannst du sie später im Profil.</div>
         <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
@@ -309,16 +310,14 @@
         <h3>Konto beantragen</h3>
         <div class="two"><div><label>Vorname <span class="req">*</span></label><div class="inp">Tim</div></div><div><label>Nachname <span class="req">*</span></label><div class="inp">S.</div></div></div>
         <div class="two"><div><label>E-Mail <span class="req">*</span></label><div class="inp">tim@beispiel.de</div></div><div><label>Geburtsdatum <span class="req">*</span></label><div class="inp">03.03.2012</div></div></div>
-        <label>Bereiche <span class="req">*</span></label><div class="chips"><span class="chip on">Luftsport</span><span class="chip">RC Cars</span></div>
+        <div class="an-minor" style="margin:8px 0"><i class="bi bi-grid"></i> <b>Alle Bereiche stehen dir offen.</b> Welche dich besonders interessieren („Meine Bereiche“ für Startseite, Vorfilter und Benachrichtigungen), stellst du später im Profil ein.</div>
         <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
         <div class="chips"><span class="chip on"><i class="bi bi-fingerprint"></i> Passkey (empfohlen)</span><span class="chip">Passwort</span></div>
-        <div class="hint" style="margin-top:-4px">Der Passkey wird sofort angelegt. Anmelden kannst du dich erst nach der Freischaltung. Bei „Passwort“: mindestens 12 Zeichen, bekannte, geleakte Passwörter werden abgelehnt.</div>
-        <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Dein Konto wird erst aktiv, wenn die Abteilungsleitung einen Erziehungsberechtigten verknüpft und die Einwilligung dokumentiert hat.
+        <div class="hint" style="margin-top:-4px">Der Passkey wird sofort angelegt. Anmelden kannst du dich erst nach der Freischaltung. Bei „Passwort“: mindestens 10 Zeichen, Sonderzeichen nicht nötig; bekannte, geleakte Passwörter werden abgelehnt (Liste auf dem Server, ohne externen Dienst).</div>
+        <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten. Nach der Freischaltung kannst du die App nutzen; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
           <label style="margin-top:6px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><div class="inp">sandra@beispiel.de</div></div>
         <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Datenschutzhinweise gelesen <span style="color:var(--red)">*</span></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px"><i class="bi bi-fingerprint"></i> Passkey anlegen und registrieren</span>
-        <span class="assume">Annahme: Geburtsdatum und Bereiche bei Selbstregistrierung Pflicht</span>
-        <span class="assume">Annahme: Passwortregel 12 Zeichen + Leak-Liste (lokal, ohne externen Dienst)</span>
       </div>
       <div style="width:230px;flex:0 0 auto">
         <div class="an-card" style="width:auto">
@@ -326,7 +325,7 @@
           <div class="an-feat"><i class="bi bi-fingerprint"></i><span><b>Passkey angelegt</b><br><small class="mut">Konto bis zur Freischaltung gesperrt; Anmeldeversuche zeigen „Noch nicht freigeschaltet“</small></span></div>
           <div class="an-feat"><i class="bi bi-envelope-check"></i><span><b>1. E-Mail bestätigen</b><br><small class="mut">Link in der Mail an tim@…</small></span></div>
           <div class="an-feat"><i class="bi bi-person-check"></i><span><b>2. Freischaltung</b><br><small class="mut">durch die Abteilungsleitung</small></span></div>
-          <div class="an-feat"><i class="bi bi-people"></i><span><b>3. Erziehungsberechtigte</b><br><small class="mut">verknüpft die Leitung (nur unter 18)</small></span></div>
+          <div class="an-feat"><i class="bi bi-people"></i><span><b>3. Erziehungsberechtigte</b><br><small class="mut">verknüpft die Leitung (nur unter 18); bis zur Zustimmung warten z. B. Ausleihen</small></span></div>
           <div class="an-feat"><i class="bi bi-envelope-paper"></i><span><b>4. Startklar</b><br><small class="mut">Mail „Dein Konto ist aktiv“, Anmeldung mit dem Passkey</small></span></div>
         </div>
       </div>
@@ -337,7 +336,7 @@
 <!-- ========== 3 Passwort zurücksetzen / Wiederherstellungscode ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Passwort zurücksetzen und Anmeldung mit Wiederherstellungscode</h2></div>
-  <p class="ddesc">Der Reset-Link geht immer an die hinterlegte E-Mail und ist kurz gültig. Die Rückmeldung verrät nicht, ob die Adresse existiert. Ein zweiter Faktor bleibt nach dem Reset bestehen; ohne Zugriff darauf hilft ein Wiederherstellungscode.</p>
+  <p class="ddesc">Der Reset-Link geht immer an die hinterlegte E-Mail, gilt 1 Stunde und nur einmal. Die Rückmeldung verrät nicht, ob die Adresse existiert. Ein zweiter Faktor bleibt nach dem Reset bestehen; ohne Zugriff darauf hilft ein Wiederherstellungscode.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/passwort-vergessen</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
@@ -352,7 +351,6 @@
       <div class="an-mail">
         <div class="mh"><b>Von:</b> TSV RC &lt;noreply@rc.tsv1927…&gt;<br><b>Betreff:</b> Passwort zurücksetzen</div>
         <div class="mb">Hallo Markus,<br><br>hier kannst du ein neues Passwort setzen:<br><span class="an-link">rc.tsv1927roethenbach.de/reset/…</span><br><br><small class="mut">Der Link ist 1 Stunde gültig und nur einmal nutzbar. Warst du das nicht? Dann ignoriere diese Mail.</small></div>
-        <div style="padding:0 12px 12px"><span class="assume">Annahme: Reset-Link 1 Stunde gültig</span></div>
       </div>
       <div class="an-card" style="width:270px">
         <div class="an-step">2 · Neues Passwort</div>
@@ -360,7 +358,7 @@
         <label>Neues Passwort <span class="req">*</span></label><div class="inp">••••••••••••••</div>
         <div class="an-strength"><div></div></div>
         <label>Wiederholen <span class="req">*</span></label><div class="inp">••••••••••••••</div>
-        <div class="hint">Alle anderen Sitzungen werden abgemeldet.</div>
+        <div class="hint">Mindestens 10 Zeichen, Sonderzeichen nicht nötig. Steht es auf der Leak-Liste: „Dieses Passwort steht auf der Liste bekannter, geleakter Passwörter.“ Alle anderen Sitzungen werden abgemeldet.</div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px;margin-top:12px">Speichern</span>
       </div>
       <div class="an-card" style="width:270px">
@@ -391,11 +389,10 @@
         <div>
           <div class="card" style="padding:10px 14px"><h3>Meine Faktoren</h3>
             <table class="dt"><tr><td><b>Authenticator iPhone</b><br><small class="mut">seit 03/2024 · zuletzt heute</small></td><td style="text-align:right"><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Entfernen</span></td></tr></table>
-            <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-shield-exclamation"></i> Als Admin brauchst du mindestens einen zweiten Faktor oder Passkey. Den letzten kannst du nicht entfernen.</div>
-            <div class="an-minor" style="margin-bottom:0"><i class="bi bi-shield-check"></i> <b>Empfehlung</b> (dauerhaft auf den Sicherheitsseiten): Passkey oder zweiter Faktor schützen dein Konto zusätzlich. Für Mitglieder freiwillig, für Admins Pflicht.</div>
+            <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-shield-exclamation"></i> Die Admin-Rolle wird erst wirksam, wenn ein Passkey oder zweiter Faktor eingerichtet ist. Den letzten kannst du als Admin nicht entfernen.</div>
+            <div class="an-minor" style="margin-bottom:0"><i class="bi bi-shield-check"></i> <b>Empfehlung</b> (dauerhaft auf den Sicherheitsseiten): Passkey oder zweiter Faktor schützen dein Konto zusätzlich. Für Mitglieder freiwillig; die Admin-Rolle wird erst damit wirksam.</div>
           </div>
-          <div class="ok"><i class="bi bi-shield-check"></i><span>Erneut bestätigt mit Passkey. Änderungen sind 5 Minuten möglich.</span></div>
-          <span class="assume">Annahme: Bestätigung gilt 5 Minuten</span>
+          <div class="ok"><i class="bi bi-shield-check"></i><span>Erneut bestätigt mit Passkey. Weitere Änderungen sind 5 Minuten ohne neue Bestätigung möglich.</span></div>
         </div>
         <div class="card" style="padding:12px 16px"><h3>Weiteren Faktor hinzufügen</h3>
           <label>Name des Faktors <span class="req">*</span></label><div class="inp">Authenticator iPad</div>
@@ -423,7 +420,7 @@
 <!-- ========== 5 Passkeys + Geräte ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">5</span><h2>Profil › Sicherheit: Passkeys und angemeldete Geräte</h2></div>
-  <p class="ddesc">Passkeys werden über den Browser-Dialog angelegt und benannt. Angemeldete Geräte sind die aktiven Sitzungen; jede lässt sich einzeln abmelden, die aktuelle ist markiert. Auf dem Handy zeigt die Liste dasselbe untereinander.</p>
+  <p class="ddesc">Passkeys werden über den Browser-Dialog angelegt und benannt. Angemeldete Geräte sind die aktiven Sitzungen; jede lässt sich einzeln abmelden, die aktuelle ist markiert. Der ungefähre Ort (Stadt) kommt aus der IP-Adresse über eine Datenbank auf dem Vereinsserver, ohne externen Dienst. Auf dem Handy zeigt die Liste dasselbe untereinander.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/sicherheit/geraete</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -441,17 +438,16 @@
             <tr><td><i class="bi bi-laptop"></i> <b>MacBook</b></td><td>05/2025</td><td>gestern</td><td><i class="bi bi-pencil mut"></i> <i class="bi bi-trash mut"></i></td></tr>
           </table>
           <div class="note" style="text-align:left;margin-top:8px">Ein Passkey ersetzt Passwort und zweiten Faktor. Er wird auf deinem Gerät bzw. im Passwortmanager gespeichert.</div>
-          <div class="an-minor" style="margin-bottom:0"><i class="bi bi-shield-check"></i> <b>Empfehlung:</b> Passkey oder zweiter Faktor schützen dein Konto zusätzlich. Für Mitglieder freiwillig, für Admins Pflicht.</div>
+          <div class="an-minor" style="margin-bottom:0"><i class="bi bi-shield-check"></i> <b>Empfehlung:</b> Passkey oder zweiter Faktor schützen dein Konto zusätzlich. Für Mitglieder freiwillig; die Admin-Rolle wird erst damit wirksam.</div>
         </div>
         <div class="card" style="padding:10px 14px">
           <div class="hrow"><h3>Angemeldete Geräte</h3><span class="ibtn out">Alle anderen abmelden</span></div>
-          <table class="dt"><tr><th>Gerät</th><th>Angemeldet</th><th>Zuletzt aktiv</th><th>Ort (ungefähr)</th><th></th></tr>
-            <tr class="me"><td><i class="bi bi-laptop"></i> <b>Firefox · macOS</b><br><span class="badge b-g">dieses Gerät</span></td><td>12.11.2026</td><td>jetzt</td><td>Nürnberg</td><td></td></tr>
-            <tr><td><i class="bi bi-phone"></i> <b>TSV RC App · iPhone</b><br><small class="mut">installiert (PWA)</small></td><td>02.10.2026</td><td>heute 08:12</td><td>Röthenbach</td><td><span class="ibtn out">Abmelden</span></td></tr>
-            <tr><td><i class="bi bi-tablet"></i> <b>Safari · iPad</b></td><td>20.09.2026</td><td>vor 9 Tagen</td><td>Röthenbach</td><td><span class="ibtn out">Abmelden</span></td></tr>
+          <table class="dt"><tr><th>Gerät</th><th>Angemeldet</th><th>Zuletzt aktiv</th><th>Ort (ungefähr)</th><th>Sitzung</th><th></th></tr>
+            <tr class="me"><td><i class="bi bi-laptop"></i> <b>Firefox · macOS</b><br><span class="badge b-g">dieses Gerät</span></td><td>12.11.2026</td><td>jetzt</td><td>ca. Nürnberg</td><td>vertraut</td><td></td></tr>
+            <tr><td><i class="bi bi-phone"></i> <b>TSV RC App · iPhone</b><br><small class="mut">installiert (PWA)</small></td><td>02.10.2026</td><td>heute 08:12</td><td>ca. Röthenbach a. d. Pegnitz</td><td>vertraut</td><td><span class="ibtn out">Abmelden</span></td></tr>
+            <tr><td><i class="bi bi-tablet"></i> <b>Safari · iPad</b></td><td>heute 08:10</td><td>vor 1 Std.</td><td>ca. Lauf a. d. Pegnitz</td><td>bis Browser-Ende</td><td><span class="ibtn out">Abmelden</span></td></tr>
           </table>
-          <div class="note" style="text-align:left;margin-top:8px">Sitzungen laufen 30 Tage gleitend, als Admin höchstens 12 Stunden. Nicht übertragene Offline-Daten eines abgemeldeten Geräts bleiben dort erhalten und werden nach erneuter Anmeldung desselben Kontos übertragen.</div>
-          <span class="assume">Annahme: ungefährer Ort aus IP nur grob (Stadt), ohne externen Dienst</span>
+          <div class="note" style="text-align:left;margin-top:8px">Vertraute Geräte bleiben 30 Tage ab der letzten Nutzung angemeldet, als Admin höchstens 12 Stunden; andere bis zum Schließen des Browsers. Nicht übertragene Offline-Daten eines abgemeldeten Geräts bleiben dort erhalten und werden nach erneuter Anmeldung desselben Kontos übertragen.</div>
         </div>
       </div>
     </div>
@@ -461,7 +457,7 @@
 <!-- ========== 6 API-Tokens ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">6</span><h2>Profil › Sicherheit: API-Tokens</h2></div>
-  <p class="ddesc">Für eigene Skripte und Auswertungen (API-first). Ein Token hat höchstens die Rechte seines Besitzers, eingeschränkt auf die gewählten Scopes. Er wird genau einmal angezeigt und nur als Hash gespeichert; das Präfix <code>tsvrc_</code> macht ihn erkennbar.</p>
+  <p class="ddesc">Für eigene Skripte und Auswertungen (API-first). Ein Token hat höchstens die Rechte seines Besitzers, eingeschränkt auf die gewählten Scopes. Der Ablauf ist wählbar, auch „unbefristet“ (mit Warnhinweis); jeder Token lässt sich jederzeit widerrufen. Er wird genau einmal angezeigt und nur als Hash gespeichert; das Präfix <code>tsvrc_</code> macht ihn erkennbar.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/sicherheit/tokens</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -476,6 +472,7 @@
           <div class="card" style="padding:10px 14px"><h3>Aktive Tokens</h3>
             <table class="dt"><tr><th>Name</th><th>Scopes</th><th>Läuft ab</th><th>Zuletzt genutzt</th><th></th></tr>
               <tr><td><b>Auswertung Tabellenkalkulation</b><br><small class="mut an-mono">tsvrc_8f2a…</small></td><td><span class="badge b-all">flights:read</span> <span class="badge b-all">models:read</span></td><td>31.03.2027</td><td>gestern</td><td><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Widerrufen</span></td></tr>
+              <tr><td><b>Vereinsheim-Anzeige</b><br><small class="mut an-mono">tsvrc_77b0…</small> <span class="badge b-w">unbefristet</span></td><td><span class="badge b-all">events:read</span></td><td>nie</td><td>heute 06:00</td><td><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Widerrufen</span></td></tr>
               <tr style="background:var(--gl)"><td><b>Flugbuch-Export Skript</b><br><small class="mut an-mono">tsvrc_c41e…</small> <span class="badge b-g">neu</span></td><td><span class="badge b-all">flights:read</span></td><td>12.02.2027</td><td>nie</td><td><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Widerrufen</span></td></tr>
             </table>
           </div>
@@ -495,10 +492,10 @@
           <div class="chk"><i class="bi bi-square off"></i><span><b>certificates:read</b><small class="mut">Nachweise lesen</small></span></div>
           <div class="chk"><i class="bi bi-square off"></i><span><b>events:read</b><small class="mut">Termine lesen</small></span></div>
           <label>Ablauf <span class="req">*</span></label>
-          <div class="chips"><span class="chip">30 Tage</span><span class="chip on">90 Tage</span><span class="chip">1 Jahr</span><span class="chip">Datum …</span></div>
+          <div class="chips"><span class="chip">30 Tage</span><span class="chip on">90 Tage</span><span class="chip">1 Jahr</span><span class="chip">Datum …</span><span class="chip">Unbefristet</span></div>
+          <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-exclamation-triangle"></i> <b>Bei „Unbefristet“:</b> Der Token läuft nie ab. Wer ihn kennt, hat dauerhaft Zugriff mit den gewählten Scopes. Sicher aufbewahren und widerrufen, sobald er nicht mehr gebraucht wird; eine Kontosperre macht ihn sofort ungültig.</div>
           <span class="ibtn">Token erstellen</span>
-          <div class="hint" style="margin-top:6px">Rechte, die du selbst nicht hast, wirken nicht, auch wenn der Scope gewählt ist.</div>
-          <span class="assume">Annahme: Scope-Namen und Ablauf höchstens 1 Jahr (kein „unbefristet“)</span>
+          <div class="hint" style="margin-top:6px">Rechte, die du selbst nicht hast, wirken nicht, auch wenn der Scope gewählt ist. Die Scope-Namen sind Beispiele.</div>
         </div>
       </div>
     </div>
@@ -507,8 +504,8 @@
 
 <!-- ========== 7 Erster Start / Installieren ========== -->
 <section class="direction">
-  <div class="dhead"><span class="dletter">7</span><h2>Erster Start: App installieren</h2></div>
-  <p class="ddesc">Nach der ersten Anmeldung erklärt eine Willkommensseite, warum sich die Installation lohnt (Startbildschirm, Offline-Erfassung, Push). Mitglieder ohne Admin-Rolle, die noch keinen Passkey und keinen zweiten Faktor haben, sehen einmalig einen sanften, wegklickbaren Hinweis darauf; dauerhaft steht die Empfehlung auf den Sicherheitsseiten im Profil. Am PC bietet der Browser die Installation in der Adressleiste an; der Hinweis lässt sich schließen und erscheint dann nicht mehr. Am Handy ist der Ablauf im Klickdummy.</p>
+  <div class="dhead"><span class="dletter">7</span><h2>Erster Login: Willkommen und „Als Nächstes“</h2></div>
+  <p class="ddesc">Nur beim ersten Login erscheint eine Willkommensseite mit der ausblendbaren Checkliste „Als Nächstes“ (Konto schützen, Bestätigungs-PIN festlegen, Meine Bereiche wählen, Nachweise, App installieren, Termine). Mitglieder ohne Admin-Rolle, die noch keinen Passkey und keinen zweiten Faktor haben, sehen dazu einmalig einen sanften, wegklickbaren Hinweis; dauerhaft steht die Empfehlung auf den Sicherheitsseiten im Profil. Am PC bietet der Browser die Installation in der Adressleiste an; der Hinweis lässt sich schließen und erscheint dann nicht mehr. Am Handy ist der Ablauf im Klickdummy.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/willkommen</span><i class="bi bi-box-arrow-in-down an-inst" title="App installieren"></i></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Lena K.</div></div>
@@ -533,10 +530,17 @@
         <div style="margin-top:12px"><span class="ibtn">Zur Startseite</span></div>
       </div>
       <div>
-        <div class="card"><h3>Als Nächstes</h3>
-          <table class="dt"><tr><td><i class="bi bi-patch-check"></i> Nachweise eintragen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr><tr><td><i class="bi bi-airplane"></i> Erstes Modell anlegen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr><tr><td><i class="bi bi-calendar3"></i> Nächste Termine ansehen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr></table>
+        <div class="card"><div class="hrow"><h3>Als Nächstes</h3><span class="an-link"><i class="bi bi-eye-slash"></i> ausblenden</span></div>
+          <table class="dt">
+            <tr><td><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> <s class="mut">Konto schützen (Passkey oder zweiter Faktor)</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
+            <tr><td><i class="bi bi-circle mut"></i> <b>Bestätigungs-PIN festlegen</b><br><small class="mut">6 Ziffern, zum Bestätigen einer Übergabe am Gerät eines anderen; nie zum Anmelden</small></td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
+            <tr><td><i class="bi bi-circle mut"></i> Meine Bereiche wählen<br><small class="mut">für Startseite, Kalender-Vorfilter und Benachrichtigungen</small></td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
+            <tr><td><i class="bi bi-circle mut"></i> Nachweise eintragen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
+            <tr><td><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> <s class="mut">App installieren</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
+            <tr><td><i class="bi bi-circle mut"></i> Nächste Termine ansehen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
+          </table>
+          <div class="hint">2 von 6 erledigt. Ausgeblendet lässt sich die Liste wieder einblenden.</div>
         </div>
-        <span class="assume">Annahme: Willkommensseite nur beim ersten Login, Checkliste „Als Nächstes“ ausblendbar</span>
       </div>
     </div>
   </div></div></div>

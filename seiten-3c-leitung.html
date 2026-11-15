@@ -229,7 +229,8 @@
 <div class="intro">
   <h1>TSV RC – Seiten: Abteilungsleitung und Gelände</h1>
   <p>Gruppe 3c, <b>PC-Ansicht</b>. Bereich „Abteilung“ für die Abteilungsleitung (Gesamtdesign 7, 9, 10) sowie die Gelände-Funktionen
-     Anwesenheit, Aufsicht (optional) und Gastpiloten (Domänenmodell „Gelände“, Teil 2). Die Handy-Seiten sind klickbar im
+     Anwesenheit, Aufsicht (optional) und Gastpiloten (Domänenmodell „Gelände“, Teil 2), dazu Platzsperren (6.4), Anfragen der Mitglieder,
+     Notfallkontakte und die optionale Sammelversicherung. Die Handy-Seiten sind klickbar im
      <b>Klickdummy</b> (Mehr › Abteilung; Einchecken am Platz über die Einstiegs-ID <code>anwesenheit</code>).</p>
   <p>Grundsatz: Die Leitung sieht bei Nachweisen nur <b>Typ, Nummer und Gültigkeit</b>, nie die Dateien; bei Flügen nur die am
      <b>Vereinsgelände</b> (automatische, nicht widerrufbare Freigabe). Alle Änderungen an Rollen, Verknüpfungen und Status werden protokolliert.</p>
@@ -240,12 +241,13 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">1</span><h2>Leitungs-Übersicht</h2></div>
   <p class="ddesc">Einstieg der Abteilungsleitung (Menü „Abteilung“). Kennzahlen oben, darunter alles, was eine Entscheidung braucht:
-     Registrierungen, Ausleih-Anträge, kritische Nachweise, offene Vorfälle und wer heute am Platz ist.</p>
+     Registrierungen, Ausleih-Anträge, kritische Nachweise, offene Vorfälle, wer heute am Platz ist, Platzsperren und offene Anfragen.
+     Tritt jemand mit offener Ausleihe aus, erscheint zusätzlich „Rückgabe offen“ (Ansicht 18).</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung</span></div>
   <div class="app" style="height:640px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a class="on">Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a class="on">Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="kpis">
       <div class="kpi red"><b>4</b><span>Personen mit kritischen Nachweisen</span></div>
       <div class="kpi warn"><b>2</b><span>offene Ausleih-Anträge</span></div>
@@ -287,6 +289,13 @@
           <div style="font-size:13px"><i class="bi bi-person-badge"></i> Aufsicht: <span class="mut">keine (optional)</span></div>
           <small class="mut">Jonas B., Lena K., Thomas K. (Gast) · Vereinsgelände<br>Felix H. · Sand-Rennstrecke</small>
         </div>
+        <div class="card"><div class="hrow"><h3>Platzsperren</h3><span class="ibtn out"><i class="bi bi-sign-stop"></i> Sperre setzen</span></div>
+          <table class="dt">
+            <tr><td><b>Sporthalle</b> <span class="badge b-air">Luftsport</span><br><small class="mut">Sa 14.11. 08:00 – So 15.11. 20:00 · Halle belegt</small></td><td><span class="badge b-r">aktiv</span></td></tr>
+            <tr><td><b>Crawler-Strecke</b> <span class="badge b-car">RC Cars</span><br><small class="mut">Mo 16.11. – Fr 20.11. · Pflegearbeiten</small></td><td><span class="badge b-w">geplant</span></td></tr>
+          </table></div>
+        <div class="card"><div class="hrow"><h3>Anfragen</h3><span class="badge b-w">3 offen</span></div>
+          <small class="mut">Lena K. · Flugbuch &amp; Regeln · Do 12.11.<br>Tim S. (14) · Termine &amp; Schulungen · Fr 13.11.</small></div>
       </div>
     </div>
   </div></div></div>
@@ -295,23 +304,23 @@
 <!-- ========== 2 Mitglieder ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Mitglieder</h2></div>
-  <p class="ddesc">Tabelle mit Suche und Filtern nach Bereich, Rolle, minderjährig, Erziehungsberechtigte und Nachweis-Status. Der Nachweis-Status zeigt den
+  <p class="ddesc">Tabelle mit Suche und Filtern nach Vorliebe („meine Bereiche“ – alle sehen alle Bereiche), Rolle, minderjährig, Erziehungsberechtigte und Nachweis-Status. Der Nachweis-Status zeigt den
      schlechtesten Nachweis laut Regelwerk. Erziehungsberechtigte ohne Mitgliedschaft erscheinen mit eigenem Kontotyp.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/mitglieder</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr">
       <div class="card">
         <div class="fbar">
           <div class="search"><i class="bi bi-search"></i>Name suchen …</div>
-          <span class="chip on">Alle Bereiche</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span>
+          <span class="chip on">Vorliebe: alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span>
           <span class="chip"><i class="bi bi-person-badge"></i> Rolle: alle <i class="bi bi-chevron-down"></i></span>
           <span class="chip">minderjährig</span><span class="chip"><i class="bi bi-people-fill"></i> Erziehungsberechtigte</span><span class="chip">Nachweis kritisch</span>
           <span class="sp"></span><span class="ibtn"><i class="bi bi-person-plus"></i> Mitglied einladen</span>
         </div>
-        <table class="dt"><tr><th>Name</th><th>Bereiche</th><th>Rollen</th><th>Alter</th><th>Nachweise</th><th>Konto</th><th>Letzte Anmeldung</th></tr>
+        <table class="dt"><tr><th>Name</th><th>Vorliebe</th><th>Rollen</th><th>Alter</th><th>Nachweise</th><th>Konto</th><th>Letzte Anmeldung</th></tr>
           <tr><td><span class="av min">FH</span><b>Felix H.</b></td><td><span class="badge b-car">RC Cars</span></td><td>Mitglied</td><td>16</td><td><span class="badge b-all">keine nötig</span></td><td><span class="badge b-g">aktiv</span></td><td>10.11.2026</td></tr>
           <tr><td><span class="av">JB</span><b>Jonas B.</b></td><td><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></td><td>Mitglied, Ausbilder</td><td></td><td><span class="badge b-g">gültig</span></td><td><span class="badge b-g">aktiv</span></td><td>14.11.2026</td></tr>
           <tr><td><span class="av">LK</span><b>Lena K.</b></td><td><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></td><td>Mitglied</td><td></td><td><span class="badge b-r">abgelaufen</span></td><td><span class="badge b-g">aktiv</span></td><td>14.11.2026</td></tr>
@@ -321,7 +330,7 @@
           <tr><td><span class="av gast">SS</span><b>Sandra S.</b></td><td>–</td><td>Erziehungsberechtigte (Tim S.)</td><td></td><td>–</td><td><span class="badge b-all">kein Mitglied</span></td><td>02.11.2026</td></tr>
           <tr><td><span class="av">SM</span><b>Sophie M.</b></td><td><span class="badge b-air">Luftsport</span></td><td>Mitglied</td><td></td><td><span class="badge b-w">läuft ab</span></td><td><span class="badge b-g">aktiv</span></td><td>30.10.2026</td></tr>
           <tr class="sel"><td><span class="av min">TS</span><b>Tim S.</b></td><td><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></td><td>Mitglied</td><td>14</td><td><span class="badge b-g">gültig</span></td><td><span class="badge b-g">aktiv</span></td><td>12.11.2026</td></tr>
-          <tr><td><span class="av">EF</span><b>Erik F.</b></td><td><span class="badge b-car">RC Cars</span></td><td>Mitglied</td><td></td><td>–</td><td><span class="badge b-w">eingeladen 10.11.</span></td><td>–</td></tr>
+          <tr><td><span class="av">EF</span><b>Erik F.</b></td><td><span class="mut">noch keine</span></td><td>Mitglied</td><td></td><td>–</td><td><span class="badge b-w">eingeladen 10.11.</span></td><td>–</td></tr>
         </table>
         <div class="note" style="text-align:left;margin-top:8px">10 Konten · Ausgetretene über ⋯ › „Ausgetretene anzeigen“ (Daten bis Ende der Aufbewahrungsfrist).</div>
       </div>
@@ -332,19 +341,23 @@
 <!-- ========== 3 Mitglied-Detail ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Mitglied-Detail (Tim S., 14)</h2></div>
-  <p class="ddesc">Drei Spalten: links Person, Bereiche und Rollen (Schalter, protokolliert); Mitte Nachweis-Gültigkeit ohne Dateien und
-     Erziehungsberechtigte mit Einwilligungsdatum; rechts Konto und Austritt. Rechts oben als Dialog: Erziehungsberechtigte verknüpfen.</p>
+  <p class="ddesc">Drei Spalten: links Person mit Stammdaten (Name und Geburtsdatum ändert die Leitung, protokolliert), Vorliebe des Mitglieds (nur Anzeige –
+     „meine Bereiche“ wählt Tim selbst) und Rollen (Schalter, protokolliert); Mitte Nachweis-Gültigkeit ohne Dateien und Erziehungsberechtigte mit
+     Einwilligungsdatum; rechts Konto und Austritt. Rechts oben als Dialog: Erziehungsberechtigte verknüpfen. Verliert ein Kind die letzte Verknüpfung,
+     ist sein Konto gesperrt, bis neu verknüpft ist.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/mitglieder/tim-s</span></div>
   <div class="app" style="height:640px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Tim S.</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Tim S.</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr 1.25fr 1fr">
       <div>
         <div class="card">
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><div class="avatar min">TS</div><div><b style="font-size:16px">Tim S.</b> (14)<br><small class="mut">Mitglied seit 09/2026 · volljährig 03/2030</small></div></div>
-          <label>Bereiche</label>
-          <div class="chips"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip on"><i class="bi bi-car-front"></i> RC Cars</span></div>
+          <div class="hrow"><label style="margin:0">Stammdaten</label><span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span></div>
+          <dl class="kv2"><dt>Name</dt><dd>Tim S.</dd><dt>Geburtsdatum</dt><dd>18.03.2012 (14)</dd></dl>
+          <label>Vorliebe („meine Bereiche“)</label>
+          <div><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span> <small class="mut">wählt Tim selbst · ohne Wirkung auf Rechte</small></div>
           <label>Rollen</label>
           <table class="dt">
             <tr><td>Mitglied</td><td><i class="bi bi-lock mut"></i></td></tr>
@@ -364,7 +377,7 @@
             <tr><td><b>Betreiber-Registrierung</b></td><td>–</td><td>–</td><td><span class="badge b-all">nicht hinterlegt</span></td></tr>
           </table>
           <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-eye-slash"></i> Keine Dateien – die sehen nur Tim, Erziehungsberechtigte und Freigaben.</div>
-          <span class="assume">Annahme: Erinnerungen an Minderjährige gehen in Kopie an die Erziehungsberechtigten.</span>
+          <div class="note" style="text-align:left">Erinnerungen an Minderjährige gehen in Kopie an die Erziehungsberechtigten.</div>
         </div>
         <div class="card"><div class="hrow"><h3>Erziehungsberechtigte</h3><span class="ibtn"><i class="bi bi-link-45deg"></i> Verknüpfen</span></div>
           <table class="dt"><tr><th>Person</th><th>Beziehung</th><th>Einwilligung</th><th></th></tr>
@@ -379,9 +392,9 @@
           <table class="dt"><tr><td><i class="bi bi-shield-lock"></i> Zweite Faktoren zurücksetzen</td><td><span class="badge b-all">nur Admin</span></td></tr><tr><td><i class="bi bi-clock-history"></i> Änderungsprotokoll</td><td>›</td></tr></table>
         </div>
         <div class="card"><h3>Austritt</h3>
-          <small class="mut">Konto wird deaktiviert. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (3 Jahre), Kontaktdaten werden sofort gelöscht.</small>
+          <small class="mut">Konto wird deaktiviert. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (3 Jahre ab Erfassung). Vor dem Löschen der Adresse geht eine Bestätigung an Tim und Sandra S., danach werden die Kontaktdaten gelöscht.</small>
           <div class="btnrow"><span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren …</span><span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span><small class="mut">Sperren auch befristet (1 Woche, 1 Monat, bis Datum); Admins kann nur ein Admin sperren.</small></div>
-          <span class="assume">Annahme: Offene Ausleihen blockieren den Austritt; Reservierungen werden storniert; Erziehungsberechtigte verlieren die Einsicht.</span>
+          <div class="note" style="text-align:left">Offene Ausleihen blockieren den Austritt nicht – die Rückgabe wird eingefordert und bleibt als „Rückgabe offen“ bei der Leitung. Reservierungen werden storniert; die Einsicht der Erziehungsberechtigten endet mit dem Austritt. Der letzte Admin kann nicht austreten.</div>
         </div>
       </div>
     </div>
@@ -408,7 +421,7 @@
   <div class="app" style="height:640px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Einladen</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Einladen</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1.3fr 1fr">
       <div class="card">
         <h3>Mitglied einladen</h3>
@@ -418,21 +431,20 @@
         <div class="hint"><i class="bi bi-info-circle"></i> Minderjährig (14): Erziehungsberechtigte gleich mit anlegen. Auch Kinder brauchen eine eigene E-Mail-Adresse.</div>
         <div class="fsec">Erziehungsberechtigte<span class="ln"></span></div>
         <div class="two"><div><label>Person <span class="req">*</span></label><div class="inp"><span>Neue Person anlegen</span><i class="bi bi-chevron-down"></i></div></div><div><label>Name <span class="req">*</span></label><div class="inp">Eva Fuchs</div></div><div><label>E-Mail <span class="req">*</span></label><div class="inp ph">name@…</div></div></div>
-        <div class="two"><div><label>Einwilligung erteilt am <span class="req">*</span></label><div class="inp">14.11.2026</div></div><div><label>Abteilung: Bereiche <span class="req">*</span></label><div class="chips"><span class="chip">Luftsport</span><span class="chip on">RC Cars</span></div></div><div><label>Rollen</label><div class="chips"><span class="badge b-all" style="padding:5px 8px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span></div></div></div>
+        <div class="two"><div><label>Einwilligung erteilt am <span class="req">*</span></label><div class="inp">14.11.2026</div></div><div><label>Rollen</label><div class="chips"><span class="badge b-all" style="padding:5px 8px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span></div></div></div>
         <div class="btnrow"><span class="ibtn dis">Einladung senden</span><small style="color:var(--red)">Es fehlt: Name und E-Mail der Erziehungsberechtigten.</small></div>
         <div class="note" style="text-align:left;margin-top:8px">Einladungslink 7 Tage gültig, lässt sich neu senden.</div>
-        <span class="assume">Annahme: Kinder-Konto wird erst aktiv, wenn das Konto der Erziehungsberechtigten angenommen ist.</span>
+        <div class="note" style="text-align:left">Keine Bereichsauswahl: Alle sehen alle Bereiche, „meine Bereiche“ wählt die Person selbst. Das Kinder-Konto ist sofort nutzbar; zustimmungspflichtige Aktionen (z. B. Ausleihe) warten, bis das Eltern-Konto aktiv ist – das Mitglied-Detail zeigt dazu einen Hinweis.</div>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3>Registrierung prüfen</h3><span class="badge b-w">wartet</span></div>
-          <dl class="kv2"><dt>Name</dt><dd>Paul W. (16)</dd><dt>E-Mail</dt><dd>paul.w@… <span class="badge b-g">bestätigt</span></dd><dt>Geburtsdatum</dt><dd>02.03.2010</dd><dt>Gewünscht</dt><dd>Luftsport</dd><dt>Nachricht</dt><dd>„War beim Schnupperfliegen, Mutter Karin W.“</dd></dl>
+          <dl class="kv2"><dt>Name</dt><dd>Paul W. (16)</dd><dt>E-Mail</dt><dd>paul.w@… <span class="badge b-g">bestätigt</span></dd><dt>Geburtsdatum</dt><dd>02.03.2010</dd><dt>Vorliebe</dt><dd>Luftsport <small class="mut">(änderbar im Profil)</small></dd><dt>Nachricht</dt><dd>„War beim Schnupperfliegen, Mutter Karin W.“</dd></dl>
           <div class="chk"><i class="bi bi-check-square-fill"></i><span>E-Mail bestätigt</span></div>
           <div class="chk"><i class="bi bi-square off"></i><span>Erziehungsberechtigte verknüpft, Einwilligung dokumentiert <a style="color:var(--g);font-weight:700">verknüpfen</a></span></div>
-          <label>Bereiche</label><div class="chips"><span class="chip on">Luftsport</span><span class="chip">RC Cars</span></div>
           <div class="btnrow"><span class="ibtn dis">Freischalten</span><span class="ibtn out">Ablehnen</span></div>
           <div class="hint">Minderjährig: Freischalten erst nach Verknüpfung.</div>
         </div>
-        <div class="card" style="font-size:13px"><span class="tg on"></span> Selbstregistrierung erlaubt<br><span class="assume">Annahme: Schalter bedient die Abteilungsleitung, nicht nur der Admin.</span></div>
+        <div class="card" style="font-size:13px"><span class="tg on"></span> Selbstregistrierung erlaubt<br><small class="mut">Den Schalter bedienen Abteilungsleitung und Admin (protokolliert).</small></div>
       </div>
     </div>
   </div></div></div>
@@ -447,7 +459,7 @@
   <div class="app" style="height:620px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a class="on">Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a class="on">Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:2.2fr 1fr">
       <div class="card">
         <div class="fbar"><span class="chip on">Alle</span><span class="chip">nur kritisch</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="sp"></span><span class="ibtn out"><i class="bi bi-download"></i> CSV</span><span class="ibtn out"><i class="bi bi-bell"></i> Alle Kritischen erinnern</span></div>
@@ -461,7 +473,8 @@
           <tr><td>Tim S. (14)</td><td class="c"><span class="badge b-g">10/2031</span></td><td class="c"><span class="badge b-all">–</span></td><td class="c"><span class="badge b-all">–</span></td><td class="c"><span class="badge b-all">–</span></td><td></td></tr>
         </table>
         <div class="note" style="text-align:left;margin-top:8px">Nur Typ, Nummer, Gültigkeit – keine Dateien. Erinnerungen gehen automatisch 60 und 14 Tage vorher; „Erinnern“ schickt zusätzlich sofort eine.</div>
-        <span class="assume">Annahme: „fehlt“ = für den Bereich laut Regelwerk erwarteter Nachweistyp ist nicht hinterlegt. Vereins-Haftpflicht (Sammelversicherung bis 31.12.2026) wird einmal für die Abteilung gepflegt.</span>
+        <div class="note" style="text-align:left">Sammelversicherung (optional, Ansicht 18): eingetragen bis 31.12.2026 für alle Mitglieder. Ohne Sammelvertrag erscheint hier zusätzlich die Spalte „Versicherung“ je Mitglied.</div>
+        <span class="assume">Annahme: „fehlt“ = ein laut Regelwerk erwarteter Nachweistyp ist nicht hinterlegt (z. B. A1/A3 bei eigenen oder ausgeliehenen Luftfahrzeugen).</span>
       </div>
       <div class="card"><h3>Schulung planen</h3>
         <label>Thema <span class="req">*</span></label><div class="inp"><span>Vorbereitung A1/A3</span><i class="bi bi-chevron-down"></i></div>
@@ -488,7 +501,7 @@
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a class="on">Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a class="on">Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr">
       <div class="card">
         <div class="fbar">
@@ -527,7 +540,7 @@
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a class="on">Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a class="on">Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1.2fr 1fr">
       <div class="card">
         <div class="fbar"><span class="chip">Nicht erledigt (3)</span><span class="chip">Erledigt</span><span class="chip on">Alle</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div>
@@ -557,13 +570,13 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">8</span><h2>Gelände: Anwesenheit und Aufsicht (optional)</h2></div>
   <p class="ddesc">Links „Am Platz“: eigener Check-in (Ort per GPS vorgeschlagen, Auswahldialog zum Ändern) und wer heute da ist, inkl. Gastpiloten.
-     Mitglieder ohne Leitungsrolle erreichen diese Ansicht über Start. Den Verlauf früherer Tage sieht nur die Abteilungsleitung. Rechts die Aufsicht: Sie ist nirgends Pflicht (Vereinsgelände, Halle, Events, beide Bereiche).
+     Mitglieder ohne Leitungsrolle erreichen die Gelände-Funktionen über die Startseite (Karte „Am Platz“), nicht über einen eigenen Menüpunkt; hier die Sicht der Leitung unter „Abteilung › Gelände“. Den Verlauf früherer Tage sieht nur die Abteilungsleitung. Rechts die Aufsicht: Sie ist nirgends Pflicht (Vereinsgelände, Halle, Events, beide Bereiche).
      Normalfall ist „keine Aufsicht“; wer auf der Aufsichts-Liste steht, kann sie für heute übernehmen. Bei Events kann eine Aufsicht geplant werden.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/gelaende</span></div>
   <div class="app" style="height:900px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a class="on">Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a class="on">Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr 1fr">
       <div>
         <div class="cibox"><i class="bi bi-geo-alt-fill big"></i><div style="flex:1"><b>Eingecheckt seit 14:20</b><br><small class="mut">Vereinsgelände · per GPS erkannt (12 m)</small></div><span class="ibtn out"><i class="bi bi-box-arrow-right"></i> Auschecken</span></div>
@@ -576,8 +589,7 @@
             <tr><td><span class="av">MB</span>Markus B.</td><td>Vereinsgelände</td><td>14:20</td><td><span class="badge b-g">ich</span></td></tr>
             <tr><td><span class="av min">FH</span>Felix H.</td><td>Sand-Rennstrecke</td><td>12:10</td><td></td></tr>
           </table>
-          <div class="note" style="text-align:left;margin-top:8px">Wer heute am Platz ist, sehen alle Mitglieder. Anwesenheiten werden wie Flugbuchdaten aufbewahrt (Regelwerk, derzeit 3 Jahre).</div>
-          <span class="assume">Annahme: Auschecken automatisch um Mitternacht.</span>
+          <div class="note" style="text-align:left;margin-top:8px">Wer heute am Platz ist, sehen alle Mitglieder. Anwesenheiten werden wie Flugbuchdaten aufbewahrt (Regelwerk, derzeit 3 Jahre). Um Mitternacht wird automatisch ausgecheckt. Gilt am gewählten Ort eine Platzsperre, steht sie als Hinweis über dem Einchecken.</div>
         </div>
         <div class="card"><div class="hrow"><h3>Verlauf der Anwesenheit <span class="opt">nur Abteilungsleitung</span></h3><span class="ibtn out"><i class="bi bi-download"></i> Export CSV</span></div>
           <div class="fbar"><span class="chip on">November</span><span class="chip">Oktober</span><span class="chip">2026</span><span class="chip"><i class="bi bi-geo-alt"></i> Alle Orte <i class="bi bi-chevron-down"></i></span><span class="chip"><i class="bi bi-person"></i> Alle Personen <i class="bi bi-chevron-down"></i></span></div>
@@ -602,7 +614,7 @@
             <tr><td>Mo 30.11.</td><td>Schnuppertag · Vereinsgelände <span class="badge b-all">beide</span></td><td class="mut">keine</td><td><span class="ibtn out">Übernehmen</span></td></tr>
           </table>
           <div class="hint">Eingetragen wird die Aufsicht beim Event im Kalender (Feld „Aufsicht“, optional).</div>
-          <div style="font-size:13px;margin-top:8px"><b>Dürfen Aufsicht übernehmen:</b> Max R., Jonas B., Markus B. <a style="color:var(--g);font-weight:700">pflegen</a></div>
+          <div style="font-size:13px;margin-top:8px"><b>Dürfen Aufsicht übernehmen:</b> Max R., Jonas B., Markus B. <a style="color:var(--g);font-weight:700">pflegen</a> <small class="mut">(nur Volljährige)</small></div>
           <div class="mut" style="font-size:13px">Aufsicht ist keine Rolle, sondern eine von der Leitung gepflegte Liste; Pflegen nur durch die Leitung.</div>
         </div>
         </div>
@@ -615,13 +627,15 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">9</span><h2>Gastpilot eintragen</h2></div>
   <p class="ddesc">Gastpiloten haben kein Konto (Gesamtdesign 10). Eingetragen werden Name, Verband, Nachweis-Nr. und Versicherung; das
-     eintragende Mitglied bestätigt, dass es Nachweis und Versicherung im Original gesehen hat. Eine Aufsicht ist nicht nötig; ist eine eingetragen, wird sie informiert.<br><span class="assume">Annahme: Am PC erreichen Mitglieder ohne Leitungsrolle die Gelände-Funktionen über einen eigenen Menüpunkt „Gelände“ (hier aus Sicht von Max R.).</span></p>
-  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/gelaende/gast</span></div>
+     eintragende Mitglied bestätigt, dass es Nachweis und Versicherung im Original gesehen hat. Eine Aufsicht ist nicht nötig; ist eine eingetragen, wird sie informiert.
+     Hier aus Sicht von Max R. (keine Leitungsrolle): Am PC erreichen Mitglieder die Gelände-Funktionen über die Startseite (Karte „Am Platz“ › „Gastpilot eintragen“) – es gibt keinen eigenen Menüpunkt „Gelände“.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/start/am-platz/gast</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Max R.</div></div>
-    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-geo-alt"></i>Gelände</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav"><a class="on"><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
     <div class="dmain" style="grid-template-columns:1.2fr 1fr">
       <div class="card">
+        <div class="mut" style="font-size:12px;margin-bottom:4px">Start › Am Platz › Gastpilot eintragen</div>
         <h3>Gastpilot eintragen</h3>
         <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Thomas K.</div></div><div><label>Verband <span class="req">*</span></label><div class="chips"><span class="chip on">DMFV</span><span class="chip">DAeC</span><span class="chip">anderer</span><span class="chip">keiner</span></div></div></div>
         <label>Nachweis-Nr. <span class="req">*</span> <span class="opt">Kompetenznachweis / Fernpilotenzeugnis</span></label><div class="inp">DEU-RP-8f3…</div>
@@ -651,18 +665,18 @@
   <div class="dhead"><span class="dletter">10</span><h2>Mitglied-Detail, volljährig (Max R.)</h2></div>
   <p class="ddesc">Dieselbe Seite wie bei Tim S. (Ansicht 3), aus Beispieldaten befüllt: Jede Zeile der Mitgliederliste öffnet sie. Bei Volljährigen entfällt
      „Erziehungsberechtigte“; dafür zeigt die Seite Rollen, Aufsichts-Liste, aktuelle Ausleihen/Vorfälle, eigene Modelle (nur Name, Typ, Klasse) und die
-     Flüge am Vereinsgelände (öffnet die Flugliste mit Pilotfilter). Änderungen an Rollen und Bereichen landen im Änderungsprotokoll.</p>
+     Flüge am Vereinsgelände (öffnet die Flugliste mit Pilotfilter). Änderungen an Rollen und Stammdaten landen im Änderungsprotokoll.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/mitglieder/max-r</span></div>
   <div class="app" style="height:620px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Max R.</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Max R.</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr 1.25fr 1fr">
       <div>
         <div class="card">
           <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><div class="avatar">MR</div><div><b style="font-size:16px">Max R.</b><br><small class="mut">Mitglied seit 06/2020</small><br><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></div></div>
-          <label>Bereiche</label>
-          <div class="chips"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip on"><i class="bi bi-car-front"></i> RC Cars</span></div>
+          <div class="hrow"><label style="margin:0">Stammdaten</label><span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span></div>
+          <dl class="kv2"><dt>Name</dt><dd>Max R.</dd><dt>Geburtsdatum</dt><dd>02.02.1975</dd><dt>Vorliebe</dt><dd>Luftsport, RC Cars <small class="mut">(wählt Max selbst)</small></dd></dl>
           <label>Rollen</label>
           <table class="dt">
             <tr><td>Mitglied</td><td><i class="bi bi-lock mut"></i></td></tr>
@@ -698,11 +712,11 @@
       <div>
         <div class="card"><h3>Eigene Modelle (3)</h3>
           <table class="dt">
-            <tr><td><b>FPV Quad 5″</b><br><small class="mut">FPV · Eigenbau · 650 g</small></td><td><span class="badge b-air">Luftsport</span></td></tr>
-            <tr><td><b>DJI Mini 3</b><br><small class="mut">Drohne · C0 · 248 g</small></td><td><span class="badge b-air">Luftsport</span></td></tr>
+            <tr><td><b>FPV Quad 5″</b><br><small class="mut">FPV</small></td><td><span class="badge b-air">Luftsport</span></td></tr>
+            <tr><td><b>DJI Mini 3</b><br><small class="mut">Drohne · C0</small></td><td><span class="badge b-air">Luftsport</span></td></tr>
             <tr><td><b>Traxxas TRX-4</b><br><small class="mut">Crawler · 1:10</small></td><td><span class="badge b-car">RC Cars</span></td></tr>
           </table>
-          <span class="assume">Annahme: Die Leitung sieht von privaten Modellen nur Name, Typ und Klasse, keine Seriennummern oder Dateien.</span>
+          <div class="note" style="text-align:left">Von privaten Modellen sieht die Leitung nur Name, Typ und Klasse – keine Seriennummern, Gewichte oder Dateien.</div>
         </div>
         <div class="card"><h3>Ausleihen</h3>
           <small class="mut">Keine laufenden Ausleihen oder Anträge. Bei Max R. (Ausgabe von Vereinsgerät) erscheinen Übergaben in seinen Protokollen.</small>
@@ -715,14 +729,15 @@
 <!-- ========== 11 Konto Erziehungsberechtigte ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">11</span><h2>Konto einer Erziehungsberechtigten (Sandra S.)</h2></div>
-  <p class="ddesc">Erziehungsberechtigte haben ein eigenes Konto ohne Mitgliedschaft (Gesamtdesign 10): keine Bereiche, keine Rollen. Die Seite zeigt die
-     verknüpften Kinder (mit Einwilligungsdatum und automatischem Ende mit 18), was die Person sieht und darf, Kontodaten und das Änderungsprotokoll.
-     Löschen geht erst, wenn kein Kind mehr verknüpft ist.</p>
+  <p class="ddesc">Erziehungsberechtigte haben ein eigenes Konto ohne Mitgliedschaft (Gesamtdesign 10): keine Rollen; sie sehen die Daten des Kindes und den ganzen
+     Vereinskalender. Die Seite zeigt die verknüpften Kinder (mit Einwilligungsdatum und automatischem Ende mit 18), was die Person sieht und darf, Kontodaten und
+     das Änderungsprotokoll. Ist kein Kind mehr verknüpft, wird das Konto nach Ankündigung gelöscht – außer die Person ist selbst Mitglied: Dann bleibt das
+     Konto und nur die Elternrolle endet.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/konten/sandra-s</span></div>
   <div class="app" style="height:520px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Sandra S.</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Sandra S.</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr 1fr 1fr">
       <div>
         <div class="card">
@@ -738,17 +753,18 @@
           <table class="dt">
             <tr><td><i class="bi bi-eye"></i> Liest alle Daten des Kindes <small class="mut">Flüge, Nachweise inkl. Dateien, Vorfälle, Ausleihen</small></td></tr>
             <tr><td><i class="bi bi-check2-square"></i> Stimmt Ausleihen des Kindes zu <small class="mut">vor der Genehmigung durch die Leitung</small></td></tr>
-            <tr><td><i class="bi bi-slash-circle"></i> Keine Bereiche, keine Rollen, keine Daten anderer Mitglieder</td></tr>
+            <tr><td><i class="bi bi-calendar3"></i> Sieht den ganzen Vereinskalender <small class="mut">nur lesen; Erinnerungen an das Kind in Kopie</small></td></tr>
+            <tr><td><i class="bi bi-slash-circle"></i> Keine Rollen, keine Daten anderer Mitglieder</td></tr>
           </table>
-          <span class="assume">Annahme: Erziehungsberechtigte stimmen Ausleihen des Kindes zu und sehen den Vereinskalender nicht.</span>
         </div>
       </div>
       <div>
         <div class="card"><h3>Konto</h3>
           <dl class="kv2"><dt>E-Mail</dt><dd>sandra.s@… (Anmeldename)</dd><dt>Status</dt><dd><span class="badge b-g">aktiv</span></dd><dt>Angelegt</dt><dd>01.09.2026 · Markus B.</dd><dt>Letzte Anmeldung</dt><dd>02.11.2026</dd><dt>Anmeldung</dt><dd>Passwort + TOTP</dd></dl>
           <table class="dt"><tr><td><i class="bi bi-shield-lock"></i> Zweite Faktoren zurücksetzen</td><td><span class="badge b-all">nur Admin</span></td></tr><tr><td><i class="bi bi-clock-history"></i> Änderungsprotokoll</td><td>›</td></tr></table>
-          <div class="btnrow"><span class="ibtn red dis"><i class="bi bi-person-dash"></i> Konto löschen</span><small class="mut">erst ohne verknüpftes Kind</small></div>
-          <span class="assume">Annahme: Konten von Erziehungsberechtigten ohne Kind werden gelöscht (keine Aufbewahrungspflicht); die Verknüpfungen bleiben im Protokoll nachvollziehbar.</span>
+          <div class="btnrow"><span class="ibtn red dis"><i class="bi bi-person-dash"></i> Konto jetzt löschen</span><small class="mut">erst ohne verknüpftes Kind</small></div>
+          <div class="note" style="text-align:left">Ohne verknüpftes Kind: Löschung wird angekündigt und erfolgt automatisch (Verknüpfungen bleiben im Protokoll). Ist die Person selbst Mitglied, endet nur die Elternrolle.</div>
+          <span class="assume">Annahme: Die Löschung wird 14 Tage vorher per E-Mail angekündigt.</span>
         </div>
       </div>
     </div>
@@ -759,13 +775,13 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">12</span><h2>Änderungsprotokoll einer Person (Tim S.)</h2></div>
   <p class="ddesc">Aus dem Mitglied- oder Konto-Detail. Nur anhängen (Gesamtdesign 5.6): wer, wann, was, über welchen Weg. Vorher/Nachher nur bei fachlichen
-     Daten (Rollen, Bereiche, Nachweise); bei Kontakt- und Profildaten steht nur, <b>dass</b> sich ein Feld geändert hat. Jeder Eintrag trägt die Prüfsumme
-     seines Vorgängers (Hash-Kette); Admins können die Kette prüfen.</p>
+     Daten (Rollen, Nachweise); bei Kontakt- und Profildaten steht nur, <b>dass</b> sich ein Feld geändert hat. Jeder Eintrag trägt die Prüfsumme
+     seines Vorgängers (Hash-Kette); Admins prüfen die Kette auf Knopfdruck.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/mitglieder/tim-s/protokoll</span></div>
   <div class="app" style="height:560px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Tim S. › Protokoll</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a class="on">Mitglieder › Tim S. › Protokoll</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:2.2fr 1fr">
       <div class="card">
         <div class="fbar"><span class="chip on">Alle</span><span class="chip">Rollen &amp; Bereiche</span><span class="chip">Konto</span><span class="chip">Familie</span><span class="chip">Nachweise</span><span class="sp"></span><span class="ibtn out"><i class="bi bi-download"></i> Export</span></div>
@@ -773,22 +789,22 @@
           <tr><td>12.11.2026 18:40</td><td>Tim S.</td><td>Anmeldung mit Passkey</td><td>Oberfläche</td><td><code>c0660c98</code></td></tr>
           <tr><td>03.11.2026 19:12</td><td>Tim S.</td><td>Profil: Telefonnummer geändert <small class="mut">(Wert nicht protokolliert)</small></td><td>Oberfläche</td><td><code>7e21a4f0</code></td></tr>
           <tr><td>15.10.2026 17:05</td><td>Tim S.</td><td>Nachweis A1/A3 angelegt · vorher: – · nachher: gültig bis 10/2031</td><td>Oberfläche</td><td><code>19bd03e7</code></td></tr>
-          <tr><td>01.10.2026 20:02</td><td>Markus B.</td><td>Bereiche · vorher: Luftsport · nachher: Luftsport, RC Cars</td><td>Oberfläche</td><td><code>5a8c2e61</code></td></tr>
+          <tr><td>01.10.2026 20:02</td><td>Tim S.</td><td>Profil: „meine Bereiche“ (Vorliebe) · vorher: Luftsport · nachher: Luftsport, RC Cars</td><td>Oberfläche</td><td><code>5a8c2e61</code></td></tr>
           <tr><td>02.09.2026 20:15</td><td>Tim S.</td><td>Einladung angenommen, Passkey registriert, Konto aktiv</td><td>Oberfläche</td><td><code>e4097b2d</code></td></tr>
           <tr><td>01.09.2026 10:31</td><td>Markus B.</td><td>Erziehungsberechtigte Sandra S. (Mutter) verknüpft, Einwilligung vom 01.09.2026</td><td>Oberfläche</td><td><code>3fd1c88a</code></td></tr>
-          <tr><td>01.09.2026 10:28</td><td>Markus B.</td><td>Konto angelegt, Bereich Luftsport <small class="mut">(Name, Geburtsdatum, E-Mail – Werte nicht protokolliert)</small></td><td>Oberfläche</td><td><code>a91f0b34</code></td></tr>
+          <tr><td>01.09.2026 10:28</td><td>Markus B.</td><td>Konto angelegt <small class="mut">(Name, Geburtsdatum, E-Mail – Werte nicht protokolliert)</small></td><td>Oberfläche</td><td><code>a91f0b34</code></td></tr>
         </table>
       </div>
       <div>
         <div class="card"><h3><i class="bi bi-link-45deg" style="color:var(--g)"></i> Hash-Kette</h3>
-          <div style="font-size:13px"><span class="badge b-g">intakt</span> · letzte Prüfung heute 03:00 (nachts automatisch)</div>
+          <div style="font-size:13px"><span class="badge b-g">intakt</span> · letzte Prüfung 02.11.2026 (auf Knopfdruck)</div>
           <div class="hint">Die Anwendung darf die Protokolltabelle nur ergänzen und lesen. Nachträgliche Änderungen direkt in der Datenbank fallen bei der Prüfung auf.</div>
           <div class="btnrow"><span class="ibtn out"><i class="bi bi-shield-check"></i> Kette jetzt prüfen</span><small class="mut">nur Admin</small></div>
-          <span class="assume">Annahme: Zusätzlich zur Prüffunktion für den Admin läuft die Prüfung nachts automatisch.</span>
+          <div class="note" style="text-align:left">Geprüft wird nur auf Knopfdruck; eine nächtliche Prüfung gibt es nicht.</div>
         </div>
         <div class="card"><h3>Sichtbarkeit</h3>
           <small class="mut">Tim selbst sieht seine Einträge, Sandra S. als Erziehungsberechtigte ebenfalls.</small>
-          <span class="assume">Annahme: Die Leitung sieht Einträge zu Konto, Rollen, Bereichen, Familie und Nachweis-Gültigkeit ihrer Mitglieder; Flugdetails nur, soweit sie den Flug ohnehin sehen darf.</span>
+          <div class="note" style="text-align:left">Die Leitung sieht Einträge zu Konto, Rollen, Bereichen, Familie und Nachweis-Gültigkeit ihrer Mitglieder; Flugdetails nur, soweit sie den Flug ohnehin sehen darf. Das volle Protokoll sieht der Admin.</div>
         </div>
       </div>
     </div>
@@ -805,7 +821,7 @@
   <div class="app" style="height:560px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a class="on">Flüge Vereinsgelände › Flug</a><a>Vorfälle</a><a>Gelände</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a class="on">Flüge Vereinsgelände › Flug</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1fr 1fr">
       <div class="card">
         <div class="hrow"><h3>Flug Sa 14.11.2026 · Jonas B.</h3><span class="badge b-all">nur lesen</span></div>
@@ -836,7 +852,7 @@
   <div class="app" style="height:500px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a class="on">Gelände › Aufsichts-Liste</a><a class="dots">⋯</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a class="on">Gelände › Aufsichts-Liste</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
     <div class="dmain" style="grid-template-columns:1.3fr 1fr">
       <div class="card">
         <div class="hrow"><h3>Dürfen Aufsicht übernehmen (3)</h3><span class="ibtn"><i class="bi bi-person-plus"></i> Mitglied hinzufügen</span></div>
@@ -846,7 +862,8 @@
           <tr><td><span class="av">MR</span>Max R. <span class="badge b-g">geplant 19.11.</span></td><td>03/2026</td><td>Markus B.</td><td><span class="ibtn out">Entfernen</span></td></tr>
         </table>
         <div class="hint">Aufsicht ist <b>optional</b> – am Vereinsgelände, in der Halle und bei Events. Ist niemand auf der Liste, kann niemand Aufsicht übernehmen; Fliegen und Fahren bleibt möglich.</div>
-        <span class="assume">Annahme: Nur volljährige Mitglieder können auf die Liste. Wer entfernt wird, behält eine heute bereits übernommene Aufsicht bis zum Auschecken; geplante Event-Aufsichten bleiben stehen und werden angezeigt.</span>
+        <div class="note" style="text-align:left">Auf die Liste können nur volljährige Mitglieder.</div>
+        <span class="assume">Annahme: Wer entfernt wird, behält eine heute bereits übernommene Aufsicht bis zum Auschecken; geplante Event-Aufsichten bleiben stehen und werden angezeigt.</span>
       </div>
       <div></div>
     </div>
@@ -858,6 +875,138 @@
           <tr><td><span class="av">SM</span><b>Sophie M.</b><br><small class="mut">Luftsport · Mitglied</small></td></tr>
         </table>
         <div class="hint">Es erscheinen volljährige Mitglieder der Abteilung, die noch nicht auf der Liste stehen. Minderjährige erscheinen nicht.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 15 Platzsperren ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">15</span><h2>Platzsperren pflegen (Abteilungsleitung)</h2></div>
+  <p class="ddesc">Gesamtdesign 6.4: Die Abteilungsleitung sperrt Vereinsorte zeitlich begrenzt – Ort, von–bis, Grund, optional nur bestimmte Bereiche.
+     Links die Liste aktiver und geplanter Sperren (Filter je Vereinsort), rechts das Formular: Ort per Auswahldialog (nur Vereinsorte), Grund per Auswahl
+     plus Erläuterung (Pflicht bei „Sonstiges“), betroffene Bereiche. „Sperre setzen“ wird erst aktiv, wenn alles Nötige gefüllt ist. Beim Setzen werden die
+     Mitglieder der Bereiche benachrichtigt; Setzen, Ändern und Aufheben stehen im Änderungsprotokoll. Die Sperre ist ein Hinweis, keine technische Sperre.
+     Erreichbar über „Platzsperren“, die Leitungs-Übersicht und die Ortsseite eines Vereinsorts.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/platzsperren</span></div>
+  <div class="app" style="height:600px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a class="on">Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
+    <div class="dmain" style="grid-template-columns:1.35fr 1fr">
+      <div class="card">
+        <div class="fbar"><span class="chip"><i class="bi bi-geo-alt"></i> Alle Vereinsorte <i class="bi bi-chevron-down"></i></span><span class="chip on">aktiv &amp; geplant</span><span class="chip">beendet</span><span class="sp"></span><span class="ibtn"><i class="bi bi-sign-stop"></i> Sperre setzen</span></div>
+        <table class="dt"><tr><th>Ort</th><th>Zeitraum</th><th>Grund</th><th>Bereiche</th><th>Status</th><th></th></tr>
+          <tr><td><b>Sporthalle</b></td><td>Sa 14.11. 08:00 – So 15.11. 20:00</td><td>Halle belegt<br><small class="mut">Handball-Turnier des TSV</small></td><td><span class="badge b-air">Luftsport</span></td><td><span class="badge b-r">aktiv</span></td><td><span class="ibtn out">Ändern</span> <span class="ibtn out red">Aufheben</span></td></tr>
+          <tr><td><b>Crawler-Strecke</b></td><td>Mo 16.11. – Fr 20.11. <small class="mut">ganztägig</small></td><td>Pflegearbeiten<br><small class="mut">Neuaufbau für VM Lauf 5</small></td><td><span class="badge b-car">RC Cars</span></td><td><span class="badge b-w">geplant</span></td><td><span class="ibtn out">Ändern</span> <span class="ibtn out red">Aufheben</span></td></tr>
+          <tr><td><b>Vereinsgelände</b></td><td>Mo 30.11. 13:00–17:00</td><td>Veranstaltung des Vereins<br><small class="mut">Schnuppertag</small></td><td><span class="badge b-air">Luftsport</span></td><td><span class="badge b-w">geplant</span></td><td><span class="ibtn out">Ändern</span> <span class="ibtn out red">Aufheben</span></td></tr>
+          <tr style="color:#999"><td>Vereinsgelände</td><td>Sa 31.10. – So 01.11.</td><td>Witterung / Platzzustand</td><td><span class="badge b-air">Luftsport</span></td><td><span class="badge b-all">beendet</span></td><td></td></tr>
+        </table>
+        <div class="note" style="text-align:left;margin-top:8px">Klick auf eine Zeile öffnet die Sperre mit Verlauf (gesetzt, geändert, aufgehoben – jeweils mit Person und Zeit).</div>
+      </div>
+      <div class="card"><h3>Platzsperre setzen</h3>
+        <label>Ort <span class="req">*</span></label><div class="inp"><span>Teerfläche <small class="mut">· RC Cars · Glattbahn</small></span><i class="bi bi-chevron-down"></i></div>
+        <div class="hint">Auswahldialog: nur Vereinsorte (Vereinsgelände, Sand-Rennstrecke, Crawler-Strecke, Teerfläche, Sporthalle).</div>
+        <div class="two"><div><label>Von <span class="req">*</span></label><div class="inp">Sa 21.11.2026 · 09:00</div></div><div><label>Bis <span class="req">*</span></label><div class="inp">Sa 21.11.2026 · 13:00</div></div></div>
+        <label>Grund <span class="req">*</span></label><div class="inp"><span>Sonstiges</span><i class="bi bi-chevron-down"></i></div>
+        <label>Erläuterung <span class="opt">Pflicht bei „Sonstiges“</span></label><div class="inp ph">z. B. Markierungen werden neu gezogen</div>
+        <label>Betroffene Bereiche <span class="req">*</span></label><div class="chips"><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip on"><i class="bi bi-car-front"></i> RC Cars</span></div>
+        <div class="note" style="text-align:left"><i class="bi bi-bell"></i> Benachrichtigt werden 6 Mitglieder (RC Cars) per Push bzw. E-Mail laut ihren Einstellungen.</div>
+        <div class="btnrow"><span class="ibtn dis">Sperre setzen</span><small style="color:var(--red)">Es fehlt: Erläuterung.</small></div>
+        <span class="assume">Annahme: „Mitglieder der Bereiche“ sind alle, die den Bereich unter „meine Bereiche“ gewählt haben.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 16 Platzsperre für Mitglieder ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">16</span><h2>Platzsperre aus Sicht der Mitglieder</h2></div>
+  <p class="ddesc">Eine aktive Sperre erscheint als roter Hinweis auf der Startseite (Karte „Am Platz“), beim Einchecken, beim Erfassen eines Fluges an diesem Ort,
+     bei „Hier fliegen“ und auf der Ortsseite; geplante Sperren gelb. Ein Klick öffnet die Info: Ort, Zeitraum, Grund, gesetzt von, Bereiche – ohne Bearbeiten.
+     Hier aus Sicht von Max R. (kein Leitungsmitglied), der die Gelände-Funktionen über die Startseite erreicht.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/start/am-platz</span></div>
+  <div class="app" style="height:470px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Max R.</div></div>
+    <div class="dnav"><a class="on"><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1fr">
+      <div class="card"><h3>Am Platz <small class="mut" style="font-weight:600">Karte auf der Startseite</small></h3>
+        <div class="legal" style="margin-bottom:8px"><b><i class="bi bi-sign-stop-fill"></i> Platzsperre: Sporthalle <span class="badge b-air">Luftsport</span></b>Sa 14.11. 08:00 – So 15.11. 20:00 · Halle belegt · Hinweis des Vereins, nicht technisch erzwungen · <u>Details</u></div>
+        <div class="cibox" style="margin-bottom:8px"><i class="bi bi-geo-alt big"></i><div style="flex:1"><b>Nicht eingecheckt</b><br><small class="mut">Vereinsgelände · per GPS erkannt (12 m)</small></div><span class="ibtn"><i class="bi bi-box-arrow-in-right"></i> Einchecken</span></div>
+        <small class="mut">Heute am Platz: Jonas B., Lena K., Thomas K. (Gast), Felix H. · Aufsicht: keine (optional)</small>
+        <div class="btnrow"><span class="ibtn out"><i class="bi bi-person-vcard"></i> Gastpilot eintragen</span></div>
+      </div>
+      <div class="card"><div class="hrow"><h3>Platzsperre Sporthalle</h3><span class="badge b-r">aktiv</span></div>
+        <dl class="kv2"><dt>Ort</dt><dd>Sporthalle</dd><dt>Zeitraum</dt><dd>Sa 14.11. 08:00 – So 15.11. 20:00</dd><dt>Grund</dt><dd>Halle belegt<br><small class="mut">Handball-Turnier des TSV, die Halle ist komplett belegt.</small></dd><dt>Bereiche</dt><dd><span class="badge b-air">Luftsport</span></dd><dt>Gesetzt von</dt><dd>Markus B. (Abteilungsleitung) · 09.11.2026</dd></dl>
+        <div class="note" style="text-align:left;margin-top:6px">Die Sperre ist ein Hinweis des Vereins und wird nicht technisch erzwungen. Verantwortlich bleibt der Fernpilot bzw. Fahrer. <a style="color:var(--g);font-weight:700">Ortsseite Sporthalle</a></div>
+        <div class="hint">Verlauf, Ändern und Aufheben sieht nur die Abteilungsleitung.</div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 17 Anfragen ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">17</span><h2>Anfragen der Mitglieder (Posteingang)</h2></div>
+  <p class="ddesc">„Frage an die Abteilungsleitung“ läuft in der App mit Verlauf und Status (statt E-Mail). Alle Personen mit der Rolle Abteilungsleitung
+     teilen einen Posteingang. Links die Liste mit Filter nach Status, rechts der Verlauf: Antwort schreiben (Pflichttext) macht die Anfrage „beantwortet“ und
+     benachrichtigt das Mitglied; schreibt es zurück, ist sie wieder „offen“. Den Status kann die Leitung auch direkt setzen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/anfragen</span></div>
+  <div class="app" style="height:560px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a class="on">Anfragen</a><a class="dots">⋯</a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.2fr">
+      <div class="card">
+        <div class="fbar"><span class="chip on">Offen (3)</span><span class="chip">Beantwortet</span><span class="chip">Erledigt</span><span class="chip">Alle</span></div>
+        <table class="dt"><tr><th>Von</th><th>Thema</th><th>Letzte Nachricht</th><th>Status</th></tr>
+          <tr class="sel"><td><span class="av">LK</span>Lena K.</td><td>Flugbuch &amp; Regeln</td><td>Do 12.11. 19:24</td><td><span class="badge b-w">offen</span></td></tr>
+          <tr><td><span class="av min">TS</span>Tim S. <small class="mut">(14)</small></td><td>Termine &amp; Schulungen</td><td>Fr 13.11. 17:02</td><td><span class="badge b-w">offen</span></td></tr>
+          <tr><td><span class="av">MB</span>Markus B.</td><td>Flugbuch &amp; Regeln</td><td>Fr 13.11. 21:05</td><td><span class="badge b-w">offen</span></td></tr>
+          <tr style="color:#777"><td><span class="av">JB</span>Jonas B.</td><td>Ausleihe &amp; Vereinsmodelle</td><td>Mi 11.11. 08:15</td><td><span class="badge b-g">beantwortet</span></td></tr>
+        </table>
+      </div>
+      <div class="card"><div class="hrow"><h3>Flugbuch &amp; Regeln · Lena K.</h3><span class="badge b-w">offen</span></div>
+        <div style="background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:8px"><small class="mut" style="display:block">Lena K. · Do 12.11. 19:24</small>Mein A1/A3 ist abgelaufen. Muss ich den Online-Test komplett neu machen oder reicht eine Auffrischung? Gibt es dafür eine Schulung im Verein?</div>
+        <label>Antwort <span class="req">*</span></label><div class="inp ph" style="height:60px;align-items:flex-start">Antwort an das Mitglied …</div>
+        <div class="btnrow"><span class="ibtn dis"><i class="bi bi-send"></i> Antwort senden</span><small class="mut">Status setzen:</small><span class="chip on">offen</span><span class="chip">beantwortet</span><span class="chip">erledigt</span></div>
+        <span class="assume">Annahme: Anfragen zum Thema „Fehler in der App“ sieht zusätzlich der Admin.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 18 Notfallkontakte, Sammelversicherung, Rückgabe offen ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">18</span><h2>Notfallkontakte, Sammelversicherung und „Rückgabe offen“</h2></div>
+  <p class="ddesc">Links: Die Abteilungsleitung pflegt die Notfallkontakte (Name, Funktion per Auswahldialog, Telefon). Alle Mitglieder sehen sie beim Vorfall
+     („Anrufen“) und unter Mehr – auch offline; der Notruf 112 steht fest oben. Mitte: Eine Sammelversicherung ist optional (Schalter); ohne sie weist jedes
+     Mitglied seine Versicherung als Nachweis nach. Rechts: Tritt jemand mit offener Ausleihe aus, bleibt die Rückgabe als Mahnfall bei der Leitung stehen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/einstellungen</span></div>
+  <div class="app" style="height:520px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a>Gelände</a><a>Platzsperren</a><a>Anfragen</a><a class="dots">⋯</a></div>
+    <div class="dmain three">
+      <div class="card"><div class="hrow"><h3>Notfallkontakte</h3><span class="ibtn"><i class="bi bi-person-plus"></i> Kontakt</span></div>
+        <table class="dt"><tr><th></th><th>Name</th><th>Funktion</th><th>Telefon</th></tr>
+          <tr style="color:#777"><td><i class="bi bi-lock"></i></td><td>Notruf</td><td>Rettungsdienst, Feuerwehr</td><td>112</td></tr>
+          <tr><td><i class="bi bi-grip-vertical mut"></i></td><td>Markus B.</td><td>Abteilungsleitung</td><td>0911 5550123</td></tr>
+          <tr><td><i class="bi bi-grip-vertical mut"></i></td><td>Max R.</td><td>Ausbilder</td><td>0170 5550188</td></tr>
+        </table>
+        <div class="note" style="text-align:left;margin-top:6px">Reihenfolge per Ziehen. Für alle sichtbar, wird für die Offline-Nutzung zwischengespeichert. Änderungen werden protokolliert.</div>
+      </div>
+      <div class="card"><h3>Sammelversicherung <span class="tg on" style="margin-left:6px"></span></h3>
+        <dl class="kv2"><dt>Versicherer</dt><dd>Vereins-Haftpflicht (Sammelvertrag)</dd><dt>Police-Nr.</dt><dd>HV-2026-0815</dd><dt>Gültig</dt><dd>01.01.–31.12.2026</dd><dt>Gilt für</dt><dd><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></dd></dl>
+        <div class="btnrow"><span class="ibtn out">Bearbeiten</span></div>
+        <div class="hint">Schalter aus: kein Sammelvertrag – jedes Mitglied trägt seine Haftpflicht als Nachweis (Typ „Versicherung“) ein; Fehlende erscheinen in der Nachweis-Übersicht.</div>
+        <span class="assume">Offen (Verein): ob eine Sammelversicherung besteht und was sie abdeckt.</span>
+      </div>
+      <div class="card"><div class="hrow"><h3>Rückgabe offen</h3><span class="badge b-r">1</span></div>
+        <div class="gone" style="margin-bottom:8px"><i class="bi bi-person-x"></i> <b>Jonas B.</b> ist zum 14.11.2026 ausgetreten.</div>
+        <dl class="kv2"><dt>Gerät</dt><dd>Avata-Set 2 <span class="badge b-g">Verein</span></dd><dt>Ausleihe</dt><dd>seit 14.11., Rückgabe bis Di 17.11.</dd><dt>Status</dt><dd><span class="badge b-r">Rückgabe offen</span></dd></dl>
+        <div class="btnrow"><span class="ibtn out"><i class="bi bi-envelope"></i> Erneut erinnern</span><span class="ibtn">Rückgabe erfassen</span></div>
+        <span class="assume">Annahme: Für den Mahnfall bleibt die E-Mail-Adresse bis zur Rückgabe gespeichert.</span>
       </div>
     </div>
   </div></div></div>

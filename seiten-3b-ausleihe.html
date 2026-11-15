@@ -196,6 +196,7 @@
   .mcal .busy{background:#e6e8e6;color:#9aa09a;text-decoration:line-through}
   .mcal .res{background:var(--warnbg);color:var(--warn);border-color:#f3d19c}
   .mcal .req{background:repeating-linear-gradient(45deg,#fff,#fff 3px,#e8f5e9 3px,#e8f5e9 6px);color:var(--g);border-color:#b9dcc0}
+  .mcal .oreq{background:repeating-linear-gradient(45deg,#fff,#fff 3px,#fdf0d9 3px,#fdf0d9 6px)}
   .mcal .sel{background:var(--g);border-color:var(--g);color:#fff;font-weight:800}
   .mcal .in{background:#cfe8d4;border-color:#cfe8d4}
   .mcal .today{box-shadow:inset 0 0 0 2px var(--gd)}
@@ -307,13 +308,21 @@
             <tr><td>Transporttasche</td><td>Sonstiges Zubehör</td><td>–</td><td><span class="badge b-g">ok</span></td></tr>
           </table>
           <div class="hint"><i class="bi bi-diagram-3"></i> Jedes Teil hat eine eigene Seite mit Verfügbarkeit und „Dieses Teil ausleihen“. Einzeln ausleihbar, solange das Set nicht verliehen ist; ist ein Teil einzeln verliehen (z. B. Goggles 3 #1 am 28.11.), ist das Set an diesen Tagen belegt.</div>
-          <div class="note" style="text-align:left;margin-top:6px">Vermerk: kleiner Kratzer am Gehäuse oben, ohne Funktionseinschränkung. Voraussetzung: Kompetenznachweis A1/A3 (C1).</div>
+          <div class="note" style="text-align:left;margin-top:6px">Vermerk: kleiner Kratzer am Gehäuse oben, ohne Funktionseinschränkung. Voraussetzung: Kompetenznachweis A1/A3 (C1). Fehlt dir ein passender Nachweis, kannst du trotzdem beantragen; die Abteilungsleitung sieht beim Genehmigen eine Warnung.</div>
         </div>
         <div class="card">
           <div class="hrow"><h3>Verfügbarkeit November 2026</h3><span class="mut" style="font-size:13px"><i class="bi bi-chevron-left"></i> <i class="bi bi-chevron-right"></i></span></div>
           <div class="mcal" id="cal1"></div>
-          <div class="leg"><span><i style="background:#e6e8e6"></i>belegt</span><span><i style="background:var(--warnbg);border-color:#f3d19c"></i>Event-Reservierung (Schulung A1/A3)</span><span><i style="background:repeating-linear-gradient(45deg,#fff,#fff 2px,#cfe8d4 2px,#cfe8d4 4px)"></i>dein Antrag</span><span><i style="background:var(--g);border-color:var(--g)"></i>gewählt</span></div>
-          <span class="assume">Annahme (DSGVO): Mitglieder sehen nur „belegt“, nicht wer ausgeliehen hat.</span>
+          <div class="leg"><span><i style="background:#e6e8e6"></i>ausgeliehen</span><span><i style="background:var(--warnbg);border-color:#f3d19c"></i>Event-Reservierung (Schulung A1/A3)</span><span><i style="background:repeating-linear-gradient(45deg,#fff,#fff 2px,#cfe8d4 2px,#cfe8d4 4px)"></i>dein Antrag</span><span><i style="background:repeating-linear-gradient(45deg,#fff,#fff 2px,#f3d19c 2px,#f3d19c 4px)"></i>beantragt, blockiert nicht</span><span><i style="background:var(--g);border-color:var(--g)"></i>gewählt</span></div>
+          <table class="dt" style="margin-top:6px;font-size:12.5px">
+            <tr><td>16.–17.11.</td><td><b>ausgeliehen von Lena K.</b></td></tr>
+            <tr><td>Mo 23.11.</td><td><b>Event-Reservierung: Schulung A1/A3</b></td></tr>
+            <tr><td>25.–26.11.</td><td>dein Antrag</td></tr>
+            <tr><td>Sa 28.11.</td><td><b>Teil DJI Goggles 3 #1 einzeln an Jonas B. verliehen</b></td></tr>
+            <tr><td>Mo 30.11.</td><td class="mut">offener Antrag (blockiert nicht)</td></tr>
+          </table>
+          <div class="hint">Alle Mitglieder sehen, wer ausgeliehen hat; Tag anklicken zeigt den Namen auch im Kalender.</div>
+          <span class="assume">Annahme: Bei offenen Anträgen anderer steht kein Name, nur „offener Antrag“.</span>
         </div>
       </div>
       <div>
@@ -333,6 +342,7 @@
           <div class="inp ph">ohne Event <i class="bi bi-chevron-down"></i></div>
           <label>Bemerkung <span class="opt">optional</span></label>
           <div class="inp ph" style="height:40px">z. B. Abholung am Platz</div>
+          <div class="hint" style="color:var(--g)"><i class="bi bi-patch-check"></i> Voraussetzung Kompetenznachweis A1/A3: bei dir hinterlegt, gültig bis 03/2029.</div>
           <div class="alert" style="margin:10px 0 8px;font-size:12.5px"><i class="bi bi-shield-check"></i> <b>Genehmigungspflichtig.</b> Die Abteilungsleitung entscheidet; du wirst per E-Mail/Push benachrichtigt.</div>
           <span class="ibtn" style="display:block;text-align:center">Antrag senden</span>
           <div class="note">Bei Minderjährigen geht der Antrag zuerst an die Erziehungsberechtigten.</div>
@@ -379,7 +389,7 @@
 <!-- ================= 3 ================= -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Übergabeprotokoll (hier: Rückgabe)</h2></div>
-  <p class="ddesc">Gleiches Formular für Ausgabe und Rückgabe. Checkliste je Gegenstand mit Zustand, bei Akkus die Ladezyklen (bei Ausgabe vorbelegt), Fotos und Bemerkungen. Beide Seiten bestätigen <b>vor Ort am selben Gerät</b>: die angemeldete Person per Klick, die andere tippt auf ihren Namen bzw. bestätigt mit ihrem Passkey. Fehlt eine Bestätigung, lässt sich das Protokoll als „unbestätigt“ speichern; die Abteilungsleitung wird erinnert. Mangel oder Fehlteil führt nach dem Abschluss direkt zu „Vorfall melden“ mit Bezug zur Ausleihe.</p>
+  <p class="ddesc">Gleiches Formular für Ausgabe und Rückgabe. Checkliste je Gegenstand mit Zustand, bei Akkus die Ladezyklen (bei Ausgabe vorbelegt), Fotos und Bemerkungen. Beide Seiten bestätigen <b>vor Ort am selben Gerät</b>: die angemeldete Person per Klick, die andere tippt auf ihren Namen und gibt ihre 6-stellige <b>Bestätigungs-PIN</b> ein (nur zum Bestätigen, nie zum Anmelden; nach 5 Fehlversuchen 15 Minuten gesperrt) oder bestätigt mit Passkey bzw. Passwort. Ändert sich danach die Checkliste, verfallen die Bestätigungen. Ladezyklen werden bei der Rückgabe abgelesen; der Zähler kann nicht sinken. Fehlt eine Bestätigung, lässt sich das Protokoll als „unbestätigt“ speichern; die Abteilungsleitung wird erinnert. Mangel oder Fehlteil führt nach dem Abschluss direkt zu „Vorfall melden“ mit Bezug zur Ausleihe.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/ausleihen/trx-4m-1311/rueckgabe</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -397,7 +407,7 @@
             <tr><td>Akku 2S 1500 #B</td><td>ok · 37</td><td><span class="seg3"><span class="ok">in Ordnung</span><span>Mangel</span><span>fehlt</span></span></td><td><span class="cy">39</span> <small class="mut">+2</small></td></tr>
             <tr><td>USB-Ladegerät</td><td>ok</td><td><span class="seg3"><span class="ok">in Ordnung</span><span>Mangel</span><span>fehlt</span></span></td><td>–</td></tr>
           </table>
-          <span class="assume">Annahme: Ladezyklen werden bei Rückgabe eingetragen; der Zähler darf nicht sinken.</span>
+          <div class="hint"><i class="bi bi-battery-half"></i> Ladezyklen am Akku bzw. Ladegerät ablesen. Kleinere Werte als bei der Ausgabe werden abgelehnt (der Zähler sinkt nie).</div>
         </div>
         <div class="two" style="gap:14px">
           <div class="card" style="flex:1"><h3>Fotos</h3><div class="photos"><div><i class="bi bi-image"></i></div><div><i class="bi bi-image"></i></div><div class="add"><i class="bi bi-camera"></i></div></div></div>
@@ -409,8 +419,17 @@
         <div class="card">
           <h3>Bestätigung beider Seiten</h3>
           <div class="ack ok"><i class="bi bi-person-check" style="font-size:18px;color:var(--g)"></i><div><b>Markus B.</b> · gibt zurück<br><small class="mut">angemeldet bestätigt · 16:42</small></div><span class="st" style="color:var(--g)"><i class="bi bi-check-circle-fill"></i> bestätigt</span></div>
-          <div class="ack"><i class="bi bi-person" style="font-size:18px;color:var(--mut)"></i><div><b>Max R.</b> · nimmt zurück<br><small class="mut">tippt hier auf seinen Namen · oder <i class="bi bi-fingerprint"></i> Passkey</small></div><span class="st" style="color:var(--warn)"><i class="bi bi-hand-index"></i> Name antippen</span></div>
-          <span class="assume">Annahme: Ändert sich die Checkliste nach einer Bestätigung, verfallen die Bestätigungen.</span>
+          <div class="ack"><i class="bi bi-person" style="font-size:18px;color:var(--mut)"></i><div><b>Max R.</b> · nimmt zurück<br><small class="mut">tippt hier auf seinen Namen, dann Bestätigungs-PIN</small></div><span class="st" style="color:var(--warn)"><i class="bi bi-hand-index"></i> Name antippen</span></div>
+          <div class="hint">Ändert sich danach noch etwas an der Checkliste, verfallen beide Bestätigungen.</div>
+        </div>
+        <div class="dlg" style="margin-bottom:10px">
+          <h3>Bestätigung durch Max R. <i class="bi bi-x-lg mut" style="font-size:14px"></i></h3>
+          <div style="font-size:12.5px" class="mut">Max R. prüft das Protokoll und bestätigt hier an diesem Gerät.</div>
+          <label>Bestätigungs-PIN <span class="req">*</span></label>
+          <div class="inp" style="justify-content:center;letter-spacing:10px;font-weight:800">●●●●●●</div>
+          <div class="hint" style="color:var(--red);font-weight:700">Falsche PIN. Noch 4 Versuche, danach 15 Minuten gesperrt.</div>
+          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><span class="ibtn">Mit PIN bestätigen</span><span class="ibtn out"><i class="bi bi-fingerprint"></i> Passkey</span><span class="ibtn out"><i class="bi bi-key"></i> Passwort</span></div>
+          <div class="hint">Nach 5 Fehlversuchen ist die PIN von Max R. 15 Minuten gesperrt; dann bleiben Passkey, Passwort oder „unbestätigt“. Jede Bestätigung wird protokolliert.</div>
         </div>
         <span class="ibtn dis" style="display:block;text-align:center;padding:9px">Rückgabe abschließen</span>
         <span class="ibtn out" style="display:block;text-align:center;padding:7px;margin-top:6px"><i class="bi bi-exclamation-triangle"></i> Ohne Bestätigung von Max R. speichern (unbestätigt)</span>
@@ -423,18 +442,19 @@
 <!-- ================= 4 ================= -->
 <section class="direction">
   <div class="dhead"><span class="dletter">4</span><h2>Abteilungsleitung: Anträge genehmigen</h2></div>
-  <p class="ddesc">Unter Abteilung › Ausleihe. Offene Anträge als Tabelle mit Prüfhinweisen (Überschneidung, Zustimmung der Erziehungsberechtigten, Nachweis). Ablehnen nur mit Begründung, die das Mitglied sieht. Eigene Ausleihen der Abteilungsleitung brauchen keine Genehmigung (entschieden) und erscheinen hier nicht. Verlängerungsanträge erscheinen ebenfalls hier; offene Anträge blockieren einander nicht, erst die Genehmigung belegt die Tage. Rechts die unbestätigten Übergaben, an die die Leitung erinnert wird.</p>
+  <p class="ddesc">Unter Abteilung › Ausleihe. Offene Anträge als Tabelle mit Prüfhinweisen (Überschneidung, Zustimmung der Erziehungsberechtigten, Nachweis). Fehlt ein passender Nachweis, zeigt die Prüfung eine Warnung und „Genehmigen“ fragt einmal nach („Trotzdem genehmigen“); gesperrt wird nicht. Ablehnen nur mit Begründung, die das Mitglied sieht. Eigene Ausleihen der Abteilungsleitung brauchen keine Genehmigung (entschieden) und erscheinen hier nicht. Verlängerungsanträge erscheinen ebenfalls hier; offene Anträge blockieren einander nicht, erst die Genehmigung belegt die Tage. Rechts die unbestätigten Übergaben, an die die Leitung erinnert wird.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/ausleihe/antraege</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. · Leitung</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2"><a>Mitglieder</a><a class="ong">Ausleihe <span class="badge b-w">5</span></a><a>Belegungsplan</a><a>Sets</a><a>Gerät</a><a>Nachweise</a><a>Schulungen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dnav2"><a>Mitglieder</a><a class="ong">Ausleihe <span class="badge b-w">6</span></a><a>Belegungsplan</a><a>Sets</a><a>Gerät</a><a>Nachweise</a><a>Schulungen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
     <div class="dmain" style="grid-template-columns:2.1fr 1fr">
       <div class="card">
         <div class="hrow"><h3>Offene Anträge</h3><div class="chips sm" style="margin:0"><span class="chip on">Alle</span><span class="chip">Luftsport</span><span class="chip">RC Cars</span></div></div>
         <table class="dt"><tr><th>Gerät</th><th>Mitglied</th><th>Zeitraum</th><th>Zweck</th><th>Prüfung</th><th></th></tr>
           <tr><td><b>Mini-T Einsteiger-Set</b><br><span class="badge b-car">RC Cars</span></td><td>Jonas B.</td><td>20.–22.11.</td><td>Training</td><td><span class="flag ok"><i class="bi bi-check-circle"></i> frei</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr class="hl"><td><b>Mini-T Einsteiger-Set</b><br><span class="badge b-car">RC Cars</span></td><td>Lena K.</td><td>21.11.</td><td>Ausprobieren</td><td><span class="flag w"><i class="bi bi-exclamation-triangle"></i> überschneidet offenen Antrag Jonas B. (blockiert nicht)</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
+          <tr class="hl"><td><b>Avata-Set 1</b><br><span class="badge b-air">Luftsport</span></td><td>Nico F.</td><td>30.11.</td><td>Training</td><td><span class="flag ok"><i class="bi bi-check-circle"></i> frei</span><br><span class="flag w"><i class="bi bi-exclamation-triangle"></i> Nachweis fehlt: A1/A3 nötig (C1), bei Nico F. keiner hinterlegt</span></td><td style="white-space:nowrap"><span class="ibtn" style="background:var(--warn);border-color:var(--warn)">Trotzdem genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr><td><b>Tinywhoop-Set</b><br><span class="badge b-air">Luftsport</span></td><td>Tim S. <span class="badge b-w">14 J.</span></td><td>26.11.</td><td>Training</td><td><span class="flag ok"><i class="bi bi-people-fill"></i> Sandra S. zugestimmt 13.11.</span><br><span class="flag ok"><i class="bi bi-patch-check"></i> A1/A3 gültig</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr><td><b>TRX-4M Crawler</b><br><span class="badge b-car">RC Cars</span></td><td>Tim S. <span class="badge b-w">14 J.</span></td><td>30.11.</td><td>Ausprobieren</td><td><span class="flag w"><i class="bi bi-hourglass-split"></i> wartet auf Sandra S.</span></td><td style="white-space:nowrap"><span class="ibtn dis">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr><td><b>Avata-Set 1</b><br><span class="badge b-air">Luftsport</span></td><td>Markus B. (du)</td><td>25.–26.11.</td><td>Training</td><td><span class="flag w"><i class="bi bi-person-lock"></i> eigener Antrag</span></td><td><small class="mut">andere Leitung</small></td></tr>
@@ -468,7 +488,7 @@
   <div class="app" style="height:590px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. · Leitung</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2"><a>Mitglieder</a><a>Ausleihe <span class="badge b-w">5</span></a><a class="ong">Belegungsplan</a><a>Sets</a><a>Gerät</a><a>Nachweise</a><a>Schulungen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dnav2"><a>Mitglieder</a><a>Ausleihe <span class="badge b-w">6</span></a><a class="ong">Belegungsplan</a><a>Sets</a><a>Gerät</a><a>Nachweise</a><a>Schulungen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
     <div style="padding:12px 22px">
       <div class="hrow"><div style="display:flex;gap:10px;align-items:center"><b style="font-size:15px">14.11. – 30.11.2026</b><span class="mut"><i class="bi bi-chevron-left"></i> <i class="bi bi-chevron-right"></i></span><div class="chips sm" style="margin:0"><span class="chip on">Alle Bereiche</span><span class="chip">Luftsport</span><span class="chip">RC Cars</span><span class="chip">nur Sets</span></div></div><span class="ibtn"><i class="bi bi-bookmark-plus"></i> Event-Reservierung</span></div>
       <div class="gantt" id="gantt"></div>
@@ -498,7 +518,7 @@
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. · Leitung</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dnav2"><a>Mitglieder</a><a>Ausleihe <span class="badge b-w">5</span></a><a>Belegungsplan</a><a class="ong">Sets</a><a>Gerät</a><a>Nachweise</a><a>Schulungen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dnav2"><a>Mitglieder</a><a>Ausleihe <span class="badge b-w">6</span></a><a>Belegungsplan</a><a class="ong">Sets</a><a>Gerät</a><a>Nachweise</a><a>Schulungen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
     <div class="dmain" style="grid-template-columns:1fr 1.5fr">
       <div class="card">
         <div class="hrow"><h3>Sets</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Set anlegen</span></div>
@@ -509,7 +529,7 @@
           <tr><td><b>Mini-T Einsteiger-Set</b></td><td><span class="badge b-car">RC Cars</span></td><td>5</td><td><span class="badge b-g">frei</span></td></tr>
         </table>
         <div class="note" style="text-align:left">Sets gibt es nur für Vereinsgerät. Teile eines Sets sind einzeln ausleihbar, solange das Set nicht verliehen ist; ist das Set verliehen oder reserviert, sind seine Teile belegt.</div>
-        <span class="assume">Annahme: Ein Teil gehört höchstens zu einem Set.</span>
+        <div class="hint">Ein Teil gehört höchstens zu einem Set; Teile aus anderen Sets sind in der Auswahl ausgegraut.</div>
       </div>
       <div class="card">
         <div class="hrow"><h3>Set bearbeiten: Avata-Set 1</h3><span class="badge b-air">Luftsport</span></div>
@@ -618,7 +638,7 @@
   var WD = ['Mo','Di','Mi','Do','Fr','Sa','So'], OFF = 6, TODAY = 14;
   function wd(d){ return WD[(d - 1 + OFF) % 7]; }
   // Monatskalender Avata-Set 1
-  var busy = {16:'busy',17:'busy',23:'res',25:'req',26:'req'}, h = '';
+  var busy = {16:'busy',17:'busy',23:'res',25:'req',26:'req',28:'busy',30:'oreq'}, h = '';
   WD.forEach(function(w){ h += '<div class="h">'+w+'</div>'; });
   for (var i = 0; i < OFF; i++) h += '<div></div>';
   for (var d = 1; d <= 30; d++) {
@@ -631,7 +651,7 @@
   // Belegungsplan
   var F = 14, T = 30;
   var rows = [
-    ['Avata-Set 1','air','Set', [[16,17,'ok','Lena K.'],[23,23,'res','Schulung A1/A3'],[25,26,'req mine','Markus B.']]],
+    ['Avata-Set 1','air','Set', [[16,17,'ok','Lena K.'],[23,23,'res','Schulung A1/A3'],[25,26,'req mine','Markus B.'],[30,30,'req','Nico F.']]],
     ['Avata-Set 2','air','Set', [[14,30,'wart','Wartung: Motor tauschen']]],
     ['Tinywhoop-Set','air','Set', [[14,18,'out','Lena K.'],[19,19,'ok mine','Markus B. · Hallenfliegen'],[26,26,'req','Tim S.']]],
     ['DJI Neo (Verein)','air','Drohne', []],

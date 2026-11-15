@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSV RC – Seiten: Hier fliegen und Platzsperre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
+        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+  .intro h1{margin:0 0 6px;font-size:26px}
+  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:#cfd8cf}
+  .direction.selected{border-color:var(--g)}
+  .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
+  .dhead h2{margin:0;font-size:20px}
+  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .proscons ul{margin:2px 0 0;padding-left:18px}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .pcol{flex:0 0 auto}
+  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
+  .top{background:var(--gd);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 14px 12px}
+  .top img{height:34px}
+  .top .t1{font-weight:800;font-size:16px;line-height:1.1}
+  .top .t2{font-size:11px;opacity:.8}
+  .top .sp{flex:1}
+  .body{flex:1;overflow:hidden;padding:12px 14px;background:var(--bg)}
+  h3{font-size:16px;margin:12px 0 8px}
+  h3:first-child{margin-top:2px}
+  small,.mut{color:var(--mut)}
+  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card.pad{padding:10px 12px}
+  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .stats{display:flex;gap:8px;margin-bottom:10px}
+  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat span{font-size:11px;color:var(--mut)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row:last-child{border-bottom:0}
+  .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
+  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .tabbar i{font-size:19px}
+  .tabbar .on{color:var(--g);font-weight:700}
+  .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
+  .b-g{background:var(--gl);color:var(--g)}
+  .b-w{background:var(--warnbg);color:var(--warn)}
+  .b-r{background:#fde8e8;color:var(--red)}
+  .b-air{background:var(--airbg);color:var(--air)}
+  .b-car{background:var(--carbg);color:var(--car)}
+  .b-all{background:#eceeec;color:#444}
+  .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .ico.air{background:var(--airbg);color:var(--air)}
+  .ico.car{background:var(--carbg);color:var(--car)}
+  .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div+div{border-left:1px solid var(--g)}
+  .subnav .on{background:var(--g);color:#fff}
+  .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip.on{background:var(--g);border-color:var(--g);color:#fff}
+  .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
+  .areahead:first-child{margin-top:2px}
+  .areahead .ln{flex:1;height:1px;background:#dfe3df}
+  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .block.air{border-left-color:var(--air)}
+  .block.car{border-left-color:var(--car)}
+  .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
+  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
+  .mini b{color:var(--t);font-size:15px}
+  table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab tr:last-child td{border-bottom:0}
+  table.tab td.r{text-align:right;font-weight:700}
+  .me{background:var(--gl)}
+  .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
+  /* PC-Ansicht */
+  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .winwrap{overflow-x:auto;padding-bottom:8px}
+  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
+  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+  .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .hdr img{height:38px}
+  .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
+  .hdr .user{margin-left:auto;font-size:13px}
+  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav .r{margin-left:auto}
+  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
+  .dmain.three{grid-template-columns:1fr 1fr 1fr}
+  .dmain h3{margin:0 0 8px;font-size:15px}
+  .dmain .card{padding:10px 14px;margin-bottom:14px}
+  .dmain .block{padding:10px 14px;margin-bottom:14px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .hrow h3{margin:0}
+  .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
+  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  table.dt{width:100%;border-collapse:collapse;font-size:13px}
+  table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
+  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+  .direction{cursor:default}
+  .direction:hover{border-color:transparent}
+  .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
+  .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
+  .subnav .more.open{background:var(--gl)}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .air .subnav,.subnav.air{border-color:var(--air)}
+  /* Bottom-Sheet "Mehr" */
+  .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet h4{margin:0 0 6px;font-size:15px}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it:last-child{border-bottom:0}
+  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it .r{margin-left:auto}
+  /* Formular */
+  label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
+  label .req{color:var(--red)}
+  label .opt{font-weight:400;color:var(--mut)}
+  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp.ph{color:var(--mut)}
+  .two{display:flex;gap:8px}.two>div{flex:1}
+  .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
+  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .kv{display:flex;gap:6px;margin-bottom:6px}
+  .kv .inp{flex:1}
+  .kv .x{color:var(--mut);display:flex;align-items:center}
+  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .hint{font-size:11px;color:var(--mut);margin-top:3px}
+  .chip .x{margin-left:4px;opacity:.8}
+  /* Admin */
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk:last-child{border-bottom:0}
+  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
+  .chk i.off{color:#aaa}
+  .chk small{display:block}
+  .lock{font-size:10.5px;color:var(--mut)}
+  table.dt td .bi-grip-vertical{color:#bbb}
+  .adm{background:#3b3f3b}
+  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
+  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dbody{flex:1;display:flex;overflow:hidden}
+  .dcontent{flex:1;padding:16px 22px;overflow:hidden}
+  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
+  .dropdown a i{color:var(--g);width:18px}
+  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .app{position:relative}
+  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes ul{margin:4px 0 0;padding-left:18px}
+  .kv2{display:grid;grid-template-columns:120px 1fr;gap:6px 10px;font-size:13px;padding:4px 0;margin:0}
+  .kv2 dt{color:var(--mut)}
+  .kv2 dd{margin:0;font-weight:600}
+  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .legal{background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:10px}
+  .legal b{display:block;margin-bottom:2px}
+  .amp{display:flex;gap:12px;align-items:center;border-radius:6px;padding:12px;margin-bottom:10px;border:1px solid}
+  .amp > i{font-size:30px}
+  .amp b{display:block;font-size:17px}
+  .amp small{display:block;font-size:12px;opacity:.85}
+  .amp.ok{background:var(--gl);border-color:#b9dcbf;color:var(--gd)}.amp.ok > i{color:var(--g)}
+  .amp.warn{background:var(--warnbg);border-color:#f3d19c;color:#7a4a06}.amp.warn > i{color:var(--warn)}
+  .amp.bad{background:#fde8e8;border-color:#f3b4b4;color:#7f1d1d}.amp.bad > i{color:var(--red)}
+  .amp.off{background:#eceeec;border-color:#d3d7d3;color:#3b3f3b}.amp.off > i{color:#6c757d}
+  .st{font-size:16px}.st.ok{color:var(--g)}.st.warn{color:var(--warn)}.st.bad{color:var(--red)}.st.na{color:#9aa09a}
+  .ban{display:flex;gap:8px;align-items:flex-start;border-radius:6px;padding:7px 10px;font-size:12.5px;margin-bottom:10px;border:1px solid #f3b4b4;background:#fde8e8;color:#7f1d1d}
+  .ban > i{font-size:17px;color:var(--red)}
+  .ban.ok{border-color:#b9dcbf;background:var(--gl);color:var(--gd)}.ban.ok > i{color:var(--g)}
+  .ban.warn{border-color:#f3d19c;background:var(--warnbg);color:#7a4a06}.ban.warn > i{color:var(--warn)}
+  .ban.off{border-color:#d3d7d3;background:#eceeec;color:#3b3f3b}.ban.off > i{color:#6c757d}
+  .src{font-size:10.5px;color:var(--mut);margin-top:6px;line-height:1.4}
+  .disc{display:flex;gap:8px;font-size:12px;color:#3b3f3b;background:#f1f3f1;border-radius:6px;padding:7px 10px;margin-top:8px}
+  .map{position:relative;height:150px;border-radius:6px;overflow:hidden;border:1px solid #d3dccd;background:linear-gradient(135deg,#e3ecdb 0%,#d4e1ca 50%,#e9eee3 100%);margin-bottom:10px}
+  .map::before{content:"";position:absolute;left:-10%;right:-10%;top:62%;height:8px;background:#f6f3ea;transform:rotate(-7deg)}
+  .map span{position:absolute;display:block}
+  .map .me{left:calc(50% - 7px);top:calc(50% - 7px);width:14px;height:14px;border-radius:50%;background:#1e73d8;border:2px solid #fff;box-shadow:0 0 0 9px rgba(30,115,216,.18);z-index:2}
+  .map .club{border:2px dashed var(--g);border-radius:50%;background:rgba(10,92,35,.07)}
+  .map .zr{border:2px solid var(--red);border-radius:50%;background:rgba(185,28,28,.12)}
+  .map .zy{border:2px solid var(--warn);border-radius:6px;background:rgba(180,83,9,.12)}
+  .map .zt{border:2px dashed #6b21a8;border-radius:50%;background:rgba(107,33,168,.12)}
+  .map .lb{font-size:10px;font-weight:800;color:#4b524b;background:rgba(255,255,255,.85);border-radius:3px;padding:0 4px;white-space:nowrap;z-index:2}
+  .opt{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:13px}
+  .opt > i{font-size:17px;color:#bbb}
+  .opt.on{border:2px solid var(--g);background:#fbfefb}.opt.on > i{color:var(--g)}
+  .opt b{display:block}
+  .pre{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:2px 12px;margin-bottom:10px}
+  .pre .row{font-size:13.5px}
+  .pre .lbl{color:var(--mut);font-size:11.5px;display:block}
+  .pre .chg{color:var(--g);font-weight:700;font-size:12.5px}
+  .step{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13.5px}
+  .step:last-child{border-bottom:0}
+  .step i{font-size:17px;width:20px;text-align:center}
+  .progress{height:6px;background:#e3e6e3;border-radius:3px;overflow:hidden;margin:2px 0 10px}
+  .progress div{height:100%;background:var(--g)}
+  .offbar{background:#3b3f3b;color:#fff;font-size:11.5px;font-weight:700;padding:5px 14px;display:flex;gap:6px;align-items:center}
+  .redbtn{border-color:var(--red)!important;color:var(--red)!important}
+  .ul{margin:4px 0 0;padding-left:18px;font-size:13px}
+  .ul li{margin:2px 0}
+  .dt td .st{margin-right:4px}
+</style>
+</head>
+<body>
+<div class="intro">
+  <h1>TSV RC – Seiten: Hier fliegen und Platzsperre</h1>
+  <p>Gruppe 7 (Gesamtdesign 6.4). <b>„Hier fliegen“</b> bereitet unterwegs oder am Platz einen spontanen Flug vor: Position bestimmen, Ort vorschlagen, über den Vereinsserver prüfen (Geozonen aus dipul, temporäre Flugbeschränkungen, Platzsperre des Vereins, Wetter mit Modellgrenze, Modell ↔ Unterkategorie, Kompetenznachweis) und das Ergebnis als Ampel zeigen. Grün und Gelb führen direkt in „Flug erfassen“, Rot warnt deutlich, lässt sich aber ignorieren (nicht protokolliert). Die <b>Platzsperre</b> setzt die Abteilungsleitung; Mitglieder sehen sie auf der Startseite, bei „Hier fliegen“ und beim Erfassen am Vereinsgelände.</p>
+  <p>Handy klickbar im <b>Klickdummy</b>: Startseite oder Luftsport › Flugbuch › „Hier fliegen“, mit Demo-Szenarien (Bildschirme <code>hf-start</code>, <code>hf-check</code>, <code>hf-result</code>, <code>hf-pruef</code>, <code>hf-sperre</code>).</p>
+  <div class="legend"><span class="assume">Gelb markiert: Annahme, mit dem Verein bzw. im Feindesign Teil 4 zu klären</span></div>
+</div>
+
+<!-- ========== 1 Einstieg und Position ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">1</span><h2>Einstieg, Position und Ort</h2></div>
+  <p class="ddesc">Einstieg über die Startseite und das Flugbuch. Die Position kommt vom Gerät (am Handy GPS, am PC die Standortfreigabe des Browsers) und wird nur für diese Abfrage verwendet. Liegt ein <b>bekannter Ort</b> in der Nähe (Vereinsort oder eigener Ort), wird er vorgeschlagen; sonst gilt die <b>neue Position</b> als Ort. Vorbelegt ist das zuletzt genutzte Modell; die Wind-Grenze des Modells fließt in die Wetterprüfung ein.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/hier-fliegen</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a><a>Wissen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.25fr">
+      <div>
+        <div class="hrow"><h3>Flugbuch</h3><span><span class="ibtn"><i class="bi bi-plus-lg"></i> Neuer Flug</span> <span class="ibtn out"><i class="bi bi-crosshair"></i> Hier fliegen</span></span></div>
+        <div class="card"><table class="dt"><tr><th>Datum</th><th>Modell</th><th>Ort</th><th>Min.</th></tr>
+          <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>18</td></tr>
+          <tr><td>12.11.2026</td><td>FPV Quad 5″</td><td>Sporthalle</td><td>6</td></tr>
+          <tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>24</td></tr></table></div>
+        <div class="note" style="text-align:left">Auf der Startseite steht derselbe Knopf unter „Flug erfassen“ (Abschnitt 6).</div>
+      </div>
+      <div class="card" style="padding:12px 16px">
+        <div class="hrow"><h3><i class="bi bi-crosshair"></i> Hier fliegen</h3><span class="mut" style="font-size:12px">Ort und Bedingungen prüfen</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <div class="map"><span class="club" style="left:28%;top:22%;width:44%;height:56%"></span><span class="lb" style="left:31%;top:12%">Vereinsgelände</span><span class="me"></span></div>
+            <div style="font-size:13px"><b>49.4127° N, 11.2034° E</b><br><small class="mut">Standort ± 8 m · nur für diese Abfrage · <b style="color:var(--g)">neu bestimmen</b></small></div>
+          </div>
+          <div>
+            <label>Ort</label>
+            <div class="opt on"><i class="bi bi-record-circle-fill"></i><span><b>Vereinsgelände</b><small class="mut">Bekannter Ort in der Nähe · 12 m · Vereinsort</small></span></div>
+            <div class="opt"><i class="bi bi-circle"></i><span><b>Nur die Position verwenden</b><small class="mut">49.4127, 11.2034 · ohne Ortsnamen</small></span></div>
+            <label>Modell</label><div class="inp">DJI Neo 2 <i class="bi bi-chevron-down"></i></div>
+            <div class="hint">zuletzt genutzt · C0 · 151 g · Wind-Grenze 15 km/h (eigene)</div>
+          </div>
+        </div>
+        <div style="margin-top:10px"><span class="ibtn"><i class="bi bi-shield-check"></i> Jetzt prüfen</span> <span class="ibtn out">Abbrechen</span></div>
+        <div class="note" style="text-align:left">Die Prüfung läuft über den Vereinsserver. An dipul gehen nur Koordinaten, keine Personendaten.</div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="sublabel">Ohne bekannten Ort in der Nähe (Handy) und Prüfung mit Fortschritt</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Neue Position</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:03</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div><div class="t1">Hier fliegen</div><div class="t2">Ort und Bedingungen prüfen</div></div></div>
+        <div class="body">
+          <div class="map"><span class="zr" style="left:-30%;top:-40%;width:120%;height:150%"></span><span class="lb" style="left:6%;top:8%">CTR Nürnberg</span><span class="me"></span></div>
+          <div class="card pad" style="font-size:13px"><b>49.4836° N, 11.0921° E</b><br><small class="mut">GPS ± 10 m · nur für diese Abfrage</small></div>
+          <h3>Ort</h3>
+          <div class="opt on"><i class="bi bi-record-circle-fill"></i><span><b>Neue Position</b><small class="mut">kein bekannter Ort im Umkreis von 200 m. Die Position gilt als Ort; nach dem Flug kannst du sie als eigenen Ort speichern.</small></span></div>
+          <h3>Modell</h3><div class="inp">DJI Neo 2 <i class="bi bi-chevron-down"></i></div>
+          <button class="btn" style="margin-top:12px"><i class="bi bi-shield-check"></i> Jetzt prüfen</button>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Prüfung läuft</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:03</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div><div class="t1">Prüfung läuft …</div><div class="t2">Vereinsgelände · DJI Neo 2</div></div></div>
+        <div class="body">
+          <div class="progress"><div style="width:50%"></div></div>
+          <div class="card" style="padding:0 12px">
+            <div class="step"><i class="bi bi-check-circle-fill" style="color:var(--g)"></i>Geozonen (dipul)</div>
+            <div class="step"><i class="bi bi-check-circle-fill" style="color:var(--g)"></i>Temporäre Flugbeschränkungen</div>
+            <div class="step"><i class="bi bi-check-circle-fill" style="color:var(--g)"></i>Platzsperren des Vereins</div>
+            <div class="step"><i class="bi bi-arrow-repeat" style="color:var(--air)"></i>Wetter</div>
+            <div class="step mut"><i class="bi bi-circle"></i>Modell und Unterkategorie</div>
+            <div class="step mut"><i class="bi bi-circle"></i>Kompetenznachweis</div>
+          </div>
+          <div class="note">Dauert meist wenige Sekunden. Nichts wird gespeichert.</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2 Grün ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2</span><h2>Ergebnis grün: Flug vorbereiten</h2></div>
+  <p class="ddesc">Keine bekannte Einschränkung. Jede Einzelprüfung ist anklickbar (Detailseite). „Flug vorbereiten“ übernimmt Ort, zuletzt genutztes Modell, Flugart und Checkliste in „Flug erfassen“; „Direkt zur Checkliste“ springt gleich zum Abhaken. Jede Prüfung trägt den Hinweis „Keine Rechtsauskunft; verantwortlich ist der Fernpilot“ und nennt die Datenquellen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/hier-fliegen/ergebnis</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a><a>Wissen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1.3fr 1fr">
+      <div>
+        <div class="amp ok"><i class="bi bi-check-circle-fill"></i><div><b>Keine bekannte Einschränkung</b><small>Vereinsgelände · DJI Neo 2 · Sa 14.11. 14:03</small></div></div>
+        <div class="card"><table class="dt"><tr><th>Prüfung</th><th>Ergebnis</th><th></th></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Geozonen (dipul)</td><td>keine Geozone am Standort</td><td><i class="bi bi-chevron-right mut"></i></td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Temporäre Flugbeschränkungen</td><td>keine bekannte Beschränkung</td><td><i class="bi bi-chevron-right mut"></i></td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Platzsperre des Vereins</td><td>keine Sperre</td><td><i class="bi bi-chevron-right mut"></i></td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Wetter</td><td>Böen 12 km/h · Grenze 15 km/h (eigene)</td><td><i class="bi bi-chevron-right mut"></i></td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Modell und Unterkategorie</td><td>C0 · 151 g → A1</td><td><i class="bi bi-chevron-right mut"></i></td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Kompetenznachweis</td><td>A1/A3 gültig bis 12.03.2029</td><td><i class="bi bi-chevron-right mut"></i></td></tr></table></div>
+        <span class="ibtn"><i class="bi bi-airplane"></i> Flug vorbereiten</span> <span class="ibtn out"><i class="bi bi-list-check"></i> Direkt zur Checkliste</span>
+        <div class="disc"><i class="bi bi-info-circle"></i><span><b>Keine Rechtsauskunft; verantwortlich ist der Fernpilot.</b> Die Prüfung ersetzt nicht den eigenen Blick in dipul und auf die Lage vor Ort.</span></div>
+        <div class="src">Geozonen: dipul (DFS/BMV), Stand Sa 14.11.2026 06:00 · Temporäre Beschränkungen: soweit maschinenlesbar verfügbar · Wetter: DWD über Open-Meteo, Kp-Index: NOAA · Platzsperren: TSV RC</div>
+      </div>
+      <div>
+        <div class="card"><h3>So landet es in „Flug erfassen“</h3>
+          <div class="ban ok"><i class="bi bi-check-circle-fill"></i><span><b>Hier fliegen:</b> geprüft 14:03 · keine bekannte Einschränkung · <b style="color:var(--g)">Ergebnis</b></span></div>
+          <div class="pre">
+            <div class="row"><span><span class="lbl">Modell</span><b>DJI Neo 2</b> <small>· C0 · eigenes</small></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Ort · per GPS erkannt (12 m) · Hier fliegen</span><b>Vereinsgelände</b></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Flugart</span><b>Training</b></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Checkliste</span><b>Vor dem Flug – Offene Kategorie</b></span><span class="chg">ändern</span></div>
+          </div>
+          <div class="note" style="text-align:left">Danach wie gewohnt: Checkliste, Start, Landung, Speichern. Das Prüfergebnis wird nicht am Flug gespeichert.</div>
+        </div>
+        <div class="card"><h3>Detail: Wetter</h3><dl class="kv2"><dt>Wind</dt><dd>8 km/h</dd><dt>Böen</dt><dd>12 km/h</dd><dt>Grenze</dt><dd>15 km/h · eigene Grenze von DJI Neo 2</dd><dt>Ampel</dt><dd>grün bis 15, gelb bis 25, darüber rot (km/h)</dd><dt>Kp-Index</dt><dd>2</dd></dl>
+          <span class="assume">Annahme: Für die Ampel zählen die Böen, nicht der mittlere Wind.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 3 Gelb ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">3</span><h2>Ergebnis gelb: Auflagen (Wohngrundstück)</h2></div>
+  <p class="ddesc">Fliegen ist möglich, aber mit Auflagen – hier über Wohngrundstücken: Zustimmung des Eigentümers bzw. Nutzungsberechtigten, Höhenbegrenzung. Die Auflagen stehen oben; die Detailseite der Geozone erklärt, was dort gilt und warum. Mit einem Modell der Unterkategorie A3 (z. B. FPV-Eigenbau über 250 g) wird derselbe Ort <b>rot</b>, weil A3 Abstand zu Wohngebieten verlangt.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/hier-fliegen/ergebnis</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a><a>Wissen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1.2fr 1fr">
+      <div>
+        <div class="amp warn"><i class="bi bi-exclamation-triangle-fill"></i><div><b>Fliegen mit Auflagen</b><small>Garten (eigener Ort) · DJI Neo 2 · Sa 14.11. 14:03</small></div></div>
+        <div class="alert"><b><i class="bi bi-exclamation-triangle-fill"></i> Auflagen</b><ul class="ul"><li>Zustimmung des Grundstückseigentümers bzw. Nutzungsberechtigten</li><li>Höchstens 120 m über Grund</li><li>Nicht über unbeteiligte Personen fliegen</li><li>Wind: Böen 16 km/h über der Grenze von 15 km/h – nur mit Vorsicht</li></ul></div>
+        <div class="card"><table class="dt">
+          <tr class="sel"><td><i class="bi bi-exclamation-triangle-fill st warn"></i> Geozonen (dipul)</td><td>Wohngrundstück · Wohnbebauung Röthenbach-Süd</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Temporäre Flugbeschränkungen</td><td>keine bekannte Beschränkung</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Platzsperre des Vereins</td><td>kein Vereinsort</td></tr>
+          <tr><td><i class="bi bi-exclamation-triangle-fill st warn"></i> Wetter</td><td>Böen 16 km/h · Grenze 15 km/h (eigene)</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Modell und Unterkategorie</td><td>C0 · 151 g → A1</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Kompetenznachweis</td><td>A1/A3 gültig bis 12.03.2029</td></tr></table></div>
+        <span class="ibtn"><i class="bi bi-airplane"></i> Flug vorbereiten</span> <span class="ibtn out"><i class="bi bi-list-check"></i> Direkt zur Checkliste</span>
+        <div class="disc"><i class="bi bi-info-circle"></i><span><b>Keine Rechtsauskunft; verantwortlich ist der Fernpilot.</b></span></div>
+      </div>
+      <div>
+        <div class="card"><h3>Detail: Geozone</h3>
+          <dl class="kv2"><dt>Typ</dt><dd>Wohngrundstück</dd><dt>Name</dt><dd>Wohnbebauung Röthenbach-Süd</dd><dt>Höhe</dt><dd>Boden bis 120 m über Grund (offene Kategorie)</dd><dt>Rechtsgrundlage</dt><dd>§ 21h LuftVO <small class="mut">(Hinweis)</small></dd><dt>Position</dt><dd>49.4071, 11.2152 · innerhalb</dd></dl>
+          <h3 style="margin-top:8px">Was gilt dort?</h3><div style="font-size:13px">Über Wohngrundstücken ist der Betrieb nur mit Zustimmung des Eigentümers bzw. Nutzungsberechtigten zulässig; weitere Ausnahmen regelt § 21h LuftVO.</div>
+          <h3 style="margin-top:8px">Warum?</h3><div style="font-size:13px">Schutz der Privatsphäre und der Anwohner.</div>
+          <div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-box-arrow-up-right"></i> Auf dipul-Karte ansehen</span></div>
+          <div class="hint">Öffnet die dipul-Karte als externe Seite mit dem Standort (kein Einbetten).</div>
+          <div class="src">Geozonen: dipul (DFS/BMV), Stand Sa 14.11.2026 06:00</div>
+          <span class="assume">Annahme: Erklärtexte je Geozonentyp schreibt der Verein bzw. Admin; maßgeblich bleibt die Angabe in dipul.</span></div>
+        <div class="card"><h3>Gleicher Ort mit FPV Quad 5″</h3><div class="legal" style="margin:0"><b><i class="bi bi-airplane"></i> Unterkategorie A3 passt nicht zum Ort</b>FPV Quad 5″ (Eigenbau, 640 g) fliegt in A3: mindestens 150 m Abstand zu Wohn-, Gewerbe-, Industrie- und Erholungsgebieten.</div>
+          <span class="assume">Annahme: Zuordnung vereinfacht (C0/C1 oder unter 250 g → A1, C2 → A2, sonst A3); Details im Feindesign mit dem Verein.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 4 Rot Geozone ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">4</span><h2>Ergebnis rot: Geozone (Kontrollzone Flughafen Nürnberg)</h2></div>
+  <p class="ddesc">Fliegen ist hier grundsätzlich verboten oder genehmigungspflichtig. Die Warnung erklärt, was gilt und warum. Weil die Datenlage unvollständig oder fehlerhaft sein kann, lässt sich die Warnung mit <b>„Trotzdem fortfahren“</b> übergehen; das wird <b>nicht protokolliert</b>. In „Flug erfassen“ erinnert dann ein roter Hinweis daran.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/hier-fliegen/ergebnis</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a><a>Wissen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1.2fr 1fr">
+      <div>
+        <div class="amp bad"><i class="bi bi-x-octagon-fill"></i><div><b>Hier nicht fliegen</b><small>Fliegen ist hier verboten oder genehmigungspflichtig.</small><small>Position 49.4836, 11.0921 · DJI Neo 2 · Sa 14.11. 14:03</small></div></div>
+        <div class="legal"><b><i class="bi bi-x-octagon-fill"></i> Kontrollzone (CTR): Kontrollzone Nürnberg (EDDN)</b>In einer Kontrollzone ist der Betrieb grundsätzlich nur mit Freigabe bzw. Zustimmung der Flugverkehrskontrolle (DFS) zulässig. Ausnahmen in geringer Höhe mit Abstand zur Flugplatzgrenze regelt § 21h LuftVO; maßgeblich sind die Angaben in dipul.<br><i>Warum:</i> Schutz des bemannten Luftverkehrs beim An- und Abflug.</div>
+        <div class="card"><table class="dt">
+          <tr class="sel"><td><i class="bi bi-x-octagon-fill st bad"></i> Geozonen (dipul)</td><td>Kontrollzone (CTR) · Kontrollzone Nürnberg (EDDN)</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Temporäre Flugbeschränkungen</td><td>keine bekannte Beschränkung</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Platzsperre des Vereins</td><td>kein Vereinsort</td></tr>
+          <tr><td><i class="bi bi-exclamation-triangle-fill st warn"></i> Wetter</td><td>Böen 22 km/h · Grenze 15 km/h (eigene)</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Modell und Unterkategorie</td><td>C0 · 151 g → A1</td></tr>
+          <tr><td><i class="bi bi-check-circle-fill st ok"></i> Kompetenznachweis</td><td>A1/A3 gültig bis 12.03.2029</td></tr></table></div>
+        <span class="ibtn"><i class="bi bi-x-lg"></i> Abbrechen</span> <span class="ibtn out redbtn"><i class="bi bi-exclamation-octagon"></i> Trotzdem fortfahren</span>
+        <div class="hint">Die Daten können unvollständig oder fehlerhaft sein. Das Fortfahren wird nicht protokolliert; die Verantwortung liegt bei dir.</div>
+        <div class="disc"><i class="bi bi-info-circle"></i><span><b>Keine Rechtsauskunft; verantwortlich ist der Fernpilot.</b></span></div>
+      </div>
+      <div>
+        <div class="card"><h3>Detail: Geozone</h3>
+          <div class="map" style="height:110px"><span class="zr" style="left:-30%;top:-40%;width:120%;height:150%"></span><span class="lb" style="left:6%;top:8%">CTR Nürnberg</span><span class="me"></span></div>
+          <dl class="kv2"><dt>Typ</dt><dd>Kontrollzone (CTR)</dd><dt>Name</dt><dd>Kontrollzone Nürnberg (EDDN)</dd><dt>Höhe</dt><dd>Boden bis 2.500 ft MSL</dd><dt>Rechtsgrundlage</dt><dd>§ 21h LuftVO <small class="mut">(Hinweis)</small></dd><dt>Position</dt><dd>49.4836, 11.0921 · innerhalb</dd></dl>
+          <div style="margin-top:6px"><span class="ibtn out"><i class="bi bi-box-arrow-up-right"></i> Auf dipul-Karte ansehen</span></div>
+          <div class="src">Geozonen: dipul (DFS/BMV), Stand Sa 14.11.2026 06:00</div></div>
+        <div class="card"><h3>Nach „Trotzdem fortfahren“</h3>
+          <div class="ban"><i class="bi bi-exclamation-octagon-fill"></i><span><b>Warnung ignoriert:</b> Geozonen (dipul) · wird nicht protokolliert · <b style="color:var(--g)">Ergebnis</b></span></div>
+          <div class="pre"><div class="row"><span><span class="lbl">Ort · Koordinaten aus „Hier fliegen“</span><b>49.4836, 11.0921</b></span><span class="chg">ändern</span></div></div></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 5 Rot temporär ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">5</span><h2>Ergebnis rot: temporäre Flugbeschränkung (ED-R)</h2></div>
+  <p class="ddesc">Behördliche Beschränkung auf Zeit, z. B. wegen einer Großveranstaltung (veröffentlicht u. a. per NOTAM). Angezeigt werden Name, Zeitraum, Höhe und Quelle – soweit die Daten maschinenlesbar vorliegen. Beispiel mit erfundenen Daten.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/hier-fliegen/pruefung/temporaer</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a>Checklisten</a><a>Wissen</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1fr 1fr">
+      <div>
+        <div class="amp bad"><i class="bi bi-x-octagon-fill"></i><div><b>Hier nicht fliegen</b><small>Position an der Konzertwiese · DJI Neo 2 · Sa 14.11. 14:03</small></div></div>
+        <div class="legal"><b><i class="bi bi-x-octagon-fill"></i> ED-R „Konzert Wiesengrund“</b>Sa 14.11.2026, 10:00 – 23:00 Uhr · Boden bis 1.000 ft über Grund. Wegen einer Großveranstaltung ist der Luftraum vorübergehend gesperrt. Unbemannte Luftfahrzeuge dürfen dort nur mit Genehmigung der zuständigen Behörde fliegen.<br><i>Warum:</i> Schutz der Besucherinnen und Besucher; Polizei und Rettungsdienst nutzen den Luftraum.</div>
+        <span class="ibtn"><i class="bi bi-x-lg"></i> Abbrechen</span> <span class="ibtn out redbtn"><i class="bi bi-exclamation-octagon"></i> Trotzdem fortfahren</span>
+        <div class="disc"><i class="bi bi-info-circle"></i><span><b>Keine Rechtsauskunft; verantwortlich ist der Fernpilot.</b></span></div>
+      </div>
+      <div class="card"><h3>Detail: Temporäre Flugbeschränkung</h3>
+        <div class="map" style="height:110px"><span class="zt" style="left:10%;top:-20%;width:80%;height:140%"></span><span class="lb" style="left:24%;top:8%">ED-R temporär</span><span class="me"></span></div>
+        <dl class="kv2"><dt>Typ</dt><dd>Flugbeschränkungsgebiet ED-R (temporär)</dd><dt>Name</dt><dd>ED-R „Konzert Wiesengrund“</dd><dt>Gültig</dt><dd>Sa 14.11.2026, 10:00 – 23:00 Uhr</dd><dt>Höhe</dt><dd>Boden bis 1.000 ft über Grund</dd><dt>Quelle</dt><dd>NOTAM B2471/26 (Beispiel)</dd></dl>
+        <div style="margin-top:6px"><span class="ibtn out"><i class="bi bi-box-arrow-up-right"></i> Auf dipul-Karte ansehen</span></div>
+        <span class="assume">Annahme: Temporäre Beschränkungen erscheinen nur, soweit sie maschinenlesbar verfügbar sind; ob dipul sie enthält oder nur NOTAM, ist offen (Gesamtdesign 14.4).</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 6 Platzsperre ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">6</span><h2>Platzsperre des Vereins</h2></div>
+  <p class="ddesc">Die Abteilungsleitung sperrt einen Vereinsort auf Zeit (Ort, von–bis, Grund, optional nur bestimmte Bereiche). Mitglieder sehen die Sperre auf der <b>Startseite</b>, bei <b>„Hier fliegen“</b> (eigene rote Überschrift), beim <b>Erfassen eines Flugs</b> an diesem Ort als Warnbanner, auf der Ortsseite und beim Einchecken. Sie ist nicht technisch erzwungen; Setzen, Ändern und Aufheben stehen im Änderungsprotokoll. Gepflegt wird sie im Bereich der Abteilungsleitung (eigene Seite der Leitung).</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Startseite</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
+        <div class="body">
+          <h3>Hallo Markus</h3>
+          <div class="ban"><i class="bi bi-sign-stop-fill"></i><span style="flex:1"><b>Platzsperre Vereinsgelände</b> bis Di 17.11. · Wiese gemäht, Ballen liegen<br><small>gesetzt von Markus B. (Abteilungsleitung) · betrifft nur Luftsport</small></span><i class="bi bi-chevron-right"></i></div>
+          <div class="card pad" style="background:var(--g);color:#fff;font-weight:800"><i class="bi bi-airplane"></i> Flug erfassen<br><small style="font-weight:600;color:#d6eadb">Neo 2 · Vereinsgelände · Training</small></div>
+          <button class="btn out"><i class="bi bi-crosshair"></i> Hier fliegen – Ort prüfen</button>
+          <h3>Nächste Termine</h3>
+          <div class="card"><div class="row"><span><b>Mo 16.11.</b> Fahrtag Sandbahn<br><small>10–16 Uhr · Rennstrecke</small></span><span class="badge b-car">RC Cars</span></div></div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Hier fliegen: Platzsperre</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:03</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Ergebnis</div><div class="t2">Vereinsgelände · DJI Neo 2</div></div></div>
+        <div class="body">
+          <div class="amp bad"><i class="bi bi-x-octagon-fill"></i><div><b>Platzsperre des Vereins</b><small>Die Abteilungsleitung hat das Vereinsgelände gesperrt.</small></div></div>
+          <div class="legal"><b><i class="bi bi-sign-stop-fill"></i> Platzsperre bis Di 17.11.2026, 20:00</b>Wiese gemäht, Ballen liegen noch – Start- und Landebereich nicht frei. Gesetzt von Markus B. (Abteilungsleitung). Nicht technisch erzwungen.</div>
+          <button class="btn"><i class="bi bi-x-lg"></i> Abbrechen</button>
+          <button class="btn out redbtn" style="margin-top:8px"><i class="bi bi-exclamation-octagon"></i> Trotzdem fortfahren</button>
+          <span class="assume">Annahme: Eine aktive Platzsperre färbt die Ampel rot (wie andere Verbote, aber mit eigener Überschrift).</span>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Flug erfassen am Vereinsgelände</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:04</span><span><i class="bi bi-wifi-off"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div class="t1">Neuer Flug</div></div>
+        <div class="offbar"><i class="bi bi-cloud-slash"></i> Offline – wird später übertragen</div>
+        <div class="body">
+          <div class="ban"><i class="bi bi-sign-stop-fill"></i><span><b>Platzsperre Vereinsgelände</b> bis Di 17.11. · Wiese gemäht, Ballen liegen. Erfassen bleibt möglich. <b style="color:var(--g)">Details</b></span></div>
+          <div class="pre">
+            <div class="row"><span><span class="lbl">Modell</span><b>DJI Neo 2</b> <small>· C0 · eigenes</small></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Ort · per GPS erkannt (12 m)</span><b>Vereinsgelände</b></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Flugart</span><b>Training</b></span><span class="chg">ändern</span></div>
+          </div>
+          <div class="note">Die zuletzt bekannte Sperre ist auf dem Handy gespeichert und erscheint auch offline.</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <p class="sublabel">PC · Infoseite Platzsperre für Mitglieder</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/orte/vereinsgelaende/sperre</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a class="on"><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dmain" style="grid-template-columns:1.2fr 1fr">
+      <div>
+        <div class="ban"><i class="bi bi-sign-stop-fill"></i><span><b>Gesperrt bis Di 17.11.2026, 20:00</b><br>Wiese gemäht, Ballen liegen noch – Start- und Landebereich nicht frei.</span></div>
+        <div class="card"><h3>Platzsperre Vereinsgelände</h3><dl class="kv2"><dt>Ort</dt><dd>Vereinsgelände</dd><dt>Von</dt><dd>Fr 13.11.2026, 18:00</dd><dt>Bis</dt><dd>Di 17.11.2026, 20:00</dd><dt>Grund</dt><dd>Wiese gemäht, Ballen liegen noch – Start- und Landebereich nicht frei.</dd><dt>Gesetzt von</dt><dd>Markus B. (Abteilungsleitung)<br><small class="mut">am Fr 13.11. 17:52</small></dd><dt>Betrifft</dt><dd>nur Luftsport<br><small class="mut">RC Cars ist nicht betroffen</small></dd></dl></div>
+        <span class="ibtn out"><i class="bi bi-crosshair"></i> Hier fliegen</span> <span class="ibtn out"><i class="bi bi-geo-alt"></i> Einchecken</span>
+      </div>
+      <div>
+        <div class="card"><h3>Was bedeutet das?</h3><div style="font-size:13px">Bitte am Vereinsgelände nicht fliegen, solange die Sperre gilt. Die Sperre ist <b>nicht technisch erzwungen</b>: Flüge lassen sich weiter erfassen, die App zeigt aber eine Warnung.</div></div>
+        <div class="card"><h3>Protokoll</h3><div class="note" style="text-align:left">Setzen, Ändern und Aufheben stehen im Änderungsprotokoll.</div>
+          <span class="assume">Annahme: Benachrichtigt werden alle Mitglieder, die den betroffenen Bereich unter „Meine Bereiche“ gewählt haben.</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 7 Offline ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Ohne Netz: Prüfung nicht möglich</h2></div>
+  <p class="ddesc">Ohne Netz lassen sich Geozonen, temporäre Beschränkungen und Wetter nicht abfragen. Die App zeigt „Prüfung nicht möglich“, dazu die <b>zuletzt bekannten Platzsperren</b> und – falls zwischengespeichert – die Geozonen des Orts. Der Flug lässt sich trotzdem vorbereiten.</p>
+  <div class="phones">
+    <div class="pcol"><p class="plabel">Ergebnis offline</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:03</span><span><i class="bi bi-wifi-off"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Ergebnis</div><div class="t2">Vereinsgelände · DJI Neo 2</div></div></div>
+        <div class="body">
+          <div class="amp off"><i class="bi bi-cloud-slash"></i><div><b>Prüfung nicht möglich</b><small>Kein Netz – angezeigt wird der zuletzt bekannte Stand.</small></div></div>
+          <div class="card pad" style="font-size:12.5px">Geozonen und temporäre Beschränkungen lassen sich nicht abfragen. Angezeigt werden zwischengespeicherte Daten dieses Orts und die zuletzt bekannten Platzsperren (Stand Sa 14.11. 08:12).</div>
+          <div class="card">
+            <div class="row"><span class="li"><i class="bi bi-dash-circle st na"></i><span><b>Geozonen (dipul)</b><br><small>zwischengespeichert: keine Geozone (Stand 13.11.)</small></span></span></div>
+            <div class="row"><span class="li"><i class="bi bi-dash-circle st na"></i><span><b>Temporäre Flugbeschränkungen</b><br><small>nicht prüfbar ohne Netz</small></span></span></div>
+            <div class="row"><span class="li"><i class="bi bi-x-octagon-fill st bad"></i><span><b>Platzsperre des Vereins</b><br><small>zuletzt bekannt: gesperrt bis Di 17.11.</small></span></span></div>
+            <div class="row"><span class="li"><i class="bi bi-dash-circle st na"></i><span><b>Wetter</b><br><small>zuletzt 08:12: Böen 13 km/h</small></span></span></div>
+          </div>
+          <button class="btn"><i class="bi bi-airplane"></i> Flug trotzdem vorbereiten</button>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Flug erfassen danach</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:04</span><span><i class="bi bi-wifi-off"></i> <i class="bi bi-battery-half"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div class="t1">Neuer Flug</div></div>
+        <div class="offbar"><i class="bi bi-cloud-slash"></i> Offline – wird später übertragen</div>
+        <div class="body">
+          <div class="ban off"><i class="bi bi-cloud-slash"></i><span><b>Hier fliegen:</b> ohne Netz nicht geprüft · <b style="color:var(--g)">Ergebnis</b></span></div>
+          <div class="ban"><i class="bi bi-sign-stop-fill"></i><span><b>Platzsperre Vereinsgelände</b> bis Di 17.11. · Wiese gemäht, Ballen liegen. Erfassen bleibt möglich.</span></div>
+          <div class="pre">
+            <div class="row"><span><span class="lbl">Modell</span><b>DJI Neo 2</b></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Ort · per GPS erkannt (12 m)</span><b>Vereinsgelände</b></span><span class="chg">ändern</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8 Annahmen ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">8</span><h2>Offene Punkte und Annahmen</h2></div>
+  <div class="card pad" style="max-width:900px;font-size:13px">
+    <span class="assume">Annahme: dipul-Zugang (automatische Abfrage des Kartendienstes, nötige Namensnennung) ist noch mit dem Betreiber zu klären (Gesamtdesign 14.4); bis dahin bleibt der Link zur dipul-Karte mit Standort.</span><br>
+    <span class="assume">Annahme: Temporäre Beschränkungen nur, soweit maschinenlesbar verfügbar; ob dipul sie enthält oder nur NOTAM, ist offen.</span><br>
+    <span class="assume">Annahme: Für die Wetter-Ampel zählen die Böen; Grenzwerte wie beim Drohnenwetter (grün bis Grenze, gelb +10 km/h).</span><br>
+    <span class="assume">Annahme: Zuordnung EU-Klasse → Unterkategorie vereinfacht; Details und Texte je Geozonentyp mit dem Verein abstimmen.</span><br>
+    <span class="assume">Annahme: Eine aktive Platzsperre färbt die Ampel rot; benachrichtigt werden Mitglieder mit dem betroffenen Bereich unter „Meine Bereiche“.</span>
+    <p class="mut" style="margin:8px 0 0">Entschieden (Gesamtdesign 6.4): Prüfung über den eigenen Server, Ampel grün/gelb/rot, Warnungen ignorierbar ohne Protokoll, offline „Prüfung nicht möglich“ mit zuletzt bekannten Sperren, Platzsperre nicht technisch erzwungen und im Änderungsprotokoll, Hinweis „Keine Rechtsauskunft; verantwortlich ist der Fernpilot“.</p>
+  </div>
+</section>
+<div style="height:30px"></div>
+</body>
+</html>

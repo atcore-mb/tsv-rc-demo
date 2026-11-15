@@ -237,6 +237,12 @@
   .pk .it.off{opacity:.45}
   .pk .it.on{background:var(--gl);border-radius:4px}
   .pk .foot{font-size:11.5px;color:var(--mut);margin-top:8px;border-top:1px solid #eef0ee;padding-top:6px}
+  .tl .e.x::before{background:var(--red)}
+  .ban{display:flex;gap:8px;align-items:flex-start;border-radius:6px;padding:7px 10px;font-size:12px;margin-bottom:10px;border:1px solid #f3b4b4;background:#fde8e8;color:#7f1d1d}
+  .ban i{font-size:16px;color:var(--red)}
+  .ban.ok{border-color:#b9dcbf;background:var(--gl);color:var(--gd)}.ban.ok i{color:var(--g)}
+  .legal{background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:10px}
+  .legal b{display:block;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -249,7 +255,7 @@
 <!-- ========== 1 Live-Erfassung ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">1</span><h2>Flug live erfassen (am Platz)</h2></div>
-  <p class="ddesc">Drei Tipps im Normalfall: <b>Start</b> → <b>Landung</b> → <b>Speichern</b>. Modell, Ort (GPS) und Flugart werden vom letzten Flug übernommen und lassen sich mit einem Tipp ändern. Die Checkliste kommt vor dem Start, falls das Regelwerk sie verlangt. Alles funktioniert ohne Netz.</p>
+  <p class="ddesc">Drei Tipps im Normalfall: <b>Start</b> → <b>Landung</b> → <b>Speichern</b>. Modell, Ort (GPS) und Flugart werden vom letzten Flug übernommen und lassen sich mit einem Tipp ändern. Die Checkliste kommt vor dem Start, falls das Regelwerk sie verlangt; wählbar sind die Vorlagen des Vereins und <b>eigene Zusatz-Checklisten</b> (Luftsport › ⋯ › Checklisten). Ist am gewählten Vereinsort eine <b>Platzsperre</b> aktiv, erscheint ein Warnbanner – Erfassen bleibt möglich. Unterwegs prüft <b>„Hier fliegen“</b> den Ort vorab (Seite 7). Alles funktioniert ohne Netz.</p>
   <div class="phones">
     <div class="pcol"><p class="plabel">Vor dem Start</p>
       <div class="phone"><div class="screen">
@@ -258,10 +264,12 @@
         <div class="offbar"><i class="bi bi-cloud-slash"></i> Offline – wird später übertragen<span class="r">2 ausstehend</span></div>
         <div class="body">
           <div class="seg"><div class="on">Jetzt fliegen</div><div>Nachtragen</div></div>
+          <div class="ban"><i class="bi bi-sign-stop-fill"></i><span><b>Platzsperre Vereinsgelände</b> bis Di 17.11. · Wiese gemäht, Ballen liegen. Erfassen bleibt möglich. <b style="color:var(--g)">Details</b></span></div>
           <div class="pre">
             <div class="row"><span><span class="lbl">Modell</span><b>DJI Neo 2</b> <small>· C0</small></span><span class="chg">ändern</span></div>
             <div class="row"><span><span class="lbl">Ort · per GPS (± 8 m)</span><b>Vereinsgelände</b></span><span class="chg">ändern</span></div>
             <div class="row"><span><span class="lbl">Flugart</span><b>Training</b></span><span class="chg">ändern</span></div>
+            <div class="row"><span><span class="lbl">Checkliste</span><b>Vor dem Flug – Offene Kategorie</b></span><span class="chg">ändern</span></div>
           </div>
           <div class="card pad" style="display:flex;justify-content:space-between;align-items:center">
             <span><i class="bi bi-list-check"></i> Checkliste vor dem Flug</span><span class="badge b-w">0 / 6</span>
@@ -380,7 +388,7 @@
 <!-- ========== 3 Liste und Detail ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Flugliste und Flug-Detail</h2></div>
-  <p class="ddesc">Die Liste ist nach Monaten gruppiert und durchsuchbar. Im Detail steht der <b>Änderungsverlauf</b>: Flüge werden nicht still geändert. Korrekturen brauchen eine Begründung, Löschen gibt es nicht, nur „ungültig markieren“.</p>
+  <p class="ddesc">Die Liste ist nach Monaten gruppiert und durchsuchbar. Im Detail steht der <b>Änderungsverlauf</b>: Flüge werden nicht still geändert. Korrekturen brauchen eine Begründung. <b>Löschen</b> geht nur kurz nach der Erfassung (Frist vom Admin einstellbar, Standard 30 Minuten), z. B. nach einem versehentlichen Start; danach nur noch „ungültig markieren“, mit Grund wieder aufhebbar.</p>
   <div class="phones">
     <div class="pcol"><p class="plabel">Flugliste</p>
       <div class="phone"><div class="screen">
@@ -446,9 +454,22 @@
           <button class="btn" style="margin-top:12px">Korrektur speichern</button>
           <div style="margin-top:22px;border-top:1px solid #e3e6e3;padding-top:10px">
             <div class="addlink" style="color:var(--red)"><i class="bi bi-slash-circle"></i> Flug als ungültig markieren</div>
-            <div class="hint">z. B. doppelt erfasst. Der Flug bleibt im Verlauf, zählt aber nicht mehr.</div>
-            <span class="assume">Annahme: kein Löschen, nur Ungültig-Markieren</span>
+            <div class="hint">z. B. doppelt erfasst. Der Flug bleibt im Verlauf, zählt aber nicht mehr. Die Markierung lässt sich mit Grund wieder aufheben.</div>
           </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Innerhalb der Löschfrist</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>14:31</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Flug am 14.11.2026</div><div class="t2">DJI Neo 2 · 18 min</div></div></div>
+        <div class="body">
+          <div class="card pad"><dl class="kv2"><dt>Pilot</dt><dd>Markus B.</dd><dt>Modell</dt><dd>DJI Neo 2 · C0</dd><dt>Ort</dt><dd>Vereinsgelände</dd><dt>Zeit</dt><dd>14:05 – 14:23</dd><dt>Erfasst</dt><dd>14:22 · live</dd></dl></div>
+          <div class="card pad" style="font-size:13px;border-color:#f3b4b4"><i class="bi bi-trash"></i> Versehentlich erfasst? <b>Löschen bis 14:52</b> möglich (30 Minuten nach der Erfassung). Danach nur noch „ungültig markieren“.</div>
+          <div class="btns"><button class="btn out"><i class="bi bi-pencil"></i> Korrigieren</button><button class="btn out"><i class="bi bi-share"></i> Teilen</button></div>
+          <button class="btn" style="background:var(--red)"><i class="bi bi-trash"></i> Löschen (bis 14:52)</button>
+          <div class="note">Danach Bestätigung „Flug endgültig löschen“. Der Flug verschwindet aus Flugbuch, Summen und Berichten.</div>
+          <span class="assume">Annahme: Im Änderungsprotokoll steht nur, dass und wann der Flug gelöscht wurde, nicht seine Daten.</span>
         </div>
       </div></div>
     </div>
@@ -464,7 +485,7 @@
         <div class="hrow"><div style="display:flex;gap:8px;align-items:center"><div class="search" style="margin:0;width:260px"><i class="bi bi-search"></i> Suchen</div><span class="chip on">2026</span><span class="chip">Modell <i class="bi bi-chevron-down"></i></span><span class="chip">Flugart <i class="bi bi-chevron-down"></i></span></div><span><span class="ibtn out"><i class="bi bi-download"></i> Export</span> <span class="ibtn"><i class="bi bi-plus-lg"></i> Neuer Flug</span></span></div>
         <div class="card">
           <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Ort</th><th>Art</th><th>Start</th><th>Min.</th><th></th></tr>
-            <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>14:05</td><td>18</td><td><i class="bi bi-cloud-arrow-up mut"></i></td></tr>
+            <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>14:05</td><td>18</td><td><i class="bi bi-cloud-arrow-up mut"></i> <span class="badge b-r" title="Löschfrist">löschbar bis 14:52</span></td></tr>
             <tr><td>12.11.2026</td><td>FPV Quad 5″</td><td>Sporthalle</td><td>Training</td><td>18:20</td><td>6</td><td></td></tr>
             <tr class="sel"><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td>15:40</td><td>24</td><td><span class="badge b-w">korr.</span></td></tr>
             <tr><td>07.11.2026</td><td>DJI Avata 2 <span class="badge b-air">Max R.</span></td><td>Vereinsgelände</td><td>Training</td><td>15:20</td><td>11</td><td></td></tr>
@@ -483,6 +504,7 @@
           <div class="e c"><b>Korrigiert · 10.11. 08:12</b>Landung <span class="diff"><s>16:14</s> → <ins>16:04</ins></span><br><small>„Landung zu spät getippt“</small></div>
           <div class="e"><b>Erfasst · 09.11. 16:14</b><small>offline, übertragen 17:02</small></div>
         </div>
+        <div class="note" style="text-align:left;margin-top:8px">Löschfrist abgelaufen (30 Minuten nach der Erfassung). Falsche Flüge über „Korrigieren“ als ungültig markieren.</div>
       </div>
     </div>
   </div></div></div>
@@ -536,8 +558,8 @@
 
 <!-- ========== 5 Startzeit korrigieren / ungültig markieren ========== -->
 <section class="direction">
-  <div class="dhead"><span class="dletter">5</span><h2>Startzeit korrigieren und Flug ungültig markieren</h2></div>
-  <p class="ddesc">Während des Flugs lässt sich die Startzeit korrigieren (z. B. Start zu spät getippt); erfasste Zeit und Korrektur stehen später beide im Verlauf. Gespeicherte Flüge werden nie gelöscht, sondern mit Grund als ungültig markiert; sie bleiben sichtbar, zählen aber nicht mehr.</p>
+  <div class="dhead"><span class="dletter">5</span><h2>Startzeit korrigieren, Flug ungültig markieren und Markierung aufheben</h2></div>
+  <p class="ddesc">Während des Flugs lässt sich die Startzeit korrigieren (z. B. Start zu spät getippt); erfasste Zeit und Korrektur stehen später beide im Verlauf. Nach Ablauf der Löschfrist werden Flüge nicht mehr gelöscht, sondern mit Grund als ungültig markiert; sie bleiben sichtbar, zählen aber nicht mehr. Die Markierung lässt sich <b>mit Grund wieder aufheben</b>; beides steht im Verlauf. Bei Flügen mit fremdem Modell dürfen <b>Pilot und Besitzer</b> korrigieren und markieren (Abschnitt 7).</p>
   <div class="phones">
     <div class="pcol"><p class="plabel">Startzeit korrigieren (Handy, im Flug)</p>
       <div class="phone"><div class="screen">
@@ -551,6 +573,30 @@
           <div class="chips" style="margin-top:6px"><span class="chip">1 min früher</span><span class="chip on">2 min früher</span><span class="chip">5 min früher</span></div>
           <label>Grund <span class="req">*</span></label><div class="chips"><span class="chip on">Start zu spät getippt</span><span class="chip">Start zu früh getippt</span><span class="chip">App war nicht offen</span></div>
           <button class="btn">Startzeit übernehmen</button>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Markierter Flug (Handy)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-arrow-left" style="font-size:20px"></i><div><div class="t1">Flug am 12.11.2026</div><div class="t2">FPV Quad 5″ · 6 min · <span class="badge b-r">ungültig</span></div></div></div>
+        <div class="body">
+          <div class="legal"><b><i class="bi bi-slash-circle"></i> Als ungültig markiert</b>13.11. 08:40 von Markus B. · Grund: „Doppelt erfasst“. Zählt nicht in Summen, Berichten und Exporten.<div style="margin-top:6px"><b style="color:var(--red);display:inline">Markierung aufheben</b></div></div>
+          <div class="card pad"><dl class="kv2"><dt>Ort</dt><dd>Sporthalle</dd><dt>Zeit</dt><dd>18:11 – 18:17</dd><dt>Flugart</dt><dd>Training</dd></dl></div>
+          <h3>Änderungsverlauf</h3>
+          <div class="card pad"><div class="tl"><div class="e x"><b>Ungültig markiert · 13.11. 08:40 · Markus B.</b><small>Grund: „Doppelt erfasst“</small></div><div class="e"><b>Erfasst · 12.11. 18:18 · Markus B.</b></div></div></div>
+        </div>
+      </div></div>
+    </div>
+    <div class="pcol"><p class="plabel">Markierung aufheben (Handy)</p>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+        <div class="top"><i class="bi bi-x-lg" style="font-size:18px"></i><div class="t1">Ungültig-Markierung aufheben</div></div>
+        <div class="body">
+          <div class="legal"><b><i class="bi bi-arrow-counterclockwise"></i> Markierung aufheben</b>Danach zählt der Flug wieder. Markierung und Aufhebung bleiben im Verlauf sichtbar.</div>
+          <label>Grund <span class="req">*</span></label><div class="chips"><span class="chip on">Irrtümlich markiert</span><span class="chip">Flug war doch gültig</span><span class="chip">Anderer Grund</span></div>
+          <div class="chk"><i class="bi bi-check-square-fill"></i><span>Mir ist klar, dass Markierung und Aufhebung im Änderungsverlauf sichtbar bleiben.</span></div>
+          <button class="btn" style="margin-top:10px">Markierung aufheben</button>
         </div>
       </div></div>
     </div>
@@ -568,10 +614,9 @@
     <div style="position:absolute;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center">
       <div class="card" style="width:520px;padding:16px 20px;box-shadow:0 10px 30px rgba(0,0,0,.25)">
         <div class="hrow"><h3>Flug ungültig markieren</h3><i class="bi bi-x-lg"></i></div>
-        <div style="background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:8px"><b>Kein Löschen.</b> Der Flug bleibt im Flugbuch und im Verlauf sichtbar (als „ungültig“), zählt aber nicht mehr in Summen, Berichten und Exporten.</div>
+        <div style="background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:8px"><b>Ungültig statt löschen.</b> Der Flug bleibt im Flugbuch und im Verlauf sichtbar (als „ungültig“), zählt aber nicht mehr in Summen, Berichten und Exporten. Die Markierung lässt sich mit Grund wieder aufheben. Löschen geht nur innerhalb der Frist nach der Erfassung (Standard 30 Minuten).</div>
         <label>Grund <span class="req">*</span></label><div class="chips"><span class="chip on">Doppelt erfasst</span><span class="chip">Versehentlich gestartet</span><span class="chip">Falsches Konto</span><span class="chip">Anderer Grund</span></div>
         <div class="chk"><i class="bi bi-check-square-fill"></i><span>Mir ist klar, dass die Markierung im Änderungsverlauf dauerhaft sichtbar bleibt.</span></div>
-        <span class="assume">Annahme: Die Markierung lässt sich später mit Grund wieder aufheben; auch das steht im Verlauf.</span>
         <div style="margin-top:10px;text-align:right"><span class="ibtn out">Abbrechen</span> <span class="ibtn" style="background:var(--red)">Als ungültig markieren</span></div>
       </div>
     </div>
@@ -604,10 +649,10 @@
           </div>
           <div>
             <label>Gewählter Punkt</label><div class="inp">49.4145° N, 11.2068° E</div>
-            <div class="chk"><i class="bi bi-check-square-fill"></i><span>Als eigenen Ort speichern<small class="mut">siehst nur du, danach unter „Meine Orte“</small></span></div>
+            <div class="chk"><i class="bi bi-check-square-fill"></i><span>Als eigenen Ort speichern<small class="mut">zunächst nur für dich, unter „Meine Orte“; dort mit anderen Mitgliedern teilbar</small></span></div>
             <label>Name des Orts <span class="req">*</span></label><div class="inp">Feldweg Ost</div>
             <div style="margin:8px 0;font-size:13px"><i class="bi bi-map"></i> <b style="color:var(--g)">Geozonen an diesem Punkt prüfen (dipul)</b></div>
-            <span class="assume">Annahme: Kartenkacheln kommen über den Server (Feindesign Teil 4); offline nur GPS-Position ohne Karte.</span>
+            <div class="hint">Kartenkacheln kommen über den Vereinsserver (zwischengespeichert); offline nur die GPS-Position ohne Karte.</div>
             <div style="margin-top:10px"><span class="ibtn">Ort übernehmen</span> <span class="ibtn out">Abbrechen</span></div>
           </div>
         </div>
@@ -618,7 +663,7 @@
 <!-- ========== 7 Fremdes Privatmodell fliegen ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">7</span><h2>Fremdes Privatmodell fliegen (Freigabe zum Fliegen)</h2></div>
-  <p class="ddesc">Ein Mitglied kann ein einzelnes eigenes Luftfahrzeug anderen <b>zum Fliegen freigeben</b> (Mehr › Freigaben › Neue Freigabe › Einzelnes …, Recht „Darf fliegen“). Das Modell erscheint dann in der Modellauswahl unter „Für mich zum Fliegen freigegeben“. Der Flug zählt beim Piloten und beim Modell: Der Besitzer sieht ihn auf der Modellseite unter „Flüge“. Handy: Klickdummy, Flugbuch-Eintrag vom 07.11. und Modell „DJI Avata 2“ unter Freigaben › Mit mir geteilt.</p>
+  <p class="ddesc">Ein Mitglied kann ein einzelnes eigenes Luftfahrzeug anderen <b>zum Fliegen freigeben</b> (Mehr › Freigaben › Neue Freigabe › Einzelnes …, Recht „Darf fliegen“). Das Modell erscheint dann in der Modellauswahl unter „Für mich zum Fliegen freigegeben“. Freigeben lassen sich auch <b>alle eigenen Luftfahrzeuge auf einmal</b> (Freigabe „Modelle“, Recht „Darf alle Luftfahrzeuge fliegen“, gilt auch für künftig angelegte; widerrufbar und befristbar). Der Flug zählt beim Piloten und beim Modell: Der Besitzer sieht ihn auf der Modellseite unter „Flüge“. <b>Pilot und Besitzer</b> dürfen ihn korrigieren oder ungültig markieren (mit Grund, im Verlauf). Handy: Klickdummy, Flugbuch-Eintrag vom 07.11. und Modell „DJI Avata 2“ unter Freigaben › Mit mir geteilt.</p>
   <p class="sublabel">PC · Modellauswahl beim Flug nachtragen</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/flugbuch/neu</span></div>
   <div class="app">
@@ -668,7 +713,31 @@
         <div class="note" style="text-align:left">Zählt in deinem Flugbuch und beim Modell; Max R. sieht den Flug auf der Modellseite unter „Flüge“.</div>
         <h3 style="margin-top:10px">Änderungsverlauf</h3>
         <div class="tl"><div class="e"><b>Erfasst · 07.11. 15:31</b><small>Freigabe zum Fliegen von Max R.</small></div></div>
-        <span class="assume">Annahme: Korrigieren kann nur der Pilot; der Besitzer sieht Flüge mit seinem Modell nur lesend.</span>
+        <div class="note" style="text-align:left">Max R. darf als Besitzer ebenfalls korrigieren oder ungültig markieren; die Änderung steht mit Grund im Verlauf.</div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="sublabel">PC · Besitzersicht: Jonas B. ist mit meinem DJI Neo 2 geflogen</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/modelle/neo-2/fluege/2026-11-11</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Flugbuch</a><a class="on">Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1.4fr 1fr">
+      <div class="card">
+        <div class="hrow"><h3>DJI Neo 2 · Flüge</h3><span class="mut" style="font-size:12px">enthält Flüge mit Freigabe zum Fliegen</span></div>
+        <table class="dt"><tr><th>Datum</th><th>Pilot</th><th>Ort</th><th>Art</th><th>Min.</th></tr>
+          <tr><td>14.11.2026</td><td>Markus B.</td><td>Vereinsgelände</td><td>Training</td><td>18</td></tr>
+          <tr class="sel"><td>11.11.2026</td><td>Jonas B. <span class="badge b-air">Freigabe</span></td><td>Vereinsgelände</td><td>Training</td><td>10</td></tr>
+          <tr><td>05.11.2026</td><td>Markus B.</td><td>Vereinsgelände</td><td>Training</td><td>14</td></tr>
+        </table>
+      </div>
+      <div class="detailpane">
+        <div class="hrow"><h3>Flug am 11.11.2026</h3><span><span class="ibtn out"><i class="bi bi-pencil"></i> Korrigieren</span> <span class="ibtn out"><i class="bi bi-slash-circle"></i> Ungültig markieren</span></span></div>
+        <dl class="kv2"><dt>Pilot</dt><dd>Jonas B.</dd><dt>Modell</dt><dd>DJI Neo 2 · C0</dd><dt>Besitzer</dt><dd>du (Markus B.)<br><small class="mut">Freigabe zum Fliegen an Jonas B.</small></dd><dt>Zeit</dt><dd>16:05 – 16:15 (10 min)</dd><dt>Flugart</dt><dd>Training</dd></dl>
+        <div class="note" style="text-align:left">Als Besitzer darfst du korrigieren oder ungültig markieren – mit Grund, sichtbar im Verlauf. Jonas B. sieht die Änderung bei seinem Flug. Löschen kann nur der Pilot innerhalb der Frist.</div>
+        <h3 style="margin-top:10px">Änderungsverlauf</h3>
+        <div class="tl"><div class="e c"><b>Korrigiert · 12.11. 09:05 · Markus B. (Besitzer)</b>Flugart <span class="diff"><s>Schulung</s> → <ins>Training</ins></span><br><small>„Falsche Flugart“</small></div><div class="e"><b>Erfasst · 11.11. 16:15 · Jonas B.</b><small>mit deinem Modell (Freigabe zum Fliegen)</small></div></div>
       </div>
     </div>
   </div></div></div>

@@ -307,7 +307,7 @@
           <table class="dt"><tr><td>Stornierte Einträge mit Grund</td><td><span class="tg on"></span></td></tr><tr><td>Änderungsverlauf je Flug</td><td><span class="tg"></span></td></tr><tr><td>Zusatzfelder des Regelwerks</td><td><span class="tg on"></span></td></tr></table>
           <div style="margin-top:8px;font-size:13px"><i class="bi bi-eye"></i> 37 Flüge · 9:12 Std.</div>
           <span class="ibtn" style="margin-top:8px"><i class="bi bi-download"></i> Export erstellen</span>
-          <div><span class="assume">Annahme: PDF-Kopf mit Name, Regelwerk-Version, Erstellungsdatum und Prüfsumme.</span></div>
+          <div class="note" style="text-align:left">PDF-Kopf mit Name, Regelwerk-Version, Erstellungsdatum und Prüfsumme; CSV mit einer Zeile je Flug.</div>
         </div>
         <div class="card"><h3>Import</h3><div style="font-size:13px;margin-bottom:8px">Flüge aus DJI-Flugprotokollen übernehmen.</div><span class="ibtn out"><i class="bi bi-upload"></i> DJI-Protokolle importieren</span></div>
       </div>
@@ -338,7 +338,7 @@
             <tr><td><i class="bi bi-check-square-fill" style="color:var(--g)"></i></td><td>26.10.2026</td><td>16:30–16:42</td><td>12</td><td>DJI Neo 2<br><small class="mut">SN 1581F8K…</small></td><td><span class="pickf">DJI Neo 2 <i class="bi bi-chevron-down"></i></span><br><span class="badge b-g">per Seriennummer</span></td><td>49.4318, 11.2511<br><small class="mut">kein bekannter Ort</small></td></tr>
           </table>
         </div>
-        <span class="assume">Annahme: Duplikat = gleiches Modell und Startzeit ±5 min. Originaldatei wird am Flug gespeichert, Flug als „importiert“ gekennzeichnet.</span>
+        <div class="note" style="text-align:left">Doppelt = gleiches Modell und Start ±5 Minuten. Die Originaldatei wird am Flug gespeichert, der Flug als „importiert“ gekennzeichnet.</div>
         <span class="assume">Offen: Neuere DJI-Protokolle sind verschlüsselt – Lesbarkeit im Feindesign Teil 3 klären.</span>
       </div>
       <div>
@@ -376,7 +376,7 @@
             <tr><td>Freigaben, Änderungsprotokoll, Anmeldungen</td><td>–</td><td>JSON</td></tr>
           </table>
           <div class="note" style="text-align:left;margin-top:6px">Nicht enthalten: Daten anderer Personen, auch wenn sie mit dir geteilt wurden.</div>
-          <span class="assume">Annahme: ZIP-Archiv, 7 Tage abrufbar, dann automatisch gelöscht.</span>
+          <div class="note" style="text-align:left">ZIP-Archiv, 7 Tage abrufbar, danach automatisch gelöscht.</div>
         </div>
         <div>
           <div class="card" style="padding:10px 14px">
@@ -394,7 +394,7 @@
 <!-- ============ 4 AUSTRITT ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">4</span><h2>Austritt mit doppelter Bestätigung</h2></div>
-  <p class="ddesc">Erste Stufe: Übersicht in drei Spalten (sofort gelöscht · bis Fristende aufbewahrt · anonymisiert) plus „vorher zu klären“. Zweite Stufe: Dialog mit Häkchen, Eingabe „AUSTRETEN“ und Bestätigung per Passkey. Dargestellt ist der geöffnete Dialog.</p>
+  <p class="ddesc">Erste Stufe: Übersicht in drei Spalten (sofort gelöscht · bis Fristende aufbewahrt · anonymisiert) plus „vorher zu klären“. Eine offene Ausleihe blockiert nicht – die Rückgabe wird eingefordert und bleibt bei der Leitung als „Rückgabe offen“. Der letzte Admin kann nicht austreten (dann ist „Weiter“ gesperrt, bis ein weiterer Admin bestimmt ist). Vor dem Löschen der Adresse geht eine Bestätigung per E-Mail raus. Zweite Stufe: Dialog mit Häkchen, Eingabe „AUSTRETEN“ und Bestätigung per Passkey. Dargestellt ist der geöffnete Dialog.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/austritt</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -403,12 +403,12 @@
       <div class="card" style="padding:10px 14px;font-size:13px">Dein Konto wird <b>deaktiviert</b>. Nicht aufbewahrungspflichtige Daten werden <b>sofort gelöscht</b>. Flugbuchdaten bleiben bis zum Ende der Aufbewahrungsfrist (<b>3 Jahre</b> laut Regelwerk) gesperrt erhalten und werden danach gelöscht bzw. anonymisiert. Die Mitgliedschaft im TSV 1927 endet dadurch <b>nicht</b>.</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--warn)"><i class="bi bi-exclamation-triangle-fill"></i> Vorher klären</h3>
-          <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>TRX-4M ausgeliehen</b><small class="mut">Rückgabe bis 17.11.</small></span></div>
-          <div class="wx-grp"><i class="bi bi-person-gear" style="color:var(--g)"></i><span><b>Rollen werden entfernt</b><small class="mut">weiterer Admin vorhanden ✓</small></span></div></div>
+          <div class="wx-grp"><i class="bi bi-box-arrow-in-right" style="color:var(--warn)"></i><span><b>TRX-4M ausgeliehen</b><small class="mut">Rückgabe bis 17.11. – Austritt trotzdem möglich, Rückgabe wird eingefordert</small></span></div>
+          <div class="wx-grp"><i class="bi bi-person-gear" style="color:var(--g)"></i><span><b>Rollen werden entfernt</b><small class="mut">weiterer Admin vorhanden (Max R.) ✓</small></span></div></div>
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--red)"><i class="bi bi-trash3"></i> Sofort gelöscht</h3>
           <div class="wx-grp"><span>Kontaktdaten</span></div><div class="wx-grp"><span>Benachrichtigungen, Push</span></div><div class="wx-grp"><span>Passwort, Passkeys, 2FA, Tokens</span></div><div class="wx-grp"><span>Freigaben, ICS-Link</span></div><div class="wx-grp"><span>Eigene Orte, Checklisten</span></div></div>
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--warn)"><i class="bi bi-hourglass-split"></i> Bis Fristende</h3>
-          <div class="wx-grp"><span>39 Flüge <small class="mut">letzter bis 14.11.2029</small></span></div><div class="wx-grp"><span>Vorfälle (Luftfahrzeuge)</span></div><div class="wx-grp"><span>Änderungsprotokoll</span></div><div class="wx-grp"><span>Modelle aus Flügen <span class="assume" style="margin:2px 0 0">Annahme</span></span></div><div class="wx-grp"><span>Ausleihen, Protokolle <span class="assume" style="margin:2px 0 0">Annahme</span></span></div></div>
+          <div class="wx-grp"><span>39 Flüge <small class="mut">3 Jahre ab Erfassung · letzter bis 14.11.2029</small></span></div><div class="wx-grp"><span>Vorfälle (Luftfahrzeuge)</span></div><div class="wx-grp"><span>Änderungsprotokoll</span></div><div class="wx-grp"><span>Modelle aus Flügen <span class="assume" style="margin:2px 0 0">Annahme</span></span></div><div class="wx-grp"><span>Ausleihen, Protokolle <span class="assume" style="margin:2px 0 0">Annahme</span></span></div></div>
         <div class="card" style="padding:10px 14px"><h3 style="color:var(--mut)"><i class="bi bi-incognito"></i> Anonymisiert</h3>
           <div class="wx-grp"><span>VM-Ergebnisse <small class="mut">als „ehemaliges Mitglied“</small></span></div><div class="wx-grp"><span>Teilnehmerzahlen bei Events</span></div><span class="assume">Annahme: mit dem Verein abstimmen</span></div>
       </div>
@@ -509,7 +509,7 @@
           </table>
           <div class="hint">Ampel dann: „eingeschränkt fliegbar – Böen 22 km/h (eigene Grenze DJI Neo 2)“. Eigene Grenzen hinterlegt der Besitzer am Modell.</div>
         </div>
-        <div class="card" style="font-size:12.5px"><h3>Datenquelle</h3>Stand 10:00 · aktualisiert stündlich<br><span class="assume">Annahme: DWD-Daten (z. B. über Open-Meteo), Kp-Index von NOAA, serverseitig abgefragt – der Browser spricht keinen Fremddienst an.</span></div>
+        <div class="card" style="font-size:12.5px"><h3>Datenquelle</h3>Stand 10:00 · aktualisiert stündlich<br>Deutscher Wetterdienst über Open-Meteo, Kp-Index von NOAA – abgefragt und gepuffert über den Vereinsserver; der Browser spricht keinen Fremddienst an.</div>
       </div>
     </div>
   </div></div></div>
@@ -518,7 +518,7 @@
 <!-- ============ 7 DIPUL ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">7</span><h2>Orte &amp; dipul-Karte</h2></div>
-  <p class="ddesc">Ob sich die dipul-Karte einbetten lässt, ist offen. Bis dahin ein Platzhalter mit dem Link „In dipul öffnen (mit aktuellem Standort)“ und einem deutlichen Hinweis auf Geozonen. Rechts die Orte des Vereins und die eigenen Orte.</p>
+  <p class="ddesc">dipul wird nicht eingebettet, sondern per Link mit dem aktuellen Standort geöffnet (nur Koordinaten). Die Karte selbst kommt über den Vereinsserver. Rechts die Orte des Vereins (mit Platzsperren), die eigenen Orte und die mit mir geteilten Orte.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/orte</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -526,15 +526,16 @@
     <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Orte &amp; dipul-Karte</a></div>
     <div class="dmain" style="grid-template-columns:2fr 1fr;height:100%">
       <div class="wx-map"><div class="road"></div><div class="zone z1"></div><div class="zone z2"></div><i class="bi bi-geo-alt-fill pin"></i>
-        <div class="ph"><i class="bi bi-map"></i> <b>Platzhalter dipul-Karte</b><br><small class="mut">Einbindung wird geprüft (Gesamtdesign Teil 4)</small><div style="margin-top:8px"><span class="ibtn"><i class="bi bi-box-arrow-up-right"></i> In dipul öffnen (mit aktuellem Standort)</span></div><small class="mut">49.4127° N, 11.2034° E (± 8 m)</small></div>
+        <div class="ph"><i class="bi bi-map"></i> <b>Kartenausschnitt (simuliert)</b><br><small class="mut">Kacheln über den Vereinsserver; dipul öffnet per Link</small><div style="margin-top:8px"><span class="ibtn"><i class="bi bi-box-arrow-up-right"></i> In dipul öffnen (mit aktuellem Standort)</span></div><small class="mut">49.4127° N, 11.2034° E (± 8 m)</small></div>
       </div>
       <div>
-        <div class="alert"><i class="bi bi-sign-stop"></i> <b>Geozonen prüfen.</b> Vor jedem Flug außerhalb des Vereinsgeländes selbst prüfen, ob Geozonen gelten (z. B. Kontrollzonen von Flugplätzen, Naturschutzgebiete, Wohngrundstücke). TSV RC prüft Geozonen nicht.</div>
-        <span class="assume" style="margin:0 0 10px">Annahme: dipul übernimmt den Standort per Link, sonst öffnet nur die Karte.</span>
+        <div class="alert"><i class="bi bi-sign-stop"></i> <b>Geozonen prüfen.</b> Vor jedem Flug außerhalb des Vereinsgeländes prüfen, ob Geozonen gelten – mit „Hier fliegen“ auf der Startseite oder in dipul. Keine Rechtsauskunft; verantwortlich ist der Fernpilot.</div>
         <div class="card"><h3>Orte des Vereins</h3>
-          <table class="dt"><tr><td><b>Vereinsgelände</b><br><small class="mut">Radius 150 m</small></td><td><span class="badge b-g">flugbuchpflichtig</span></td></tr><tr><td><b>Sporthalle</b><br><small class="mut">Halle, Winter</small></td><td><span class="badge b-all">Halle</span></td></tr></table></div>
+          <table class="dt"><tr><td><b>Vereinsgelände</b><br><small class="mut">Radius 150 m</small></td><td><span class="badge b-g">flugbuchpflichtig</span></td></tr><tr><td><b>Sporthalle</b><br><small class="mut">Halle, Winter</small><br><span class="badge b-r">gesperrt bis So 15.11. 20:00</span></td><td><span class="badge b-all">Halle</span></td></tr></table></div>
         <div class="card"><h3>Meine Orte</h3>
-          <table class="dt"><tr><td><b>Wolfgangsberg</b></td><td><small class="mut">3 Flüge</small></td></tr><tr><td><b>Garten</b></td><td><small class="mut">2 Flüge</small></td></tr></table></div>
+          <table class="dt"><tr><td><b>Wolfgangsberg</b><br><small class="mut">geteilt mit Max R.</small></td><td><small class="mut">3 Flüge</small></td></tr><tr><td><b>Garten</b></td><td><small class="mut">2 Flüge</small></td></tr></table></div>
+        <div class="card"><h3>Mit mir geteilt</h3>
+          <table class="dt"><tr><td><b>Wiese Haimendorf</b><br><small class="mut">geteilt von Jonas B. · nur lesen</small></td><td><small class="mut">1 Flug</small></td></tr></table></div>
       </div>
     </div>
   </div></div></div>
@@ -590,7 +591,7 @@
       <div>
         <div class="card"><div class="hrow"><h3>VM Lauf 5 · Crawler</h3><span class="badge b-car">RC Cars</span></div>
           <dl class="kv2" style="grid-template-columns:90px 1fr"><dt>Datum</dt><dd>Di 24.11.2026, 10:00</dd><dt>Ort</dt><dd>Crawler-Strecke</dd><dt>Klasse</dt><dd>Mini-Crawler bis 1:18</dd><dt>Wertung</dt><dd>Strafpunkte, dann Zeit</dd><dt>Rennleitung</dt><dd>Max R.</dd><dt>Teilnehmer</dt><dd>5 (davon 1 nachgemeldet)</dd></dl>
-          <span class="assume">Annahme: Rennleitung = Verantwortliche des Events, keine eigene Rolle.</span></div>
+          <div class="note" style="text-align:left">Rennleitung sind die Verantwortlichen des Renn-Events – keine eigene Rolle.</div></div>
         <div class="card"><h3>Ablauf</h3><table class="dt"><tr><td>9:30</td><td>Fahrerbesprechung</td></tr><tr><td>10:00</td><td>Durchgang 1 · Parcours A</td></tr><tr><td>13:00</td><td>Durchgang 2 · Parcours B</td></tr><tr><td>15:30</td><td>Siegerehrung</td></tr></table></div>
       </div>
       <div>
@@ -605,7 +606,7 @@
             <tr><td>5.</td><td><b>Tim S.</b></td><td>Axial SCX24</td><td>20</td><td>6:02</td><td><b>11</b></td><td>5. · 51 <i class="bi bi-arrow-down" style="color:var(--red)"></i></td></tr>
           </table>
           <div class="note" style="text-align:left;margin-top:6px">Gleichstand bei 12 Strafpunkten: Markus B. vor Jonas B. wegen der kürzeren Zeit. Ab Lauf 5 greift das Streichergebnis.</div>
-          <span class="assume">Annahme: vorläufige Ergebnisse sind sofort für alle sichtbar und noch änderbar (Einspruch), „endgültig“ sperrt sie.</span>
+          <div class="note" style="text-align:left">„Vorläufig“ ist sofort für alle sichtbar und noch änderbar, „endgültig“ sperrt die Ergebnisse.</div>
         </div>
       </div>
     </div>
@@ -637,7 +638,7 @@
         <div class="card"><h3>Veröffentlichen</h3>
           <label>Status</label><div class="chips"><span class="chip on">vorläufig</span><span class="chip">endgültig</span></div>
           <span class="ibtn dis">Ergebnisse speichern</span>
-          <div><span class="assume">Annahme: Änderungen nach dem Speichern landen im Änderungsprotokoll.</span></div></div>
+          <div class="note" style="text-align:left">Änderungen nach dem Speichern stehen im Änderungsprotokoll.</div></div>
         <div class="card" style="font-size:12.5px"><h3>So wird gewertet</h3>Crawler: weniger Strafpunkte vorn, bei Gleichstand kürzere Zeit. Punkte nach Schema 25 / 20 / 16 / 13 / 11 …<br><small class="mut">Später: Rohwerte automatisch über die Zeitmessung (API).</small></div>
       </div>
     </div>
@@ -647,7 +648,7 @@
 <!-- ============ 11 ORT-DETAIL ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">11</span><h2>Ort-Detail (Vereinsort und eigener Ort)</h2></div>
-  <p class="ddesc">Ein Bildschirm für alle Orte, befüllt aus den Ortsdaten. Links ein eigener Ort: bearbeiten und löschen darf nur der Besitzer, deutlicher Geozonen-Hinweis mit dipul-Link. Rechts zum Vergleich der Vereinsort „Vereinsgelände“: nur lesen, Admins sehen zusätzlich „Als Admin bearbeiten“ (führt in Admin › Orte). Darunter jeweils die letzten Flüge an diesem Ort.</p>
+  <p class="ddesc">Ein Bildschirm für alle Orte, befüllt aus den Ortsdaten. Links ein eigener Ort: bearbeiten, löschen und teilen darf nur der Besitzer; die Freigabe wählt Mitglieder per Auswahldialog, sie sehen den Ort nur lesend in ihrer Ortsauswahl. Ändern oder Löschen wirkt nur auf künftige Flüge. Rechts der Vereinsort „Sporthalle“ mit einer aktiven Platzsperre als Banner (Klick öffnet die Info), dazu „Platzsperre setzen“ für die Abteilungsleitung und „Als Admin bearbeiten“ für Admins.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/orte/wolfgangsberg</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -658,12 +659,14 @@
         <div class="hrow"><h3><i class="bi bi-pin-map"></i> Wolfgangsberg <span class="badge b-all">eigener Ort</span></h3><span><span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out red"><i class="bi bi-trash3"></i> Löschen</span></span></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
           <div class="wx-map" style="min-height:200px;height:200px"><div class="road"></div><div style="position:absolute;left:52%;top:45%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:2px dashed var(--air);background:rgba(30,90,153,.1)"></div><i class="bi bi-geo-alt-fill pin"></i></div>
-          <div class="card" style="margin:0"><dl class="kv2"><dt>Koordinaten</dt><dd>49.4206° N, 11.2412° E</dd><dt>Radius</dt><dd>100 m</dd><dt>Sichtbar für</dt><dd>nur mich</dd><dt>Notiz</dt><dd>Wiese oberhalb des Wanderparkplatzes. Erlaubnis des Eigentümers liegt vor.</dd></dl></div>
+          <div class="card" style="margin:0"><dl class="kv2"><dt>Koordinaten</dt><dd>49.4206° N, 11.2412° E</dd><dt>Radius</dt><dd>100 m</dd><dt>Sichtbar für</dt><dd>mich und Max R.</dd><dt>Notiz</dt><dd>Wiese oberhalb des Wanderparkplatzes. Erlaubnis des Eigentümers liegt vor.</dd></dl></div>
         </div>
-        <div class="alert" style="margin-top:12px"><i class="bi bi-sign-stop"></i> <b>Geozonen prüfen.</b> Eigener Ort: Vor jedem Flug selbst prüfen, ob Geozonen gelten. TSV RC prüft Geozonen nicht. <span class="ibtn out" style="margin-left:6px"><i class="bi bi-box-arrow-up-right"></i> In dipul öffnen</span></div>
+        <div class="alert" style="margin-top:12px"><i class="bi bi-sign-stop"></i> <b>Geozonen prüfen.</b> Kein Vereinsort: vor jedem Flug prüfen – mit „Hier fliegen“ oder in dipul. Keine Rechtsauskunft. <span class="ibtn out" style="margin-left:6px"><i class="bi bi-box-arrow-up-right"></i> In dipul öffnen</span></div>
+        <div class="card"><div class="hrow"><h3>Geteilt mit</h3><span class="ibtn out"><i class="bi bi-person-plus"></i> Teilen</span></div>
+          <table class="dt"><tr><td><i class="bi bi-person"></i> <b>Max R.</b> <small class="mut">sieht den Ort in der Ortsauswahl · nur lesen</small></td><td><span class="ibtn out">Entfernen</span></td></tr></table></div>
         <div class="card"><div class="hrow"><h3>Letzte Flüge hier</h3><span class="ibtn out"><i class="bi bi-cloud-sun"></i> Drohnenwetter hier</span></div>
           <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Flugart</th><th>Dauer</th></tr><tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Foto/Video</td><td>24 min</td></tr><tr><td>18.10.2026</td><td>DJI Neo 2</td><td>Training</td><td>12 min</td></tr><tr><td>27.09.2026</td><td>FPV Quad 5″</td><td>Training</td><td>8 min</td></tr></table></div>
-        <span class="assume">Annahme: Eigene Orte sieht nur der Besitzer. Ändern oder Löschen wirkt nur auf künftige Flüge; erfasste Flüge behalten Ortsname und Koordinaten.</span>
+        <div class="note" style="text-align:left">Ändern oder Löschen wirkt nur auf künftige Flüge; erfasste Flüge behalten Ortsname und Koordinaten – auch bei Mitgliedern, mit denen der Ort geteilt ist.</div>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3><i class="bi bi-geo-alt-fill" style="color:var(--g)"></i> Vereinsgelände</h3><span class="badge b-g">Vereinsort</span></div>
@@ -672,7 +675,10 @@
           <div class="note" style="text-align:left"><i class="bi bi-lock"></i> Vereinsorte pflegt der Admin; Mitglieder sehen sie nur.</div>
           <div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-gear"></i> Als Admin bearbeiten</span> <small class="mut">nur für Admins</small></div>
           <span class="assume">Annahme: Luftraum und Geozonen des Vereinsgeländes hat der Verein geprüft; welche Orte Vereinsgelände bzw. flugbuchpflichtig sind, ist offen (13.2).</span></div>
-        <div class="card"><h3>Sporthalle <span class="badge b-all">Halle</span></h3><small class="mut">Hallenregeln des Vereins, kein Drohnenwetter, keine Geozonen-Prüfung.</small><br><span class="assume">Annahme: Rechtslage in Hallen mit dem Verein abstimmen.</span></div>
+        <div class="card"><div class="hrow"><h3><i class="bi bi-building"></i> Sporthalle</h3><span class="badge b-g">Vereinsort</span></div>
+          <div class="legal" style="background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:8px"><b><i class="bi bi-sign-stop-fill"></i> Platzsperre: Sporthalle <span class="badge b-air">Luftsport</span></b><br>Sa 14.11. 08:00 – So 15.11. 20:00 · Halle belegt · gesetzt von Markus B. · <u>Details</u></div>
+          <small class="mut">Hallenregeln des Vereins, kein Drohnenwetter, keine Geozonen-Prüfung.</small><br><span class="assume">Annahme: Rechtslage in Hallen mit dem Verein abstimmen.</span>
+          <div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-sign-stop"></i> Platzsperre setzen</span> <small class="mut">nur Abteilungsleitung</small></div></div>
       </div>
     </div>
   </div></div></div>
@@ -688,16 +694,16 @@
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
     <div class="dmain" style="grid-template-columns:260px 1fr">
       <div class="card"><h3>Anleitungen</h3><table class="dt"><tr><td>Erste Schritte</td></tr><tr><td>App installieren</td></tr><tr><td>Flug erfassen</td></tr><tr class="me"><td><b>Offline &amp; Synchronisierung</b></td></tr><tr><td>Ausleihe &amp; Übergabe</td></tr><tr><td>Datenschutz</td></tr></table>
-        <div style="margin-top:10px"><span class="ibtn out"><i class="bi bi-envelope"></i> Frage an die Abteilungsleitung</span></div></div>
+        <div style="margin-top:10px"><span class="ibtn out"><i class="bi bi-chat-left-text"></i> Fragen an die Abteilungsleitung</span></div></div>
       <div class="card">
         <div class="hrow"><h3>Offline &amp; Synchronisierung</h3><span class="ibtn"><i class="bi bi-arrow-repeat"></i> Synchronisierungsstatus öffnen</span></div>
         <p style="font-size:13px;margin:0 0 8px">TSV RC funktioniert am Platz auch ohne Netz. Was du offline erfasst, bleibt zuerst auf deinem Gerät und wird automatisch übertragen, sobald wieder Netz da ist.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px">
-          <div><b>Geht ohne Netz</b><ul style="margin:4px 0;padding-left:18px"><li>Flüge erfassen, mit Checkliste und GPS-Ortserkennung</li><li>Vorfälle melden (Fotos werden nachgeladen)</li><li>Eigene Modelle, Orte, Checklisten, Nachweise ansehen</li></ul></div>
-          <div><b>Braucht Netz</b><ul style="margin:4px 0;padding-left:18px"><li>Ausleihe beantragen und genehmigen</li><li>Kalender, Zusagen, Schulungsanmeldung</li><li>DJI-Import, Export, Datenarchiv</li><li>Leitung und Admin</li></ul></div>
+          <div><b>Geht ohne Netz</b><ul style="margin:4px 0;padding-left:18px"><li>Flüge erfassen, mit Checkliste und GPS-Ortserkennung</li><li>Vorfälle melden (Fotos werden nachgeladen)</li><li>Eigene Modelle, Orte, Checklisten, Nachweise ansehen</li><li>Kalender lesen (letzter Stand), Notfallkontakte</li></ul></div>
+          <div><b>Braucht Netz</b><ul style="margin:4px 0;padding-left:18px"><li>Ausleihe beantragen und genehmigen</li><li>Zusagen, Absagen, Schulungsanmeldung</li><li>DJI-Import, Export, Datenarchiv</li><li>Leitung und Admin</li></ul></div>
         </div>
         <p style="font-size:13px;margin:8px 0"><b>Wenn etwas kollidiert:</b> Hat jemand denselben Eintrag inzwischen geändert, überschreibt TSV RC nichts. Du siehst beide Stände und entscheidest. <b>Anmeldung:</b> bleibt 30 Tage gültig; läuft sie offline ab, bleiben wartende Einträge erhalten.</p>
-        <span class="assume">Annahme: Kalender und Zusagen nur online; beim Abmelden mit wartenden Einträgen warnt TSV RC.</span>
+        <div class="note" style="text-align:left">Meldest du dich mit wartenden Einträgen ab, warnt TSV RC und bietet „erst übertragen“ an.</div>
         <div class="note" style="text-align:left">Zuletzt geändert vom Admin am 02.11.2026</div>
       </div>
     </div>
@@ -706,24 +712,36 @@
 
 <!-- ============ 13 KONTAKT ============ -->
 <section class="direction">
-  <div class="dhead"><span class="dletter">13</span><h2>Frage an die Abteilungsleitung (Kontaktformular)</h2></div>
-  <p class="ddesc">Aus Hilfe &amp; FAQ („Frage nicht dabei?“). Thema per Auswahldialog, Nachricht ist Pflicht; „Senden“ wird erst aktiv, wenn beides gefüllt ist. Die Antwort kommt per E-Mail.</p>
-  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/hilfe/kontakt</span></div>
-  <div class="app" style="height:500px">
+  <div class="dhead"><span class="dletter">13</span><h2>Fragen an die Abteilungsleitung (in der App, mit Verlauf und Status)</h2></div>
+  <p class="ddesc">Aus Hilfe &amp; FAQ („Frage nicht dabei?“). Links „Meine Anfragen“ mit Status (offen · beantwortet · erledigt), Mitte der Verlauf einer Anfrage
+     mit Nachfrage und „Als erledigt markieren“, rechts das Formular „Neue Frage“: Thema per Auswahldialog, Nachricht ist Pflicht; „Senden“ wird erst aktiv,
+     wenn beides gefüllt ist. Die Frage landet im Posteingang der Abteilungsleitung (Seiten 3c, Ansicht 17); bei einer Antwort wird das Mitglied benachrichtigt.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/hilfe/anfragen</span></div>
+  <div class="app" style="height:540px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
-    <div class="dmain" style="grid-template-columns:1.4fr 1fr">
-      <div class="card">
-        <h3>Frage an die Abteilungsleitung</h3>
-        <div class="two"><div><label>Thema <span class="req">*</span></label><div class="inp">Flugbuch &amp; Regeln <i class="bi bi-chevron-down"></i></div></div><div><label>Bereich <span class="opt">optional</span></label><div class="chips" style="margin:0"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="chip">beide</span></div></div></div>
-        <label>Nachricht <span class="req">*</span></label><div class="inp" style="min-height:110px;align-items:flex-start">Darf ich am Wolfgangsberg mit der Mini 4 Pro fliegen, oder brauche ich dafür eine Erlaubnis?</div>
-        <div class="hint" style="text-align:right">94 / 1000 Zeichen</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span style="font-size:13px"><span class="tg on"></span> Kopie an mich per E-Mail</span><span class="ibtn"><i class="bi bi-send"></i> Senden</span></div>
+    <div class="dmain" style="grid-template-columns:1fr 1.2fr 1fr">
+      <div class="card"><div class="hrow"><h3>Meine Anfragen</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Neue Frage</span></div>
+        <div class="chips" style="margin:0 0 6px"><span class="chip on">Alle</span><span class="chip">Offen</span><span class="chip">Beantwortet</span><span class="chip">Erledigt</span></div>
+        <table class="dt">
+          <tr class="me"><td><b>Vereinsmeisterschaft</b> <span class="badge b-g">neue Antwort</span><br><small class="mut">Zählt Lauf 5 Crawler doppelt …? · Fr 06.11.</small></td><td><span class="badge b-g">beantwortet</span></td></tr>
+          <tr><td><b>Flugbuch &amp; Regeln</b><br><small class="mut">Könnte die Wiese am Wolfgangsberg … · Fr 13.11.</small></td><td><span class="badge b-w">offen</span></td></tr>
+        </table>
       </div>
-      <div>
-        <div class="card" style="font-size:13px"><h3>Was passiert dann?</h3>Die Nachricht geht an die Abteilungsleitung. Die Antwort kommt per E-Mail an <b>markus@…</b>.</div>
-        <div class="card"><h3>Themen (Auswahldialog)</h3><table class="dt"><tr><td>Mitgliedschaft &amp; Konto</td></tr><tr><td>Flugbuch &amp; Regeln</td></tr><tr><td>Ausleihe &amp; Vereinsmodelle</td></tr><tr><td>Termine &amp; Schulungen</td></tr><tr><td>Vereinsmeisterschaft</td></tr><tr><td>Fehler in der App <small class="mut">(auch an Admin)</small></td></tr><tr><td>Sonstiges</td></tr></table></div>
-        <span class="assume">Annahme: Versand per E-Mail an alle mit Rolle Abteilungsleitung; kein Chat und keine Ablage in der App.</span>
+      <div class="card"><div class="hrow"><h3>Vereinsmeisterschaft</h3><span class="badge b-g">beantwortet</span></div>
+        <div style="background:var(--gl);border:1px solid #b9dcbf;border-radius:6px;padding:8px 10px;font-size:13px;margin:0 0 8px 24px"><small class="mut" style="display:block">Ich · Do 05.11. 20:30</small>Zählt Lauf 5 Crawler doppelt, weil er auf den Dienstag verlegt wurde?</div>
+        <div style="background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:8px"><small class="mut" style="display:block">Abteilungsleitung · Fr 06.11. 09:12</small>Nein, alle Läufe zählen gleich. Das Streichergebnis gilt wie immer ab 5 Läufen.</div>
+        <label>Nachfrage <span class="opt">optional</span></label><div class="inp ph" style="height:46px;align-items:flex-start">Etwas ergänzen oder nachfragen …</div>
+        <div class="btnrow" style="display:flex;gap:8px;margin-top:8px"><span class="ibtn dis"><i class="bi bi-send"></i> Senden</span><span class="ibtn out"><i class="bi bi-check2-circle"></i> Als erledigt markieren</span></div>
+        <div class="hint">Mit einer Nachfrage ist die Anfrage wieder „offen“.</div>
+      </div>
+      <div class="card"><h3>Neue Frage</h3>
+        <label>Thema <span class="req">*</span></label><div class="inp"><span class="mut">Thema wählen</span> <i class="bi bi-chevron-down"></i></div>
+        <label>Bereich <span class="opt">optional</span></label><div class="chips" style="margin:0"><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span><span class="chip">beide</span></div>
+        <label>Nachricht <span class="req">*</span></label><div class="inp ph" style="min-height:70px;align-items:flex-start">Deine Frage oder dein Anliegen …</div>
+        <div style="font-size:13px;margin-top:6px"><span class="tg on"></span> Bei Antwort benachrichtigen</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><small style="color:var(--red)">Es fehlt: Thema, Nachricht.</small><span class="ibtn dis"><i class="bi bi-send"></i> Senden</span></div>
+        <span class="assume">Annahme: Anfragen zum Thema „Fehler in der App“ sieht zusätzlich der Admin.</span>
       </div>
     </div>
   </div></div></div>

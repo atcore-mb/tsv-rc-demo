@@ -267,7 +267,7 @@
             <div class="row"><span>Differenzial prüfen<br><small>alle 3 Monate</small></span><span class="badge b-w">fällig</span></div>
             <div class="row"><span>Lager reinigen<br><small>alle 20 Fahrstunden</small></span><span class="badge b-g">ok</span></div>
           </div>
-          <span class="assume">Annahme: Erinnerungsintervalle je Modell frei einstellbar</span>
+          <div class="hint">Intervalle legt der Besitzer je Modell fest (Vereinsmodelle: Abteilungsleitung); der nächste Termin ergibt sich aus dem Intervall.</div>
         </div>
       </div></div>
     </div>
@@ -304,7 +304,7 @@
           </div>
           <div class="card pad"><dl class="kv2"><dt>Typ</dt><dd>Li-Ion 2S, 1435 mAh</dd><dt>Gekauft</dt><dd>03/2025</dd><dt>Zugeordnet</dt><dd>DJI Neo 2</dd><dt>Zustand</dt><dd>leicht aufgebläht?</dd></dl></div>
           <div class="btns"><button class="btn out">Ausmustern</button><button class="btn out"><i class="bi bi-exclamation-diamond"></i> Schaden</button></div>
-          <span class="assume">Annahme: Flug mit Akku zählt automatisch einen Zyklus</span>
+          <div class="hint">Zählt automatisch je Flug mit diesem Akku, dazu von Hand; bei Rückgabe eines Vereinsakkus wird abgelesen. Der Zähler sinkt nie.</div>
         </div>
       </div></div>
     </div>
@@ -362,7 +362,7 @@
 <!-- ========== 3 Vorfall melden ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Vorfall oder Schaden melden</h2></div>
-  <p class="ddesc">Für beide Bereiche. Bezug zu Flug, Modell oder Ausleihe ist optional und meist schon vorausgefüllt (z. B. aus „Nach der Landung“). Bei <b>schweren Vorfällen mit Luftfahrzeugen</b> erscheint der Hinweis auf die Meldepflicht.</p>
+  <p class="ddesc">Für beide Bereiche. Bezug zu Flug, Modell oder Ausleihe ist optional und meist schon vorausgefüllt (z. B. aus „Nach der Landung“). Nur bei Schwere <b>„Schwer“ mit einem Luftfahrzeug</b> erscheint der Hinweis auf mögliche Meldepflichten; die App meldet nie selbst. Bei anderen Modellen geht „Weiter“ direkt zum Speichern.</p>
   <div class="phones">
     <div class="pcol"><p class="plabel">Schritt 1: Was ist passiert?</p>
       <div class="phone"><div class="screen">
@@ -421,7 +421,7 @@
 <!-- ========== 4 Modell-Detail Drohne/FPV und Zubehör ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">4</span><h2>Modell-Detail: Drohne/FPV und Zubehör</h2></div>
-  <p class="ddesc">Dieselbe Seite wie beim RC Car, gefüllt aus dem Modelltyp. Bei Luftfahrzeugen erscheinen die festen Felder (EU-Klasse, Gewicht, Remote-ID, Betreiber) mit Schloss, der Reiter heißt <b>Flüge</b>, Akkus stehen mit Ladezyklen dabei. Die Wind-Grenze fürs Drohnenwetter kommt vom Admin und lässt sich je Modell überschreiben (optional, im Bearbeiten-Formular unter „Wetter“); gesetzt erscheint sie auf der Modellseite. Zubehör (z. B. Fernsteuerung, Akku) hat kein Flugbuch, zeigt dafür <b>„Passt zu“</b> und bei Akkus den Ladezyklen-Zähler. Handy: Klickdummy, Bildschirm <code>md-detail</code>.</p>
+  <p class="ddesc">Dieselbe Seite wie beim RC Car, gefüllt aus dem Modelltyp. Bei Luftfahrzeugen erscheinen die festen Felder (EU-Klasse, Gewicht, Remote-ID, Betreiber) mit Schloss, der Reiter heißt <b>Flüge</b>, Akkus stehen mit Ladezyklen dabei. Die Wind-Grenze fürs Drohnenwetter kommt vom Admin und lässt sich je Modell überschreiben (optional, schon beim Anlegen und im Bearbeiten-Formular unter „Wetter“); gesetzt erscheint sie auf der Modellseite. Ampel: grün bis zur Grenze, gelb bis 10 km/h darüber, darüber rot – auch bei „Hier fliegen“. Zubehör (z. B. Fernsteuerung, Akku) hat kein Flugbuch, zeigt dafür <b>„Passt zu“</b> und bei Akkus den Ladezyklen-Zähler. Handy: Klickdummy, Bildschirm <code>md-detail</code>.</p>
   <p class="sublabel">PC · FPV Quad 5″ (Luftfahrzeug)</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/modelle/fpv-quad-5</span></div>
   <div class="app">
@@ -443,8 +443,7 @@
         <div class="card"><div class="hrow"><h3>Wartung</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Eintrag</span></div><div class="tl"><div class="e w"><b>So 12.04. Propeller getauscht</b><small>nach Vorfall vom Sa 11.04.</small></div></div>
           <table class="dt"><tr><td>Schrauben nachziehen<br><small class="mut">alle 10 Flüge</small></td><td><span class="badge b-w">in 2 Flügen</span></td></tr></table></div>
         <div class="card"><h3>Verlauf</h3><div class="tl"><div class="e w"><b>Fr 13.11. · Markus B.</b><small>Eigene Wind-Grenze: – → 25 km/h</small></div><div class="e"><b>So 12.04. · Markus B.</b><small>Vorfall „Propeller gebrochen“ verknüpft</small></div><div class="e"><b>So 14.02. · Markus B.</b><small>Angelegt</small></div></div></div>
-        <div class="card"><h3>Bearbeiten · Abschnitt Wetter</h3><label>Eigene Wind-Grenze (km/h) <span class="opt">optional</span></label><div class="inp">25</div><div class="hint">Standard vom Admin: 20 km/h. Leer lassen, um den Standard zu verwenden.</div>
-          <span class="assume">Annahme: Die eigene Grenze ersetzt den Wert für „grün“; „gelb“ reicht wie beim Standard 10 km/h darüber.</span></div>
+        <div class="card"><h3>Bearbeiten · Abschnitt Wetter</h3><label>Eigene Wind-Grenze (km/h) <span class="opt">optional</span></label><div class="inp">25</div><div class="hint">Standard vom Admin: 20 km/h. Leer lassen, um den Standard zu verwenden. Ampel: grün bis 25, gelb bis 35, darüber rot (km/h). Dasselbe Feld gibt es optional schon beim Anlegen.</div></div>
       </div>
     </div>
   </div></div></div>
@@ -464,7 +463,7 @@
       <div>
         <div class="card"><h3>Zum Vergleich: Akku Neo #1</h3><div class="hrow" style="margin-bottom:2px"><b><i class="bi bi-lock mut"></i> Ladezyklen</b><b>112</b></div><div class="meter w"><div style="width:75%"></div></div><small class="mut">Richtwert ca. 150 Zyklen · passt zu DJI Neo 2</small>
           <div style="margin-top:8px"><span class="ibtn out"><i class="bi bi-plus-lg"></i> 1 Ladezyklus</span></div></div>
-        <span class="assume">Annahme: Typwechsel nach dem Anlegen nicht möglich (nur Neuanlage)</span>
+        <div class="note" style="text-align:left">Der Typ ist nach dem Anlegen fest; für einen anderen Typ wird das Modell neu angelegt.</div>
       </div>
     </div>
   </div></div></div>
@@ -473,7 +472,7 @@
 <!-- ========== 5 Geteiltes Modell ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">5</span><h2>Geteiltes Modell, zum Fliegen freigegeben</h2></div>
-  <p class="ddesc">Ein fremdes Privatmodell, das der Besitzer mit mir geteilt hat (Mehr › Freigaben › Mit mir geteilt). Gleiche Seite mit Hinweis „geteilt von …“, ohne Bearbeiten, Teilen oder Wartung eintragen. Hat der Besitzer das Recht <b>„darf fliegen“</b> vergeben, zeigt die Seite „Du darfst es fliegen“, den Reiter „Meine Flüge“ und „Flug erfassen“ (Modell vorbelegt). Der Flug zählt bei mir und beim Modell; der Besitzer sieht ihn unter „Flüge“. Ohne dieses Recht bleibt es bei „nur lesen“. Handy: <code>md-detail</code> mit DJI Avata 2 von Max R.</p>
+  <p class="ddesc">Ein fremdes Privatmodell, das der Besitzer mit mir geteilt hat (Mehr › Freigaben › Mit mir geteilt). Gleiche Seite mit Hinweis „geteilt von …“, ohne Bearbeiten, Teilen oder Wartung eintragen. Hat der Besitzer das Recht <b>„darf fliegen“</b> vergeben, zeigt die Seite „Du darfst es fliegen“, den Reiter „Meine Flüge“ und „Flug erfassen“ (Modell vorbelegt). Der Flug zählt bei mir und beim Modell; der Besitzer sieht ihn unter „Flüge“. Ohne dieses Recht bleibt es bei „nur lesen“. Die Freigabe zeigt Daten, <b>Zubehör mit Detailseite</b> (nur lesen) und Wartung sowie nur die eigenen Flüge damit, nicht die e-ID des Besitzers. „Darf fliegen“ gibt es auch für <b>alle Luftfahrzeuge</b> eines Mitglieds (inkl. künftiger). Handy: <code>md-detail</code> mit DJI Avata 2 von Max R., Reiter Zubehör.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben/modell/avata-2-max</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a></div>
@@ -482,15 +481,16 @@
         <div class="md-share"><i class="bi bi-airplane"></i> <b>Geteilt von Max R.</b> · <b>du darfst es fliegen</b> · unbefristet (seit Di 03.11.). Ändern kann nur der Besitzer, die Freigabe kann Max R. jederzeit widerrufen.</div>
         <div class="hero"><div class="pic air"><i class="bi bi-airplane"></i></div><div><b>DJI Avata 2</b><small>FPV · Besitzer Max R.</small><br><span class="badge b-g">bereit</span> <span class="badge b-air">Luftfahrzeug</span></div></div>
         <div class="card"><h3><i class="bi bi-lock" style="color:var(--mut);font-size:13px"></i> Luftfahrzeug (fest) · Typ FPV</h3><dl class="kv2"><dt>EU-Klasse</dt><dd>C1</dd><dt>Gewicht</dt><dd>377 g</dd><dt>Remote-ID</dt><dd>aktiv</dd><dt>Betreiber</dt><dd>Max R. · registriert</dd><dt>Größe</dt><dd>3″</dd><dt>Videosystem</dt><dd>DJI O3 / O4</dd></dl></div>
-        <span class="assume">Annahme (DSGVO): Die Registrierungsnummer des Betreibers wird bei Freigaben nicht angezeigt</span>
+        <div class="note" style="text-align:left"><i class="bi bi-lock"></i> Die Registrierungsnummer (e-ID) des Besitzers wird in Freigaben nicht angezeigt.</div>
       </div>
       <div>
-        <div class="card"><h3>Zubehör</h3><table class="dt"><tr><td>Akku Avata 2 #1</td><td><small>24 Zyklen</small></td></tr><tr><td>Akku Avata 2 #2</td><td><small>21 Zyklen</small></td></tr><tr><td>DJI Goggles 3</td><td><small>FPV-Brille</small></td></tr><tr><td>RC Motion 3</td><td><small>Fernsteuerung</small></td></tr></table></div>
+        <div class="card"><h3>Zubehör</h3><table class="dt"><tr><td style="color:var(--g);font-weight:700">Akku Avata 2 #1</td><td><small>24 Zyklen</small></td><td><i class="bi bi-chevron-right mut"></i></td></tr><tr><td style="color:var(--g);font-weight:700">Akku Avata 2 #2</td><td><small>21 Zyklen</small></td><td><i class="bi bi-chevron-right mut"></i></td></tr><tr><td style="color:var(--g);font-weight:700">DJI Goggles 3</td><td><small>FPV-Brille</small></td><td><i class="bi bi-chevron-right mut"></i></td></tr><tr><td style="color:var(--g);font-weight:700">RC Motion 3</td><td><small>Fernsteuerung</small></td><td><i class="bi bi-chevron-right mut"></i></td></tr></table>
+          <div style="border-top:1px solid #eef0ee;margin-top:6px;padding-top:6px;font-size:12.5px"><b>Akku Avata 2 #1</b> <span class="badge b-all">nur lesen</span><br><span class="mut">Zubehör zum geteilten Modell „DJI Avata 2“ · Li-Ion 2150 mAh · 24 von ca. 200 Ladezyklen · Lagerspannung zuletzt geprüft So 01.11.</span></div></div>
         <div class="card"><h3>Wartung</h3><div class="tl"><div class="e"><b>So 01.11. Propeller getauscht</b></div></div></div>
         <div class="card"><div class="hrow"><h3>Meine Flüge mit diesem Modell</h3><span class="ibtn"><i class="bi bi-airplane"></i> Flug erfassen</span></div>
           <table class="dt"><tr><td>Sa 07.11.</td><td>Vereinsgelände · Training</td><td>11 min</td></tr></table>
           <div class="note" style="text-align:left">Du darfst es fliegen. Deine Flüge zählen in deinem Flugbuch und beim Modell; Max R. sieht sie.</div></div>
-        <span class="assume">Annahme: Die Freigabe zeigt Daten, Zubehör und Wartung; von den Flügen mit dem Modell siehst du nur deine eigenen (alle Flüge des Besitzers nur über die Freigabe „Flugbuch“).</span>
+        <div class="note" style="text-align:left">Von den Flügen mit dem Modell siehst du nur deine eigenen; alle Flüge des Besitzers nur über eine Freigabe „Flugbuch“.</div>
       </div>
     </div>
   </div></div></div>
@@ -509,8 +509,7 @@
         <div class="card"><dl class="kv2"><dt>Modell</dt><dd style="color:var(--g)">FPV Quad 5″</dd><dt>Wann</dt><dd>Sa 11.04.2026, 15:20</dd><dt>Wo</dt><dd>Vereinsgelände</dd><dt>Bezug</dt><dd>Flug Sa 11.04. 15:12 · 7 min</dd><dt>Gemeldet von</dt><dd>Markus B.</dd><dt>Sichtbar für</dt><dd>Abteilungsleitung (automatisch: Vereinsgelände)</dd></dl></div>
         <div class="card"><h3>Beschreibung</h3><div style="font-size:13px">Beim Freestyle-Training Bodenberührung, zwei Propeller gebrochen. Keine Personen und keine fremden Sachen betroffen.</div>
           <div class="photos" style="margin-top:8px"><div><i class="bi bi-image"></i></div></div></div>
-        <div class="card" style="font-size:13px"><i class="bi bi-info-circle"></i> Luftfahrzeug, aber nicht als „schwer“ eingestuft: kein Hinweis auf Meldepflicht.</div>
-        <span class="assume">Annahme: Meldehinweis hängt allein an der Schwere „Schwer“</span>
+        <div class="card" style="font-size:13px"><i class="bi bi-info-circle"></i> Luftfahrzeug, aber nicht als „schwer“ eingestuft: kein Hinweis auf Meldepflicht. Der Hinweis erscheint nur bei „Schwer“ mit Luftfahrzeug; die App meldet nie selbst.</div>
       </div>
       <div>
         <div class="card"><h3>Verlauf</h3><div class="tl"><div class="e"><b>So 12.04. · Markus B.</b><small>Status → erledigt · Propeller getauscht</small></div><div class="e"><b>Sa 11.04. · Markus B.</b><small>Vorfall gemeldet</small></div></div></div>
@@ -518,7 +517,7 @@
           <label>Status <span class="req">*</span></label><div class="chips"><span class="chip">offen</span><span class="chip">in Bearbeitung</span><span class="chip on">erledigt</span></div>
           <label>Nachtrag <span class="req">*</span></label><div class="inp ph" style="height:50px;align-items:flex-start">z. B. Ersatzteil bestellt</div>
           <div style="margin-top:8px"><span class="ibtn">Nachtrag speichern</span> <span class="ibtn out"><i class="bi bi-share"></i> Teilen</span></div></div>
-        <span class="assume">Annahme: Status ändern Meldende und bei Vereinsgerät die Abteilungsleitung</span>
+        <div class="note" style="text-align:left">Den Status ändern die meldende Person und bei Vereinsgerät die Abteilungsleitung.</div>
       </div>
     </div>
   </div></div></div>
@@ -539,7 +538,7 @@
           <tr><td><b>Crawler-Strecke</b></td><td>Crawler</td><td><span class="badge b-w">nass, rutschig</span></td><td><small>Fr 13.11. 17:40 · Max R.</small></td></tr>
           <tr><td><b>Teerfläche</b></td><td>Glattbahn</td><td><span class="badge b-r">gesperrt</span></td><td><small>Sa 07.11. · Markus B.</small></td></tr>
           <tr><td><b>Sporthalle</b></td><td>Indoor-Crawlen (Winter)</td><td><span class="badge b-all">nach Hallenplan</span></td><td><small>Kalender</small></td></tr></table></div>
-        <span class="assume">Annahme: Strecke = Ort mit Bereich RC Cars plus Zusatzfelder (Disziplin, Untergrund, Streckenführung)</span>
+        <div class="note" style="text-align:left">Eine Strecke ist ein Ort mit Zusatzfeldern (Disziplin, Untergrund, Streckenführung). Den Zustand meldet jedes Mitglied, sichtbar für alle.</div>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3>Sand-Rennstrecke</h3><span class="badge b-g">befahrbar</span></div><dl class="kv2"><dt>Untergrund</dt><dd>Sand/Lehm, gewässert</dd><dt>Strecke</dt><dd>ca. 180 m · 9 Kurven · 2 Sprünge</dd><dt>Fahrzeuge</dt><dd>Offroad bis 1:8, Elektro</dd><dt>Ansprechpartner</dt><dd>Jonas B.</dd><dt>Koordinaten</dt><dd>49.4119, 11.2051</dd></dl>
@@ -554,7 +553,7 @@
 <!-- ========== 8 Checklisten ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">8</span><h2>Checklisten</h2></div>
-  <p class="ddesc">Die vom Admin im Regelwerk vorgegebenen Vorlagen, nach Bereich filterbar, mit Vorschau zum Abhaken (wird nicht gespeichert). Gespeichert wird eine Checkliste nur beim Flug erfassen (mit Uhrzeit am Flug) bzw. im Übergabeprotokoll. Darunter die zuletzt durchgeführten Checklisten. Für RC Cars sind Checklisten eine <b>Merkhilfe ohne Speichern</b>; sie liegen im ⋯-Menü von RC Cars und öffnen dort auf RC Cars gefiltert. Handy: <code>md-checklisten</code>, <code>md-cl</code>.</p>
+  <p class="ddesc">Die vom Admin im Regelwerk vorgegebenen Vorlagen und darunter <b>„Meine Checklisten“</b>: private Zusatz-Checklisten, die jedes Mitglied selbst anlegt (Name, Bereich, Punkte hinzufügen und sortieren). Sie sind nur für das Mitglied sichtbar und beim Flug erfassen wählbar. Alles nach Bereich filterbar, mit Vorschau zum Abhaken (wird nicht gespeichert). Gespeichert wird eine Checkliste nur beim Flug erfassen (mit Uhrzeit am Flug) bzw. im Übergabeprotokoll. Darunter die zuletzt durchgeführten Checklisten. Für RC Cars sind Checklisten eine <b>Merkhilfe ohne Speichern</b>; sie liegen im ⋯-Menü von RC Cars und öffnen dort auf RC Cars gefiltert. Handy: <code>md-checklisten</code>, <code>md-cl</code>.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/checklisten</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="on">Checklisten</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
@@ -567,7 +566,9 @@
           <tr><td><b>Vor der Fahrt</b></td><td>vor der Fahrt</td><td>Offroad, Crawler, Glattbahn</td><td>5</td></tr>
           <tr><td><b>Übergabe Vereinsmodell</b></td><td>Übergabe und Rückgabe</td><td>alle Modelltypen</td><td>7</td></tr></table></div>
         <div class="card"><h3>Zuletzt durchgeführt</h3><table class="dt"><tr><td>Sa 14.11. · 14:02</td><td>Vor dem Flug</td><td>DJI Neo 2</td><td><span class="badge b-g">6/6</span></td></tr><tr><td>Do 12.11. · 18:11</td><td>Hallenfliegen</td><td>FPV Quad 5″</td><td><span class="badge b-g">4/4</span></td></tr></table></div>
-        <span class="assume">Annahme: Mitglieder legen keine eigenen Checklisten an; Vorschläge gehen an den Admin</span>
+        <div class="card"><div class="hrow"><h3>Meine Checklisten <small class="mut" style="font-weight:600">nur für dich</small></h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Eigene Checkliste</span></div>
+          <table class="dt"><tr><td><i class="bi bi-person-check" style="color:var(--air)"></i> <b>FPV Freestyle – meine Extras</b></td><td>vorher</td><td>Luftsport</td><td>4</td></tr></table>
+          <div class="note" style="text-align:left">Beim Flug erfassen unter „Checkliste ändern › Meine Checklisten“ wählbar.</div></div>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3>Vorschau</h3><span class="badge b-w">2 / 6</span></div>
@@ -579,6 +580,27 @@
           <div class="chk"><i class="bi bi-square off"></i><span>Aufsicht informiert (falls vorhanden)</span></div>
           <div style="margin-top:8px"><span class="ibtn out">Zurücksetzen</span> <span class="ibtn"><i class="bi bi-airplane"></i> Flug erfassen</span></div></div>
         <div class="note" style="text-align:left"><i class="bi bi-info-circle"></i> RC Cars („Vor der Fahrt“): Merkhilfe, wird nicht gespeichert.</div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="sublabel">PC · Eigene Checkliste anlegen (Dialog)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/checklisten/neu</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="on">Checklisten</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="opacity:.45"><div class="card"><h3>Vorlagen des Vereins</h3><table class="dt"><tr><td>Vor dem Flug – Offene Kategorie</td></tr><tr><td>Hallenfliegen</td></tr></table></div><div></div></div>
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center">
+      <div class="card" style="width:560px;padding:16px 20px;box-shadow:0 10px 30px rgba(0,0,0,.25)">
+        <div class="hrow"><h3>Eigene Checkliste anlegen</h3><i class="bi bi-x-lg"></i></div>
+        <label>Name <span class="req">*</span></label><div class="inp">Wiese prüfen</div>
+        <div class="two"><div><label>Bereich <span class="req">*</span></label><div class="chips"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span></div></div>
+          <div><label>Wann <span class="opt">optional</span></label><div class="chips"><span class="chip on">vorher</span><span class="chip">nachher</span><span class="chip">Packliste</span></div></div></div>
+        <label>Punkte <span class="req">*</span></label>
+        <div style="display:flex;gap:6px;margin-bottom:6px"><div class="inp" style="flex:1">Ballen weggeräumt</div><span class="ibtn out"><i class="bi bi-arrow-up"></i></span><span class="ibtn out"><i class="bi bi-arrow-down"></i></span><span class="ibtn out"><i class="bi bi-x-lg"></i></span></div>
+        <div style="display:flex;gap:6px;margin-bottom:6px"><div class="inp" style="flex:1">Hund angeleint</div><span class="ibtn out"><i class="bi bi-arrow-up"></i></span><span class="ibtn out"><i class="bi bi-arrow-down"></i></span><span class="ibtn out"><i class="bi bi-x-lg"></i></span></div>
+        <div style="display:flex;gap:6px;margin-bottom:6px"><div class="inp" style="flex:1">Zaun geschlossen</div><span class="ibtn out"><i class="bi bi-arrow-up"></i></span><span class="ibtn out"><i class="bi bi-arrow-down"></i></span><span class="ibtn out"><i class="bi bi-x-lg"></i></span></div>
+        <div style="font-size:13px;font-weight:700;color:var(--g);margin:4px 0 8px"><i class="bi bi-plus-circle"></i> Punkt hinzufügen</div>
+        <div class="hint">Nur für dich sichtbar. Luftsport: beim Flug erfassen wählbar, wird mit Uhrzeit beim Flug gespeichert. RC Cars: Merkhilfe ohne Speichern. Speichern erst mit Name, Bereich und mindestens einem Punkt.</div>
+        <div style="margin-top:10px;text-align:right"><span class="ibtn out">Abbrechen</span> <span class="ibtn">Speichern</span></div>
       </div>
     </div>
   </div></div></div>

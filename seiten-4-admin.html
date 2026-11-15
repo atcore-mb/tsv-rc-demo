@@ -255,8 +255,8 @@
         <div class="ad-tiles">
           <div class="ad-tile w"><b>1</b>Registrierung wartet auf Freischaltung<br><small class="mut">Paul W. · seit gestern</small></div>
           <div class="ad-tile w"><b>v5</b>Regelwerk-Entwurf mit 3 Änderungen<br><small class="mut">aktiv: v4 seit 02.11.2026</small></div>
-          <div class="ad-tile ok"><b>02:30</b>Letzte Sicherung heute, erfolgreich<br><small class="mut">412 MB · Probe-Restore ok</small></div>
-          <div class="ad-tile ok"><b><i class="bi bi-link-45deg"></i> intakt</b>Hash-Kette Änderungsprotokoll<br><small class="mut">48.213 Einträge · geprüft 03:00</small></div>
+          <div class="ad-tile ok"><b>02:30</b>Letzte Sicherung heute, erfolgreich<br><small class="mut">412 MB · Restore nach Test 03:00 ok</small></div>
+          <div class="ad-tile ok"><b><i class="bi bi-link-45deg"></i> intakt</b>Hash-Kette Änderungsprotokoll<br><small class="mut">48.213 Einträge · zuletzt geprüft 02.11. (auf Knopfdruck)</small></div>
         </div>
         <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px">
           <div class="card"><h3>Letzte Admin-Aktionen</h3>
@@ -270,7 +270,11 @@
           </div>
           <div>
             <div class="card"><h3>Sicherheit</h3>
-              <table class="dt"><tr><td>Admins mit 2FA/Passkey</td><td><span class="badge b-g">1 / 1</span></td></tr><tr><td>Gesperrte Konten</td><td>1</td></tr><tr><td>Fehlversuche (24 h)</td><td>3</td></tr></table>
+              <table class="dt"><tr><td>Admins mit 2FA/Passkey</td><td><span class="badge b-g">1 / 1</span></td></tr><tr><td>Gesperrte Konten</td><td>1</td></tr><tr><td>Fehlversuche (24 h)</td><td>3</td></tr><tr><td>Anmeldung vorübergehend gesperrt</td><td>1 <small class="mut">Jonas B.</small></td></tr></table>
+            </div>
+            <div class="card"><h3>Einstellungen</h3>
+              <table class="dt"><tr><td>Löschfrist für eigene Flüge<br><small class="mut">danach nur „ungültig markieren“</small></td><td><span class="inp" style="display:inline-flex;margin:0;padding:4px 8px;gap:6px">30 Minuten <i class="bi bi-chevron-down"></i></span></td></tr></table>
+              <div class="hint">Standard 30 Minuten; Auswahl: keine, 10 Min., 30 Min., 60 Min., 24 Std. Wirkt sofort, protokolliert.</div>
             </div>
             <div class="card" style="border-left:4px solid var(--warn)"><h3><i class="bi bi-hdd-network ad-warn"></i> Externe Backup-Ablage</h3><small>Noch nicht eingerichtet. Sicherungen liegen nur auf dem Vereinsserver.</small><br><span class="assume">Offener Punkt 14.3 (Projektinhaber)</span></div>
           </div>
@@ -283,7 +287,7 @@
 <!-- ============ 2 KONTEN ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Konten: Liste und Selbstregistrierung</h2></div>
-  <p class="ddesc">Alle Konten mit Rollen, Bereichen und Anmeldestatus. Für Admins wird die 2FA-Pflicht direkt in der Liste geprüft. Oben rechts der Schalter für die Selbstregistrierung; neue Registrierungen erscheinen als „wartet“ und werden von Abteilungsleitung oder Admin freigeschaltet.</p>
+  <p class="ddesc">Alle Konten mit Rollen, Vorliebe („meine Bereiche“, wählt die Person selbst) und Anmeldestatus. Für Admins wird die 2FA-Pflicht direkt in der Liste geprüft. Oben rechts der Schalter für die Selbstregistrierung; neue Registrierungen erscheinen als „wartet“ und werden von Abteilungsleitung oder Admin freigeschaltet.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/konten</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -297,25 +301,25 @@
       </div>
       <div class="dcontent">
         <div class="hrow"><h3 style="font-size:18px">Konten <small class="mut" style="font-size:13px;font-weight:600">41</small></h3>
-          <span style="display:flex;gap:10px;align-items:center;font-size:13px"><span>Selbstregistrierung</span><span class="tg on"></span><span class="ibtn"><i class="bi bi-envelope-plus"></i> Person einladen</span></span></div>
+          <span style="display:flex;gap:10px;align-items:center;font-size:13px"><span>Selbstregistrierung <small class="mut">(Leitung und Admin)</small></span><span class="tg on"></span><span class="ibtn"><i class="bi bi-envelope-plus"></i> Person einladen</span></span></div>
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
           <div class="inp" style="width:260px"><span class="mut">Name oder E-Mail …</span><i class="bi bi-search"></i></div>
           <div class="chips" style="margin:0"><span class="chip on">Alle</span><span class="chip">Wartet (1)</span><span class="chip">Eingeladen (1)</span><span class="chip">Admin</span><span class="chip">Abteilungsleitung</span><span class="chip">Minderjährig</span><span class="chip">Gesperrt</span></div>
         </div>
         <div class="card" style="padding:4px 10px">
-          <table class="dt"><tr><th>Name</th><th>E-Mail</th><th>Rollen</th><th>Bereiche</th><th>Anmeldung</th><th>Status</th><th>Letzte Anmeldung</th></tr>
+          <table class="dt"><tr><th>Name</th><th>E-Mail</th><th>Rollen</th><th>Vorliebe</th><th>Anmeldung</th><th>Status</th><th>Letzte Anmeldung</th></tr>
             <tr><td><b>Markus B.</b></td><td>markus@…</td><td>Admin <small class="mut">(global)</small>, Abteilungsleitung, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td><i class="bi bi-fingerprint"></i> 2 · <i class="bi bi-shield-lock"></i> 1 <span class="badge b-g">Admin-Pflicht erfüllt</span></td><td><span class="badge b-g">aktiv</span></td><td>heute</td></tr>
             <tr><td><b>Max R.</b></td><td>max@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span></td><td><i class="bi bi-fingerprint"></i> 1</td><td><span class="badge b-g">aktiv</span></td><td>gestern</td></tr>
-            <tr><td><b>Jonas B.</b></td><td>jonas@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td>Passwort <small class="mut">(2FA zurückgesetzt)</small></td><td><span class="badge b-g">aktiv</span></td><td>10.11.</td></tr>
+            <tr><td><b>Jonas B.</b></td><td>jonas@…</td><td>Ausbilder, Mitglied</td><td><span class="badge b-air">Luft</span> <span class="badge b-car">RC</span></td><td>Passwort <small class="mut">(2FA zurückgesetzt)</small> <span class="badge b-w">5 Fehlversuche · bis 14:27</span></td><td><span class="badge b-g">aktiv</span></td><td>10.11.</td></tr>
             <tr class="sel"><td><b>Lena K.</b></td><td>lena@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>08.11.</td></tr>
             <tr><td><b>Tim S.</b> <span class="badge b-w">14</span></td><td>tim@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>Passwort</td><td><span class="badge b-g">aktiv</span> <small class="mut">Eltern: Sandra S.</small></td><td>12.11.</td></tr>
             <tr><td><b>Sandra S.</b></td><td>sandra@…</td><td>Erziehungsberechtigte <small class="mut">(kein Mitglied)</small></td><td>–</td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>12.11.</td></tr>
-            <tr><td><b>Paul W.</b> <span class="badge b-w">16</span></td><td>paul@…</td><td>–</td><td><span class="badge b-car">RC</span> gewünscht</td><td>–</td><td><span class="badge b-w">wartet: Eltern fehlen</span></td><td>–</td></tr>
+            <tr><td><b>Paul W.</b> <span class="badge b-w">16</span></td><td>paul@…</td><td>–</td><td><span class="badge b-car">RC</span></td><td>–</td><td><span class="badge b-w">wartet: Eltern fehlen</span></td><td>–</td></tr>
             <tr><td><b>Eva M.</b></td><td>eva@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>–</td><td><span class="badge b-all">eingeladen · bis 21.11.</span></td><td>–</td></tr>
             <tr style="color:#888"><td><b>Felix H.</b></td><td>felix@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-r">gesperrt</span></td><td>03/2026</td></tr>
           </table>
         </div>
-        <div class="hint">Minderjährige werden erst aktiv, wenn ein Erziehungsberechtigter verknüpft und die Einwilligung dokumentiert ist. Kontotyp „Dienst“ (Service Accounts) folgt in einer späteren Ausbaustufe.</div>
+        <div class="hint">Eingeladene Kinder-Konten sind sofort nutzbar; zustimmungspflichtige Aktionen warten auf das Eltern-Konto. Selbstregistrierte Minderjährige werden erst nach Verknüpfung eines Erziehungsberechtigten freigeschaltet. Kontotyp „Dienst“ (Service Accounts) folgt in einer späteren Ausbaustufe.</div>
       </div>
     </div>
   </div></div></div>
@@ -341,7 +345,7 @@
         <div class="hrow"><h3 style="font-size:18px">Lena K.</h3><span><span class="ibtn out"><i class="bi bi-envelope"></i> Passwort-Link senden</span> <span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren</span></span></div>
         <div style="display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:14px">
           <div class="card"><h3>Person</h3>
-            <dl class="kv2"><dt>Kontotyp</dt><dd>Person</dd><dt>E-Mail (Login)</dt><dd>lena@…</dd><dt>Geburtsdatum</dt><dd>04.07.1998</dd><dt>Telefon</dt><dd>0911 …</dd><dt>Mitglied seit</dt><dd>09/2025</dd><dt>Bereiche</dt><dd><span class="badge b-car">RC Cars</span> <span class="mut">+ hinzufügen</span></dd></dl>
+            <dl class="kv2"><dt>Kontotyp</dt><dd>Person</dd><dt>E-Mail (Login)</dt><dd>lena@…</dd><dt>Geburtsdatum</dt><dd>04.07.1998</dd><dt>Telefon</dt><dd>0911 …</dd><dt>Mitglied seit</dt><dd>09/2025</dd><dt>Vorliebe</dt><dd><span class="badge b-car">RC Cars</span> <small class="mut">wählt Lena selbst</small></dd></dl>
             <div class="hint">Kontaktdaten-Änderungen werden ohne Werte protokolliert.</div>
           </div>
           <div class="card"><div class="hrow"><h3>Rollen</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Rolle</span></div>
@@ -350,11 +354,11 @@
               <tr><td><b>Ausbilder</b></td><td>Abteilung RC-Modellsport</td><td><span class="badge b-g">neu</span></td><td><i class="bi bi-x mut"></i></td></tr>
               <tr style="color:#888"><td><b>Admin</b></td><td>global</td><td><span class="badge b-w">wartet auf 2FA</span></td><td><i class="bi bi-x mut"></i></td></tr>
             </table>
-            <div class="alert" style="margin:8px 0 0"><i class="bi bi-shield-exclamation"></i> Admins brauchen mindestens einen zweiten Faktor oder Passkey. Lena wird bei der nächsten Anmeldung zur Einrichtung aufgefordert; bis dahin hat sie keine Admin-Rechte.<br><span class="assume">Annahme: Rolle bleibt bis zur Einrichtung unwirksam</span></div>
+            <div class="alert" style="margin:8px 0 0"><i class="bi bi-shield-exclamation"></i> Admins brauchen mindestens einen zweiten Faktor oder Passkey. Lena wird bei der nächsten Anmeldung zur Einrichtung aufgefordert; die Admin-Rolle wird erst danach wirksam.</div>
           </div>
           <div>
             <div class="card"><h3>Anmeldung</h3>
-              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>0</td></tr><tr><td>Fehlversuche</td><td>0</td></tr></table>
+              <table class="dt"><tr><td>Passwort</td><td><i class="bi bi-check-lg ad-ok"></i></td></tr><tr><td>Passkeys</td><td>0</td></tr><tr><td>TOTP-Faktoren</td><td>0</td></tr><tr><td>Sitzungen</td><td>2 Geräte</td></tr><tr><td>API-Tokens</td><td>0</td></tr><tr><td>Fehlversuche</td><td>0 <small class="mut">(bei Sperre: „Sofort freigeben“ / „Verkürzen“)</small></td></tr></table>
               <div style="margin-top:8px"><span class="ibtn out">Zweite Faktoren zurücksetzen</span></div>
               <div class="hint">Zurücksetzen wird protokolliert; Lena wird per E-Mail informiert.</div>
             </div>
@@ -370,7 +374,7 @@
       <label>Dauer <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip">unbefristet</span><span class="chip on">1 Woche</span><span class="chip">1 Monat</span><span class="chip">bis Datum …</span></div>
       <div style="font-size:13px;margin-top:6px" class="mut">Endet automatisch am Sa 21.11.2026.</div>
       <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><span class="ibtn out">Abbrechen</span><span class="ibtn red">Sperren</span></div>
-      <span class="assume">Annahme: Sperre mit Pflichtgrund, keine Datenlöschung; die Person wird per E-Mail informiert.</span>
+      <div class="note" style="text-align:left">Die Person erhält eine E-Mail mit Grund, Dauer und Nachricht (bei Minderjährigen auch die Erziehungsberechtigten). Eine Sperre löscht keine Daten.</div>
     </div></div>
   </div></div></div>
 </section>
@@ -521,8 +525,8 @@
             </div>
             <div class="card"><h3>Aufbewahrungsfrist</h3>
               <div class="two"><div><label>Flugbuch, Vorfälle, Nachweise <span class="req">*</span></label><div class="inp">3 <span class="mut">Jahre</span></div></div></div>
-              <div class="hint">Gilt ab Erfassung. Danach werden Daten gelöscht bzw. anonymisiert; das Protokoll wird blockweise gekürzt. Standard 3 Jahre (strengste bekannte Anforderung).</div>
-              <span class="assume">Fristbeginn „ab Erfassung“ ist Annahme; Verbandsfrist offen (13.1)</span>
+              <div class="hint">Gilt ab Erfassung des Datensatzes. Danach werden Daten gelöscht bzw. anonymisiert; das Protokoll wird blockweise gekürzt. Standard 3 Jahre (strengste bekannte Anforderung).</div>
+              <span class="assume">Offen (13.1): Frist des Verbands</span>
             </div>
           </div>
         </div>
@@ -534,7 +538,7 @@
 <!-- ============ 7 FLUGARTEN / NACHWEISTYPEN ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">7</span><h2>Flugarten und Nachweistypen</h2></div>
-  <p class="ddesc">Zwei Wertelisten im Regelwerk. Flugarten mit Sortierung und dem Merkmal „Ausbilder nötig“; Nachweistypen mit Standard-Gültigkeit (schlägt beim Erfassen das Ablaufdatum vor). Benutzte Einträge werden deaktiviert, nicht gelöscht.</p>
+  <p class="ddesc">Zwei Wertelisten im Regelwerk. Flugarten mit Sortierung; „Ausbilder nötig“ ist fest an „Schulung“ gebunden und kein Schalter je Flugart; Nachweistypen mit Standard-Gültigkeit (schlägt beim Erfassen das Ablaufdatum vor). Benutzte Einträge werden deaktiviert, nicht gelöscht.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/regelwerk/wertelisten</span></div>
   <div class="app tall">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -550,16 +554,16 @@
         <div class="banner" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-pencil-square"></i> Du bearbeitest <b>Entwurf v5</b>. Aktiv bleibt v4, bis der Entwurf aktiviert wird.</div>
         <div style="display:grid;grid-template-columns:1fr 1.35fr;gap:14px">
           <div class="card"><div class="hrow"><h3>Flugarten</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Flugart</span></div>
-            <table class="dt"><tr><th></th><th>Name</th><th>Ausbilder nötig</th><th>Status</th></tr>
-              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Training</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
-              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Schulung</b></td><td><i class="bi bi-check-square-fill ad-ok"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
-              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Foto/Video</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
-              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Event/Vorführung</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
-              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Wettbewerb/Rennen</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-g">aktiv</span></td></tr>
-              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Testflug</b></td><td><i class="bi bi-square ad-no"></i></td><td><span class="badge b-w">neu in v5</span></td></tr>
-              <tr style="color:#999"><td><i class="bi bi-grip-vertical"></i></td><td>Sonstiges</td><td></td><td><span class="badge b-all">inaktiv</span></td></tr>
+            <table class="dt"><tr><th></th><th>Name</th><th>Status</th></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Training</b></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Schulung</b><br><small class="mut"><i class="bi bi-lock"></i> Ausbilder nötig (fest)</small></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Foto/Video</b></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Event/Vorführung</b></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Wettbewerb/Rennen</b></td><td><span class="badge b-g">aktiv</span></td></tr>
+              <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Testflug</b></td><td><span class="badge b-w">neu in v5</span></td></tr>
+              <tr style="color:#999"><td><i class="bi bi-grip-vertical"></i></td><td>Sonstiges</td><td><span class="badge b-all">inaktiv</span></td></tr>
             </table>
-            <span class="assume">Annahme: „Ausbilder nötig“ als Merkmal der Flugart</span>
+            <div class="note" style="text-align:left">„Ausbilder nötig“ ist fest an die Flugart „Schulung“ gebunden; neue Flugarten verlangen keinen Ausbilder.</div>
           </div>
           <div class="card"><div class="hrow"><h3>Nachweistypen</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Nachweistyp</span></div>
             <table class="dt"><tr><th>Name</th><th>Bereich</th><th>Standard-Gültigkeit</th><th>Nummer</th><th>Datei</th></tr>
@@ -606,11 +610,11 @@
               <tr><td>Start · Landung</td><td><i class="bi bi-lock mut"></i> immer</td></tr>
               <tr><td>Ort</td><td><span class="tg on"></span></td></tr>
               <tr><td>Flugart</td><td><span class="tg on"></span></td></tr>
-              <tr><td>Ausbilder</td><td><small class="mut">laut Flugart</small></td></tr>
+              <tr><td>Ausbilder</td><td><small class="mut"><i class="bi bi-lock"></i> Pflicht nur bei „Schulung“</small></td></tr>
               <tr><td>Akku</td><td><span class="tg"></span></td></tr>
               <tr><td>Bemerkungen</td><td><span class="tg"></span></td></tr>
             </table>
-            <span class="assume">Annahme: Pilot, Modell, Start, Landung immer Pflicht</span>
+            <div class="note" style="text-align:left">Pilot, Modell, Start und Landung sind immer Pflicht; den Rest legt das Regelwerk fest.</div>
           </div>
           <div class="card"><div class="hrow"><h3>Zusatzfelder</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Feld</span></div>
             <table class="dt"><tr><th></th><th>Feld</th><th>Feldtyp</th><th>Pflicht</th><th>Status</th></tr>
@@ -749,10 +753,10 @@
           <div class="card"><div class="hrow"><h3>Frage bearbeiten</h3><span><span class="ibtn out">Vorschau</span> <span class="ibtn">Veröffentlichen</span></span></div>
             <label>Frage <span class="req">*</span></label><div class="inp">Brauche ich für die Halle ein Flugbuch?</div>
             <label>Antwort <span class="req">*</span></label>
-            <div class="ad-tb"><i class="bi bi-type-bold"></i><i class="bi bi-type-italic"></i><i class="bi bi-list-ul"></i><i class="bi bi-link-45deg"></i></div>
+            <div class="ad-tb"><i class="bi bi-type-bold"></i><i class="bi bi-type-italic"></i><i class="bi bi-list-ul"></i><i class="bi bi-link-45deg"></i> <small class="mut" style="margin-left:6px">Markdown, kein HTML</small></div>
             <div class="ad-ta">Flüge in der Sporthalle fallen in der Regel nicht unter die EU-Drohnenverordnung. Trag sie trotzdem ein – sie zählen dann für deine Statistik, aber nicht fürs Vereinsflugbuch …</div>
             <div class="two"><div><label>Bereich</label><div class="chips" style="margin:0"><span class="chip on">Luftsport</span><span class="chip">RC Cars</span><span class="chip">alle</span></div></div><div><label>Sichtbar</label><div class="chips" style="margin:0"><span class="chip on">angemeldet</span><span class="chip">auch ohne Login</span></div></div></div>
-            <span class="assume">Annahme: einfache Formatierung (Markdown) und Sichtbarkeit „auch ohne Login“</span>
+            <div class="note" style="text-align:left">Einfaches Markdown, kein HTML. „Auch ohne Login“ zeigt einzelne Seiten auf der Anmeldeseite (z. B. Platzregeln, Datenschutz).</div>
           </div>
         </div>
       </div>
@@ -763,7 +767,7 @@
 <!-- ============ 12 BACKUP ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">12</span><h2>Backup und Restore</h2></div>
-  <p class="ddesc">Zeitplan, letzte Sicherungen und Wiederherstellung. Die Wiederherstellung verlangt eine doppelte Bestätigung: erst Auswirkungen bestätigen, dann den Namen der Umgebung eintippen und mit Passkey/2FA erneut anmelden. Vorher wird automatisch der aktuelle Stand gesichert.</p>
+  <p class="ddesc">Zeitplan, letzte Sicherungen, der tägliche Restore von Production nach Test (mit Status) und Wiederherstellung. Test enthält damit echte Daten und ist wie Production geschützt; E-Mail und Push sind dort abgeschaltet. Die Wiederherstellung verlangt eine doppelte Bestätigung: erst Auswirkungen bestätigen, dann den Namen der Umgebung eintippen und mit Passkey/2FA erneut anmelden. Vorher wird automatisch der aktuelle Stand gesichert.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin/backup</span></div>
   <div class="app tall">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -780,13 +784,21 @@
         <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:14px">
           <div>
             <div class="card"><h3>Zeitplan</h3>
-              <dl class="kv2"><dt>Automatisch</dt><dd>täglich 02:30</dd><dt>Umfang</dt><dd>Datenbank + Datei-Volume</dd><dt>Aufbewahren</dt><dd>14 täglich · 8 wöchentlich · 12 monatlich</dd><dt>Probe-Restore</dt><dd>wöchentlich, in temporäre DB</dd><dt>Externe Ablage</dt><dd class="ad-warn">nicht eingerichtet</dd></dl>
-              <span class="assume">Annahme: Aufbewahrungsstufen und Probe-Restore; externe Ablage offen (14.3)</span>
+              <dl class="kv2"><dt>Automatisch</dt><dd>täglich 02:30</dd><dt>Umfang</dt><dd>Datenbank + Datei-Volume</dd><dt>Aufbewahren</dt><dd>14 tägliche Stände</dd><dt>Restore nach Test</dt><dd>täglich 03:00</dd><dt>Externe Ablage</dt><dd class="ad-warn">nicht eingerichtet</dd></dl>
+              <span class="assume">Offen (14.3): externe Ablage</span>
+            </div>
+            <div class="card"><div class="hrow"><h3>Restore Production → Test</h3><span class="ibtn out"><i class="bi bi-arrow-repeat"></i> Jetzt</span></div>
+              <table class="dt">
+                <tr><td><b>Sa 14.11. 03:00</b><br><small class="mut">Stand 14.11. 02:30 · 4 min · Stichprobe ok</small></td><td><span class="badge b-g">erfolgreich</span></td></tr>
+                <tr><td>Fr 13.11. 03:00<br><small class="mut">Stand 13.11. 02:30 · 4 min</small></td><td><span class="badge b-g">erfolgreich</span></td></tr>
+                <tr><td>Mi 11.11. 03:00<br><small class="mut">keine Sicherung vom 11.11. – Admin benachrichtigt</small></td><td><span class="badge b-r">fehlgeschlagen</span></td></tr>
+              </table>
+              <div class="hint"><i class="bi bi-shield-lock"></i> Test ist wie Production geschützt (gleiche Absicherung, gleicher Personenkreis). E-Mail und Push sind in Test abgeschaltet.</div>
             </div>
           </div>
           <div class="card"><h3>Letzte Sicherungen</h3>
             <table class="dt"><tr><th>Zeitpunkt</th><th>Art</th><th>Größe</th><th>Prüfung</th><th></th></tr>
-              <tr><td><b>14.11.2026 02:30</b></td><td>automatisch</td><td>412 MB</td><td><span class="badge b-g">ok · Probe</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
+              <tr><td><b>14.11.2026 02:30</b></td><td>automatisch</td><td>412 MB</td><td><span class="badge b-g">ok · nach Test</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
               <tr><td>13.11.2026 02:30</td><td>automatisch</td><td>410 MB</td><td><span class="badge b-g">ok</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
               <tr><td>12.11.2026 17:02</td><td>manuell <small class="mut">vor Import</small></td><td>409 MB</td><td><span class="badge b-g">ok</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
               <tr><td>12.11.2026 02:30</td><td>automatisch</td><td>409 MB</td><td><span class="badge b-g">ok</span></td><td><span class="ibtn out">Wiederherstellen</span></td></tr>
@@ -802,7 +814,7 @@
       <div class="ad-step"><span class="n">1</span><span><i class="bi bi-check-square-fill ad-ok"></i> Ich habe verstanden, dass Daten seit dem 13.11. 02:30 verloren gehen. Der aktuelle Stand wird vorher automatisch gesichert.</span></div>
       <div class="ad-step"><span class="n">2</span><span style="flex:1">Zur Bestätigung <b>production</b> eintippen und erneut anmelden:<div class="two" style="margin-top:4px"><div class="inp">producti<span style="border-left:1px solid #333;margin-left:1px">&nbsp;</span></div><div class="inp mut" style="flex:0 0 auto"><i class="bi bi-fingerprint"></i>&nbsp;Passkey</div></div></span></div>
       <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><span class="ibtn out">Abbrechen</span><span class="ibtn red dis">Wiederherstellen</span></div>
-      <span class="assume">Annahme: Bestätigung per Eintippen + erneute Anmeldung, automatisches Vorab-Backup</span>
+      <div class="note" style="text-align:left">Abgesichert durch Eintippen, erneute Anmeldung und eine automatische Vorab-Sicherung.</div>
     </div></div>
   </div></div></div>
 </section>
@@ -823,7 +835,7 @@
         <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a class="on">Änderungsprotokoll</a><a>Benachrichtigungen</a>
       </div>
       <div class="dcontent">
-        <div class="banner" style="background:var(--gl);border-color:#bfe0c6;display:flex;align-items:center;gap:10px"><i class="bi bi-link-45deg" style="font-size:20px;color:var(--g)"></i><span><b>Hash-Kette intakt.</b> 48.213 Einträge seit Prüfpunkt #3 (01.11.2026). Zuletzt automatisch geprüft heute 03:00.</span><span class="ibtn out" style="margin-left:auto">Jetzt prüfen</span></div>
+        <div class="banner" style="background:var(--gl);border-color:#bfe0c6;display:flex;align-items:center;gap:10px"><i class="bi bi-link-45deg" style="font-size:20px;color:var(--g)"></i><span><b>Hash-Kette intakt.</b> 48.213 Einträge seit Prüfpunkt #3 (01.11.2026). Zuletzt geprüft 02.11.2026 – nur auf Knopfdruck, keine nächtliche Prüfung.</span><span class="ibtn out" style="margin-left:auto">Jetzt prüfen</span></div>
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
           <div class="inp" style="width:220px"><span>lena</span><i class="bi bi-search"></i></div>
           <div class="inp" style="width:150px"><span>Letzte 30 Tage</span><i class="bi bi-calendar3"></i></div>
@@ -917,7 +929,7 @@
           <div>
             <div class="card"><h3>Nachweistypen</h3><table class="dt"><tr><td>e-ID (Betreiber-Registrierung)</td><td class="mut">laut Registrierung</td></tr><tr><td>Kompetenznachweis A1/A3</td><td class="mut">5 Jahre</td></tr><tr><td>Fernpilotenzeugnis A2</td><td class="mut">5 Jahre</td></tr><tr><td>Versicherung</td><td class="mut">1 Jahr</td></tr><tr><td>Verbandsnachweis</td><td class="mut">DMFV / DAeC offen</td></tr></table></div>
             <div class="card"><h3>Checklisten · Aufbewahrung</h3><table class="dt"><tr><td>Vor dem Flug</td><td class="mut">9 Punkte</td></tr><tr><td>Vor der Fahrt</td><td class="mut">5 Punkte</td></tr><tr><td><b>Aufbewahrungsfrist</b></td><td>3 Jahre</td></tr></table></div>
-            <span class="assume">Annahme: Inhalte der Versionen nur Beispiel; ein Export lässt sich unter „Vorlage importieren“ wieder als Entwurf einlesen.</span>
+            <div class="note" style="text-align:left">Export als JSON; unter „Vorlage importieren“ lässt er sich wieder als Entwurf einlesen. Inhalte der Versionen sind Beispieldaten.</div>
           </div>
         </div>
       </div>

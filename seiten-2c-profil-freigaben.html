@@ -208,12 +208,12 @@
     <div class="dmain" style="grid-template-columns:1fr 1.5fr 1fr">
       <div>
         <div class="card">
-          <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><div class="avatar">MB</div><div><b style="font-size:16px">Markus B.</b><br><small class="mut">Mitglied seit 03/2024</small><br><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></div></div>
-          <dl class="kv2"><dt>Rollen</dt><dd>Mitglied, Abteilungsleitung, Admin</dd><dt>Geburtsdatum</dt><dd>12.05.1980</dd><dt>E-Mail</dt><dd>markus@…</dd><dt>Telefon</dt><dd>0911 …</dd></dl>
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px"><div class="avatar">MB</div><div><b style="font-size:16px">Markus B.</b><br><small class="mut">Mitglied seit 03/2024</small><br><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span><br><small class="mut">Meine Bereiche · Vorliebe</small></div></div>
+          <dl class="kv2"><dt>Rollen</dt><dd>Mitglied, Abteilungsleitung, Admin</dd><dt>Geburtsdatum</dt><dd>12.05.1980</dd><dt>E-Mail</dt><dd>markus@…</dd><dt>Telefon</dt><dd>0911 …<br><small class="mut">nur für die Abteilungsleitung</small></dd><dt>Bestätigungs-PIN</dt><dd>festgelegt</dd></dl>
           <span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span>
         </div>
         <div class="card"><h3>Anmeldung &amp; Sicherheit</h3>
-          <table class="dt"><tr><td><i class="bi bi-fingerprint"></i> Passkeys</td><td>iPhone, MacBook</td></tr><tr><td><i class="bi bi-shield-lock"></i> Zwei-Faktor</td><td>1 App</td></tr><tr><td><i class="bi bi-life-preserver"></i> Wiederherstellung</td><td>8 / 10 Codes</td></tr><tr><td><i class="bi bi-phone"></i> Geräte</td><td>3 angemeldet</td></tr><tr><td><i class="bi bi-code-slash"></i> API-Tokens</td><td>1 aktiv</td></tr></table>
+          <table class="dt"><tr><td><i class="bi bi-fingerprint"></i> Passkeys</td><td>iPhone, MacBook</td></tr><tr><td><i class="bi bi-shield-lock"></i> Zwei-Faktor</td><td>1 App</td></tr><tr><td><i class="bi bi-life-preserver"></i> Wiederherstellung</td><td>8 / 10 Codes</td></tr><tr><td><i class="bi bi-123"></i> Bestätigungs-PIN</td><td>festgelegt</td></tr><tr><td><i class="bi bi-phone"></i> Geräte</td><td>3 angemeldet</td></tr><tr><td><i class="bi bi-code-slash"></i> API-Tokens</td><td>1 aktiv</td></tr></table>
         </div>
       </div>
       <div>
@@ -232,7 +232,7 @@
       <div>
         <div class="card"><h3>Benachrichtigungen</h3>
           <table class="dt"><tr><td>Nachweis läuft ab</td><td><span class="tg on"></span></td></tr><tr><td>Ausleihe / Rückgabe</td><td><span class="tg on"></span></td></tr><tr><td>Neue Termine</td><td><span class="tg"></span></td></tr><tr><td>E-Mail</td><td><span class="tg on"></span></td></tr></table></div>
-        <div class="card"><h3>Kalender-Abo</h3><small class="mut">Persönlicher ICS-Link für Termine deiner Bereiche</small><div style="margin-top:8px"><span class="ibtn out">Link kopieren</span> <span class="ibtn out">Neu erzeugen</span></div></div>
+        <div class="card"><h3>Kalender-Abo</h3><small class="mut">Persönlicher ICS-Link, vorgefiltert nach deinen Bereichen</small><div style="margin-top:8px"><span class="ibtn out">Link kopieren</span> <span class="ibtn out">Neu erzeugen</span></div></div>
       </div>
     </div>
   </div></div></div>
@@ -240,7 +240,7 @@
 
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Freigaben</h2></div>
-  <p class="ddesc">Zwei Tabellen: von mir geteilt (mit automatischen, gesperrten Freigaben) und mit mir geteilt. Neue Freigabe als Formular rechts. Freigaben sind nur lesen; ein <b>einzelnes Luftfahrzeug</b> kann zusätzlich mit dem Recht <b>„darf fliegen“</b> freigegeben werden. Es erscheint dann in der Modellauswahl der Person, ihre Flüge zählen bei ihr und beim Modell.</p>
+  <p class="ddesc">Zwei Tabellen: von mir geteilt (mit automatischen, gesperrten Freigaben) und mit mir geteilt. Neue Freigabe als Formular rechts. Freigaben sind nur lesen; Luftfahrzeuge können zusätzlich mit dem Recht <b>„darf fliegen“</b> freigegeben werden – <b>einzeln</b> oder als <b>alle meine Luftfahrzeuge</b> (Freigabe „Modelle“, gilt auch für künftig angelegte; widerrufbar und befristbar). Sie erscheinen dann in der Modellauswahl der Person, ihre Flüge zählen bei ihr und beim Modell. Modell-Freigaben zeigen die e-ID des Besitzers nicht.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -251,21 +251,22 @@
           <table class="dt"><tr><th>Was</th><th>An</th><th>Recht</th><th>Bis</th><th></th></tr>
             <tr><td><b>Flugbuch (gesamt)</b></td><td>Max R.</td><td>nur lesen</td><td>31.12.2026</td><td><span class="ibtn out">Widerrufen</span></td></tr>
             <tr><td><b>Modell DJI Neo 2</b></td><td>Jonas B.</td><td><span class="badge b-air"><i class="bi bi-airplane"></i> darf fliegen</span></td><td>unbefristet</td><td><span class="ibtn out">Widerrufen</span></td></tr>
+            <tr><td><b>Alle meine Luftfahrzeuge</b> <small class="mut">auch künftige</small></td><td>Lena K.</td><td><span class="badge b-air"><i class="bi bi-airplane"></i> darf fliegen</span></td><td>31.01.2027</td><td><span class="ibtn out">Widerrufen</span></td></tr>
             <tr class="lockrow"><td>Flüge am Vereinsgelände</td><td>Abteilungsleitung</td><td>nur lesen</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
             <tr class="lockrow"><td>Gültigkeit der Nachweise</td><td>Abteilungsleitung</td><td>nur lesen</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
           </table>
-          <div class="note" style="text-align:left;margin-top:8px">Freigaben sind nur lesen, außer „darf fliegen“ bei einzelnen Luftfahrzeugen. Flüge anderer mit deinem Modell siehst du auf der Modellseite unter „Flüge“. Automatische Freigaben ergeben sich aus den Vereinsregeln.</div>
+          <div class="note" style="text-align:left;margin-top:8px">Freigaben sind nur lesen, außer „darf fliegen“ bei Luftfahrzeugen (einzeln oder alle). Flüge anderer mit deinem Modell siehst du auf der Modellseite unter „Flüge“. Automatische Freigaben ergeben sich aus den Vereinsregeln.</div>
           <h3 style="margin-top:12px">Mit mir geteilt</h3>
           <table class="dt"><tr><td><b>Flugbuch von Lena K.</b></td><td>nur lesen</td><td>bis 31.01.2027</td></tr><tr><td><b>Modell DJI Avata 2</b> <small class="mut">von Max R.</small></td><td><span class="badge b-air"><i class="bi bi-airplane"></i> du darfst es fliegen</span></td><td>unbefristet</td></tr></table>
         </div>
       </div>
       <div class="card"><h3>Neue Freigabe</h3>
-        <label>Was teilen? <span class="req">*</span></label><div class="chips"><span class="chip">Flugbuch</span><span class="chip">Modelle</span><span class="chip">Nachweise</span><span class="chip on">Einzelnes …</span></div>
-        <label>Welches? <span class="req">*</span></label><div class="inp">DJI Neo 2 <small class="mut">&nbsp;Drohne · C0 · Luftfahrzeug</small><i class="bi bi-chevron-down"></i></div>
-        <label>Recht <span class="req">*</span></label><div class="chips"><span class="chip"><i class="bi bi-eye"></i> Nur lesen</span><span class="chip on"><i class="bi bi-airplane"></i> Darf fliegen</span></div>
-        <div class="hint">Nur bei einzelnen Luftfahrzeugen. Das Modell erscheint in der Modellauswahl der Person; ihre Flüge zählen bei ihr und beim Modell.</div>
-        <label>Mit wem? <span class="req">*</span></label><div class="inp">Jonas B. <i class="bi bi-chevron-down"></i></div>
-        <label>Wie lange?</label><div class="chips"><span class="chip on">Unbefristet</span><span class="chip">1 Monat</span><span class="chip">Datum …</span></div>
+        <label>Was teilen? <span class="req">*</span></label><div class="chips"><span class="chip">Flugbuch</span><span class="chip on">Modelle</span><span class="chip">Nachweise</span><span class="chip">Einzelnes …</span></div>
+        <label>Recht <span class="req">*</span></label><div class="chips"><span class="chip"><i class="bi bi-eye"></i> Nur lesen</span><span class="chip on"><i class="bi bi-airplane"></i> Darf alle Luftfahrzeuge fliegen</span></div>
+        <div class="hint">Gilt für alle deine Luftfahrzeuge, auch für solche, die du später anlegst. Sie erscheinen in der Modellauswahl der Person; ihre Flüge zählen bei ihr und beim Modell. Bei „Einzelnes …“ wählst du ein bestimmtes Luftfahrzeug.</div>
+        <div class="hint"><i class="bi bi-lock"></i> Deine e-ID wird in Modell-Freigaben nicht angezeigt.</div>
+        <label>Mit wem? <span class="req">*</span></label><div class="inp">Lena K. <i class="bi bi-chevron-down"></i></div>
+        <label>Wie lange?</label><div class="chips"><span class="chip">Unbefristet</span><span class="chip">1 Monat</span><span class="chip on">Datum …</span></div><div class="inp">31.01.2027</div>
         <span class="ibtn" style="margin-top:6px">Freigeben</span>
       </div>
     </div>
@@ -331,7 +332,7 @@
         <label>Wie lange? <span class="req">*</span></label><div class="chips"><span class="chip">1 Monat</span><span class="chip">bis 31.12.2026</span><span class="chip">Unbefristet</span><span class="chip on">Datum …</span></div>
         <div class="inp">31.01.2027</div>
         <div class="note" style="text-align:left;margin:8px 0">Nur lesen, jederzeit widerrufbar. Die Person wird benachrichtigt.</div>
-        <span class="assume">Annahme: Einzelne Nachweise lassen sich mit oder ohne Datei teilen.</span><br>
+        <div class="hint">Wahlweise nur die Angaben (Typ, Nummer, Gültigkeit) oder zusätzlich Foto bzw. Datei.</div>
         <span class="ibtn" style="margin-top:6px">Freigeben</span>
       </div>
     </div>
@@ -340,7 +341,7 @@
 
 <section class="direction">
   <div class="dhead"><span class="dletter">5</span><h2>Persönliche Daten bearbeiten</h2></div>
-  <p class="ddesc">Mitglieder ändern E-Mail und Telefon selbst. Name, Geburtsdatum und Bereiche pflegt die Abteilungsleitung. Die E-Mail ist der Anmeldename: Änderung nur mit erneuter Bestätigung (Passkey/Passwort) und Bestätigungslink an die neue Adresse.</p>
+  <p class="ddesc">Mitglieder ändern E-Mail, Telefon und <b>„Meine Bereiche“</b> selbst; Name und Geburtsdatum ändert die Abteilungsleitung. Telefon ist freiwillig, ein Schalter legt fest, ob andere Mitglieder es sehen (die Leitung sieht es immer). „Meine Bereiche“ ist nur eine Vorliebe für Startseite, Vorfilter und Benachrichtigungen – sehen kann jedes Mitglied alle Bereiche. Die E-Mail ist der Anmeldename: Änderung nur mit erneuter Bestätigung (Passkey/Passwort) und Bestätigungslink an die neue Adresse. Neu: die <b>Bestätigungs-PIN</b>.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/profil/daten</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -349,15 +350,21 @@
       <div class="card" style="padding:14px 18px">
         <div class="hrow"><h3>Persönliche Daten</h3><span class="mut" style="font-size:12px"><span style="color:var(--red)">*</span> Pflichtfeld</span></div>
         <div class="two"><div><label>Name</label><div class="inp" style="background:#f3f5f3">Markus B. <i class="bi bi-lock lock"></i></div></div><div><label>Geburtsdatum</label><div class="inp" style="background:#f3f5f3">12.05.1980 <i class="bi bi-lock lock"></i></div></div></div>
-        <div class="hint">Name und Geburtsdatum ändert die Abteilungsleitung.</div>
-        <div class="two"><div><label>E-Mail (Anmeldename) <span class="req">*</span></label><div class="inp" style="border-color:var(--g);border-width:2px">markus.neu@beispiel.de</div></div><div><label>Telefon <span class="opt">optional</span></label><div class="inp">0911 5550123</div></div></div>
+        <div class="hint">Name und Geburtsdatum ändert die Abteilungsleitung, weil Altersgrenzen daran hängen.</div>
+        <div class="two"><div><label>E-Mail (Anmeldename) <span class="req">*</span></label><div class="inp" style="border-color:var(--g);border-width:2px">markus.neu@beispiel.de</div></div><div><label>Telefon <span class="opt">optional</span></label><div class="inp">0911 5550123</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin-top:6px"><span>Für andere Mitglieder sichtbar<br><small class="mut">Die Abteilungsleitung sieht die Nummer immer.</small></span><span class="tg"></span></div></div></div>
         <div class="alert" style="margin-top:8px"><i class="bi bi-shield-lock"></i> Die E-Mail ist dein Anmeldename. Zum Ändern bestätigst du mit Passkey oder Passwort. Danach geht ein Bestätigungslink an die neue Adresse; bis dahin gilt die alte.</div>
-        <label>Bereiche</label><div class="inp" style="background:#f3f5f3"><span><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></span><i class="bi bi-lock lock"></i></div>
+        <label>Meine Bereiche <span class="opt">Vorliebe</span></label><div class="chips"><span class="chip on"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip on"><i class="bi bi-car-front"></i> RC Cars</span></div>
+        <div class="hint">Nur eine Vorliebe, keine Rechte: bestimmt Startseite, Vorfilter der Listen und Benachrichtigungen.</div>
         <div style="margin-top:12px"><span class="ibtn"><i class="bi bi-fingerprint"></i> Mit Passkey bestätigen &amp; speichern</span> <span class="ibtn out">Abbrechen</span></div>
       </div>
       <div>
         <div class="card"><h3>Protokoll</h3><small class="mut">Bei Kontakt- und Profildaten steht im Änderungsprotokoll nur, <b>dass</b> sich ein Feld geändert hat, nicht der Wert.</small></div>
-        <div class="card"><span class="assume">Annahme: Name, Geburtsdatum und Bereiche sind für Mitglieder gesperrt (Altersgrenzen hängen am Geburtsdatum).</span><br><span class="assume">Annahme: Telefon ist freiwillig und nur für die Abteilungsleitung sichtbar.</span></div>
+        <div class="card"><h3><i class="bi bi-123"></i> Bestätigungs-PIN</h3>
+          <div style="font-size:12.5px;margin-bottom:6px">Nur zum Bestätigen <b>auf fremden Geräten</b> (z. B. Übergabe eines Vereinsmodells am Handy der Leitung), <b>nie zum Anmelden</b>.</div>
+          <div class="two"><div><label>Neue PIN (6 Ziffern) <span class="req">*</span></label><div class="inp">••••••</div></div><div><label>PIN wiederholen <span class="req">*</span></label><div class="inp">••••••</div></div></div>
+          <small class="mut">Gespeichert wird nur ein Hash · 5 Fehlversuche → 15 Minuten gesperrt · jede Bestätigung wird protokolliert · Alternative: Passkey oder Passwort. Ändern einer bestehenden PIN nur nach erneuter Anmeldung.</small>
+          <div style="margin-top:8px"><span class="ibtn">PIN festlegen</span></div></div>
       </div>
     </div>
   </div></div></div>
