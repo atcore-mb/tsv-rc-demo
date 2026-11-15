@@ -9,27 +9,65 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
-  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
-        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  /* ---------- Farb-Tokens (hell). Komponenten nutzen nur Tokens, keine festen Farbwerte. ----------
+     --g, --red, --warn, --air, --car: Flächen (Schalter, Badges mit weißer Schrift, Rahmen);
+     --gt, --redt, --warnt, --airt, --cart, --gdt: dieselben Farben als Schrift/Symbol. */
+  :root{color-scheme:light;
+        --g:#0A5C23;--gt:#0A5C23;--gd:#052e12;--gdt:#052e12;--gl:#e8f5e9;--gl2:#cfe8d4;--glt:#f6fbf7;--gbd:#b9dcbf;
+        --t:#1a1a1a;--t2:#333;--t3:#555;--mut:#646c72;--mut2:#aaa;
+        --bg:#fafafa;--page:#eceeec;--card:#fff;--sunk:#f4f5f4;--sunk2:#eceeec;
+        --line:#e3e6e3;--line2:#eef0ee;--line3:#dfe3df;--line4:#c3c8c3;--inpb:#868f88;
+        --warn:#b45309;--warnt:#b45309;--warnbg:#fff4e0;--warnbd:#f3d19c;--warnfg:#7a4a06;
+        --red:#b91c1c;--redt:#b91c1c;--redbg:#fde8e8;--redbd:#f3b4b4;--redfg:#7f1d1d;
+        --air:#1e5a99;--airt:#1e5a99;--airbg:#e4eef8;--airbd:#c9dcf0;--airfg:#173f6b;
+        --car:#a8361b;--cart:#a8361b;--carbg:#fbe9e4;
+        --ok:#1f8a3b;--okt:#1a7a34;--yel:#b88400;--yelt:#8a6100;--gold:#c99a06;--mark:#fff0a8;--toast:#1f2a22}
+  /* ---------- Dunkler Modus (Vorschlag zur Abstimmung, Teil 0 Abschnitt 7.4) ----------
+     Hintergrund sehr dunkles Grau mit Grünstich, Karten etwas heller, Text hellgrau;
+     Vereinsgrün für Schrift aufgehellt (--gt), für Schalter mittleres Grün (--g, weiße Schrift);
+     der Kopf bleibt dunkelgrün (--gd). */
+  [data-bs-theme="dark"]{color-scheme:dark;
+        --g:#23803f;--gt:#6fcf8a;--gd:#052e12;--gdt:#b5e6c2;--gl:#183322;--gl2:#24492f;--glt:#162219;--gbd:#2f5a3a;
+        --t:#e2e7e3;--t2:#d0d7d1;--t3:#b8c0ba;--mut:#9aa59d;--mut2:#6b766e;
+        --bg:#111613;--page:#0b0e0c;--card:#1a201c;--sunk:#222924;--sunk2:#262e28;
+        --line:#2c352f;--line2:#252d27;--line3:#333d36;--line4:#4a554c;--inpb:#66726a;
+        --warn:#a8580f;--warnt:#f2b35c;--warnbg:#36290f;--warnbd:#6b5020;--warnfg:#f5cd8a;
+        --red:#c93838;--redt:#ff8f86;--redbg:#3b1c1c;--redbd:#6e2e2e;--redfg:#ffc2bc;
+        --air:#2f6db3;--airt:#8ec0f5;--airbg:#172a3f;--airbd:#2c4b6e;--airfg:#c3dcf8;
+        --car:#b84a2c;--cart:#f2a088;--carbg:#3a2019;
+        --ok:#2e9e4c;--okt:#6fcf8a;--yel:#e0a516;--yelt:#f2c14e;--gold:#e0b030;--mark:#6b5a10;--toast:#33463a}
+  /* Karten-Kacheln werden nicht invertiert: in Karten gelten die hellen Werte weiter */
+  [data-bs-theme="dark"] .md-map,[data-bs-theme="dark"] .pf-map,[data-bs-theme="dark"] .ev-amap,[data-bs-theme="dark"] .wx-map,
+  [data-bs-theme="dark"] .ad-map,[data-bs-theme="dark"] .hf-map,[data-bs-theme="dark"] .pfmap,[data-bs-theme="dark"] .map{color-scheme:light;
+        --g:#0A5C23;--gt:#0A5C23;--gl:#e8f5e9;--t:#1a1a1a;--t2:#333;--t3:#555;--mut:#646c72;--card:#fff;--sunk:#f4f5f4;
+        --line:#e3e6e3;--line2:#eef0ee;--line3:#dfe3df;--red:#b91c1c;--redt:#b91c1c;--air:#1e5a99;--airt:#1e5a99;--car:#a8361b;--cart:#a8361b;
+        --warn:#b45309;--warnt:#b45309;--yel:#b88400;color:var(--t)}
+  [data-bs-theme="dark"] a{color:var(--gt)}
+  /* Umschalter Darstellung (PC-Ansichten) */
+  .thm-sw{position:fixed;top:10px;right:12px;z-index:50;display:flex;align-items:center;gap:6px;background:var(--card);color:var(--t);border:1px solid var(--inpb);border-radius:8px;padding:4px 6px 4px 10px;font-size:12px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+  .thm-sw .thm-seg{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden}
+  .thm-sw button{font:inherit;font-size:12px;font-weight:700;border:0;background:var(--card);color:var(--gt);padding:4px 9px;cursor:pointer}
+  .thm-sw button+button{border-left:1px solid var(--g)}
+  .thm-sw button.on{background:var(--g);color:#fff}
   *{box-sizing:border-box}
-  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:var(--page);color:var(--t)}
   .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
   .intro h1{margin:0 0 6px;font-size:26px}
-  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .intro p{margin:0 0 6px;color:var(--t2);max-width:860px}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
-  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
-  .direction:hover{border-color:#cfd8cf}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:var(--card);border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:var(--line3)}
   .direction.selected{border-color:var(--g)}
   .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
   .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
   .dhead h2{margin:0;font-size:20px}
-  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
-  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .ddesc{color:var(--t3);margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:var(--t2)}
   .proscons ul{margin:2px 0 0;padding-left:18px}
-  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--t3)}
   .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
   .pcol{flex:0 0 auto}
-  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .plabel{font-size:12px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
   .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
   .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
   .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
@@ -42,75 +80,75 @@
   h3{font-size:16px;margin:12px 0 8px}
   h3:first-child{margin-top:2px}
   small,.mut{color:var(--mut)}
-  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:4px 12px;margin-bottom:10px}
   .card.pad{padding:10px 12px}
-  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .alert{background:var(--warnbg);border:1px solid var(--warnbd);border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:var(--warnfg)}
   .stats{display:flex;gap:8px;margin-bottom:10px}
-  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
-  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--gt)}
   .stat span{font-size:11px;color:var(--mut)}
-  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:13px}
   .row:last-child{border-bottom:0}
   .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
-  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btn.out{background:var(--card);color:var(--gt);border:1px solid var(--g)}
   .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
-  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:var(--card);border-top:1px solid var(--line);color:var(--mut)}
   .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
   .tabbar i{font-size:19px}
-  .tabbar .on{color:var(--g);font-weight:700}
+  .tabbar .on{color:var(--gt);font-weight:700}
   .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
-  .b-g{background:var(--gl);color:var(--g)}
-  .b-w{background:var(--warnbg);color:var(--warn)}
-  .b-r{background:#fde8e8;color:var(--red)}
-  .b-air{background:var(--airbg);color:var(--air)}
-  .b-car{background:var(--carbg);color:var(--car)}
-  .b-all{background:#eceeec;color:#444}
+  .b-g{background:var(--gl);color:var(--gt)}
+  .b-w{background:var(--warnbg);color:var(--warnt)}
+  .b-r{background:var(--redbg);color:var(--redt)}
+  .b-air{background:var(--airbg);color:var(--airt)}
+  .b-car{background:var(--carbg);color:var(--cart)}
+  .b-all{background:var(--sunk2);color:var(--t2)}
   .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
-  .ico.air{background:var(--airbg);color:var(--air)}
-  .ico.car{background:var(--carbg);color:var(--car)}
+  .ico.air{background:var(--airbg);color:var(--airt)}
+  .ico.car{background:var(--carbg);color:var(--cart)}
   .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
   .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
-  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--gt);background:var(--card)}
   .subnav div+div{border-left:1px solid var(--g)}
   .subnav .on{background:var(--g);color:#fff}
   .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip{border:1px solid var(--inpb);background:var(--card);border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:var(--t2)}
   .chip.on{background:var(--g);border-color:var(--g);color:#fff}
   .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
   .areahead:first-child{margin-top:2px}
-  .areahead .ln{flex:1;height:1px;background:#dfe3df}
-  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .areahead .ln{flex:1;height:1px;background:var(--line3)}
+  .block{background:var(--card);border:1px solid var(--line);border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
   .block.air{border-left-color:var(--air)}
   .block.car{border-left-color:var(--car)}
   .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
-  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .block .act{font-size:13px;font-weight:700;color:var(--gt)}
   .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
   .mini b{color:var(--t);font-size:15px}
   table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
-  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab td{padding:5px 0;border-bottom:1px solid var(--line2)}
   table.tab tr:last-child td{border-bottom:0}
   table.tab td.r{text-align:right;font-weight:700}
   .me{background:var(--gl)}
   .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
   /* PC-Ansicht */
-  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
-  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .sublabel{font-size:12px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid var(--line3);border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
   .winwrap{overflow-x:auto;padding-bottom:8px}
-  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
-  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
-  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .chrome{background:var(--line);padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t3)}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line4);margin-right:4px}
+  .chrome .url{flex:1;background:var(--card);border-radius:6px;padding:3px 10px}
   .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
   .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
   .hdr img{height:38px}
   .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
   .hdr .user{margin-left:auto;font-size:13px}
-  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
-  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
-  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav{background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:var(--t2);border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--gt);border-color:var(--g)}
   .dnav .r{margin-left:auto}
-  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
-  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
-  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dnav2{background:var(--sunk);border-bottom:1px solid var(--line);display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:var(--t3);border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--airt);border-color:var(--air)}
   .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
   .dmain.three{grid-template-columns:1fr 1fr 1fr}
   .dmain h3{margin:0 0 8px;font-size:15px}
@@ -119,114 +157,160 @@
   .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
   .hrow h3{margin:0}
   .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
-  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .ibtn.out{background:var(--card);color:var(--gt);border:1px solid var(--g)}
   table.dt{width:100%;border-collapse:collapse;font-size:13px}
   table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
-  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  table.dt td{padding:7px 8px;border-top:1px solid var(--line2)}
   .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
   .direction{cursor:default}
   .direction:hover{border-color:transparent}
   .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
   .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
   .subnav .more.open{background:var(--gl)}
-  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--gt);background:var(--gl);border-radius:4px 4px 0 0}
   .air .subnav,.subnav.air{border-color:var(--air)}
   /* Bottom-Sheet "Mehr" */
   .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
-  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
-  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:var(--line4);margin:0 auto 10px}
   .sheet h4{margin:0 0 6px;font-size:15px}
-  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:14px;font-weight:600}
   .sheet .it:last-child{border-bottom:0}
-  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it i:first-child{font-size:18px;color:var(--gt);width:22px;text-align:center}
   .sheet .it .r{margin-left:auto}
   /* Formular */
   label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
-  label .req{color:var(--red)}
+  label .req{color:var(--redt)}
   label .opt{font-weight:400;color:var(--mut)}
-  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp{background:var(--card);border:1px solid var(--inpb);border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
   .inp.ph{color:var(--mut)}
   .two{display:flex;gap:8px}.two>div{flex:1}
   .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
-  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .fsec .ln{flex:1;height:1px;background:var(--line3)}
   .kv{display:flex;gap:6px;margin-bottom:6px}
   .kv .inp{flex:1}
   .kv .x{color:var(--mut);display:flex;align-items:center}
-  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .addlink{font-size:13px;font-weight:700;color:var(--gt);margin-top:4px}
   .hint{font-size:11px;color:var(--mut);margin-top:3px}
   .chip .x{margin-left:4px;opacity:.8}
   /* Admin */
-  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--line2)}
   .chk:last-child{border-bottom:0}
-  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
-  .chk i.off{color:#aaa}
+  .chk i{font-size:17px;color:var(--gt);margin-top:-1px}
+  .chk i.off{color:var(--mut2)}
   .chk small{display:block}
   .lock{font-size:10.5px;color:var(--mut)}
-  table.dt td .bi-grip-vertical{color:#bbb}
+  table.dt td .bi-grip-vertical{color:var(--mut2)}
   .adm{background:#3b3f3b}
-  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside{width:230px;border-right:1px solid var(--line);background:var(--card);padding:12px 0;overflow:hidden}
   .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
-  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
-  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:var(--t2)}
+  .dside a.on{background:var(--gl);color:var(--gt);border-right:3px solid var(--g)}
   .dbody{flex:1;display:flex;overflow:hidden}
   .dcontent{flex:1;padding:16px 22px;overflow:hidden}
-  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
-  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
-  .dropdown a i{color:var(--g);width:18px}
-  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .dropdown{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:var(--t2)}
+  .dropdown a i{color:var(--gt);width:18px}
+  .dropdown .sep{height:1px;background:var(--sunk);margin:4px 0}
   .app{position:relative}
-  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
   .changes ul{margin:4px 0 0;padding-left:18px}
-  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .assume{font-size:11.5px;color:var(--warnfg);background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
   .kv2{display:grid;grid-template-columns:130px 1fr;gap:6px 10px;font-size:13px;padding:4px 0;margin:0}
   .kv2 dt{color:var(--mut)}
   .kv2 dd{margin:0;font-weight:600}
-  .avatar{width:52px;height:52px;border-radius:50%;background:var(--gl);color:var(--g);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle;flex:0 0 auto}
+  .avatar{width:52px;height:52px;border-radius:50%;background:var(--gl);color:var(--gt);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--inpb);position:relative;vertical-align:middle;flex:0 0 auto}
   .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
   .tg.on{background:var(--g)}.tg.on::after{left:18px}
-  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs{display:flex;border-bottom:1px solid var(--line3);margin-bottom:10px;font-size:13px;font-weight:700}
   .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
-  .tabs .on{color:var(--g);border-color:var(--g)}
-  .banner{background:var(--airbg);border:1px solid #c9dcf0;border-radius:6px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+  .tabs .on{color:var(--gt);border-color:var(--g)}
+  .banner{background:var(--airbg);border:1px solid var(--airbd);border-radius:6px;padding:9px 12px;font-size:13px;margin-bottom:12px}
   .app.tall{height:640px}
   .dcontent{overflow:hidden}
   .ad-grid{display:grid;gap:14px}
   .ad-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-  .ad-tile{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:10px 12px;font-size:12.5px}
-  .ad-tile b{display:block;font-size:20px;color:var(--g);line-height:1.2}
-  .ad-tile.w{border-left:4px solid var(--warn)} .ad-tile.w b{color:var(--warn)}
+  .ad-tile{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:12.5px}
+  .ad-tile b{display:block;font-size:20px;color:var(--gt);line-height:1.2}
+  .ad-tile.w{border-left:4px solid var(--warn)} .ad-tile.w b{color:var(--warnt)}
   .ad-tile.ok{border-left:4px solid var(--g)}
-  .ad-ok{color:var(--g)} .ad-no{color:#aaa} .ad-warn{color:var(--warn)}
-  .ad-map{position:relative;height:190px;border-radius:6px;overflow:hidden;border:1px solid #d6dad6;
+  .ad-ok{color:var(--gt)} .ad-no{color:var(--mut2)} .ad-warn{color:var(--warnt)}
+  .ad-map{position:relative;height:190px;border-radius:6px;overflow:hidden;border:1px solid var(--line);
     background:#e9efe6;background-image:linear-gradient(#d8e2d4 1px,transparent 1px),linear-gradient(90deg,#d8e2d4 1px,transparent 1px);background-size:24px 24px}
-  .ad-map .road{position:absolute;left:-10%;top:58%;width:120%;height:10px;background:#fff;transform:rotate(-8deg);border:1px solid #dcdcdc}
+  .ad-map .road{position:absolute;left:-10%;top:58%;width:120%;height:10px;background:var(--card);transform:rotate(-8deg);border:1px solid var(--line3)}
   .ad-map .rad{position:absolute;left:50%;top:46%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:2px dashed var(--g);background:rgba(10,92,35,.10)}
-  .ad-map .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-100%);font-size:26px;color:var(--red)}
-  .ad-map .cap{position:absolute;left:8px;bottom:6px;font-size:11px;background:#fff;border-radius:4px;padding:2px 6px;color:#555}
+  .ad-map .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-100%);font-size:26px;color:var(--redt)}
+  .ad-map .cap{position:absolute;left:8px;bottom:6px;font-size:11px;background:var(--card);border-radius:4px;padding:2px 6px;color:var(--t3)}
   .ad-sw{display:inline-block;width:22px;height:22px;border-radius:4px;margin-right:4px;vertical-align:middle;border:2px solid transparent}
-  .ad-sw.on{border-color:#1a1a1a;box-shadow:0 0 0 2px #fff inset}
+  .ad-sw.on{border-color:var(--t);box-shadow:0 0 0 2px var(--card) inset}
   .ad-modal{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:6}
-  .ad-modal .box{background:#fff;border-radius:8px;width:520px;padding:16px 18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .ad-modal .box{background:var(--card);border-radius:8px;width:520px;padding:16px 18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
   .ad-modal h3{margin:0 0 6px;font-size:16px}
   .ad-pop{position:absolute;right:22px;bottom:14px;z-index:6}
-  .ad-pop .box{background:#fff;border-radius:8px;width:420px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.3);border:1px solid #d6dad6}
+  .ad-pop .box{background:var(--card);border-radius:8px;width:420px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.3);border:1px solid var(--line)}
   .ad-pop h3{margin:0 0 6px;font-size:15px}
-  .ad-step{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:8px 0;border-top:1px solid #eef0ee}
+  .ad-step{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:8px 0;border-top:1px solid var(--line2)}
   .ad-step .n{background:var(--g);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex:0 0 auto}
-  .ad-danger{background:#fde8e8;border:1px solid #f3b4b4;border-radius:6px;padding:8px 10px;font-size:12.5px;color:#7f1d1d;margin-bottom:8px}
+  .ad-danger{background:var(--redbg);border:1px solid var(--redbd);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--redfg);margin-bottom:8px}
   .ibtn.red{background:var(--red)} .ibtn.dis{opacity:.4}
-  .ibtn.out.red{background:#fff;color:var(--red);border-color:var(--red)}
-  .ad-hash{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#555;word-break:break-all}
+  .ibtn.out.red{background:var(--card);color:var(--redt);border-color:var(--red)}
+  .ad-hash{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--t3);word-break:break-all}
   table.dt tr.sel td{background:var(--gl)}
-  .ad-ta{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:8px 10px;font-size:13px;min-height:90px;color:#333}
-  .ad-tb{display:flex;gap:10px;border:1px solid #ced4da;border-bottom:0;border-radius:4px 4px 0 0;padding:4px 8px;background:#f6f7f6;color:#555;font-size:14px}
+  .ad-ta{background:var(--card);border:1px solid var(--inpb);border-radius:4px;padding:8px 10px;font-size:13px;min-height:90px;color:var(--t2)}
+  .ad-tb{display:flex;gap:10px;border:1px solid var(--inpb);border-bottom:0;border-radius:4px 4px 0 0;padding:4px 8px;background:var(--sunk);color:var(--t3);font-size:14px}
   .ad-tb+.ad-ta{border-radius:0 0 4px 4px}
-  .ad-pt{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #eef0ee;font-size:13px}
-  .ad-pt .bi-grip-vertical{color:#bbb}
+  .ad-pt{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:13px}
+  .ad-pt .bi-grip-vertical{color:var(--mut2)}
   .ad-pt .n{color:var(--mut);width:18px;text-align:right}
   .ad-pt .r{margin-left:auto;color:var(--mut);display:flex;gap:8px}
 </style>
+<script>
+/* Darstellung Hell / Dunkel / Wie Gerät (Teil 0, Abschnitt 7.4).
+   Setzt data-bs-theme="light|dark" am html-Element (passt zu Bootstrap 5.3).
+   Die Wahl wird je Gerät gespeichert (localStorage, Fehler werden abgefangen). */
+(function(){
+  var KEY = 'tsvrc-darstellung', root = document.documentElement, mem = 'auto';
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function norm(v){ return v === 'light' || v === 'dark' ? v : 'auto'; }
+  function get(){ try { var v = localStorage.getItem(KEY); if (v) return norm(v); } catch (e) {} return mem; }
+  function deviceDark(){ return !!(mq && mq.matches); }
+  function apply(m){
+    m = norm(m);
+    root.setAttribute('data-bs-theme', m === 'dark' || (m === 'auto' && deviceDark()) ? 'dark' : 'light');
+    root.setAttribute('data-darstellung', m);
+  }
+  function set(m){
+    m = norm(m); mem = m;
+    try { localStorage.setItem(KEY, m); } catch (e) {}
+    apply(m);
+    try { document.dispatchEvent(new CustomEvent('tsvrc-darstellung', { detail: m })); } catch (e) {}
+  }
+  if (mq) {
+    var onDev = function(){ if (get() === 'auto') { apply('auto'); try { document.dispatchEvent(new CustomEvent('tsvrc-darstellung', { detail: 'auto' })); } catch (e) {} } };
+    if (mq.addEventListener) mq.addEventListener('change', onDev); else if (mq.addListener) mq.addListener(onDev);
+  }
+  apply(get());
+  // Umschalter für die PC-Ansichten
+  function mountSwitch(){
+    function build(){
+      if (document.querySelector('.thm-sw')) return;
+      var box = document.createElement('div');
+      box.className = 'thm-sw'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Darstellung');
+      box.innerHTML = '<span>Darstellung</span><span class="thm-seg">' +
+        '<button type="button" data-thm="light">Hell</button><button type="button" data-thm="dark">Dunkel</button><button type="button" data-thm="auto">Wie Gerät</button></span>';
+      document.body.appendChild(box);
+      function mark(){ var m = get(); Array.prototype.forEach.call(box.querySelectorAll('button'), function(b){ var on = b.getAttribute('data-thm') === m; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
+      box.addEventListener('click', function(e){ var b = e.target.closest('button[data-thm]'); if (b) { set(b.getAttribute('data-thm')); mark(); } });
+      document.addEventListener('tsvrc-darstellung', mark);
+      mark();
+    }
+    if (document.body) build(); else document.addEventListener('DOMContentLoaded', build);
+  }
+  window.TSVTheme = { get: get, set: set, apply: apply, deviceDark: deviceDark, mountSwitch: mountSwitch };
+})();
+TSVTheme.mountSwitch();
+</script>
 </head>
 <body>
 <div class="intro">
@@ -242,7 +326,7 @@
   <p class="ddesc">Einstieg mit Zustand auf einen Blick: offene Aufgaben (Freischaltung, Regelwerk-Entwurf), Sicherung, Hash-Kette, 2FA-Pflicht. Darunter die letzten Admin-Aktionen.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/admin</span></div>
   <div class="app">
-    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. <span class="badge" style="background:#fff;color:var(--gd)">Admin · noch 11:20 h</span></div></div>
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. <span class="badge" style="background:var(--card);color:var(--gdt)">Admin · noch 11:20 h</span></div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r on"><i class="bi bi-gear"></i>Admin</a></div>
     <div class="dbody">
       <div class="dside">
@@ -321,7 +405,7 @@
             <tr><td><b>Sandra S.</b></td><td>sandra@…</td><td>Erziehungsberechtigte <small class="mut">(kein Mitglied)</small></td><td>–</td><td>Passwort</td><td><span class="badge b-g">aktiv</span></td><td>12.11.</td></tr>
             <tr><td><b>Paul W.</b> <span class="badge b-w">16</span></td><td>paul@…</td><td>–</td><td><span class="badge b-car">RC</span></td><td>–</td><td><span class="badge b-w">wartet auf Freischaltung</span> <small class="mut">noch ohne Eltern</small></td><td>–</td></tr>
             <tr><td><b>Eva M.</b></td><td>eva@…</td><td>Mitglied</td><td><span class="badge b-air">Luft</span></td><td>–</td><td><span class="badge b-all">eingeladen · bis 21.11.</span></td><td>–</td></tr>
-            <tr style="color:#888"><td><b>Felix H.</b></td><td>felix@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-r">gesperrt</span></td><td>03/2026</td></tr>
+            <tr style="color:var(--mut2)"><td><b>Felix H.</b></td><td>felix@…</td><td>Mitglied</td><td><span class="badge b-car">RC</span></td><td>Passwort</td><td><span class="badge b-r">gesperrt</span></td><td>03/2026</td></tr>
           </table>
         </div>
         <div class="hint">Kinder-Konten sind – eingeladen wie selbst registriert – nach Einladung bzw. Freischaltung sofort nutzbar; zustimmungspflichtige Aktionen (z. B. Ausleihe) warten auf das Eltern-Konto. Kontotyp „Dienst“ (Service Accounts) folgt in einer späteren Ausbaustufe.</div>
@@ -346,7 +430,7 @@
         <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
       </div>
       <div class="dcontent">
-        <div class="banner" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-eye"></i> <b>Personenbezogene Daten.</b> Nur zur Unterstützung von Lena K. nutzen. Das Ansehen wird nicht protokolliert, Änderungen schon. <span class="assume" style="margin:0">Annahme 7.3: Ob Admins Personendaten einsehen dürfen, ist mit dem Verein abzustimmen.</span></div>
+        <div class="banner" style="background:var(--warnbg);border-color:var(--warnbd);color:var(--warnfg)"><i class="bi bi-eye"></i> <b>Personenbezogene Daten.</b> Nur zur Unterstützung von Lena K. nutzen. Das Ansehen wird nicht protokolliert, Änderungen schon. <span class="assume" style="margin:0">Annahme 7.3: Ob Admins Personendaten einsehen dürfen, ist mit dem Verein abzustimmen.</span></div>
         <div class="hrow"><h3 style="font-size:18px">Lena K.</h3><span><span class="ibtn out"><i class="bi bi-envelope"></i> Passwort-Link senden</span> <span class="ibtn out red"><i class="bi bi-slash-circle"></i> Konto sperren</span> <span class="ibtn red"><i class="bi bi-person-x"></i> Austritt erfassen …</span></span></div>
         <div style="display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:14px">
           <div class="card"><h3>Person</h3>
@@ -357,7 +441,7 @@
             <table class="dt"><tr><th>Rolle</th><th>Geltung</th><th>seit</th><th></th></tr>
               <tr><td><b>Mitglied</b></td><td>Abteilung RC-Modellsport</td><td>09/2025</td><td><i class="bi bi-x mut"></i></td></tr>
               <tr><td><b>Ausbilder</b></td><td>Abteilung RC-Modellsport</td><td><span class="badge b-g">neu</span></td><td><i class="bi bi-x mut"></i></td></tr>
-              <tr style="color:#888"><td><b>Admin</b></td><td>global</td><td><span class="badge b-w">wartet auf 2FA</span></td><td><i class="bi bi-x mut"></i></td></tr>
+              <tr style="color:var(--mut2)"><td><b>Admin</b></td><td>global</td><td><span class="badge b-w">wartet auf 2FA</span></td><td><i class="bi bi-x mut"></i></td></tr>
             </table>
             <div class="alert" style="margin:8px 0 0"><i class="bi bi-shield-exclamation"></i> Admins brauchen mindestens einen zweiten Faktor oder Passkey. Lena wird bei der nächsten Anmeldung zur Einrichtung aufgefordert; die Admin-Rolle wird erst danach wirksam.</div>
           </div>
@@ -378,7 +462,7 @@
       </div>
     </div>
     <div class="ad-pop"><div class="box">
-      <h3><i class="bi bi-slash-circle" style="color:var(--red)"></i> Konto „Lena K.“ sperren?</h3>
+      <h3><i class="bi bi-slash-circle" style="color:var(--redt)"></i> Konto „Lena K.“ sperren?</h3>
       <div style="font-size:13px">Alle Sitzungen und API-Tokens werden sofort beendet. Flugbuch, Modelle und Nachweise bleiben erhalten. Entsperren ist jederzeit möglich; eine befristete Sperre endet automatisch.</div>
       <label>Grund <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip on">Verdacht auf Missbrauch</span><span class="chip">Verstoß gegen Platzregeln</span><span class="chip">Beitrag offen</span><span class="chip">Gerät verloren</span><span class="chip">Austritt in Bearbeitung</span><span class="chip">Sonstiges</span></div>
       <label>Dauer <span class="req">*</span></label><div class="chips" style="margin:0"><span class="chip">unbefristet</span><span class="chip on">1 Woche</span><span class="chip">1 Monat</span><span class="chip">bis Datum …</span></div>
@@ -436,7 +520,7 @@
             </table>
             <div class="hint"><i class="bi bi-lock"></i> 3 von 3 festen Unterpunkten belegt: Ein vierter lässt sich erst festlegen, wenn einer gelöst wird. Alle anderen sichtbaren Module liegen im ⋯-Menü.</div>
             <label>Vorschau Unterpunkte</label>
-            <div class="dnav2" style="border:1px solid #e3e6e3;border-radius:6px"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a class="dots">⋯</a></div>
+            <div class="dnav2" style="border:1px solid var(--line);border-radius:6px"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a class="dots">⋯</a></div>
             <label>Modelltypen in diesem Bereich</label>
             <div class="chips" style="margin:0"><span class="chip on">Drohne</span><span class="chip on">FPV</span><span class="chip on">Akku</span><span class="chip on">Fernsteuerung</span><span class="chip on">Ladegerät</span><span class="chip on">FPV-Brille</span><span class="chip on">Sonstiges Zubehör</span></div>
             <div class="hint">Die Zuordnung wird im Modelltyp gepflegt (Regelwerk) und hier nur angezeigt.</div>
@@ -528,7 +612,7 @@
               <table class="dt">
                 <tr><td><b>Offene Kategorie</b><br><small class="mut">EU 2019/947 · Luftsport · Stand 2026-1</small></td><td><span class="ibtn out">Als Entwurf</span></td></tr>
                 <tr><td><b>RC Cars Grundkonfiguration</b><br><small class="mut">Modelltypen, Checkliste</small></td><td><span class="ibtn out">Als Entwurf</span></td></tr>
-                <tr style="color:#999"><td><b>DMFV</b> / <b>DAeC</b><br><small>Verband noch offen (13.1)</small></td><td><span class="badge b-all">später</span></td></tr>
+                <tr style="color:var(--mut2)"><td><b>DMFV</b> / <b>DAeC</b><br><small>Verband noch offen (13.1)</small></td><td><span class="badge b-all">später</span></td></tr>
                 <tr><td><b>Aus Datei</b><br><small class="mut">exportiertes Regelwerk (JSON)</small></td><td><span class="ibtn out"><i class="bi bi-upload"></i></span></td></tr>
               </table>
               <div class="hint">Ein Import überschreibt nichts: Er erzeugt einen Entwurf, der vor dem Aktivieren verglichen wird.</div>
@@ -561,7 +645,7 @@
         <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a>Änderungsprotokoll</a><a>Benachrichtigungen</a>
       </div>
       <div class="dcontent">
-        <div class="banner" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-pencil-square"></i> Du bearbeitest <b>Entwurf v5</b>. Aktiv bleibt v4, bis der Entwurf aktiviert wird.</div>
+        <div class="banner" style="background:var(--warnbg);border-color:var(--warnbd);color:var(--warnfg)"><i class="bi bi-pencil-square"></i> Du bearbeitest <b>Entwurf v5</b>. Aktiv bleibt v4, bis der Entwurf aktiviert wird.</div>
         <div style="display:grid;grid-template-columns:1fr 1.35fr;gap:14px">
           <div class="card"><div class="hrow"><h3>Flugarten</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Flugart</span></div>
             <table class="dt"><tr><th></th><th>Name</th><th>Status</th></tr>
@@ -571,7 +655,7 @@
               <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Event/Vorführung</b></td><td><span class="badge b-g">aktiv</span></td></tr>
               <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Wettbewerb/Rennen</b></td><td><span class="badge b-g">aktiv</span></td></tr>
               <tr><td><i class="bi bi-grip-vertical"></i></td><td><b>Testflug</b></td><td><span class="badge b-w">neu in v5</span></td></tr>
-              <tr style="color:#999"><td><i class="bi bi-grip-vertical"></i></td><td>Sonstiges</td><td><span class="badge b-all">inaktiv</span></td></tr>
+              <tr style="color:var(--mut2)"><td><i class="bi bi-grip-vertical"></i></td><td>Sonstiges</td><td><span class="badge b-all">inaktiv</span></td></tr>
             </table>
             <div class="note" style="text-align:left">„Ausbilder nötig“ ist fest an die Flugart „Schulung“ gebunden; neue Flugarten verlangen keinen Ausbilder.</div>
           </div>
@@ -818,10 +902,10 @@
       </div>
     </div>
     <div class="ad-modal"><div class="box">
-      <h3><i class="bi bi-exclamation-octagon" style="color:var(--red)"></i> Sicherung vom 13.11.2026 02:30 wiederherstellen</h3>
+      <h3><i class="bi bi-exclamation-octagon" style="color:var(--redt)"></i> Sicherung vom 13.11.2026 02:30 wiederherstellen</h3>
       <div class="ad-danger"><b>Alle Änderungen seit 13.11. 02:30 gehen verloren</b> (u. a. 14 Flüge, 2 Nachweise, 1 Ausleihe). Während der Wiederherstellung ist TSV RC für alle gesperrt. Offline erfasste, noch nicht übertragene Flüge bleiben auf den Geräten und werden danach erneut gesendet.</div>
       <div class="ad-step"><span class="n">1</span><span><i class="bi bi-check-square-fill ad-ok"></i> Ich habe verstanden, dass Daten seit dem 13.11. 02:30 verloren gehen. Der aktuelle Stand wird vorher automatisch gesichert.</span></div>
-      <div class="ad-step"><span class="n">2</span><span style="flex:1">Zur Bestätigung <b>production</b> eintippen und erneut anmelden:<div class="two" style="margin-top:4px"><div class="inp">producti<span style="border-left:1px solid #333;margin-left:1px">&nbsp;</span></div><div class="inp mut" style="flex:0 0 auto"><i class="bi bi-fingerprint"></i>&nbsp;Passkey</div></div></span></div>
+      <div class="ad-step"><span class="n">2</span><span style="flex:1">Zur Bestätigung <b>production</b> eintippen und erneut anmelden:<div class="two" style="margin-top:4px"><div class="inp">producti<span style="border-left:1px solid var(--t2);margin-left:1px">&nbsp;</span></div><div class="inp mut" style="flex:0 0 auto"><i class="bi bi-fingerprint"></i>&nbsp;Passkey</div></div></span></div>
       <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><span class="ibtn out">Abbrechen</span><span class="ibtn red dis">Wiederherstellen</span></div>
       <div class="note" style="text-align:left">Abgesichert durch Eintippen, erneute Anmeldung und eine automatische Vorab-Sicherung.</div>
     </div></div>
@@ -844,7 +928,7 @@
         <div class="h" style="margin-top:6px">Inhalte &amp; System</div><a>FAQ · Hilfe · Links</a><a>Backup &amp; Restore</a><a class="on">Änderungsprotokoll</a><a>Benachrichtigungen</a>
       </div>
       <div class="dcontent">
-        <div class="banner" style="background:var(--gl);border-color:#bfe0c6;display:flex;align-items:center;gap:10px"><i class="bi bi-link-45deg" style="font-size:20px;color:var(--g)"></i><span><b>Hash-Kette intakt.</b> 48.213 Einträge seit Prüfpunkt #3 (01.11.2026). Zuletzt geprüft 02.11.2026 – nur auf Knopfdruck, keine nächtliche Prüfung.</span><span class="ibtn out" style="margin-left:auto">Jetzt prüfen</span></div>
+        <div class="banner" style="background:var(--gl);border-color:var(--gbd);display:flex;align-items:center;gap:10px"><i class="bi bi-link-45deg" style="font-size:20px;color:var(--gt)"></i><span><b>Hash-Kette intakt.</b> 48.213 Einträge seit Prüfpunkt #3 (01.11.2026). Zuletzt geprüft 02.11.2026 – nur auf Knopfdruck, keine nächtliche Prüfung.</span><span class="ibtn out" style="margin-left:auto">Jetzt prüfen</span></div>
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
           <div class="inp" style="width:220px"><span>lena</span><i class="bi bi-search"></i></div>
           <div class="inp" style="width:150px"><span>Letzte 30 Tage</span><i class="bi bi-calendar3"></i></div>
@@ -937,7 +1021,7 @@
       </div>
       <div class="dcontent">
         <div class="hrow"><h3 style="font-size:17px">Regelwerk v3 <span class="badge b-all">alt · nur lesen</span></h3><span><span class="ibtn out"><i class="bi bi-download"></i> Exportieren</span> <span class="ibtn out"><i class="bi bi-clock-history"></i> Protokoll</span></span></div>
-        <div class="banner" style="background:#eceeec;border-color:#d6dad6"><i class="bi bi-lock"></i> Gültig 01.09.–01.11.2026 · aktiviert von Markus B. · <b>1.084 Einträge</b> wurden unter dieser Version erfasst und werden weiter gegen sie geprüft.</div>
+        <div class="banner" style="background:var(--sunk2);border-color:var(--line)"><i class="bi bi-lock"></i> Gültig 01.09.–01.11.2026 · aktiviert von Markus B. · <b>1.084 Einträge</b> wurden unter dieser Version erfasst und werden weiter gegen sie geprüft.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
           <div>
             <div class="card"><h3>Änderungen gegenüber v2</h3><table class="dt"><tr><td><i class="bi bi-plus-circle ad-ok"></i> Flugart „Wettbewerb/Rennen“ angelegt</td></tr><tr><td><i class="bi bi-plus-circle ad-ok"></i> Zusatzfeld „Aufsicht anwesend“ (Ja/Nein) für Flüge</td></tr><tr><td><i class="bi bi-plus-circle ad-ok"></i> Nachweistyp „Verbandsnachweis“ angelegt</td></tr></table></div>

@@ -9,27 +9,65 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
-  :root{--g:#0A5C23;--gd:#052e12;--gl:#e8f5e9;--t:#1a1a1a;--bg:#fafafa;--mut:#6c757d;--warn:#b45309;--warnbg:#fff4e0;--red:#b91c1c;
-        --air:#1e5a99;--airbg:#e4eef8;--car:#a8361b;--carbg:#fbe9e4}
+  /* ---------- Farb-Tokens (hell). Komponenten nutzen nur Tokens, keine festen Farbwerte. ----------
+     --g, --red, --warn, --air, --car: Flächen (Schalter, Badges mit weißer Schrift, Rahmen);
+     --gt, --redt, --warnt, --airt, --cart, --gdt: dieselben Farben als Schrift/Symbol. */
+  :root{color-scheme:light;
+        --g:#0A5C23;--gt:#0A5C23;--gd:#052e12;--gdt:#052e12;--gl:#e8f5e9;--gl2:#cfe8d4;--glt:#f6fbf7;--gbd:#b9dcbf;
+        --t:#1a1a1a;--t2:#333;--t3:#555;--mut:#646c72;--mut2:#aaa;
+        --bg:#fafafa;--page:#eceeec;--card:#fff;--sunk:#f4f5f4;--sunk2:#eceeec;
+        --line:#e3e6e3;--line2:#eef0ee;--line3:#dfe3df;--line4:#c3c8c3;--inpb:#868f88;
+        --warn:#b45309;--warnt:#b45309;--warnbg:#fff4e0;--warnbd:#f3d19c;--warnfg:#7a4a06;
+        --red:#b91c1c;--redt:#b91c1c;--redbg:#fde8e8;--redbd:#f3b4b4;--redfg:#7f1d1d;
+        --air:#1e5a99;--airt:#1e5a99;--airbg:#e4eef8;--airbd:#c9dcf0;--airfg:#173f6b;
+        --car:#a8361b;--cart:#a8361b;--carbg:#fbe9e4;
+        --ok:#1f8a3b;--okt:#1a7a34;--yel:#b88400;--yelt:#8a6100;--gold:#c99a06;--mark:#fff0a8;--toast:#1f2a22}
+  /* ---------- Dunkler Modus (Vorschlag zur Abstimmung, Teil 0 Abschnitt 7.4) ----------
+     Hintergrund sehr dunkles Grau mit Grünstich, Karten etwas heller, Text hellgrau;
+     Vereinsgrün für Schrift aufgehellt (--gt), für Schalter mittleres Grün (--g, weiße Schrift);
+     der Kopf bleibt dunkelgrün (--gd). */
+  [data-bs-theme="dark"]{color-scheme:dark;
+        --g:#23803f;--gt:#6fcf8a;--gd:#052e12;--gdt:#b5e6c2;--gl:#183322;--gl2:#24492f;--glt:#162219;--gbd:#2f5a3a;
+        --t:#e2e7e3;--t2:#d0d7d1;--t3:#b8c0ba;--mut:#9aa59d;--mut2:#6b766e;
+        --bg:#111613;--page:#0b0e0c;--card:#1a201c;--sunk:#222924;--sunk2:#262e28;
+        --line:#2c352f;--line2:#252d27;--line3:#333d36;--line4:#4a554c;--inpb:#66726a;
+        --warn:#a8580f;--warnt:#f2b35c;--warnbg:#36290f;--warnbd:#6b5020;--warnfg:#f5cd8a;
+        --red:#c93838;--redt:#ff8f86;--redbg:#3b1c1c;--redbd:#6e2e2e;--redfg:#ffc2bc;
+        --air:#2f6db3;--airt:#8ec0f5;--airbg:#172a3f;--airbd:#2c4b6e;--airfg:#c3dcf8;
+        --car:#b84a2c;--cart:#f2a088;--carbg:#3a2019;
+        --ok:#2e9e4c;--okt:#6fcf8a;--yel:#e0a516;--yelt:#f2c14e;--gold:#e0b030;--mark:#6b5a10;--toast:#33463a}
+  /* Karten-Kacheln werden nicht invertiert: in Karten gelten die hellen Werte weiter */
+  [data-bs-theme="dark"] .md-map,[data-bs-theme="dark"] .pf-map,[data-bs-theme="dark"] .ev-amap,[data-bs-theme="dark"] .wx-map,
+  [data-bs-theme="dark"] .ad-map,[data-bs-theme="dark"] .hf-map,[data-bs-theme="dark"] .pfmap,[data-bs-theme="dark"] .map{color-scheme:light;
+        --g:#0A5C23;--gt:#0A5C23;--gl:#e8f5e9;--t:#1a1a1a;--t2:#333;--t3:#555;--mut:#646c72;--card:#fff;--sunk:#f4f5f4;
+        --line:#e3e6e3;--line2:#eef0ee;--line3:#dfe3df;--red:#b91c1c;--redt:#b91c1c;--air:#1e5a99;--airt:#1e5a99;--car:#a8361b;--cart:#a8361b;
+        --warn:#b45309;--warnt:#b45309;--yel:#b88400;color:var(--t)}
+  [data-bs-theme="dark"] a{color:var(--gt)}
+  /* Umschalter Darstellung (PC-Ansichten) */
+  .thm-sw{position:fixed;top:10px;right:12px;z-index:50;display:flex;align-items:center;gap:6px;background:var(--card);color:var(--t);border:1px solid var(--inpb);border-radius:8px;padding:4px 6px 4px 10px;font-size:12px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+  .thm-sw .thm-seg{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden}
+  .thm-sw button{font:inherit;font-size:12px;font-weight:700;border:0;background:var(--card);color:var(--gt);padding:4px 9px;cursor:pointer}
+  .thm-sw button+button{border-left:1px solid var(--g)}
+  .thm-sw button.on{background:var(--g);color:#fff}
   *{box-sizing:border-box}
-  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:#eceeec;color:var(--t)}
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;background:var(--page);color:var(--t)}
   .intro{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
   .intro h1{margin:0 0 6px;font-size:26px}
-  .intro p{margin:0 0 6px;color:#444;max-width:860px}
+  .intro p{margin:0 0 6px;color:var(--t2);max-width:860px}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:8px}
-  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:#fff;border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
-  .direction:hover{border-color:#cfd8cf}
+  .direction{max-width:1200px;margin:18px auto;padding:18px 16px 22px;background:var(--card);border-radius:10px;border:3px solid transparent;cursor:pointer;transition:border-color .15s}
+  .direction:hover{border-color:var(--line3)}
   .direction.selected{border-color:var(--g)}
   .dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
   .dletter{background:var(--g);color:#fff;font-weight:800;border-radius:6px;padding:2px 10px;font-size:18px}
   .dhead h2{margin:0;font-size:20px}
-  .ddesc{color:#555;margin:2px 0 6px;font-size:14px;max-width:900px}
-  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:#333}
+  .ddesc{color:var(--t3);margin:2px 0 6px;font-size:14px;max-width:900px}
+  .proscons{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin:0 0 14px;color:var(--t2)}
   .proscons ul{margin:2px 0 0;padding-left:18px}
-  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  .proscons b{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--t3)}
   .phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
   .pcol{flex:0 0 auto}
-  .plabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
+  .plabel{font-size:12px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px 4px}
   .phone{width:340px;height:690px;border-radius:34px;border:10px solid #1d1d1f;overflow:hidden;position:relative;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,.15)}
   .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
   .status{height:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font-weight:700;background:var(--gd);color:#fff}
@@ -42,75 +80,75 @@
   h3{font-size:16px;margin:12px 0 8px}
   h3:first-child{margin-top:2px}
   small,.mut{color:var(--mut)}
-  .card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:4px 12px;margin-bottom:10px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:4px 12px;margin-bottom:10px}
   .card.pad{padding:10px 12px}
-  .alert{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:#7a4a06}
+  .alert{background:var(--warnbg);border:1px solid var(--warnbd);border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:10px;color:var(--warnfg)}
   .stats{display:flex;gap:8px;margin-bottom:10px}
-  .stat{flex:1;background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:8px;text-align:center}
-  .stat b{display:block;font-size:19px;color:var(--g)}
+  .stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px;text-align:center}
+  .stat b{display:block;font-size:19px;color:var(--gt)}
   .stat span{font-size:11px;color:var(--mut)}
-  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:13px}
   .row:last-child{border-bottom:0}
   .btn{display:block;width:100%;background:var(--g);color:#fff;border:0;border-radius:6px;padding:10px;font-weight:700;font-size:14px;text-align:center;font-family:inherit}
-  .btn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .btn.out{background:var(--card);color:var(--gt);border:1px solid var(--g)}
   .btns{display:flex;gap:8px;margin-bottom:10px}.btns .btn{flex:1}
-  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:#fff;border-top:1px solid #e3e6e3;color:var(--mut)}
+  .tabbar{display:flex;justify-content:space-around;padding:6px 0 12px;font-size:10px;background:var(--card);border-top:1px solid var(--line);color:var(--mut)}
   .tabbar div{display:flex;flex-direction:column;align-items:center;gap:2px}
   .tabbar i{font-size:19px}
-  .tabbar .on{color:var(--g);font-weight:700}
+  .tabbar .on{color:var(--gt);font-weight:700}
   .badge{font-size:10.5px;border-radius:4px;padding:1px 6px;font-weight:700;white-space:nowrap}
-  .b-g{background:var(--gl);color:var(--g)}
-  .b-w{background:var(--warnbg);color:var(--warn)}
-  .b-r{background:#fde8e8;color:var(--red)}
-  .b-air{background:var(--airbg);color:var(--air)}
-  .b-car{background:var(--carbg);color:var(--car)}
-  .b-all{background:#eceeec;color:#444}
+  .b-g{background:var(--gl);color:var(--gt)}
+  .b-w{background:var(--warnbg);color:var(--warnt)}
+  .b-r{background:var(--redbg);color:var(--redt)}
+  .b-air{background:var(--airbg);color:var(--airt)}
+  .b-car{background:var(--carbg);color:var(--cart)}
+  .b-all{background:var(--sunk2);color:var(--t2)}
   .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
-  .ico.air{background:var(--airbg);color:var(--air)}
-  .ico.car{background:var(--carbg);color:var(--car)}
+  .ico.air{background:var(--airbg);color:var(--airt)}
+  .ico.car{background:var(--carbg);color:var(--cart)}
   .li{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
   .subnav{display:flex;border:1px solid var(--g);border-radius:6px;overflow:hidden;margin-bottom:10px;font-size:13px;font-weight:700}
-  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--g);background:#fff}
+  .subnav div{flex:1;text-align:center;padding:6px 0;color:var(--gt);background:var(--card)}
   .subnav div+div{border-left:1px solid var(--g)}
   .subnav .on{background:var(--g);color:#fff}
   .chips{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-  .chip{border:1px solid #ced4da;background:#fff;border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:#333}
+  .chip{border:1px solid var(--inpb);background:var(--card);border-radius:4px;padding:4px 10px;font-size:12px;font-weight:700;color:var(--t2)}
   .chip.on{background:var(--g);border-color:var(--g);color:#fff}
   .areahead{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:12px 0 6px}
   .areahead:first-child{margin-top:2px}
-  .areahead .ln{flex:1;height:1px;background:#dfe3df}
-  .block{background:#fff;border:1px solid #e3e6e3;border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+  .areahead .ln{flex:1;height:1px;background:var(--line3)}
+  .block{background:var(--card);border:1px solid var(--line);border-left:4px solid;border-radius:6px;padding:8px 12px;margin-bottom:10px}
   .block.air{border-left-color:var(--air)}
   .block.car{border-left-color:var(--car)}
   .block .bh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:4px}
-  .block .act{font-size:13px;font-weight:700;color:var(--g)}
+  .block .act{font-size:13px;font-weight:700;color:var(--gt)}
   .mini{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}
   .mini b{color:var(--t);font-size:15px}
   table.tab{width:100%;border-collapse:collapse;font-size:12.5px}
-  table.tab td{padding:5px 0;border-bottom:1px solid #eef0ee}
+  table.tab td{padding:5px 0;border-bottom:1px solid var(--line2)}
   table.tab tr:last-child td{border-bottom:0}
   table.tab td.r{text-align:right;font-weight:700}
   .me{background:var(--gl)}
   .note{font-size:11px;color:var(--mut);text-align:center;margin-top:4px}
   /* PC-Ansicht */
-  .sublabel{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
-  .win{border:1px solid #c9cdc9;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
+  .sublabel{font-size:12px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin:22px 0 6px 4px}
+  .win{border:1px solid var(--line3);border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:1000px}
   .winwrap{overflow-x:auto;padding-bottom:8px}
-  .chrome{background:#e4e6e4;padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:#555}
-  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:#c4c7c4;margin-right:4px}
-  .chrome .url{flex:1;background:#fff;border-radius:6px;padding:3px 10px}
+  .chrome{background:var(--line);padding:7px 12px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t3)}
+  .chrome .dots span{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--line4);margin-right:4px}
+  .chrome .url{flex:1;background:var(--card);border-radius:6px;padding:3px 10px}
   .app{height:560px;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
   .hdr{background:var(--gd);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 22px}
   .hdr img{height:38px}
   .hdr .t1{font-weight:800;font-size:18px;line-height:1.1}.hdr .t2{font-size:11px;opacity:.8}
   .hdr .user{margin-left:auto;font-size:13px}
-  .dnav{background:#fff;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px}
-  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:#333;border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
-  .dnav a.on{color:var(--g);border-color:var(--g)}
+  .dnav{background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:4px;padding:0 22px}
+  .dnav a{padding:10px 12px;font-size:14px;font-weight:700;color:var(--t2);border-bottom:3px solid transparent;display:flex;gap:6px;align-items:center}
+  .dnav a.on{color:var(--gt);border-color:var(--g)}
   .dnav .r{margin-left:auto}
-  .dnav2{background:#f1f3f1;border-bottom:1px solid #e3e6e3;display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
-  .dnav2 a{padding:7px 12px;font-weight:700;color:#555;border-bottom:2px solid transparent}
-  .dnav2 a.on{color:var(--air);border-color:var(--air)}
+  .dnav2{background:var(--sunk);border-bottom:1px solid var(--line);display:flex;gap:4px;padding:0 22px 0 22px;font-size:13px}
+  .dnav2 a{padding:7px 12px;font-weight:700;color:var(--t3);border-bottom:2px solid transparent}
+  .dnav2 a.on{color:var(--airt);border-color:var(--air)}
   .dmain{padding:16px 22px;display:grid;grid-template-columns:2fr 1fr;gap:16px;overflow:hidden}
   .dmain.three{grid-template-columns:1fr 1fr 1fr}
   .dmain h3{margin:0 0 8px;font-size:15px}
@@ -119,116 +157,162 @@
   .hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
   .hrow h3{margin:0}
   .ibtn{display:inline-block;background:var(--g);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:13px}
-  .ibtn.out{background:#fff;color:var(--g);border:1px solid var(--g)}
+  .ibtn.out{background:var(--card);color:var(--gt);border:1px solid var(--g)}
   table.dt{width:100%;border-collapse:collapse;font-size:13px}
   table.dt th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:6px 8px}
-  table.dt td{padding:7px 8px;border-top:1px solid #eef0ee}
+  table.dt td{padding:7px 8px;border-top:1px solid var(--line2)}
   .fabbar{position:absolute;right:14px;bottom:70px;background:var(--g);color:#fff;border-radius:6px;padding:10px 14px;font-weight:800;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
   .direction{cursor:default}
   .direction:hover{border-color:transparent}
   .subnav div{flex:1 1 auto;padding:6px 10px;white-space:nowrap}
   .subnav .more{flex:0 0 40px;display:flex;align-items:center;justify-content:center;font-size:18px;padding:0}
   .subnav .more.open{background:var(--gl)}
-  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--g);background:var(--gl);border-radius:4px 4px 0 0}
+  .dnav2 a.dots{font-size:17px;padding:3px 12px;color:var(--gt);background:var(--gl);border-radius:4px 4px 0 0}
   .air .subnav,.subnav.air{border-color:var(--air)}
   /* Bottom-Sheet "Mehr" */
   .dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
-  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
-  .sheet .grip{width:40px;height:4px;border-radius:2px;background:#ccc;margin:0 auto 10px}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:14px 14px 0 0;padding:8px 16px 22px;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+  .sheet .grip{width:40px;height:4px;border-radius:2px;background:var(--line4);margin:0 auto 10px}
   .sheet h4{margin:0 0 6px;font-size:15px}
-  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #eef0ee;font-size:14px;font-weight:600}
+  .sheet .it{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line2);font-size:14px;font-weight:600}
   .sheet .it:last-child{border-bottom:0}
-  .sheet .it i:first-child{font-size:18px;color:var(--g);width:22px;text-align:center}
+  .sheet .it i:first-child{font-size:18px;color:var(--gt);width:22px;text-align:center}
   .sheet .it .r{margin-left:auto}
   /* Formular */
   label{display:block;font-size:12px;font-weight:700;margin:8px 0 3px}
-  label .req{color:var(--red)}
+  label .req{color:var(--redt)}
   label .opt{font-weight:400;color:var(--mut)}
-  .inp{background:#fff;border:1px solid #ced4da;border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
+  .inp{background:var(--card);border:1px solid var(--inpb);border-radius:4px;padding:7px 10px;font-size:14px;display:flex;justify-content:space-between;align-items:center;min-height:34px}
   .inp.ph{color:var(--mut)}
   .two{display:flex;gap:8px}.two>div{flex:1}
   .fsec{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:14px 0 2px;display:flex;align-items:center;gap:6px}
-  .fsec .ln{flex:1;height:1px;background:#dfe3df}
+  .fsec .ln{flex:1;height:1px;background:var(--line3)}
   .kv{display:flex;gap:6px;margin-bottom:6px}
   .kv .inp{flex:1}
   .kv .x{color:var(--mut);display:flex;align-items:center}
-  .addlink{font-size:13px;font-weight:700;color:var(--g);margin-top:4px}
+  .addlink{font-size:13px;font-weight:700;color:var(--gt);margin-top:4px}
   .hint{font-size:11px;color:var(--mut);margin-top:3px}
   .chip .x{margin-left:4px;opacity:.8}
   /* Admin */
-  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #eef0ee}
+  .chk{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--line2)}
   .chk:last-child{border-bottom:0}
-  .chk i{font-size:17px;color:var(--g);margin-top:-1px}
-  .chk i.off{color:#aaa}
+  .chk i{font-size:17px;color:var(--gt);margin-top:-1px}
+  .chk i.off{color:var(--mut2)}
   .chk small{display:block}
   .lock{font-size:10.5px;color:var(--mut)}
-  table.dt td .bi-grip-vertical{color:#bbb}
+  table.dt td .bi-grip-vertical{color:var(--mut2)}
   .adm{background:#3b3f3b}
-  .dside{width:230px;border-right:1px solid #e3e6e3;background:#fff;padding:12px 0;overflow:hidden}
+  .dside{width:230px;border-right:1px solid var(--line);background:var(--card);padding:12px 0;overflow:hidden}
   .dside .h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:6px 16px}
-  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:#333}
-  .dside a.on{background:var(--gl);color:var(--g);border-right:3px solid var(--g)}
+  .dside a{display:flex;justify-content:space-between;align-items:center;padding:7px 16px;font-size:13px;font-weight:600;color:var(--t2)}
+  .dside a.on{background:var(--gl);color:var(--gt);border-right:3px solid var(--g)}
   .dbody{flex:1;display:flex;overflow:hidden}
   .dcontent{flex:1;padding:16px 22px;overflow:hidden}
-  .dropdown{position:absolute;background:#fff;border:1px solid #d6dad6;border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
-  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:#333}
-  .dropdown a i{color:var(--g);width:18px}
-  .dropdown .sep{height:1px;background:#eef0ee;margin:4px 0}
+  .dropdown{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);width:220px;padding:4px 0;z-index:5}
+  .dropdown a{display:flex;gap:10px;align-items:center;padding:8px 14px;font-size:13px;font-weight:600;color:var(--t2)}
+  .dropdown a i{color:var(--gt);width:18px}
+  .dropdown .sep{height:1px;background:var(--sunk);margin:4px 0}
   .app{position:relative}
-  .changes{background:#fff;border:1px solid #e3e6e3;border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+  .changes{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--g);border-radius:6px;padding:10px 14px;margin:0 0 16px;font-size:14px}
   .changes ul{margin:4px 0 0;padding-left:18px}
-  .assume{font-size:11.5px;color:#7a4a06;background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
-  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle}
+  .assume{font-size:11.5px;color:var(--warnfg);background:var(--warnbg);border-radius:4px;padding:4px 8px;margin-top:6px;display:inline-block}
+  .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--inpb);position:relative;vertical-align:middle}
   .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
   .tg.on{background:var(--g)}.tg.on::after{left:18px}
-  .tabs{display:flex;border-bottom:1px solid #dfe3df;margin-bottom:10px;font-size:13px;font-weight:700}
+  .tabs{display:flex;border-bottom:1px solid var(--line3);margin-bottom:10px;font-size:13px;font-weight:700}
   .tabs div{padding:7px 12px;color:var(--mut);border-bottom:2px solid transparent}
-  .tabs .on{color:var(--g);border-color:var(--g)}
-  .ok{background:var(--gl);border:1px solid #b9dcbf;border-radius:6px;padding:9px 12px;font-size:13px;color:var(--gd);margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
-  .ok i{font-size:18px;color:var(--g)}
+  .tabs .on{color:var(--gt);border-color:var(--g)}
+  .ok{background:var(--gl);border:1px solid var(--gbd);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--gdt);margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
+  .ok i{font-size:18px;color:var(--gt)}
   .bigact{display:flex;align-items:center;gap:12px;background:var(--g);color:#fff;border-radius:6px;padding:14px;margin-bottom:14px;font-weight:800;font-size:16px}
   .bigact i{font-size:24px}
   .bigact small{display:block;color:#d6eadb;font-weight:600;font-size:12px}
   /* Anmeldung (an-) */
-  .an-stage{flex:1;display:flex;gap:22px;align-items:flex-start;justify-content:center;padding:26px 22px;overflow:hidden;background:linear-gradient(180deg,#eef3ef 0,#fafafa 60%)}
-  .an-card{background:#fff;border:1px solid #e3e6e3;border-radius:6px;padding:16px 20px 18px;width:360px;flex:0 0 auto}
+  .an-stage{flex:1;display:flex;gap:22px;align-items:flex-start;justify-content:center;padding:26px 22px;overflow:hidden;background:linear-gradient(180deg,var(--glt) 0,var(--bg) 60%)}
+  .an-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 20px 18px;width:360px;flex:0 0 auto}
   .an-card.wide{width:440px}
   .an-card h3{margin:0 0 4px;font-size:17px}
-  .an-card .lead{font-size:13px;color:#555;margin:0 0 6px}
+  .an-card .lead{font-size:13px;color:var(--t3);margin:0 0 6px}
   .an-step{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-bottom:6px}
   .an-or{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin:12px 0}
-  .an-or::before,.an-or::after{content:"";flex:1;height:1px;background:#dfe3df}
-  .an-link{font-size:13px;font-weight:700;color:var(--g)}
+  .an-or::before,.an-or::after{content:"";flex:1;height:1px;background:var(--line3)}
+  .an-link{font-size:13px;font-weight:700;color:var(--gt)}
   .an-otp{display:flex;gap:6px;margin:6px 0 4px}
-  .an-otp span{width:40px;height:46px;border:1px solid #ced4da;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;background:#fff}
+  .an-otp span{width:40px;height:46px;border:1px solid var(--inpb);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;background:var(--card)}
   .an-otp span.f{border-color:var(--g);box-shadow:0 0 0 2px var(--gl)}
-  .an-qr{width:140px;height:140px;border:1px solid #ced4da;border-radius:4px;background:
+  .an-qr{width:140px;height:140px;border:1px solid var(--inpb);border-radius:4px;background:
     repeating-linear-gradient(90deg,#1a1a1a 0 7px,#fff 7px 14px),repeating-linear-gradient(0deg,#1a1a1a 0 7px,#fff 7px 14px);background-blend-mode:difference;position:relative;flex:0 0 auto}
   .an-qr::after{content:"QR-Code";position:absolute;inset:48px 26px;background:#fff;border-radius:4px;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--mut)}
   .an-mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;letter-spacing:.04em}
-  .an-codes{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;background:#f6f7f6;border-radius:6px;padding:10px 14px;margin:8px 0}
+  .an-codes{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;background:var(--sunk);border-radius:6px;padding:10px 14px;margin:8px 0}
   .an-token{background:#1f2a22;color:#c9f0d1;border-radius:6px;padding:10px 12px;word-break:break-all;margin:6px 0}
   .an-check{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:10px 0}
-  .an-check i{font-size:17px;color:var(--g)}
-  .an-check i.off{color:#aaa}
-  .an-mail{background:#fff;border:1px solid #e3e6e3;border-radius:6px;font-size:13px;width:330px;flex:0 0 auto}
-  .an-mail .mh{background:#f1f3f1;padding:8px 12px;border-bottom:1px solid #e3e6e3;font-size:12px;color:#555}
+  .an-check i{font-size:17px;color:var(--gt)}
+  .an-check i.off{color:var(--mut2)}
+  .an-mail{background:var(--card);border:1px solid var(--line);border-radius:6px;font-size:13px;width:330px;flex:0 0 auto}
+  .an-mail .mh{background:var(--sunk);padding:8px 12px;border-bottom:1px solid var(--line);font-size:12px;color:var(--t3)}
   .an-mail .mb{padding:12px}
-  .an-install{position:absolute;right:16px;top:44px;width:330px;background:#fff;border:1px solid #d6dad6;border-radius:8px;box-shadow:0 10px 26px rgba(0,0,0,.2);padding:14px 16px;z-index:5;font-size:13px}
+  .an-install{position:absolute;right:16px;top:44px;width:330px;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 26px rgba(0,0,0,.2);padding:14px 16px;z-index:5;font-size:13px}
   .an-install h4{margin:0 0 6px;font-size:15px;display:flex;gap:8px;align-items:center}
   .an-install img{height:30px}
-  .chrome .an-inst{color:var(--g);font-size:15px}
-  .an-feat{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:8px 0;border-bottom:1px solid #eef0ee}
+  .chrome .an-inst{color:var(--gt);font-size:15px}
+  .an-feat{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:8px 0;border-bottom:1px solid var(--line2)}
   .an-feat:last-child{border-bottom:0}
-  .an-feat i{font-size:20px;color:var(--g);width:24px;text-align:center}
+  .an-feat i{font-size:20px;color:var(--gt);width:24px;text-align:center}
   .an-lead{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .an-lead div{background:#f6f7f6;border-radius:6px;padding:8px 10px;font-size:12px;color:#555}
-  .an-lead b{display:block;font-size:18px;color:var(--g)}
-  .an-lead .w b{color:var(--warn)}
-  .an-strength{height:5px;border-radius:3px;background:#e3e6e3;overflow:hidden;margin-top:4px}
+  .an-lead div{background:var(--sunk);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--t3)}
+  .an-lead b{display:block;font-size:18px;color:var(--gt)}
+  .an-lead .w b{color:var(--warnt)}
+  .an-strength{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:4px}
   .an-strength div{height:100%;width:70%;background:var(--g)}
-  .an-minor{background:var(--airbg);border:1px solid #c9dcf0;border-radius:6px;padding:8px 10px;font-size:12.5px;margin:10px 0}
+  .an-minor{background:var(--airbg);border:1px solid var(--airbd);border-radius:6px;padding:8px 10px;font-size:12.5px;margin:10px 0}
 </style>
+<script>
+/* Darstellung Hell / Dunkel / Wie Gerät (Teil 0, Abschnitt 7.4).
+   Setzt data-bs-theme="light|dark" am html-Element (passt zu Bootstrap 5.3).
+   Die Wahl wird je Gerät gespeichert (localStorage, Fehler werden abgefangen). */
+(function(){
+  var KEY = 'tsvrc-darstellung', root = document.documentElement, mem = 'auto';
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function norm(v){ return v === 'light' || v === 'dark' ? v : 'auto'; }
+  function get(){ try { var v = localStorage.getItem(KEY); if (v) return norm(v); } catch (e) {} return mem; }
+  function deviceDark(){ return !!(mq && mq.matches); }
+  function apply(m){
+    m = norm(m);
+    root.setAttribute('data-bs-theme', m === 'dark' || (m === 'auto' && deviceDark()) ? 'dark' : 'light');
+    root.setAttribute('data-darstellung', m);
+  }
+  function set(m){
+    m = norm(m); mem = m;
+    try { localStorage.setItem(KEY, m); } catch (e) {}
+    apply(m);
+    try { document.dispatchEvent(new CustomEvent('tsvrc-darstellung', { detail: m })); } catch (e) {}
+  }
+  if (mq) {
+    var onDev = function(){ if (get() === 'auto') { apply('auto'); try { document.dispatchEvent(new CustomEvent('tsvrc-darstellung', { detail: 'auto' })); } catch (e) {} } };
+    if (mq.addEventListener) mq.addEventListener('change', onDev); else if (mq.addListener) mq.addListener(onDev);
+  }
+  apply(get());
+  // Umschalter für die PC-Ansichten
+  function mountSwitch(){
+    function build(){
+      if (document.querySelector('.thm-sw')) return;
+      var box = document.createElement('div');
+      box.className = 'thm-sw'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Darstellung');
+      box.innerHTML = '<span>Darstellung</span><span class="thm-seg">' +
+        '<button type="button" data-thm="light">Hell</button><button type="button" data-thm="dark">Dunkel</button><button type="button" data-thm="auto">Wie Gerät</button></span>';
+      document.body.appendChild(box);
+      function mark(){ var m = get(); Array.prototype.forEach.call(box.querySelectorAll('button'), function(b){ var on = b.getAttribute('data-thm') === m; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
+      box.addEventListener('click', function(e){ var b = e.target.closest('button[data-thm]'); if (b) { set(b.getAttribute('data-thm')); mark(); } });
+      document.addEventListener('tsvrc-darstellung', mark);
+      mark();
+    }
+    if (document.body) build(); else document.addEventListener('DOMContentLoaded', build);
+  }
+  window.TSVTheme = { get: get, set: set, apply: apply, deviceDark: deviceDark, mountSwitch: mountSwitch };
+})();
+TSVTheme.mountSwitch();
+</script>
 </head>
 <body>
 <div class="intro">
@@ -296,12 +380,12 @@
         <div class="an-step">Einladung · gültig bis Sa 21.11.2026 (7 Tage)</div>
         <h3>Willkommen, Lena!</h3>
         <p class="lead"><b>Markus B.</b> (Abteilungsleitung) hat dich zu TSV RC eingeladen. Alle Bereiche (Luftsport, RC Cars) stehen dir offen; „Meine Bereiche“ stellst du später im Profil ein.</p>
-        <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Lena K.</div></div><div><label>E-Mail <i class="bi bi-lock lock"></i></label><div class="inp" style="background:#f6f7f6">lena@beispiel.de</div></div></div>
+        <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Lena K.</div></div><div><label>E-Mail <i class="bi bi-lock lock"></i></label><div class="inp" style="background:var(--sunk)">lena@beispiel.de</div></div></div>
         <div class="hint">Die E-Mail ist dein Anmeldename. Ändern kannst du sie später im Profil.</div>
         <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
         <div class="chips"><span class="chip on"><i class="bi bi-fingerprint"></i> Passkey (empfohlen)</span><span class="chip">Passwort</span></div>
         <div class="hint" style="margin-top:-4px">Passkey: kein Passwort zu merken, Fingerabdruck oder Gesicht genügt. Ein Passwort kannst du später zusätzlich setzen.</div>
-        <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Ich habe die <span class="an-link">Datenschutzhinweise</span> der Abteilung gelesen. <span class="req" style="color:var(--red)">*</span></span></div>
+        <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Ich habe die <span class="an-link">Datenschutzhinweise</span> der Abteilung gelesen. <span class="req" style="color:var(--redt)">*</span></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px"><i class="bi bi-fingerprint"></i> Passkey anlegen und Konto aktivieren</span>
         <div class="an-minor"><i class="bi bi-people-fill"></i> <b>Für Minderjährige:</b> Die Abteilungsleitung verknüpft deine Eltern bzw. Erziehungsberechtigten mit deinem Konto. Sie können deine Daten lesen, bis du 18 bist.</div>
         <div class="hint"><i class="bi bi-clock"></i> Link abgelaufen? Seite „Einladung abgelaufen“ mit Hinweis: Die Abteilungsleitung sendet eine neue Einladung, der alte Link wird ungültig.</div>
@@ -316,11 +400,11 @@
         <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
         <div class="chips"><span class="chip on"><i class="bi bi-fingerprint"></i> Passkey (empfohlen)</span><span class="chip">Passwort</span></div>
         <div class="hint" style="margin-top:-4px">Der Passkey wird sofort angelegt. Anmelden kannst du dich erst nach der Freischaltung. Bei „Passwort“: mindestens 10 Zeichen, Sonderzeichen nicht nötig; bekannte, geleakte Passwörter werden abgelehnt (Liste auf dem Server, ohne externen Dienst).</div>
-        <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten. Nach der Freischaltung kannst du die App sofort nutzen – auch bevor ein Erziehungsberechtigter verknüpft ist; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
+        <div class="an-minor" style="background:var(--warnbg);border-color:var(--warnbd);color:var(--warnfg)"><i class="bi bi-info-circle"></i> Du bist <b>unter 18</b>. Die Abteilungsleitung verknüpft einen Erziehungsberechtigten. Nach der Freischaltung kannst du die App sofort nutzen – auch bevor ein Erziehungsberechtigter verknüpft ist; was eine Zustimmung braucht (z. B. eine Ausleihe), wartet, bis ein Erziehungsberechtigter verknüpft ist und zugestimmt hat.
           <label style="margin-top:6px">E-Mail eines Erziehungsberechtigten <span class="opt">optional, hilft der Leitung</span></label><div class="inp">sandra@beispiel.de</div></div>
         <label>Nachricht an die Abteilungsleitung <span class="opt">optional, höchstens 500 Zeichen</span></label><div class="inp" style="min-height:46px;align-items:flex-start">Ich war beim Schnupperfliegen in der Halle und würde gern mit dem Tinywhoop weitermachen.</div>
         <div class="hint" style="text-align:right;margin-top:-4px">89 / 500 Zeichen</div>
-        <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Datenschutzhinweise gelesen <span style="color:var(--red)">*</span></span></div>
+        <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Datenschutzhinweise gelesen <span style="color:var(--redt)">*</span></span></div>
         <span class="ibtn" style="display:block;text-align:center;padding:9px"><i class="bi bi-fingerprint"></i> Passkey anlegen und registrieren</span>
       </div>
       <div style="width:230px;flex:0 0 auto">
@@ -331,6 +415,61 @@
           <div class="an-feat"><i class="bi bi-person-check"></i><span><b>2. Freischaltung</b><br><small class="mut">durch die Abteilungsleitung; bei Ablehnung kommt eine neutrale E-Mail und der Antrag wird gelöscht</small></span></div>
           <div class="an-feat"><i class="bi bi-people"></i><span><b>3. Erziehungsberechtigte</b><br><small class="mut">verknüpft die Leitung (nur unter 18); bis zur Zustimmung warten z. B. Ausleihen</small></span></div>
           <div class="an-feat"><i class="bi bi-envelope-paper"></i><span><b>4. Startklar</b><br><small class="mut">Mail „Dein Konto ist aktiv“, Anmeldung mit dem Passkey</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ========== 2b Erziehungsberechtigte: Einladung annehmen und Einwilligung bestätigen ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">2b</span><h2>Erziehungsberechtigte: Einladung annehmen und Einwilligung bestätigen</h2></div>
+  <p class="ddesc">Für den Einwilligungsweg „online“: Abteilungsleitung oder Admin verknüpft einen Erziehungsberechtigten mit einem minderjährigen Mitglied. Die Verknüpfung bleibt offen, bis der Elternteil auf dieser Seite den Einwilligungstext bestätigt (gespeichert: Datum, Textversion, Konto). Ein neu eingeladener Elternteil legt dabei sein Konto an (ohne Mitgliedschaft); wer schon ein Konto hat, bekommt die Anfrage per E-Mail und bestätigt angemeldet. Beim Weg „Papier“ entfällt der Einwilligungstext, die Verknüpfung wirkt mit der Annahme der Einladung. Der Link gilt 7 Tage und nur einmal; abgelaufene oder benutzte Links zeigen eine eigene Seite. Klickbar im Klickdummy über die Anmeldeseite (Abschnitt „Für Erziehungsberechtigte“).</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/einladung/c41a…</span></div>
+  <div class="app" style="height:1000px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div></div>
+    <div class="an-stage">
+      <div class="an-card wide">
+        <div class="an-step">Einladung für Erziehungsberechtigte · gültig bis Sa 21.11.2026 (7 Tage)</div>
+        <h3>Hallo Karin!</h3>
+        <p class="lead"><b>Markus B.</b> (Abteilungsleitung) hat dich als <b>Mutter</b> von <b>Paul W. (16)</b> zu TSV RC eingeladen und mit dem Konto deines Kindes verknüpft. <span class="badge b-w">Verknüpfung offen</span></p>
+        <div class="an-minor" style="margin:8px 0"><i class="bi bi-info-circle"></i> Paul kann die App schon nutzen. Was eine Zustimmung braucht (z. B. eine Ausleihe von Vereinsgerät), wartet, bis du einwilligst.</div>
+        <label>Einwilligungserklärung <small class="mut" style="font-weight:400">Textversion 1 · Entwurf</small></label>
+        <div style="background:var(--sunk);border:1px solid var(--line);border-left:4px solid var(--g);border-radius:6px;padding:10px 12px;font-size:12.5px">
+          Ich bin erziehungsberechtigt für <b>Paul W.</b> und bin damit einverstanden, dass mein Kind die App „TSV RC“ der Abteilung RC-Modellsport nutzt. Ich habe den <span class="an-link">Datenschutzhinweis zur App</span> gelesen.<br>Mir ist bekannt:
+          <ul style="margin:4px 0 6px;padding-left:18px"><li>Die Daten meines Kindes werden wie dort beschrieben verarbeitet: Konto, Flugbuch, Nachweise, Kalender, Ausleihen und Anwesenheit.</li><li>Andere Mitglieder sehen, wer am Platz ist und wer Vereinsgerät ausgeliehen hat.</li><li>Ich sehe die Daten meines Kindes in meinem Eltern-Konto und erhalte Erinnerungen in Kopie.</li><li>Für Ausleihen von Vereinsgerät gelten die Ausleihbedingungen des Vereins.</li></ul>
+          Ich kann diese Einwilligung jederzeit für die Zukunft widerrufen, in der App oder per E-Mail an poststelle@tsv1927roethenbach.de. Danach wird das Konto meines Kindes gesperrt, bis ein anderer Erziehungsberechtigter zustimmt. Aufbewahrungspflichtige Daten bleiben bis zum Ende der Frist erhalten.
+        </div>
+        <span class="assume">Annahme: Text aus dem Datenschutz-Entwurf (Teil 2), noch nicht vom Verein freigegeben. Offen: Ausleihbedingungen zur Haftung (13.7) und ob ein Elternteil genügt.</span>
+        <div class="two"><div><label>Name <span class="req">*</span></label><div class="inp">Karin W.</div></div><div><label>E-Mail <i class="bi bi-lock lock"></i></label><div class="inp" style="background:var(--sunk)">karin.w@beispiel.de</div></div></div>
+        <label>Wie möchtest du dich anmelden? <span class="req">*</span></label>
+        <div class="chips"><span class="chip on"><i class="bi bi-fingerprint"></i> Passkey (empfohlen)</span><span class="chip">Passwort</span></div>
+        <div class="an-check"><i class="bi bi-check-square-fill"></i><span>Ich bin erziehungsberechtigt für <b>Paul W.</b> und erteile die Einwilligung oben (Textversion 1). <span style="color:var(--redt)">*</span></span></div>
+        <div style="display:flex;gap:8px"><span class="ibtn" style="flex:1;text-align:center;padding:9px"><i class="bi bi-fingerprint"></i> Einwilligen und Passkey anlegen</span><span class="ibtn out" style="padding:9px 16px;color:var(--redt);border-color:var(--red)">Ablehnen</span></div>
+        <div class="hint">Mit vorhandenem Konto (Anfrage per E-Mail): statt der Kontofelder „Angemeldet als Thomas W.“ und die Schaltfläche „Einwilligung bestätigen“.</div>
+      </div>
+      <div class="an-card" style="width:300px">
+        <h3 style="font-size:15px">Was die Verknüpfung bedeutet</h3>
+        <div class="an-feat"><i class="bi bi-eye"></i><span><b>Alle Daten von Paul sehen</b><br><small class="mut">Flugbuch, Nachweise, Modelle, Ausleihen, Termine; nur lesen</small></span></div>
+        <div class="an-feat"><i class="bi bi-bell"></i><span><b>Erinnerungen in Kopie</b><br><small class="mut">z. B. Nachweis läuft ab, Rückgabe</small></span></div>
+        <div class="an-feat"><i class="bi bi-calendar3"></i><span><b>Ganzer Vereinskalender</b><br><small class="mut">bei Zusagen von Paul informiert, Zurücknehmen möglich</small></span></div>
+        <div class="an-feat"><i class="bi bi-check2-circle"></i><span><b>Zustimmungspflichtiges wird möglich</b><br><small class="mut">z. B. Ausleihe von Vereinsgerät</small></span></div>
+        <div class="an-feat"><i class="bi bi-person-badge"></i><span><b>Eigenes Konto</b><br><small class="mut">ohne Mitgliedschaft und ohne Rollen</small></span></div>
+        <div class="an-feat"><i class="bi bi-hourglass-bottom" style="color:var(--mut)"></i><span><b>Endet automatisch</b><br><small class="mut">mit dem 18. Geburtstag (30 Tage vorher Hinweis an Kind und Eltern) oder mit dem Austritt; Eltern-Konto ohne Kind wird nach 14 Tagen Ankündigung gelöscht, außer die Person ist selbst Mitglied</small></span></div>
+      </div>
+      <div style="width:250px;flex:0 0 auto">
+        <div class="an-card" style="width:auto;margin-bottom:12px">
+          <div class="an-step" style="color:var(--gt)"><i class="bi bi-check-circle-fill"></i> Nach „Einwilligen“</div>
+          <div style="font-size:13px">Verknüpfung mit <b>Paul W.</b> wirksam.<br><small class="mut">Einwilligung: online bestätigt am 15.11.2026 von Karin W. (Textversion 1); steht im Änderungsprotokoll. Weiter zur Anmeldung bzw. zur Startseite.</small></div>
+        </div>
+        <div class="an-card" style="width:auto;margin-bottom:12px">
+          <div class="an-step"><i class="bi bi-x-circle"></i> Nach „Ablehnen“ (mit Rückfrage)</div>
+          <div style="font-size:13px">Verknüpfung wird nicht wirksam, die Abteilungsleitung wird benachrichtigt. Paul nutzt die App weiter; Zustimmungspflichtiges wartet.</div>
+          <span class="assume">Annahme: Ablehnen beendet die offene Verknüpfung; ein noch nicht angenommenes Eltern-Konto wird gelöscht.</span>
+        </div>
+        <div class="an-card" style="width:auto">
+          <div class="an-step"><i class="bi bi-envelope-x"></i> Link abgelaufen oder benutzt</div>
+          <div style="font-size:13px">Eigene Seite: „Links für Erziehungsberechtigte gelten 7 Tage.“ Die Abteilungsleitung sendet einen neuen Link; bis dahin bleibt die Verknüpfung offen. Schaltfläche „Abteilungsleitung per E-Mail bitten“.</div>
         </div>
       </div>
     </div>
@@ -393,7 +532,7 @@
       <div class="dcontent" style="display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:16px">
         <div>
           <div class="card" style="padding:10px 14px"><h3>Meine Faktoren</h3>
-            <table class="dt"><tr><td><b>Authenticator iPhone</b><br><small class="mut">seit 03/2024 · zuletzt heute</small></td><td style="text-align:right"><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Entfernen</span></td></tr></table>
+            <table class="dt"><tr><td><b>Authenticator iPhone</b><br><small class="mut">seit 03/2024 · zuletzt heute</small></td><td style="text-align:right"><span class="ibtn out" style="color:var(--redt);border-color:var(--red)">Entfernen</span></td></tr></table>
             <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-shield-exclamation"></i> Die Admin-Rolle wird erst wirksam, wenn ein Passkey oder zweiter Faktor eingerichtet ist. Den letzten kannst du als Admin nicht entfernen.</div>
             <div class="an-minor" style="margin-bottom:0"><i class="bi bi-shield-check"></i> <b>Empfehlung</b> (dauerhaft auf den Sicherheitsseiten): Passkey oder zweiter Faktor schützen dein Konto zusätzlich. Für Mitglieder freiwillig; die Admin-Rolle wird erst damit wirksam.</div>
           </div>
@@ -403,7 +542,7 @@
           <label>Name des Faktors <span class="req">*</span></label><div class="inp">Authenticator iPad</div>
           <div style="display:flex;gap:14px;margin-top:12px">
             <div class="an-qr"></div>
-            <div style="font-size:13px"><b>1.</b> QR-Code mit einer Authenticator-App scannen (z. B. Aegis, 2FAS, Google Authenticator).<br><br><b>Kein Scan möglich?</b> Schlüssel eingeben:<div class="an-mono" style="background:#f6f7f6;border-radius:4px;padding:4px 6px;margin-top:4px">JBSW Y3DP EHPK 3PXP</div></div>
+            <div style="font-size:13px"><b>1.</b> QR-Code mit einer Authenticator-App scannen (z. B. Aegis, 2FAS, Google Authenticator).<br><br><b>Kein Scan möglich?</b> Schlüssel eingeben:<div class="an-mono" style="background:var(--sunk);border-radius:4px;padding:4px 6px;margin-top:4px">JBSW Y3DP EHPK 3PXP</div></div>
           </div>
           <label><b>2.</b> Angezeigten Code eingeben <span class="req">*</span></label>
           <div class="an-otp"><span>3</span><span>1</span><span>7</span><span>0</span><span>5</span><span class="f">9</span></div>
@@ -476,9 +615,9 @@
         <div>
           <div class="card" style="padding:10px 14px"><h3>Aktive Tokens</h3>
             <table class="dt"><tr><th>Name</th><th>Scopes</th><th>Läuft ab</th><th>Zuletzt genutzt</th><th></th></tr>
-              <tr><td><b>Auswertung Tabellenkalkulation</b><br><small class="mut an-mono">tsvrc_8f2a…</small></td><td><span class="badge b-all">flights:read</span> <span class="badge b-all">models:read</span></td><td>31.03.2027</td><td>gestern</td><td><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Widerrufen</span></td></tr>
-              <tr><td><b>Vereinsheim-Anzeige</b><br><small class="mut an-mono">tsvrc_77b0…</small> <span class="badge b-w">unbefristet</span></td><td><span class="badge b-all">events:read</span></td><td>nie</td><td>heute 06:00</td><td><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Widerrufen</span></td></tr>
-              <tr style="background:var(--gl)"><td><b>Flugbuch-Export Skript</b><br><small class="mut an-mono">tsvrc_c41e…</small> <span class="badge b-g">neu</span></td><td><span class="badge b-all">flights:read</span></td><td>12.02.2027</td><td>nie</td><td><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Widerrufen</span></td></tr>
+              <tr><td><b>Auswertung Tabellenkalkulation</b><br><small class="mut an-mono">tsvrc_8f2a…</small></td><td><span class="badge b-all">flights:read</span> <span class="badge b-all">models:read</span></td><td>31.03.2027</td><td>gestern</td><td><span class="ibtn out" style="color:var(--redt);border-color:var(--red)">Widerrufen</span></td></tr>
+              <tr><td><b>Vereinsheim-Anzeige</b><br><small class="mut an-mono">tsvrc_77b0…</small> <span class="badge b-w">unbefristet</span></td><td><span class="badge b-all">events:read</span></td><td>nie</td><td>heute 06:00</td><td><span class="ibtn out" style="color:var(--redt);border-color:var(--red)">Widerrufen</span></td></tr>
+              <tr style="background:var(--gl)"><td><b>Flugbuch-Export Skript</b><br><small class="mut an-mono">tsvrc_c41e…</small> <span class="badge b-g">neu</span></td><td><span class="badge b-all">flights:read</span></td><td>12.02.2027</td><td>nie</td><td><span class="ibtn out" style="color:var(--redt);border-color:var(--red)">Widerrufen</span></td></tr>
             </table>
           </div>
           <div class="card" style="padding:10px 14px;border-left:4px solid var(--g)"><h3><i class="bi bi-key"></i> Token „Flugbuch-Export Skript“ erstellt</h3>
@@ -498,7 +637,7 @@
           <div class="chk"><i class="bi bi-square off"></i><span><b>events:read</b><small class="mut">Termine lesen</small></span></div>
           <label>Ablauf <span class="req">*</span></label>
           <div class="chips"><span class="chip">30 Tage</span><span class="chip on">90 Tage</span><span class="chip">1 Jahr</span><span class="chip">Datum …</span><span class="chip">Unbefristet</span></div>
-          <div class="an-minor" style="background:var(--warnbg);border-color:#f3d19c;color:#7a4a06"><i class="bi bi-exclamation-triangle"></i> <b>Bei „Unbefristet“:</b> Der Token läuft nie ab. Wer ihn kennt, hat dauerhaft Zugriff mit den gewählten Scopes. Sicher aufbewahren und widerrufen, sobald er nicht mehr gebraucht wird; eine Kontosperre macht ihn sofort ungültig.</div>
+          <div class="an-minor" style="background:var(--warnbg);border-color:var(--warnbd);color:var(--warnfg)"><i class="bi bi-exclamation-triangle"></i> <b>Bei „Unbefristet“:</b> Der Token läuft nie ab. Wer ihn kennt, hat dauerhaft Zugriff mit den gewählten Scopes. Sicher aufbewahren und widerrufen, sobald er nicht mehr gebraucht wird; eine Kontosperre macht ihn sofort ungültig.</div>
           <span class="ibtn">Token erstellen</span>
           <div class="hint" style="margin-top:6px">Rechte, die du selbst nicht hast, wirken nicht, auch wenn der Scope gewählt ist. Die Scope-Namen sind Beispiele.</div>
         </div>
@@ -528,7 +667,7 @@
           <b><i class="bi bi-shield-check"></i> Konto zusätzlich schützen?</b> Ein <b>Passkey</b> ersetzt dein Passwort (Fingerabdruck, Gesicht, Windows Hello); alternativ ein <b>zweiter Faktor</b>. Freiwillig.
           <div style="margin-top:6px"><span class="ibtn"><i class="bi bi-fingerprint"></i> Passkey anlegen</span> <span class="ibtn out">Zweiter Faktor</span> <span class="ibtn out">Später</span></div>
           <small class="mut">Erscheint nur einmal. Später unter Profil › Sicherheit.</small></div>
-        <p style="font-size:13px;color:#555;margin:0 0 6px">Dein Konto ist aktiv. Drei Dinge, die dir das Leben leichter machen:</p>
+        <p style="font-size:13px;color:var(--t3);margin:0 0 6px">Dein Konto ist aktiv. Drei Dinge, die dir das Leben leichter machen:</p>
         <div class="an-feat"><i class="bi bi-phone"></i><span><b>Auf den Startbildschirm</b><br><small class="mut">Am Handy: iPhone › Teilen › „Zum Home-Bildschirm“; Android › Menü › „App installieren“. Am PC über das Symbol in der Adressleiste.</small></span></div>
         <div class="an-feat"><i class="bi bi-cloud-slash"></i><span><b>Funktioniert ohne Netz</b><br><small class="mut">Flüge, Vorfälle und Checklisten kannst du auf dem Platz offline erfassen. Sie werden übertragen, sobald wieder Netz da ist. Deine Modelle, Orte und Nachweise sind offline lesbar.</small></span></div>
         <div class="an-feat"><i class="bi bi-bell"></i><span><b>Benachrichtigungen</b><br><small class="mut">z. B. wenn ein Nachweis abläuft oder eine Ausleihe genehmigt ist. Einstellbar im Profil.</small> <span class="ibtn out" style="margin-top:4px">Push erlauben</span></span></div>
@@ -537,11 +676,11 @@
       <div>
         <div class="card"><div class="hrow"><h3>Als Nächstes</h3><span class="an-link"><i class="bi bi-eye-slash"></i> ausblenden</span></div>
           <table class="dt">
-            <tr><td><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> <s class="mut">Konto schützen (Passkey oder zweiter Faktor)</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
+            <tr><td><i class="bi bi-check-circle-fill" style="color:var(--gt)"></i> <s class="mut">Konto schützen (Passkey oder zweiter Faktor)</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
             <tr><td><i class="bi bi-circle mut"></i> <b>Bestätigungs-PIN festlegen</b><br><small class="mut">6 Ziffern, zum Bestätigen einer Übergabe am Gerät eines anderen; nie zum Anmelden</small></td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
             <tr><td><i class="bi bi-circle mut"></i> Meine Bereiche wählen<br><small class="mut">für Startseite, Kalender-Vorfilter und Benachrichtigungen</small></td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
             <tr><td><i class="bi bi-circle mut"></i> Nachweise eintragen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
-            <tr><td><i class="bi bi-check-circle-fill" style="color:var(--g)"></i> <s class="mut">App installieren</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
+            <tr><td><i class="bi bi-check-circle-fill" style="color:var(--gt)"></i> <s class="mut">App installieren</s></td><td style="text-align:right"><small class="mut">erledigt</small></td></tr>
             <tr><td><i class="bi bi-circle mut"></i> Nächste Termine ansehen</td><td style="text-align:right"><span class="an-link">öffnen</span></td></tr>
           </table>
           <div class="hint">2 von 6 erledigt. Ausgeblendet lässt sich die Liste wieder einblenden. Ausblenden wirkt auch auf die Karte der Startseite.</div>
@@ -562,8 +701,8 @@
     <div class="dmain three" style="grid-template-columns:1.25fr 1fr 1fr">
       <div>
         <h3 style="font-size:18px">Hallo Markus</h3>
-        <div class="card" style="padding:10px 14px"><div class="hrow" style="margin-bottom:4px"><h3 style="margin:0"><i class="bi bi-list-check" style="color:var(--g)"></i> Als Nächstes <small class="mut" style="font-weight:400">3 von 6 erledigt</small></h3><span class="an-link"><i class="bi bi-eye-slash"></i> ausblenden</span></div>
-          <div style="height:6px;background:#e3e6e3;border-radius:3px;overflow:hidden;margin:4px 0 6px"><div style="width:50%;height:100%;background:var(--g)"></div></div>
+        <div class="card" style="padding:10px 14px"><div class="hrow" style="margin-bottom:4px"><h3 style="margin:0"><i class="bi bi-list-check" style="color:var(--gt)"></i> Als Nächstes <small class="mut" style="font-weight:400">3 von 6 erledigt</small></h3><span class="an-link"><i class="bi bi-eye-slash"></i> ausblenden</span></div>
+          <div style="height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:4px 0 6px"><div style="width:50%;height:100%;background:var(--g)"></div></div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px"><span class="an-link"><i class="bi bi-circle"></i> Bestätigungs-PIN festlegen</span><span class="an-link"><i class="bi bi-circle"></i> Meine Bereiche wählen</span><span class="an-link"><i class="bi bi-circle"></i> App installieren</span></div>
         </div>
         <div class="alert"><i class="bi bi-exclamation-triangle-fill"></i> Dein <b>A2-Fernpilotenzeugnis</b> läuft in 41 Tagen ab. <span class="an-link">Schulung finden</span></div>
@@ -598,7 +737,7 @@
         <div class="block car"><div class="bh"><span><i class="bi bi-car-front"></i> RC Cars</span><span class="act">Modelle</span></div>
           <div class="mini"><span><b>3</b> Modelle</span><span><b>1</b> Wartung fällig</span></div>
           <small class="mut">Vereinsmeisterschaft: Platz 4 (Offroad)</small></div>
-        <div class="card"><h3>Offline &amp; Sync</h3><small class="mut"><i class="bi bi-check-circle" style="color:var(--g)"></i> Alles übertragen · zuletzt 09:41</small></div>
+        <div class="card"><h3>Offline &amp; Sync</h3><small class="mut"><i class="bi bi-check-circle" style="color:var(--gt)"></i> Alles übertragen · zuletzt 09:41</small></div>
         <span class="assume">Annahme: Leitungs-Kachel zeigt nur Zähler, Details in „Abteilung“</span>
       </div>
     </div>
