@@ -255,6 +255,17 @@
   .ckl i{font-size:17px;color:var(--g)}
   .ibtn.red{background:var(--red)}
   .ibtn.dis{opacity:.4}
+  .pe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px 14px;font-size:13px}
+  .pe-grid div{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #eef0ee;padding:4px 0}
+  .pe-grid input,.pe-in{width:56px;font:inherit;font-size:13px;border:1px solid #ced4da;border-radius:4px;padding:3px 6px;text-align:center;background:#fff}
+  .pe-in.bad{border-color:var(--red);background:#fdf3f3}
+  .pe-tie{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 0;border-bottom:1px solid #eef0ee}
+  .pe-tie:last-child{border-bottom:0}
+  .pe-tie .ck{font-size:17px;color:var(--g)}
+  .pe-tie.off .ck{color:#bbb}.pe-tie.off .n{color:var(--mut)}
+  .pe-tie .n{flex:1}
+  .pe-tie .mv{color:var(--g);font-size:15px}
+  .pe-tie .mv.dis{opacity:.25}
 </style>
 </head>
 <body>
@@ -563,14 +574,15 @@
           <div class="note" style="text-align:left;margin-top:6px">Durchgestrichen = Streichergebnis (ein verpasster Lauf wird zuerst gestrichen) · – = nicht gefahren</div>
         </div>
         <div class="note" style="text-align:left">FPV-Race ist eine Disziplin der Vereinsmeisterschaft unter Luftsport (erscheint dort ebenfalls unter „Meisterschaft“); Offroad, Crawler und Glattbahn gehören zu RC Cars.</div>
-        <span class="assume">Annahme: Weitere Disziplinen, Anzahl Läufe, Punkteschema und Streichregel sind Platzhalter – offener Punkt 6 im Gesamtdesign.</span>
+        <div class="note" style="text-align:left">Punkteschema, Bonus, Streichergebnis und Gleichstandsregel legen Abteilungsleitung und Admin je Saison fest.</div>
+        <span class="assume">Annahme: Weitere Disziplinen und Anzahl Läufe sind Platzhalter – offener Punkt 6 im Gesamtdesign.</span>
       </div>
       <div>
         <div class="card"><h3>Läufe Glattbahn</h3>
           <table class="dt"><tr><td>L1 03.05.</td><td>Jonas B.</td></tr><tr><td>L2 31.05.</td><td>Jonas B.</td></tr><tr><td>L3 28.06.</td><td>Max R.</td></tr><tr><td>L4 26.07.</td><td>Jonas B.</td></tr><tr><td>L5 23.08.</td><td>Max R.</td></tr><tr><td>L6 13.09.</td><td>Jonas B.</td></tr></table></div>
-        <div class="card"><h3>Punkteschema</h3>
+        <div class="card"><div class="hrow"><h3>Punkteschema</h3><span class="ibtn out"><i class="bi bi-pencil-square"></i> Bearbeiten</span></div>
           <table class="dt"><tr><td>1. / 2. / 3.</td><td>25 / 20 / 16</td></tr><tr><td>4. / 5. / 6.</td><td>13 / 11 / 10</td></tr><tr><td>7.–10.</td><td>9 / 8 / 7 / 6</td></tr><tr><td>ab 11.</td><td>5</td></tr><tr><td>Schnellste Runde</td><td>+1</td></tr><tr><td>Streichergebnis</td><td>ab 5 Läufen</td></tr></table>
-          <span class="assume">Annahme: komplettes Schema, pflegt die Abteilungsleitung je Saison.</span></div>
+          <div class="note" style="text-align:left"><i class="bi bi-info-circle"></i> Vorschlag, bis die Abteilungsleitung das Schema für die Saison speichert. „Bearbeiten“ sehen nur Abteilungsleitung und Admin.</div></div>
       </div>
     </div>
   </div></div></div>
@@ -772,12 +784,70 @@
         <span class="assume">Annahme: Ausgetretene Mitglieder erscheinen anonymisiert als „ehemaliges Mitglied“; Archiv nur lesbar. FPV-Race (Luftsport) wird erst ab 2026 gewertet, 2025 nur RC-Cars-Disziplinen.</span>
       </div>
       <div>
-        <div class="card"><h3>Läufe Offroad 2025</h3><table class="dt"><tr><td>L1 Mo 27.04.</td><td>Max R.</td></tr><tr class="me"><td><b>L2 Mo 25.05.</b></td><td>Jonas B.</td></tr><tr><td>L3 Mo 22.06.</td><td>Max R.</td></tr><tr><td>L4 Mo 21.09.</td><td>Jonas B.</td></tr><tr><td>L5 Mo 12.10.</td><td>Jonas B.</td></tr></table></div>
+        <div class="card"><h3>Läufe Offroad 2025</h3><table class="dt"><tr><td>L1 So 27.04.</td><td>Max R.</td></tr><tr class="me"><td><b>L2 So 25.05.</b></td><td>Jonas B.</td></tr><tr><td>L3 So 22.06.</td><td>Max R.</td></tr><tr><td>L4 So 21.09.</td><td>Jonas B.</td></tr><tr><td>L5 So 12.10.</td><td>Jonas B.</td></tr></table></div>
         <div class="card"><div class="hrow"><h3>Ergebnis Lauf 2 · So 25.05.2025</h3><span class="badge b-g"><i class="bi bi-lock"></i> endgültig</span></div>
           <table class="dt"><tr><th>Pl.</th><th>Fahrer</th><th>Punkte</th></tr><tr><td>1.</td><td>Jonas B.</td><td><b>25</b></td></tr><tr><td>2.</td><td>Max R.</td><td><b>20</b></td></tr><tr class="me"><td>3.</td><td>Markus B.</td><td><b>16</b></td></tr><tr><td>4.</td><td>Lena K.</td><td><b>13</b></td></tr><tr><td>5.</td><td>ehem. Mitglied</td><td><b>11</b></td></tr><tr><td>–</td><td>Felix W.</td><td class="mut">nicht angetreten</td></tr></table>
           <small class="mut">Sand-Rennstrecke · Rennleitung Jonas B.</small><br><span class="assume">Annahme: ältere Läufe nur mit Platz und Punkten, Rohwerte nur wenn erfasst.</span></div>
       </div>
     </div>
+  </div></div></div>
+</section>
+
+<!-- ============ 15 PUNKTESCHEMA BEARBEITEN ============ -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">15</span><h2>Punkteschema der Saison bearbeiten (Abteilungsleitung, Admin)</h2></div>
+  <p class="ddesc">Erreichbar über „Bearbeiten“ am Punkteschema, nur für Abteilungsleitung und Admin. Das Schema gilt je Saison für alle Disziplinen: Punkte je Platz (Plätze hinzufügen/entfernen, dazu „ab N. Platz“ und „nicht angetreten“), Bonus für die schnellste Runde mit Schalter je Disziplin, Streichergebnis (an/aus, ab wie vielen Läufen, wie viele), Reihenfolge der Gleichstandsregeln und die Wertungsart je Disziplin per Auswahldialog. Speichern ist erst aktiv, wenn etwas geändert und alles gültig ist; der Hinweis nennt, was fehlt oder nicht passt (hier: 6. Platz hat mehr Punkte als der 5.). In der laufenden Saison fragt TSV RC vor dem Speichern nach, weil alle Tabellen neu berechnet werden; die Änderung landet im Änderungsprotokoll. Eine neue Saison übernimmt das Schema der Vorsaison als Vorschlag; solange der Verein nichts gespeichert hat, gilt der Vorschlag.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/meisterschaft/2026/punkteschema/bearbeiten</span></div>
+  <div class="app" style="height:760px">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
+    <div class="dnav2 car"><a>Modelle</a><a>Ausleihe</a><a class="on">Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:2fr 1fr">
+      <div>
+        <div class="hrow"><h3>Punkteschema bearbeiten · Saison 2026 <span class="badge b-g">läuft</span></h3><span class="ibtn out"><i class="bi bi-files"></i> Schema der Saison 2025 übernehmen</span></div>
+        <div class="card"><div class="hrow"><h3>Punkte je Platz</h3><span class="ibtn out"><i class="bi bi-plus-lg"></i> Platz hinzufügen</span></div>
+          <div class="pe-grid">
+            <div><span>1. Platz</span><input value="25"></div><div><span>2. Platz</span><input value="20"></div><div><span>3. Platz</span><input value="16"></div><div><span>4. Platz</span><input value="13"></div>
+            <div><span>5. Platz</span><input value="11"></div><div><span>6. Platz</span><input value="12" class="pe-in bad"></div><div><span>7. Platz</span><input value="9"></div><div><span>8. Platz</span><input value="8"></div>
+            <div><span>9. Platz</span><input value="7"></div><div><span>10. Platz <i class="bi bi-x-lg mut" title="Platz entfernen"></i></span><input value="6"></div><div><span>ab 11. Platz</span><input value="5"></div><div><span>nicht angetreten</span><input value="0"></div>
+          </div>
+          <div class="note" style="text-align:left;margin-top:6px">Punkte dürfen mit schlechterem Platz nicht steigen.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="card" style="margin:0"><h3>Bonus schnellste Runde</h3>
+            <table class="dt"><tr><td>Bonuspunkte</td><td style="text-align:right"><input class="pe-in" value="1"></td></tr><tr><td>Offroad</td><td style="text-align:right"><span class="tg on"></span></td></tr><tr><td>Crawler</td><td style="text-align:right"><span class="tg"></span></td></tr><tr><td>Glattbahn</td><td style="text-align:right"><span class="tg on"></span></td></tr><tr><td>FPV-Race <span class="badge b-air">Luftsport</span></td><td style="text-align:right"><span class="tg on"></span></td></tr></table></div>
+          <div class="card" style="margin:0"><h3>Streichergebnis</h3>
+            <table class="dt"><tr><td>Streichergebnis verwenden<br><small class="mut">ein verpasster Lauf wird zuerst gestrichen</small></td><td style="text-align:right"><span class="tg on"></span></td></tr><tr><td>ab gefahrenen Läufen</td><td style="text-align:right"><input class="pe-in" value="5"></td></tr><tr><td>Anzahl gestrichen</td><td style="text-align:right"><input class="pe-in" value="1"></td></tr></table></div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><h3>Bei Punktgleichstand</h3>
+          <div class="pe-tie"><i class="bi bi-check-square-fill ck"></i><span class="n">1. mehr Siege</span><i class="bi bi-arrow-up mv dis"></i><i class="bi bi-arrow-down mv"></i></div>
+          <div class="pe-tie"><i class="bi bi-check-square-fill ck"></i><span class="n">2. bessere Platzierung im letzten Lauf</span><i class="bi bi-arrow-up mv"></i><i class="bi bi-arrow-down mv"></i></div>
+          <div class="pe-tie off"><i class="bi bi-square ck"></i><span class="n">3. öfter schnellste Runde</span><i class="bi bi-arrow-up mv"></i><i class="bi bi-arrow-down mv dis"></i></div>
+          <div class="note" style="text-align:left">Haken setzen, was zählt; Pfeile ändern die Reihenfolge.</div></div>
+        <div class="card"><h3>Wertung je Disziplin</h3>
+          <label>Offroad <span class="req">*</span></label><div class="inp"><span>Runden in fester Zeit, dann Zeit</span><i class="bi bi-chevron-down"></i></div>
+          <label>Crawler <span class="req">*</span></label><div class="inp"><span>Strafpunkte, bei Gleichstand Zeit</span><i class="bi bi-chevron-down"></i></div>
+          <label>Glattbahn <span class="req">*</span></label><div class="inp"><span>Runden in fester Zeit, dann Zeit</span><i class="bi bi-chevron-down"></i></div>
+          <label>FPV-Race <span class="req">*</span></label><div class="inp"><span>Runden in fester Zeit, dann Zeit</span><i class="bi bi-chevron-down"></i></div>
+          <div class="note" style="text-align:left">Auswahl: Strafpunkte, dann Zeit · Runden in fester Zeit, dann Zeit · Nur Zeit.</div></div>
+        <div class="card">
+          <div class="alert" style="margin:0 0 8px"><i class="bi bi-exclamation-circle"></i> Bitte prüfen: 6. Platz (12) hat mehr Punkte als 5. Platz (11).</div>
+          <span class="ibtn dis">Speichern</span> <span class="ibtn out">Abbrechen</span>
+          <div class="note" style="text-align:left;margin-top:6px">Änderungen in der laufenden Saison berechnen alle Tabellen neu und stehen im Änderungsprotokoll.</div></div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="ddesc" style="margin-top:14px">Nach „Speichern“ in der laufenden Saison (Ausschnitt): Bestätigung mit der Auswirkung auf die Tabellen.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/meisterschaft/2026/punkteschema/bearbeiten</span></div>
+  <div class="app" style="height:300px;position:relative">
+    <div class="modal"><div class="box">
+      <h3><i class="bi bi-calculator"></i> Saison 2026 läuft – Tabellen werden neu berechnet</h3>
+      <p style="font-size:13px;margin:0 0 8px">Die Tabellen aller Disziplinen werden mit dem neuen Schema neu berechnet (gewertete Läufe: Offroad 4, Crawler 4, Glattbahn 6, FPV-Race 2). Die Spitzenreiter bleiben gleich.</p>
+      <p style="font-size:13px;margin:0 0 12px">Geändert: Punkte je Platz, Bonus. Die Änderung steht im Änderungsprotokoll und ist für alle sichtbar.</p>
+      <div style="text-align:right"><span class="ibtn out">Abbrechen</span> <span class="ibtn"><i class="bi bi-calculator"></i> Speichern &amp; neu berechnen</span></div>
+    </div></div>
   </div></div></div>
 </section>
 <div style="height:30px"></div>

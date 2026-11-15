@@ -9725,6 +9725,20 @@ document.addEventListener('DOMContentLoaded', () => {
   .wx-msg{border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:8px;background:#fff;border:1px solid #e3e6e3}
   .wx-msg.lt-me{background:var(--gl);border-color:#b9dcbf;margin-left:24px}
   .wx-msg small,.lt-msg small{display:block;color:var(--mut);margin-bottom:2px}
+  .wx-pe-row{display:grid;grid-template-columns:1fr 64px 26px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #eef0ee;font-size:13px}
+  .wx-pe-row input{width:100%;font:inherit;font-size:14px;border:1px solid #ced4da;border-radius:4px;padding:5px 4px;text-align:center;background:#fff}
+  .wx-pe-row input:focus{outline:0;border-color:var(--g);box-shadow:0 0 0 2px var(--gl)}
+  .wx-pe-row input.bad{border-color:var(--red);background:#fdf3f3}
+  .wx-pe-row .bi-x-lg{color:var(--mut);cursor:pointer;text-align:center}
+  .wx-pe-row .bi-x-lg.dis{opacity:.25;pointer-events:none}
+  .wx-pe-tie{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #eef0ee;font-size:13.5px}
+  .wx-pe-tie:last-child{border-bottom:0}
+  .wx-pe-tie .ck{font-size:19px;color:#bbb;cursor:pointer}
+  .wx-pe-tie.on .ck{color:var(--g)}
+  .wx-pe-tie .n{flex:1}
+  .wx-pe-tie:not(.on) .n{color:var(--mut)}
+  .wx-pe-tie .mv{font-size:16px;color:var(--g);cursor:pointer;padding:0 4px}
+  .wx-pe-tie .mv.dis{opacity:.25;pointer-events:none}
 </style>
 
 <!-- ================= BERICHTE & EXPORT ================= -->
@@ -10071,7 +10085,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="row" data-go="wx-archiv"><span><i class="bi bi-archive"></i> Saison 2025</span><i class="bi bi-chevron-right mut"></i></div>
     </div>
     <div class="note" style="text-align:left">FPV-Race ist eine Disziplin der Vereinsmeisterschaft unter Luftsport; Offroad, Crawler und Glattbahn gehören zu RC Cars.</div>
-    <span class="assume">Annahme: Weitere Disziplinen, Anzahl der Läufe, Punkteschema und Streichregel sind Platzhalter – mit dem Verein abzustimmen (offener Punkt 6).</span>
+    <div class="note" style="text-align:left">Punkteschema, Bonus, Streichergebnis und Gleichstandsregel legen Abteilungsleitung und Admin je Saison fest (Punkteschema &amp; Regeln).</div>
+    <span class="assume">Annahme: Weitere Disziplinen und Anzahl der Läufe sind Platzhalter – mit dem Verein abzustimmen (offener Punkt 6).</span>
   </div>
 </section>
 
@@ -10080,7 +10095,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
   <div class="top"><i class="bi bi-arrow-left" style="font-size:20px" data-back></i><div><div class="t1">VM Lauf 5 · Crawler</div><div class="t2">Di 24.11. · Crawler-Strecke</div></div></div>
   <div class="body">
-    <div class="card pad"><dl class="kv2"><dt>Beginn</dt><dd>10:00 Uhr, Fahrerbesprechung 9:30</dd><dt>Ort</dt><dd>Crawler-Strecke</dd><dt>Wertung</dt><dd>Strafpunkte, bei Gleichstand Zeit</dd><dt>Rennleitung</dt><dd>Max R.</dd><dt>Klasse</dt><dd>Mini-Crawler bis 1:18</dd></dl></div>
+    <div class="card pad"><dl class="kv2"><dt>Beginn</dt><dd>10:00 Uhr, Fahrerbesprechung 9:30</dd><dt>Ort</dt><dd>Crawler-Strecke</dd><dt>Wertung</dt><dd id="wx-l-wert">Strafpunkte, bei Gleichstand Zeit</dd><dt>Rennleitung</dt><dd>Max R.</dd><dt>Klasse</dt><dd>Mini-Crawler bis 1:18</dd></dl></div>
     <div class="note" style="text-align:left;margin-top:-4px">Rennleitung sind die Verantwortlichen des Renn-Events – keine eigene Rolle.</div>
     <div class="tabs"><div class="on" data-pane="wx-l-p1" id="wx-l-t1">Ergebnisse</div><div data-pane="wx-l-p2">Teilnehmer (4)</div><div data-pane="wx-l-p3">Ablauf</div></div>
     <div class="pane on" id="wx-l-p1">
@@ -10133,25 +10148,68 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
   <div class="top"><i class="bi bi-arrow-left" style="font-size:20px" data-back></i><div><div class="t1">Punkteschema</div><div class="t2">Vereinsmeisterschaft 2026</div></div></div>
   <div class="body">
-    <span class="assume">Annahme: komplettes Schema ist ein Platzhalter, bis der Verein es festlegt. Die Abteilungsleitung pflegt es je Saison.</span>
-    <h3>Punkte je Platz</h3>
-    <div class="card pad"><table class="tab">
-      <tr><td>1. Platz</td><td class="r">25</td><td style="padding-left:18px">6. Platz</td><td class="r">10</td></tr>
-      <tr><td>2. Platz</td><td class="r">20</td><td style="padding-left:18px">7. Platz</td><td class="r">9</td></tr>
-      <tr><td>3. Platz</td><td class="r">16</td><td style="padding-left:18px">8. Platz</td><td class="r">8</td></tr>
-      <tr><td>4. Platz</td><td class="r">13</td><td style="padding-left:18px">9. Platz</td><td class="r">7</td></tr>
-      <tr><td>5. Platz</td><td class="r">11</td><td style="padding-left:18px">10. Platz</td><td class="r">6</td></tr>
-      <tr><td colspan="3">ab 11. Platz</td><td class="r">5</td></tr>
-      <tr><td colspan="3">nicht angetreten</td><td class="r">0</td></tr>
-    </table></div>
-    <h3>Regeln</h3>
-    <div class="card">
-      <div class="row"><span><b>Bonus</b><br><small>+1 Punkt für die schnellste Runde (Offroad, Glattbahn, FPV-Race)</small></span></div>
-      <div class="row"><span><b>Streichergebnis</b><br><small>ab 5 gefahrenen Läufen zählt das schlechteste Ergebnis nicht (auch ein verpasster Lauf)</small></span></div>
-      <div class="row"><span><b>Gleichstand</b><br><small>mehr Siege, dann bessere Platzierung im letzten Lauf</small></span></div>
-      <div class="row"><span><b>Wertung Crawler</b><br><small>Strafpunkte (Torfehler, Berühren, Zurücksetzen), bei Gleichstand Zeit</small></span></div>
-      <div class="row"><span><b>Wertung Offroad / Glattbahn / FPV</b><br><small>Runden in fester Zeit, dann Zeit; später automatisch über Zeitmessung (API)</small></span></div>
+    <div class="card pad" style="font-size:12.5px" id="wx-pk-state"></div>
+    <div class="card menu">
+      <div class="row" data-go="wx-punkte-edit" id="wx-pk-edit"><span><i class="bi bi-pencil-square"></i> Punkteschema bearbeiten<br><small>nur Abteilungsleitung und Admin</small></span><i class="bi bi-chevron-right mut"></i></div>
     </div>
+    <h3>Punkte je Platz</h3>
+    <div class="card pad"><table class="tab" id="wx-pk-tbl"></table></div>
+    <h3>Regeln</h3>
+    <div class="card" id="wx-pk-rules"></div>
+    <h3>Änderungsprotokoll</h3>
+    <div class="card" id="wx-pk-log"></div>
+  </div>
+</section>
+
+<!-- ================= PUNKTESCHEMA BEARBEITEN ================= -->
+<section class="scr notab" id="wx-punkte-edit" data-notab>
+  <div class="status"><span>9:41</span><span><i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+  <div class="top"><i class="bi bi-x-lg" style="font-size:18px" data-back></i><div><div class="t1">Punkteschema bearbeiten</div><div class="t2">Saison 2026 · läuft · alle Disziplinen</div></div></div>
+  <div class="body">
+    <div class="card pad" style="font-size:12.5px"><i class="bi bi-shield-lock"></i> Ändern dürfen Abteilungsleitung und Admin. Das Schema gilt für die ganze Saison 2026. <span class="chg" id="wx-pe-copy">Schema der Saison 2025 übernehmen</span></div>
+    <h3>Punkte je Platz</h3>
+    <div class="card pad" style="padding:4px 12px">
+      <div id="wx-pe-places"></div>
+      <span class="addlink" id="wx-pe-add" style="cursor:pointer;margin:6px 0"><i class="bi bi-plus-lg"></i> Platz hinzufügen</span>
+      <div class="wx-pe-row"><span id="wx-pe-restl">ab 11. Platz</span><input type="number" min="0" inputmode="numeric" id="wx-pe-rest"><span></span></div>
+      <div class="wx-pe-row"><span>nicht angetreten</span><input type="number" min="0" inputmode="numeric" id="wx-pe-dns"><span></span></div>
+    </div>
+    <div class="hint" style="margin:-4px 0 6px">Punkte dürfen mit schlechterem Platz nicht steigen. Ein Fahrer ohne Ergebnis im Lauf bekommt die Punkte für „nicht angetreten“.</div>
+    <h3>Bonus schnellste Runde</h3>
+    <div class="card pad" style="padding:4px 12px">
+      <div class="wx-pe-row"><span>Bonuspunkte</span><input type="number" min="1" max="5" inputmode="numeric" id="wx-pe-bonus"><span></span></div>
+      <div class="row"><span>Offroad</span><span class="tg" id="wx-pe-b-off"></span></div>
+      <div class="row"><span>Crawler</span><span class="tg" id="wx-pe-b-crawl"></span></div>
+      <div class="row"><span>Glattbahn</span><span class="tg" id="wx-pe-b-glatt"></span></div>
+      <div class="row"><span>FPV-Race <span class="badge b-air">Luftsport</span></span><span class="tg" id="wx-pe-b-fpv"></span></div>
+    </div>
+    <h3>Streichergebnis</h3>
+    <div class="card pad" style="padding:4px 12px">
+      <div class="row"><span>Streichergebnis verwenden<br><small>das schlechteste Ergebnis zählt nicht; ein verpasster Lauf wird zuerst gestrichen</small></span><span class="tg" id="wx-pe-s-on"></span></div>
+      <div id="wx-pe-s-box">
+        <div class="wx-pe-row"><span>ab gefahrenen Läufen</span><input type="number" min="2" inputmode="numeric" id="wx-pe-s-from"><span></span></div>
+        <div class="wx-pe-row"><span>Anzahl gestrichen</span><input type="number" min="1" inputmode="numeric" id="wx-pe-s-n"><span></span></div>
+      </div>
+    </div>
+    <h3>Bei Punktgleichstand</h3>
+    <div class="card pad" style="padding:2px 12px" id="wx-pe-tie"></div>
+    <div class="hint" style="margin:-4px 0 6px">Haken setzen, was zählt; mit den Pfeilen die Reihenfolge ändern. Danach entscheidet das Los.</div>
+    <h3>Wertung je Disziplin</h3>
+    <label>Offroad <span class="req">*</span></label>
+    <div class="inp" data-pick="wxWertung" data-pe-d="off"><span id="wx-pe-w-off"></span><i class="bi bi-chevron-down"></i></div>
+    <label>Crawler <span class="req">*</span></label>
+    <div class="inp" data-pick="wxWertung" data-pe-d="crawl"><span id="wx-pe-w-crawl"></span><i class="bi bi-chevron-down"></i></div>
+    <label>Glattbahn <span class="req">*</span></label>
+    <div class="inp" data-pick="wxWertung" data-pe-d="glatt"><span id="wx-pe-w-glatt"></span><i class="bi bi-chevron-down"></i></div>
+    <label>FPV-Race <span class="req">*</span></label>
+    <div class="inp" data-pick="wxWertung" data-pe-d="fpv"><span id="wx-pe-w-fpv"></span><i class="bi bi-chevron-down"></i></div>
+    <div class="note" style="text-align:left;margin-top:8px">Änderungen in der laufenden Saison berechnen die Tabellen aller Disziplinen neu und stehen im Änderungsprotokoll. Eine neue Saison übernimmt das Schema der Vorsaison als Vorschlag.</div>
+    <div class="wx-del" id="wx-pe-conf" style="display:none;background:var(--warnbg);border-color:#f3d19c;color:#7a4a06">
+      <b>Saison 2026 läuft – Tabellen werden neu berechnet</b><br><span id="wx-pe-conftx"></span>
+      <div class="btns" style="margin:8px 0 0"><button class="btn out" id="wx-pe-no">Abbrechen</button><button class="btn" id="wx-pe-yes"><i class="bi bi-calculator"></i> Speichern &amp; neu berechnen</button></div>
+    </div>
+    <button class="btn dis" id="wx-pe-save">Speichern</button>
+    <div class="note" id="wx-pe-hint"></div>
   </div>
 </section>
 
@@ -10606,8 +10664,19 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#wx-dp-open').addEventListener('click', () => K.toast('Öffnet maps.dipul.de bei 49.4127, 11.2034 in neuem Fenster.'));
 
   // ================= Vereinsmeisterschaft =================
-  const SCH = [25,20,16,13,11,10,9,8,7,6];
-  const ptsFor = p => p <= 10 ? SCH[p - 1] : 5;
+  // Punkteschema je Saison (pflegen Abteilungsleitung und Admin)
+  const DISC = [['off','Offroad'],['crawl','Crawler'],['glatt','Glattbahn'],['fpv','FPV-Race']];
+  const WERT = { pen:'Strafpunkte, bei Gleichstand Zeit', rounds:'Runden in fester Zeit, dann Zeit', time:'Nur Zeit' };
+  const WERT_LONG = { pen:'Strafpunkte (Torfehler, Berühren, Zurücksetzen), bei Gleichstand Zeit', rounds:'Runden in fester Zeit, dann Zeit; später automatisch über Zeitmessung (API)', time:'kürzeste Zeit vorn; später automatisch über Zeitmessung (API)' };
+  const TIE = { wins:'mehr Siege', last:'bessere Platzierung im letzten Lauf', fast:'öfter schnellste Runde' };
+  const clone = o => JSON.parse(JSON.stringify(o));
+  const SCH25 = { places:[25,20,16,13,11,10,9,8,7,6], rest:5, dns:0, bonus:1, bonusOn:{ off:true, crawl:false, glatt:true, fpv:false },
+    strike:{ on:true, from:5, n:1 }, tie:[['wins',true],['last',true],['fast',false]], wert:{ off:'rounds', crawl:'pen', glatt:'rounds', fpv:'rounds' } };
+  let SCHEME = clone(SCH25); SCHEME.bonusOn.fpv = true;   // Vorschlag 2026, bis gespeichert
+  let schSaved = '';
+  const SCH_LOG = [];
+  const ptsBy = (S, p) => p <= S.places.length ? S.places[p - 1] : S.rest;
+  const ptsFor = p => ptsBy(SCHEME, p);
   const VM = {
     off:{ n:'Offroad', dates:['26.04.','24.05.','21.06.','20.09.','15.12.'], done:4,
       d:{ 'Jonas B.':[25,20,25,16], 'Markus B.':[20,25,20,14], 'Max R.':[17,16,13,25], 'Lena K.':[13,14,17,20], 'Tim S.':[11,9,10,10], 'Felix W.':[null,11,9,11], 'Sophie M.':[10,10,11,null] } },
@@ -10618,20 +10687,38 @@ document.addEventListener('DOMContentLoaded', () => {
     fpv:{ n:'FPV-Race', dates:['18.10.','08.11.','06.12.','20.12.'], done:2,
       d:{ 'Markus B.':[20,25], 'Max R.':[25,20], 'Jonas B.':[16,16], 'Tim S.':[13,13], 'Lena K.':[null,11] } }
   };
+  // Platz und Bonus je Lauf aus den Beispielpunkten ableiten, damit ein neues Schema neu rechnen kann
+  const orderOf = (D, i) => D.pl ? Object.keys(D.d).filter(n => D.pl[n] && D.pl[n][i] != null).sort((a, b) => D.pl[a][i] - D.pl[b][i])
+    : Object.keys(D.d).filter(n => D.d[n][i] != null).sort((a, b) => D.d[b][i] - D.d[a][i]);
+  Object.keys(VM).forEach(k => {
+    const D = VM[k]; D.pl = {}; D.bo = {};
+    Object.keys(D.d).forEach(n => { D.pl[n] = []; D.bo[n] = []; });
+    for (let i = 0; i < D.done; i++) orderOf({ d:D.d }, i).forEach((n, ix) => { D.pl[n][i] = ix + 1; D.bo[n][i] = Math.max(0, D.d[n][i] - ptsBy(SCH25, ix + 1)); });
+  });
+  function recalc(D, k, S){
+    Object.keys(D.d).forEach(n => { for (let i = 0; i < D.done; i++) { const p = D.pl[n][i]; D.d[n][i] = p == null ? null : ptsBy(S, p) + (S.bonusOn[k] ? (D.bo[n][i] || 0) * (S.bonus || 0) : 0); } });
+  }
+  const strikeN = (D, S) => S.strike.on && D.done >= S.strike.from ? Math.min(S.strike.n, D.done - 1) : 0;
   let curDisc = 'off', RES5 = null;
   // Kalender-Events (kd-3a, EV) zu kommenden Läufen
   const VM_EV = { off:{ 4:'vmf' }, crawl:{ 5:'vmc6' }, fpv:{ 2:'vmfpv3', 3:'vmfpv4' } };
   const standings = k => standingsOf(VM[k]);
-  function standingsOf(D){
-    const strike = D.done >= 5;
+  function standingsOf(D, S){
+    S = S || SCHEME;
+    const ns = strikeN(D, S), win = [], lastOrd = D.done ? orderOf(D, D.done - 1) : [];
+    for (let i = 0; i < D.done; i++) win.push(orderOf(D, i)[0]);
     return Object.keys(D.d).map(name => {
       const a = D.d[name], v = [];
       for (let i = 0; i < D.done; i++) v.push(a[i] == null ? null : a[i]);
-      let si = -1;
-      if (strike) { let mn = Infinity; v.forEach((x, i) => { if ((x || 0) < mn) { mn = x || 0; si = i; } }); }
-      const tot = v.reduce((s, x, i) => s + (i === si ? 0 : (x || 0)), 0);
-      return { name, v, si, tot, wins: v.filter(x => x >= 25).length };
-    }).sort((a, b) => b.tot - a.tot || b.wins - a.wins || a.name.localeCompare(b.name));
+      const sx = v.map((x, i) => [x == null ? -1 : x, i]).sort((p, q) => p[0] - q[0] || p[1] - q[1]).slice(0, ns).map(p => p[1]);
+      const tot = v.reduce((s, x, i) => s + (sx.includes(i) ? 0 : (x == null ? (S.dns || 0) : x)), 0);
+      const li = lastOrd.indexOf(name);
+      return { name, v, sx, tot, wins: win.filter(w => w === name).length, last: li < 0 ? 999 : li, fast: D.bo && D.bo[name] ? D.bo[name].filter(x => x > 0).length : 0 };
+    }).sort((a, b) => {
+      if (b.tot !== a.tot) return b.tot - a.tot;
+      for (const t of S.tie) { if (!t[1]) continue; const d = t[0] === 'wins' ? b.wins - a.wins : t[0] === 'last' ? a.last - b.last : b.fast - a.fast; if (d) return d; }
+      return a.name.localeCompare(b.name);
+    });
   }
   function renderSaison(){
     const k = curDisc, D = VM[k], rows = standings(k), runs = D.dates.length;
@@ -10642,17 +10729,17 @@ document.addEventListener('DOMContentLoaded', () => {
       h += '<tr' + (r.name === 'Markus B.' ? ' class="me"' : '') + '><td>' + (ix + 1) + '.</td><td class="n">' + esc(r.name) + '</td>';
       for (let i = 0; i < runs; i++) {
         if (i >= D.done) h += '<td class="f">·</td>';
-        else h += '<td' + (i === r.si ? ' class="x" title="Streichergebnis"' : '') + '>' + (r.v[i] == null ? '–' : r.v[i]) + '</td>';
+        else h += '<td' + (r.sx.includes(i) ? ' class="x" title="Streichergebnis"' : '') + '>' + (r.v[i] == null ? '–' : r.v[i]) + '</td>';
       }
       h += '<td class="s">' + r.tot + '</td></tr>';
     });
     $('#wx-s-tbl').innerHTML = h;
-    $('#wx-s-info').innerHTML = (k === 'fpv' ? '<span class="badge b-air">Luftsport</span> ' : '<span class="badge b-car">RC Cars</span> ') + (D.done >= runs ? 'Saison abgeschlossen · Meister: <b>' + esc(rows[0].name) + '</b>' : 'Stand nach Lauf ' + D.done + ' von ' + runs + (D.done >= 5 ? ' · 1 Streichergebnis' : ''));
+    $('#wx-s-info').innerHTML = (k === 'fpv' ? '<span class="badge b-air">Luftsport</span> ' : '<span class="badge b-car">RC Cars</span> ') + (D.done >= runs ? 'Saison abgeschlossen · Meister: <b>' + esc(rows[0].name) + '</b>' : 'Stand nach Lauf ' + D.done + ' von ' + runs + (strikeN(D, SCHEME) ? ' · ' + strikeN(D, SCHEME) + (strikeN(D, SCHEME) === 1 ? ' Streichergebnis' : ' Streichergebnisse') : ''));
     let l = '';
     D.dates.forEach((d, i) => {
       const n = i + 1, done = i < D.done, next = i === D.done;
       let win = '';
-      if (done) { const best = Object.keys(D.d).filter(x => D.d[x][i] != null).sort((a, b) => D.d[b][i] - D.d[a][i])[0]; win = best || ''; }
+      if (done) win = orderOf(D, i)[0] || '';
       let go;
       if (k === 'crawl' && i === 4) go = 'data-go="wx-lauf"';
       else if (done) go = 'data-go="wx-vmerg" data-vm="2026|' + k + '|' + i + '"';
@@ -10676,6 +10763,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#wx-l-empty').style.display = has ? 'none' : '';
     $('#wx-l-done').style.display = has ? '' : 'none';
     $('#wx-l-edit').innerHTML = '<i class="bi bi-pencil-square"></i> ' + (has ? 'Ergebnisse bearbeiten' : 'Ergebnisse eintragen');
+    $('#wx-l-wert').textContent = WERT[SCHEME.wert.crawl];
     if (!has) return;
     let h = '<tr><th>Pl.</th><th class="n">Fahrer</th><th>Strafp.</th><th>Zeit</th><th>Punkte</th></tr>';
     RES5.list.forEach(r => { h += '<tr' + (r.n === 'Markus B.' ? ' class="me"' : '') + '><td>' + r.place + '.</td><td class="n">' + esc(r.n) + '</td><td>' + r.sp + '</td><td>' + esc(r.z) + '</td><td class="s">' + r.pts + '</td></tr>'; });
@@ -10741,13 +10829,14 @@ document.addEventListener('DOMContentLoaded', () => {
     Object.keys(D.d).forEach(n => {
       const a = D.d[n]; while (a.length < 4) a.push(null);
       const hit = R.find(x => x.n === n); a[4] = hit ? hit.pts : null;
+      D.pl[n] = D.pl[n] || []; D.bo[n] = D.bo[n] || []; D.pl[n][4] = hit ? hit.place : null; D.bo[n][4] = 0;
     });
     D.done = Math.max(D.done, 5);
     RES5 = { list:R, dns:RR.filter(r => r.dns).map(r => r.n), stat:chipOn('wx-r-stat').textContent };
     renderLauf(); renderSaison();
     $('#wx-l-t1').click();
     K.back();
-    K.toast('Ergebnisse ' + RES5.stat + ' gespeichert. Tabelle Crawler aktualisiert, Streichergebnis greift.');
+    K.toast('Ergebnisse ' + RES5.stat + ' gespeichert. Tabelle Crawler aktualisiert' + (strikeN(D, SCHEME) ? ', Streichergebnis greift.' : '.'));
   });
   rRender(); renderLauf();
 
@@ -11011,7 +11100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const WDN = ['So','Mo','Di','Mi','Do','Fr','Sa'];
   const wdOf = (d, y) => { const p = d.split('.'); return WDN[new Date(+y, +p[1] - 1, +p[0]).getDay()]; };
-  const winnerOf = (D, i) => Object.keys(D.d).filter(x => D.d[x][i] != null).sort((a, b) => D.d[b][i] - D.d[a][i])[0] || '';
+  const winnerOf = (D, i) => orderOf(D, i)[0] || '';
   function tblHtml(D, rows){
     const runs = D.dates.length;
     let h = '<tr><th>#</th><th class="n">Fahrer</th>';
@@ -11019,14 +11108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     h += '<th>Σ</th></tr>';
     rows.forEach((r, ix) => {
       h += '<tr' + (r.name === 'Markus B.' ? ' class="me"' : '') + '><td>' + (ix + 1) + '.</td><td class="n">' + esc(r.name) + '</td>';
-      for (let i = 0; i < runs; i++) h += i >= D.done ? '<td class="f">·</td>' : '<td' + (i === r.si ? ' class="x"' : '') + '>' + (r.v[i] == null ? '–' : r.v[i]) + '</td>';
+      for (let i = 0; i < runs; i++) h += i >= D.done ? '<td class="f">·</td>' : '<td' + (r.sx.includes(i) ? ' class="x"' : '') + '>' + (r.v[i] == null ? '–' : r.v[i]) + '</td>';
       h += '<td class="s">' + r.tot + '</td></tr>';
     });
     return h;
   }
   let arDisc = 'off';
   function renderArchiv(){
-    const D = VM25[arDisc], rows = standingsOf(D), c = rows[0];
+    const D = VM25[arDisc], rows = standingsOf(D, SCH25), c = rows[0];
     $('#wx-ar-champ').innerHTML = '<i class="bi bi-trophy-fill"></i><span>Vereinsmeister ' + D.n + ' 2025: <b>' + esc(c.name) + '</b><br><small class="mut">' + c.tot + ' Punkte · ' + c.wins + (c.wins === 1 ? ' Sieg' : ' Siege') + ' · ' + D.dates.length + ' Läufe, 1 Streichergebnis</small></span>';
     $('#wx-ar-tbl').innerHTML = tblHtml(D, rows);
     $('#wx-ar-runs').innerHTML = D.dates.map((d, i) => '<div class="row" data-go="wx-vmerg" data-vm="2025|' + arDisc + '|' + i + '"><span><b>Lauf ' + (i + 1) + '</b> · ' + wdOf(d, 2025) + ' ' + d + '2025<br><small>Sieger: ' + esc(winnerOf(D, i)) + '</small></span><span class="badge b-g">Ergebnis</span></div>').join('');
@@ -11037,21 +11126,20 @@ document.addEventListener('DOMContentLoaded', () => {
   renderArchiv();
 
   const VM_ORT = { off:'Sand-Rennstrecke', crawl:'Crawler-Strecke', glatt:'Teerfläche', fpv:'Sporthalle' };
-  const VM_WERT = { off:'Runden in fester Zeit, dann Zeit', crawl:'Strafpunkte, bei Gleichstand Zeit', glatt:'Runden in fester Zeit, dann Zeit', fpv:'Runden in fester Zeit, dann Zeit' };
   let curVm = ['2026', 'off', 0];
   function renderVmErg(){
     const y = curVm[0], k = curVm[1], i = curVm[2], D = (y === '2025' ? VM25 : VM)[k]; if (!D || !D.dates[i]) return;
     const d = D.dates[i];
     $('#wx-ve-t1').textContent = 'VM Lauf ' + (i + 1) + ' · ' + D.n;
     $('#wx-ve-t2').textContent = wdOf(d, y) + ' ' + d + y + ' · ' + VM_ORT[k];
-    const ps = Object.keys(D.d).filter(n => D.d[n][i] != null).sort((a, b) => D.d[b][i] - D.d[a][i]);
+    const ps = orderOf(D, i);
     const dns = Object.keys(D.d).filter(n => D.d[n][i] == null);
     let h = '<tr><th>Pl.</th><th class="n">' + (k === 'fpv' ? 'Pilot' : 'Fahrer') + '</th><th>Punkte</th></tr>';
     ps.forEach((n, ix) => { h += '<tr' + (n === 'Markus B.' ? ' class="me"' : '') + '><td>' + (ix + 1) + '.</td><td class="n">' + esc(n) + (ix === 0 ? ' <i class="bi bi-trophy-fill" style="color:#c99a06"></i>' : '') + '</td><td class="s">' + D.d[n][i] + '</td></tr>'; });
     dns.forEach(n => { h += '<tr><td>–</td><td class="n">' + esc(n) + '</td><td class="f">nicht angetreten</td></tr>'; });
     $('#wx-ve-tbl').innerHTML = h;
     $('#wx-ve-meta').innerHTML = 'Sieger: <b>' + esc(ps[0] || '–') + '</b> · ' + ps.length + ' gewertet';
-    $('#wx-ve-kv').innerHTML = '<dt>Disziplin</dt><dd>' + D.n + ' <span class="badge ' + (k === 'fpv' ? 'b-air">Luftsport' : 'b-car">RC Cars') + '</span></dd><dt>Ort</dt><dd>' + VM_ORT[k] + '</dd><dt>Wertung</dt><dd>' + VM_WERT[k] + '</dd><dt>Rennleitung</dt><dd>' + (k === 'crawl' ? 'Max R.' : 'Jonas B.') + '</dd><dt>Saison</dt><dd>' + y + (y === '2025' ? ' (Archiv)' : '') + '</dd>';
+    $('#wx-ve-kv').innerHTML = '<dt>Disziplin</dt><dd>' + D.n + ' <span class="badge ' + (k === 'fpv' ? 'b-air">Luftsport' : 'b-car">RC Cars') + '</span></dd><dt>Ort</dt><dd>' + VM_ORT[k] + '</dd><dt>Wertung</dt><dd>' + WERT[(y === '2025' ? SCH25 : SCHEME).wert[k]] + '</dd><dt>Rennleitung</dt><dd>' + (k === 'crawl' ? 'Max R.' : 'Jonas B.') + '</dd><dt>Saison</dt><dd>' + y + (y === '2025' ? ' (Archiv)' : '') + '</dd>';
     $('#wx-ve-tab').innerHTML = '<i class="bi bi-trophy"></i> Tabelle ' + D.n + ' ' + y + ' ansehen';
   }
   K.enter['wx-vmerg'] = renderVmErg;
@@ -11059,6 +11147,159 @@ document.addEventListener('DOMContentLoaded', () => {
     const y = curVm[0], k = curVm[1], target = y === '2025' ? 'wx-archiv' : 'wx-saison';
     if (y === '2025') arSelect(k); else selectDisc(k);
     if (K.stack[K.stack.length - 1] === target) K.back(); else K.show(target, 'push');
+  });
+
+  // ================= Punkteschema: Ansicht =================
+  const ptsTxt = n => n + (n === 1 ? ' Punkt' : ' Punkte');
+  function schemeRules(S){
+    const bon = DISC.filter(d => S.bonusOn[d[0]]).map(d => d[1]);
+    const tie = S.tie.filter(t => t[1]).map(t => TIE[t[0]]);
+    const byW = {}; DISC.forEach(d => { (byW[S.wert[d[0]]] = byW[S.wert[d[0]]] || []).push(d[1]); });
+    let h = '<div class="row"><span><b>Bonus</b><br><small>' + (bon.length ? '+' + ptsTxt(S.bonus) + ' für die schnellste Runde (' + bon.join(', ') + ')' : 'kein Bonus für die schnellste Runde') + '</small></span></div>';
+    h += '<div class="row"><span><b>Streichergebnis</b><br><small>' + (S.strike.on ? 'ab ' + S.strike.from + ' gefahrenen Läufen ' + (S.strike.n === 1 ? 'zählt das schlechteste Ergebnis' : 'zählen die ' + S.strike.n + ' schlechtesten Ergebnisse') + ' nicht (ein verpasster Lauf wird zuerst gestrichen)' : 'keines – alle Läufe zählen') + '</small></span></div>';
+    h += '<div class="row"><span><b>Gleichstand</b><br><small>' + tie.join(', dann ') + '</small></span></div>';
+    Object.keys(byW).forEach(w => { h += '<div class="row"><span><b>Wertung ' + byW[w].join(' / ') + '</b><br><small>' + WERT_LONG[w] + '</small></span></div>'; });
+    return h;
+  }
+  function renderPunkte(){
+    const S = SCHEME, L = S.places.length, half = Math.ceil(L / 2);
+    let t = '';
+    for (let i = 0; i < half; i++) {
+      const j = half + i;
+      t += '<tr><td>' + (i + 1) + '. Platz</td><td class="r">' + S.places[i] + '</td>' + (j < L ? '<td style="padding-left:18px">' + (j + 1) + '. Platz</td><td class="r">' + S.places[j] + '</td>' : '<td></td><td></td>') + '</tr>';
+    }
+    t += '<tr><td colspan="3">ab ' + (L + 1) + '. Platz</td><td class="r">' + S.rest + '</td></tr><tr><td colspan="3">nicht angetreten</td><td class="r">' + S.dns + '</td></tr>';
+    $('#wx-pk-tbl').innerHTML = t;
+    $('#wx-pk-rules').innerHTML = schemeRules(S);
+    $('#wx-pk-state').innerHTML = schSaved
+      ? '<i class="bi bi-check-circle" style="color:var(--g)"></i> Gilt für die Saison 2026 · zuletzt gespeichert ' + esc(schSaved) + '.'
+      : '<i class="bi bi-info-circle"></i> Vorschlag, bis die Abteilungsleitung das Schema für die Saison speichert.';
+    $('#wx-pk-log').innerHTML = SCH_LOG.length
+      ? SCH_LOG.map(l => '<div class="row"><span><b>' + esc(l.when) + ' · ' + esc(l.who) + '</b><br><small>' + esc(l.what) + '</small></span></div>').join('')
+      : '<div class="row"><span><small class="mut">Noch keine Änderungen – das Schema ist ein Vorschlag von TSV RC.</small></span></div>';
+  }
+  renderPunkte();
+
+  // ================= Punkteschema bearbeiten =================
+  const peNum = v => /^\d+$/.test(String(v == null ? '' : v).trim()) ? +String(v).trim() : null;
+  let F = null, peWD = 'off';
+  const norm = f => ({ places:f.places.map(peNum), rest:peNum(f.rest), dns:peNum(f.dns), bonus:peNum(f.bonus),
+    bonusOn:{ off:!!f.bonusOn.off, crawl:!!f.bonusOn.crawl, glatt:!!f.bonusOn.glatt, fpv:!!f.bonusOn.fpv },
+    strike:{ on:!!f.strike.on, from:peNum(f.strike.from), n:peNum(f.strike.n) }, tie:clone(f.tie), wert:clone(f.wert) });
+  function changesOf(A, B){
+    const c = [];
+    if (JSON.stringify([A.places, A.rest, A.dns]) !== JSON.stringify([B.places, B.rest, B.dns])) c.push('Punkte je Platz');
+    if (JSON.stringify([A.bonus, A.bonusOn]) !== JSON.stringify([B.bonus, B.bonusOn])) c.push('Bonus');
+    if (JSON.stringify(A.strike) !== JSON.stringify(B.strike)) c.push('Streichergebnis');
+    if (JSON.stringify(A.tie) !== JSON.stringify(B.tie)) c.push('Gleichstand');
+    DISC.forEach(d => { if (A.wert[d[0]] !== B.wert[d[0]]) c.push('Wertung ' + d[1]); });
+    return c;
+  }
+  function peErrors(){
+    const e = [], bad = [], P = F.places.map(peNum), rest = peNum(F.rest), dns = peNum(F.dns);
+    P.forEach((p, i) => { if (p == null) { e.push((i + 1) + '. Platz: Punkte fehlen'); bad.push('p:' + i); } });
+    if (rest == null) { e.push('„ab ' + (P.length + 1) + '. Platz“ fehlt'); bad.push('rest'); }
+    if (dns == null) { e.push('„nicht angetreten“ fehlt'); bad.push('dns'); }
+    const seq = P.concat([rest, dns]), lab = P.map((x, i) => (i + 1) + '. Platz').concat(['ab ' + (P.length + 1) + '. Platz', 'nicht angetreten']);
+    for (let i = 1; i < seq.length; i++) {
+      if (seq[i] != null && seq[i - 1] != null && seq[i] > seq[i - 1]) {
+        e.push(lab[i] + ' (' + seq[i] + ') hat mehr Punkte als ' + lab[i - 1] + ' (' + seq[i - 1] + ')');
+        bad.push(i < P.length ? 'p:' + i : (i === P.length ? 'rest' : 'dns'));
+      }
+    }
+    if (P[0] === 0) { e.push('1. Platz braucht mehr als 0 Punkte'); bad.push('p:0'); }
+    if (DISC.some(d => F.bonusOn[d[0]])) { const b = peNum(F.bonus); if (b == null || b < 1) { e.push('Bonuspunkte (mindestens 1) eintragen'); bad.push('bonus'); } }
+    if (F.strike.on) {
+      const fr = peNum(F.strike.from), n = peNum(F.strike.n);
+      if (fr == null || fr < 2) { e.push('Streichergebnis: ab mindestens 2 Läufen'); bad.push('sfrom'); }
+      if (n == null || n < 1) { e.push('Streichergebnis: mindestens 1 streichen'); bad.push('sn'); }
+      else if (fr != null && n >= fr) { e.push('Streichergebnis: weniger streichen als Läufe nötig sind'); bad.push('sn'); }
+    }
+    if (!F.tie.some(t => t[1])) e.push('Gleichstand: mindestens eine Regel wählen');
+    return { e, bad };
+  }
+  const PE_ID = { rest:'wx-pe-rest', dns:'wx-pe-dns', bonus:'wx-pe-bonus', sfrom:'wx-pe-s-from', sn:'wx-pe-s-n' };
+  function peCheck(){
+    const r = peErrors(), N = norm(F), ch = changesOf(SCHEME, N);
+    $$('#wx-punkte-edit input').forEach(i => i.classList.remove('bad'));
+    r.bad.forEach(b => { const el = b.indexOf('p:') === 0 ? $('#wx-pe-places [data-i="' + b.slice(2) + '"]') : document.getElementById(PE_ID[b]); if (el) el.classList.add('bad'); });
+    const ok = !r.e.length && ch.length > 0;
+    $('#wx-pe-save').classList.toggle('dis', !ok);
+    $('#wx-pe-save').style.display = '';
+    $('#wx-pe-conf').style.display = 'none';
+    $('#wx-pe-hint').textContent = r.e.length ? 'Bitte prüfen: ' + r.e.join(' · ') + '.' : (ch.length ? 'Geändert: ' + ch.join(', ') + '.' : 'Noch nichts geändert.');
+    $('#wx-pe-s-box').style.display = F.strike.on ? '' : 'none';
+    $('#wx-pe-restl').textContent = 'ab ' + (F.places.length + 1) + '. Platz';
+  }
+  function tieRender(){
+    $('#wx-pe-tie').innerHTML = F.tie.map((t, i) => '<div class="wx-pe-tie' + (t[1] ? ' on' : '') + '"><i class="bi ' + (t[1] ? 'bi-check-square-fill' : 'bi-square') + ' ck" data-t="' + i + '"></i><span class="n">' + (i + 1) + '. ' + TIE[t[0]] + '</span>' +
+      '<i class="bi bi-arrow-up mv' + (i === 0 ? ' dis' : '') + '" data-up="' + i + '" title="nach oben"></i><i class="bi bi-arrow-down mv' + (i === F.tie.length - 1 ? ' dis' : '') + '" data-down="' + i + '" title="nach unten"></i></div>').join('');
+  }
+  function peRender(){
+    $('#wx-pe-places').innerHTML = F.places.map((p, i) => '<div class="wx-pe-row"><span>' + (i + 1) + '. Platz</span><input type="number" min="0" inputmode="numeric" data-i="' + i + '" value="' + esc(p == null ? '' : p) + '"><i class="bi bi-x-lg' + (F.places.length <= 1 ? ' dis' : '') + '" data-del="' + i + '" title="Platz entfernen"></i></div>').join('');
+    $('#wx-pe-rest').value = F.rest == null ? '' : F.rest;
+    $('#wx-pe-dns').value = F.dns == null ? '' : F.dns;
+    $('#wx-pe-bonus').value = F.bonus == null ? '' : F.bonus;
+    DISC.forEach(d => { $('#wx-pe-b-' + d[0]).classList.toggle('on', !!F.bonusOn[d[0]]); $('#wx-pe-w-' + d[0]).textContent = WERT[F.wert[d[0]]]; });
+    $('#wx-pe-s-on').classList.toggle('on', !!F.strike.on);
+    $('#wx-pe-s-from').value = F.strike.from == null ? '' : F.strike.from;
+    $('#wx-pe-s-n').value = F.strike.n == null ? '' : F.strike.n;
+    tieRender(); peCheck();
+  }
+  K.enter['wx-punkte-edit'] = () => { F = clone(SCHEME); peRender(); };
+  $('#wx-pe-places').addEventListener('input', e => { const t = e.target; if (t.dataset.i == null) return; F.places[+t.dataset.i] = t.value; peCheck(); });
+  $('#wx-pe-places').addEventListener('click', e => { const x = e.target.closest('[data-del]'); if (!x || F.places.length <= 1) return; F.places.splice(+x.dataset.del, 1); peRender(); });
+  $('#wx-pe-add').addEventListener('click', () => { F.places.push(''); peRender(); const ins = $$('#wx-pe-places input'); ins[ins.length - 1].focus(); });
+  [['wx-pe-rest', v => { F.rest = v; }], ['wx-pe-dns', v => { F.dns = v; }], ['wx-pe-bonus', v => { F.bonus = v; }],
+   ['wx-pe-s-from', v => { F.strike.from = v; }], ['wx-pe-s-n', v => { F.strike.n = v; }]].forEach(p => {
+    document.getElementById(p[0]).addEventListener('input', e => { p[1](e.target.value); peCheck(); });
+  });
+  // Schalter: der Dummy schaltet .tg selbst um, hier nur den Zustand übernehmen
+  DISC.forEach(d => $('#wx-pe-b-' + d[0]).addEventListener('click', e => { F.bonusOn[d[0]] = e.currentTarget.classList.contains('on'); peCheck(); }));
+  $('#wx-pe-s-on').addEventListener('click', e => { F.strike.on = e.currentTarget.classList.contains('on'); peCheck(); });
+  $('#wx-pe-tie').addEventListener('click', e => {
+    const c = e.target.closest('[data-t]'), u = e.target.closest('[data-up]'), dn = e.target.closest('[data-down]');
+    if (c) { const t = F.tie[+c.dataset.t]; t[1] = !t[1]; }
+    else if (u) { const i = +u.dataset.up; if (i > 0) F.tie.splice(i - 1, 0, F.tie.splice(i, 1)[0]); }
+    else if (dn) { const i = +dn.dataset.down; if (i < F.tie.length - 1) F.tie.splice(i + 1, 0, F.tie.splice(i, 1)[0]); }
+    else return;
+    tieRender(); peCheck();
+  });
+  $('#wx-pe-copy').addEventListener('click', () => { F = clone(SCH25); peRender(); K.toast('Schema der Saison 2025 übernommen – noch nicht gespeichert.'); });
+  K.PICK.wxWertung = { title:'Wertung der Disziplin', target:'wx-pe-w-off',
+    foot:'Bestimmt, welche Rohwerte die Rennleitung einträgt und wie TSV RC daraus die Plätze ermittelt.',
+    secs:[['Wertungsarten',[
+      [WERT.pen,'weniger Strafpunkte vorn, bei Gleichstand kürzere Zeit (z. B. Crawler)','bi-cone-striped','',{ v:'pen' }],
+      [WERT.rounds,'mehr Runden in der festen Zeit vorn, bei Gleichstand kürzere Zeit','bi-arrow-repeat','',{ v:'rounds' }],
+      [WERT.time,'kürzeste Zeit vorn','bi-stopwatch','',{ v:'time' }]
+    ]]], onPick: (i, o) => { F.wert[peWD] = o.v; peCheck(); } };
+  document.addEventListener('click', e => {
+    const w = e.target.closest('[data-pe-d]'); if (!w) return;
+    peWD = w.dataset.peD; K.PICK.wxWertung.target = 'wx-pe-w-' + peWD;
+  }, true);
+  $('#wx-pe-save').addEventListener('click', () => {
+    if ($('#wx-pe-save').classList.contains('dis')) return;
+    const N = norm(F), played = DISC.map(d => d[1] + ' ' + VM[d[0]].done).join(', ');
+    const lead = DISC.map(d => {
+      const D = VM[d[0]], C = { d:clone(D.d), pl:D.pl, bo:D.bo, done:D.done };
+      recalc(C, d[0], N);
+      const a = standingsOf(D, SCHEME)[0].name, b = standingsOf(C, N)[0].name;
+      return a === b ? '' : d[1] + ': ' + a + ' → ' + b;
+    }).filter(Boolean);
+    $('#wx-pe-conftx').textContent = 'Die Tabellen aller Disziplinen werden mit dem neuen Schema neu berechnet (gewertete Läufe: ' + played + '). ' +
+      (lead.length ? 'Neue Spitze – ' + lead.join(' · ') + '. ' : 'Die Spitzenreiter bleiben gleich. ') + 'Die Änderung steht im Änderungsprotokoll und ist für alle sichtbar.';
+    $('#wx-pe-conf').style.display = '';
+    $('#wx-pe-save').style.display = 'none';
+  });
+  $('#wx-pe-no').addEventListener('click', () => { $('#wx-pe-conf').style.display = 'none'; $('#wx-pe-save').style.display = ''; });
+  $('#wx-pe-yes').addEventListener('click', () => {
+    const N = norm(F), ch = changesOf(SCHEME, N);
+    SCHEME = N; schSaved = 'So 15.11.2026 von Markus B.';
+    DISC.forEach(d => recalc(VM[d[0]], d[0], SCHEME));
+    SCH_LOG.unshift({ when:'So 15.11.2026, 9:41', who:'Markus B. (Abteilungsleitung)', what:ch.join(', ') + ' geändert · Tabellen 2026 neu berechnet' });
+    renderSaison(); renderLauf(); rCalc(); renderPunkte();
+    K.back();
+    K.toast('Punkteschema 2026 gespeichert. Tabellen neu berechnet, Änderung protokolliert.');
   });
 
   // Parameter der Detailbildschirme vor dem Dummy-Klick merken
