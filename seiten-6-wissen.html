@@ -219,6 +219,10 @@
   table.dt tr.sel td{background:var(--gl)}
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .colh{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:6px}
+  .netbar{display:flex;gap:8px;align-items:center;background:#3b3f3b;color:#fff;border-radius:6px;padding:8px 12px;font-size:12.5px;margin-bottom:10px}
+  .cm.sol{border-left:3px solid var(--g);padding-left:8px;background:#f6fbf7}
+  .cm .who{font-size:11.5px;color:var(--mut)}
+  .ibtn.dis{opacity:.4}
   .alert2{background:var(--warnbg);border:1px solid #f3d19c;border-radius:6px;padding:9px 12px;font-size:13px;margin-bottom:12px;color:#7a4a06}
   .dside a .badge{font-weight:700}
   .tg{display:inline-block;width:34px;height:18px;border-radius:9px;background:#ced4da;position:relative;vertical-align:middle}
@@ -230,12 +234,12 @@
 <div class="intro">
   <h1>TSV RC – Seiten: Wissen</h1>
   <p>Gruppe 6, <b>PC-Ansicht</b> der gemeinsamen Wissenssammlung (Gesamtdesign 6.3). Die Handy-Seiten sind klickbar im <b>Klickdummy</b>: Luftsport oder RC Cars › ⋯ › Wissen, dazu „Neu im Wissen“ auf der Startseite und „Wissen zu diesem Modell“ auf jeder Modell-Detailseite.</p>
-  <p><span class="assume">Annahme: Am PC sitzt „Wissen“ in der zweiten Menüzeile jedes Bereichs (vorgefiltert); der Filter lässt sich auf „Alle Bereiche“ umschalten. Am Handy zusätzlich unter „Mehr“ für alle Bereiche.</span></p>
+  <p>Am PC sitzt „Wissen“ in der zweiten Menüzeile jedes Bereichs (vorgefiltert); der Filter lässt sich auf „Alle Bereiche“ umschalten. Am Handy zusätzlich unter „Mehr“ für alle Bereiche.</p>
 </div>
 
 <section class="direction">
   <div class="dhead"><span class="dletter">1</span><h2>Übersicht mit Suche</h2></div>
-  <p class="ddesc">Links Filter (Bereich, Themen, Beobachtet, Moderation für die Leitung), Mitte Volltextsuche mit Treffern und Textausschnitt, rechts beobachtete Artikel und der Offline-Hinweis. Ergebnisse filtern sich beim Tippen.</p>
+  <p class="ddesc">Links Filter (Bereich, Themen, Beobachtet, <b>Offene Fragen</b>, Moderation für die Leitung), Mitte Volltextsuche mit Treffern und Textausschnitt, rechts beobachtete Artikel und der Offline-Hinweis. Ergebnisse filtern sich beim Tippen. Artikel mit offenen Fragen tragen ein Fragezeichen mit Anzahl.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/wissen?q=akku</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -249,6 +253,7 @@
         <a>Akku<span>1</span></a><a>Einsteiger<span>2</span></a><a>FPV<span>2</span></a><a>Sicherheit<span>2</span></a><a>Recht<span>1</span></a><a>Wartung<span>1</span></a>
         <div class="h">Für dich</div>
         <a><span><i class="bi bi-bell"></i> Beobachtet</span><span>2</span></a>
+        <a><span><i class="bi bi-question-circle"></i> Offene Fragen</span><span>3</span></a>
         <a><span><i class="bi bi-shield-check"></i> Moderation</span><span class="badge b-w">1</span></a>
       </div>
       <div class="dcontent" style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
@@ -258,7 +263,7 @@
           <div class="card">
             <table class="dt"><tr><th>Artikel</th><th>Bereich</th><th>Geändert</th><th>Status</th></tr>
               <tr><td><b>LiPo-<mark>Akku</mark>s richtig lagern und laden</b><br><small class="mut">… auf Lagerspannung bringen: 3,80–3,85 V je Zelle …</small></td><td><span class="badge b-air">Luftsport</span> <span class="badge b-car">RC Cars</span></td><td>Di 10.11.<br><small class="mut">Jonas B.</small></td><td><span class="badge b-w">Prüfung aufgehoben</span></td></tr>
-              <tr><td><b>Erste Schritte FPV: Simulator und Tinywhoop</b><br><small class="mut">… Kein Bruch, keine <mark>Akku</mark>s, beliebig viele Versuche …</small></td><td><span class="badge b-air">Luftsport</span></td><td>So 08.11.<br><small class="mut">Lena K.</small></td><td>–</td></tr>
+              <tr><td><b>Erste Schritte FPV: Simulator und Tinywhoop</b><br><small class="mut">… Kein Bruch, keine <mark>Akku</mark>s, beliebig viele Versuche …</small></td><td><span class="badge b-air">Luftsport</span></td><td>So 08.11.<br><small class="mut">Lena K.</small></td><td><span class="badge b-w"><i class="bi bi-question-circle"></i> 1 offen</span></td></tr>
             </table>
           </div>
           <div class="note" style="text-align:left">Ohne Suchbegriff erscheinen hier alle Artikel des Bereichs, zuletzt geänderte zuerst.</div>
@@ -266,7 +271,7 @@
         <div>
           <div class="card"><h3><i class="bi bi-bell"></i> Beobachtet</h3>
             <table class="dt"><tr><td><b>LiPo-Akkus richtig lagern und laden</b><br><small class="mut">geändert Di 10.11. · 3 neue Kommentare</small></td></tr><tr><td><b>Propeller am Avata 2 wechseln</b><br><small class="mut">geändert Mo 02.11.</small></td></tr></table></div>
-          <div class="card" style="font-size:13px"><h3><i class="bi bi-cloud-check"></i> Offline verfügbar</h3>8 Artikel deiner Bereiche, Bilder verkleinert. Zuletzt abgeglichen heute 09:38.<br><span class="assume">Annahme: Offline nur lesen; Schreiben und Kommentieren brauchen Netz.</span></div>
+          <div class="card" style="font-size:13px"><h3><i class="bi bi-cloud-check"></i> Offline verfügbar</h3>8 Artikel deiner Bereiche, Bilder verkleinert. Zuletzt abgeglichen heute 09:38.<div class="note" style="text-align:left">Offline lesen und kommentieren; Kommentare werden gesendet, sobald Netz da ist. Schreiben und Ändern nur mit Netz.</div></div>
         </div>
       </div>
     </div>
@@ -294,7 +299,7 @@
           <h4>Für alle</h4><ul><li>Höchstens 120 m über Grund und immer in Sichtweite; bei FPV mit Luftraumbeobachter.</li><li>Am Vereinsgelände gelten zusätzlich die <span class="ln">Platzregeln Vereinsgelände</span>.</li></ul>
         </div>
         <div class="card"><h3>Kommentare und Fragen (2)</h3>
-          <div class="cm"><div class="h"><b>Lena K.</b> <span class="badge b-w">Frage</span><small class="mut">Mi 14.10.2026, 18:02</small></div><div class="tx">Gilt A1 auch für den Tinywhoop in der Halle?</div><span class="mod"><i class="bi bi-eye-slash"></i> Ausblenden (Leitung)</span></div>
+          <div class="cm"><div class="h"><b>Lena K.</b> <span class="badge b-w">Frage · offen</span><small class="mut">Mi 14.10.2026, 18:02</small></div><div class="tx">Gilt A1 auch für den Tinywhoop in der Halle?</div><div class="who">Als beantwortet markieren können Lena K. (fragt) und Max R. (Autor); sie können auch eine Antwort als Lösung markieren.</div><span class="mod"><i class="bi bi-eye-slash"></i> Ausblenden (Leitung)</span></div>
           <div class="cm"><div class="h"><b>Max R.</b><small class="mut">Mi 14.10.2026, 19:30</small></div><div class="tx">Das klären wir gerade mit dem Verein. Bis dahin gelten in der Halle die Hallenregeln.</div><span class="mod"><i class="bi bi-eye-slash"></i> Ausblenden (Leitung)</span></div>
           <div class="inp ph" style="margin-top:8px;min-height:44px;align-items:flex-start">Kommentar oder Frage schreiben …</div>
           <div style="margin-top:6px;display:flex;gap:6px;align-items:center"><span class="chip on">Kommentar</span><span class="chip">Frage</span><span class="ibtn" style="margin-left:auto"><i class="bi bi-send"></i> Senden</span></div>
@@ -308,7 +313,7 @@
         <div class="card"><h3>Abteilungsleitung</h3>
           <span class="ibtn out"><i class="bi bi-patch-minus"></i> Prüfmarkierung entfernen</span><br>
           <span class="ibtn out" style="margin-top:6px;color:var(--red);border-color:var(--red)"><i class="bi bi-lock"></i> Sperren …</span>
-          <div class="note" style="text-align:left">Jede spätere Änderung hebt die Prüfmarkierung auf. Gesperrte Artikel ändert nur die Leitung; lesen und kommentieren können alle.</div>
+          <div class="note" style="text-align:left">Artikel mit rechtlichem Bezug sind frei änderbar. Jede Änderung (auch am Schalter „Rechtlicher Bezug“) hebt die Prüfmarkierung auf und legt den Artikel der Leitung zur Prüfung vor. Gesperrte Artikel ändert nur die Leitung; lesen und kommentieren können alle.</div>
           <span class="assume">Annahme: „Stand …“ ist das Datum der aktuellen Version; gekennzeichnet wird über den Schalter „Rechtlicher Bezug“ im Editor.</span>
         </div>
       </div>
@@ -359,6 +364,7 @@
             <tr><td><i class="bi bi-box-seam"></i> Avata-Set 1 <small class="mut">(Verein)</small></td><td class="mut">Vereinsmodell</td><td>×</td></tr>
             <tr><td><i class="bi bi-diagram-3"></i> FPV</td><td class="mut">Modelltyp</td><td>×</td></tr></table>
           <span class="ibtn out" style="margin-top:6px"><i class="bi bi-paperclip"></i> Datei anhängen</span> <span class="ibtn out" style="margin-top:6px"><i class="bi bi-link-45deg"></i> Modell oder Typ verknüpfen</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-top:8px"><span><b>Rechtlicher Bezug</b><br><small class="mut">zeigt „Keine Rechtsberatung, Stand …“ · frei änderbar; eine Änderung legt den Artikel der Leitung zur Prüfung vor</small></span><span class="tg"></span></div>
         <label>Änderungsnotiz <span class="opt">optional</span></label><div class="inp">Hinweis auf neue Schrauben ergänzt</div>
         <div style="margin-top:10px;display:flex;gap:8px;align-items:center"><span class="ibtn">Speichern als Version 3</span><span class="ibtn out">Abbrechen</span><small class="mut">Beobachter werden benachrichtigt.</small></div>
       </div>
@@ -440,7 +446,7 @@
 
 <section class="direction">
   <div class="dhead"><span class="dletter">6</span><h2>Moderation (Abteilungsleitung)</h2></div>
-  <p class="ddesc">Übersicht nur für die Abteilungsleitung: zu prüfende Artikel (Prüfung durch Änderung aufgehoben oder rechtlicher Bezug ohne Prüfung), gesperrte Artikel, ausgeblendete Kommentare und Änderungen der letzten 7 Tage. Endgültiges Löschen bleibt dem Admin vorbehalten.</p>
+  <p class="ddesc">Übersicht nur für die Abteilungsleitung: zu prüfende Artikel (Prüfung durch Änderung aufgehoben, rechtlicher Bezug gesetzt oder entfernt, rechtlicher Bezug ohne Prüfung), doppelte Themen zum Zusammenführen, gesperrte Artikel, ausgeblendete Kommentare und Änderungen der letzten 7 Tage. Neue Themen legt jedes Mitglied an; die Leitung führt doppelte zusammen. Endgültiges Löschen bleibt dem Admin vorbehalten.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/moderation</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -450,6 +456,8 @@
       <div>
         <div class="stats"><div class="stat"><b>1</b><span>zu prüfen</span></div><div class="stat"><b>1</b><span>gesperrt</span></div><div class="stat"><b>1</b><span>ausgeblendet</span></div></div>
         <div class="card"><h3>Zu prüfen</h3><table class="dt"><tr><td><b>LiPo-Akkus richtig lagern und laden</b><br><small class="mut">nach Prüfung geändert von Jonas B., Di 10.11.</small></td><td><span class="ibtn out">Prüfen</span></td></tr></table></div>
+        <div class="card"><h3>Themen</h3><table class="dt"><tr><td><b>Anfänger / Einsteiger</b><br><small class="mut">mögliche Doppelung · 1 bzw. 2 Artikel</small></td><td><span class="ibtn out"><i class="bi bi-intersect"></i> Zusammenführen</span></td></tr></table>
+          <div class="note" style="text-align:left">Zusammenführen: Alle Artikel mit „Anfänger“ bekommen „Einsteiger“, das erste Thema verschwindet. Steht im Verlauf der Artikel.</div></div>
         <div class="card"><h3>Gesperrt</h3><table class="dt"><tr><td><b>Platzregeln Vereinsgelände</b><br><small class="mut">seit So 12.04.2026 · Vereinsregel – Änderungen nur durch die Abteilungsleitung</small></td><td><span class="ibtn out">Entsperren</span></td></tr></table></div>
       </div>
       <div>
@@ -465,6 +473,36 @@
           <tr><td><b>LiPo-Akkus richtig lagern und laden</b><br><small class="mut">Version 4 · Jonas B. · Di 10.11.</small></td><td><span class="p">+4</span></td></tr>
           <tr><td><b>Erste Schritte FPV</b><br><small class="mut">Version 3 · Lena K. · So 08.11.</small></td><td><span class="p">+1</span> <span class="m">−1</span></td></tr></table></div>
         <span class="assume">Annahme: Die Moderationsübersicht liegt im Wissen (Filterleiste „Für dich“) und ist nur für die Abteilungsleitung sichtbar.</span>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Ohne Netz kommentieren, Fragen als beantwortet markieren</h2></div>
+  <p class="ddesc">Ohne Netz bleibt jeder offline gespeicherte Artikel lesbar und <b>kommentierbar</b>: Der Kommentar steht sofort unter dem Artikel mit „wartet auf Netz“ und wird gesendet, sobald wieder Verbindung besteht. Bearbeiten, Wiederherstellen und Moderation sind ohne Netz gesperrt (mit Hinweis). Fragen markiert die fragende Person oder der Autor als beantwortet, auf Wunsch mit einer Antwort als Lösung. Handy: Klickdummy, Wissen › Schalter „Demo: ohne Netz“, Artikel „Losi Mini-T: Differential warten“.</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/wissen/losi-mini-t-differential</span></div>
+  <div class="app tall">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a class="on"><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a>Modelle</a><a>Ausleihe</a><a>Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on" style="color:var(--car);border-color:var(--car)"><i class="bi bi-journal-text"></i> Wissen</a></div>
+    <div class="dmain">
+      <div>
+        <div class="netbar"><i class="bi bi-wifi-off"></i> <span><b>Ohne Netz.</b> Du liest die offline gespeicherte Fassung. Kommentare werden gesendet, sobald Netz da ist; Bearbeiten geht erst dann wieder.</span></div>
+        <div class="hrow"><h3 style="font-size:19px">Losi Mini-T: Differential warten</h3><span><span class="ibtn out dis"><i class="bi bi-clock-history"></i> Verlauf</span> <span class="ibtn dis" title="nur mit Netz"><i class="bi bi-pencil"></i> Bearbeiten</span></span></div>
+        <div class="meta">Version 2 · geändert So 01.11.2026 von Markus B. (Autor) · <span class="badge b-car">RC Cars</span> · <i class="bi bi-cloud-check"></i> offline gespeichert</div>
+        <div class="card"><h3>Kommentare und Fragen (4)</h3>
+          <div class="cm"><div class="h"><b>Jonas B.</b><small class="mut">Mo 02.11.2026, 09:14</small></div><div class="tx">Beim Einsteiger-Set des Vereins habe ich das am Samstag auch gemacht, war nötig.</div></div>
+          <div class="cm"><div class="h"><b>Tim S.</b> <span class="badge b-g"><i class="bi bi-check2-circle"></i> beantwortet</span><small class="mut">Do 12.11.2026, 18:40</small></div><div class="tx">Welches Diff-Fett nehmt ihr für den Mini-T?</div><div class="who">markiert von Markus B. (Autor), heute 09:20 · <span class="mod">Markierung aufheben</span></div></div>
+          <div class="cm sol"><div class="h"><b>Jonas B.</b> <span class="badge b-g"><i class="bi bi-check-lg"></i> Lösung</span><small class="mut">Do 12.11.2026, 19:15</small></div><div class="tx">Ich nehme das Losi-Diff-Fett 10.000, eine Tube liegt auch im Einsteiger-Set.</div></div>
+          <div class="cm"><div class="h"><b>Markus B.</b> <span class="badge b-w"><i class="bi bi-cloud-arrow-up"></i> wartet auf Netz</span><small class="mut">heute, 10:05</small></div><div class="tx">Ergänzung: Nach dem Fetten zwei Runden langsam fahren, dann verteilt es sich.</div></div>
+          <div class="inp ph" style="margin-top:8px;min-height:44px;align-items:flex-start">Kommentar oder Frage schreiben …</div>
+          <div style="margin-top:6px;display:flex;gap:6px;align-items:center"><span class="chip on">Kommentar</span><span class="chip">Frage</span><small class="mut">Ohne Netz: wird gespeichert und später gesendet.</small><span class="ibtn" style="margin-left:auto"><i class="bi bi-send"></i> Senden</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="font-size:13px"><h3><i class="bi bi-wifi-off"></i> Ohne Netz</h3><table class="dt"><tr><td>Lesen</td><td style="text-align:right"><span class="badge b-g">geht</span></td></tr><tr><td>Kommentieren</td><td style="text-align:right"><span class="badge b-g">geht, später gesendet</span></td></tr><tr><td>Schreiben, Bearbeiten, Wiederherstellen</td><td style="text-align:right"><span class="badge b-all">nur mit Netz</span></td></tr><tr><td>Moderation, Fragen markieren</td><td style="text-align:right"><span class="badge b-all">nur mit Netz</span></td></tr></table>
+          <div class="note" style="text-align:left">1 Kommentar wartet auf Netz.</div>
+          <span class="assume">Annahme: Fragen als beantwortet markieren geht nur mit Netz.</span></div>
       </div>
     </div>
   </div></div></div>

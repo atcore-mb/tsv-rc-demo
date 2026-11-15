@@ -295,7 +295,7 @@
 <!-- ========== 2 Mitglieder ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Mitglieder</h2></div>
-  <p class="ddesc">Tabelle mit Suche und Filtern nach Bereich, Rolle, minderjährig und Nachweis-Status. Der Nachweis-Status zeigt den
+  <p class="ddesc">Tabelle mit Suche und Filtern nach Bereich, Rolle, minderjährig, Erziehungsberechtigte und Nachweis-Status. Der Nachweis-Status zeigt den
      schlechtesten Nachweis laut Regelwerk. Erziehungsberechtigte ohne Mitgliedschaft erscheinen mit eigenem Kontotyp.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/mitglieder</span></div>
   <div class="app" style="height:600px">
@@ -308,7 +308,7 @@
           <div class="search"><i class="bi bi-search"></i>Name suchen …</div>
           <span class="chip on">Alle Bereiche</span><span class="chip"><i class="bi bi-airplane"></i> Luftsport</span><span class="chip"><i class="bi bi-car-front"></i> RC Cars</span>
           <span class="chip"><i class="bi bi-person-badge"></i> Rolle: alle <i class="bi bi-chevron-down"></i></span>
-          <span class="chip">minderjährig</span><span class="chip">Nachweis kritisch</span>
+          <span class="chip">minderjährig</span><span class="chip"><i class="bi bi-people-fill"></i> Erziehungsberechtigte</span><span class="chip">Nachweis kritisch</span>
           <span class="sp"></span><span class="ibtn"><i class="bi bi-person-plus"></i> Mitglied einladen</span>
         </div>
         <table class="dt"><tr><th>Name</th><th>Bereiche</th><th>Rollen</th><th>Alter</th><th>Nachweise</th><th>Konto</th><th>Letzte Anmeldung</th></tr>
@@ -420,7 +420,8 @@
         <div class="two"><div><label>Person <span class="req">*</span></label><div class="inp"><span>Neue Person anlegen</span><i class="bi bi-chevron-down"></i></div></div><div><label>Name <span class="req">*</span></label><div class="inp">Eva Fuchs</div></div><div><label>E-Mail <span class="req">*</span></label><div class="inp ph">name@…</div></div></div>
         <div class="two"><div><label>Einwilligung erteilt am <span class="req">*</span></label><div class="inp">14.11.2026</div></div><div><label>Abteilung: Bereiche <span class="req">*</span></label><div class="chips"><span class="chip">Luftsport</span><span class="chip on">RC Cars</span></div></div><div><label>Rollen</label><div class="chips"><span class="badge b-all" style="padding:5px 8px"><i class="bi bi-lock"></i> Mitglied</span><span class="chip">Ausbilder</span></div></div></div>
         <div class="btnrow"><span class="ibtn dis">Einladung senden</span><small style="color:var(--red)">Es fehlt: Name und E-Mail der Erziehungsberechtigten.</small></div>
-        <span class="assume">Annahme: Einladungslink 7 Tage gültig; Kinder-Konto wird erst aktiv, wenn das Konto der Erziehungsberechtigten angenommen ist.</span>
+        <div class="note" style="text-align:left;margin-top:8px">Einladungslink 7 Tage gültig, lässt sich neu senden.</div>
+        <span class="assume">Annahme: Kinder-Konto wird erst aktiv, wenn das Konto der Erziehungsberechtigten angenommen ist.</span>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3>Registrierung prüfen</h3><span class="badge b-w">wartet</span></div>
@@ -497,19 +498,21 @@
           <span class="chip">nur Vereinsgerät</span><span class="chip">mit Vorfall</span>
           <span class="chip on"><i class="bi bi-geo-alt"></i> Vereinsgelände</span>
           <span class="sp"></span>
-          <span class="mut" style="font-size:13px"><b style="color:var(--t)">6</b> Flüge · <b style="color:var(--t)">1:20</b> Std. · <b style="color:var(--t)">4</b> Piloten</span>
+          <span class="mut" style="font-size:13px"><b style="color:var(--t)">7</b> Flüge · <b style="color:var(--t)">1:32</b> Std. · <b style="color:var(--t)">5</b> Piloten</span>
           <span class="ibtn"><i class="bi bi-download"></i> Export CSV</span>
         </div>
         <table class="dt"><tr><th>Datum</th><th>Zeit</th><th>Pilot</th><th>Modell</th><th>Klasse</th><th>Flugart</th><th>Ausbilder</th><th>Min.</th><th></th></tr>
           <tr><td>14.11.2026</td><td>13:41–13:52</td><td>Jonas B.</td><td>Avata 2 <span class="badge b-g">Verein</span></td><td>C1</td><td>Training</td><td></td><td>11</td><td><span class="badge b-r">Vorfall</span></td></tr>
           <tr><td>14.11.2026</td><td>13:55–14:04</td><td>Thomas K. <span class="badge b-all">Gast</span></td><td>Nano-Quad</td><td>C0</td><td>Training</td><td></td><td>9</td><td><small class="mut">erfasst von Max R.</small></td></tr>
           <tr><td>14.11.2026</td><td>13:05–13:23</td><td>Markus B.</td><td>DJI Neo 2</td><td>C0</td><td>Training</td><td></td><td>18</td><td></td></tr>
+          <tr><td>08.11.2026</td><td>11:05–11:17</td><td>Andreas W. <span class="badge b-all">Gast</span></td><td>Mini-Quad</td><td>C1</td><td>Training</td><td></td><td>12</td><td><small class="mut">erfasst von Jonas B.</small></td></tr>
           <tr><td>05.11.2026</td><td>16:10–16:24</td><td>Markus B.</td><td>DJI Neo 2</td><td>C0</td><td>Training</td><td></td><td>14</td><td></td></tr>
           <tr><td>02.11.2026</td><td>14:00–14:17</td><td>Lena K.</td><td>Avata-Set 1 <span class="badge b-g">Verein</span></td><td>C1</td><td>Schulung</td><td>Markus B.</td><td>17</td><td></td></tr>
           <tr><td>02.11.2026</td><td>13:30–13:41</td><td>Markus B.</td><td>Avata 2 <span class="badge b-g">Verein</span></td><td>C1</td><td>Schulung</td><td>Max R.</td><td>11</td><td><span class="badge b-w">korrigiert</span></td></tr>
         </table>
         <div class="note" style="text-align:left;margin-top:8px">Halle und private Orte erscheinen nicht. Korrekturen sind im Flug-Verlauf nachvollziehbar. Jeder Export wird protokolliert. PDF-Bericht folgt mit Teil 3.</div>
-        <span class="assume">Annahme: Sporthalle ist kein Vereinsgelände (offener Punkt 13.2). Flüge von Gastpiloten trägt das eintragende Mitglied ins Vereinsflugbuch ein.</span>
+        <div class="note" style="text-align:left">Flüge von Gastpiloten trägt das eintragende Mitglied ins Vereinsflugbuch ein.</div>
+        <span class="assume">Annahme: Sporthalle ist kein Vereinsgelände (offener Punkt 13.2).</span>
       </div>
     </div>
   </div></div></div>
@@ -554,10 +557,10 @@
 <section class="direction">
   <div class="dhead"><span class="dletter">8</span><h2>Gelände: Anwesenheit und Aufsicht (optional)</h2></div>
   <p class="ddesc">Links „Am Platz“: eigener Check-in (Ort per GPS vorgeschlagen, Auswahldialog zum Ändern) und wer heute da ist, inkl. Gastpiloten.
-     Mitglieder ohne Leitungsrolle erreichen diese Ansicht über Start. Rechts die Aufsicht: Sie ist nirgends Pflicht (Vereinsgelände, Halle, Events, beide Bereiche).
+     Mitglieder ohne Leitungsrolle erreichen diese Ansicht über Start. Den Verlauf früherer Tage sieht nur die Abteilungsleitung. Rechts die Aufsicht: Sie ist nirgends Pflicht (Vereinsgelände, Halle, Events, beide Bereiche).
      Normalfall ist „keine Aufsicht“; wer auf der Aufsichts-Liste steht, kann sie für heute übernehmen. Bei Events kann eine Aufsicht geplant werden.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/gelaende</span></div>
-  <div class="app" style="height:620px">
+  <div class="app" style="height:900px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-person-circle"></i>Profil</a></div>
     <div class="dnav2 lt"><a>Übersicht</a><a>Mitglieder</a><a>Nachweise</a><a>Flüge Vereinsgelände</a><a>Vorfälle</a><a class="on">Gelände</a><a class="dots">⋯</a></div>
@@ -573,7 +576,18 @@
             <tr><td><span class="av">MB</span>Markus B.</td><td>Vereinsgelände</td><td>14:20</td><td><span class="badge b-g">ich</span></td></tr>
             <tr><td><span class="av min">FH</span>Felix H.</td><td>Sand-Rennstrecke</td><td>12:10</td><td></td></tr>
           </table>
-          <span class="assume">Annahme: Alle Mitglieder sehen, wer heute am Platz ist. Auschecken automatisch um Mitternacht; Anwesenheiten werden nach 1 Jahr gelöscht.</span>
+          <div class="note" style="text-align:left;margin-top:8px">Wer heute am Platz ist, sehen alle Mitglieder. Anwesenheiten werden wie Flugbuchdaten aufbewahrt (Regelwerk, derzeit 3 Jahre).</div>
+          <span class="assume">Annahme: Auschecken automatisch um Mitternacht.</span>
+        </div>
+        <div class="card"><div class="hrow"><h3>Verlauf der Anwesenheit <span class="opt">nur Abteilungsleitung</span></h3><span class="ibtn out"><i class="bi bi-download"></i> Export CSV</span></div>
+          <div class="fbar"><span class="chip on">November</span><span class="chip">Oktober</span><span class="chip">2026</span><span class="chip"><i class="bi bi-geo-alt"></i> Alle Orte <i class="bi bi-chevron-down"></i></span><span class="chip"><i class="bi bi-person"></i> Alle Personen <i class="bi bi-chevron-down"></i></span></div>
+          <table class="dt"><tr><th>Tag</th><th>Ort</th><th>Anwesend</th><th>Aufsicht</th></tr>
+            <tr><td>Do 12.11.</td><td>Sand-Rennstrecke</td><td>Jonas B., Felix H., Tim S.</td><td class="mut">keine</td></tr>
+            <tr><td>So 08.11.</td><td>Vereinsgelände</td><td>Max R., Jonas B., Andreas W. <span class="badge b-all">Gast</span></td><td>Max R.</td></tr>
+            <tr><td>Do 05.11.</td><td>Vereinsgelände</td><td>Markus B.</td><td class="mut">keine</td></tr>
+            <tr><td>Mo 02.11.</td><td>Vereinsgelände</td><td>Markus B., Lena K.</td><td class="mut">keine</td></tr>
+          </table>
+          <div class="hint">Frühere Tage sieht nur die Abteilungsleitung. Klick auf einen Tag zeigt alle Besuche mit Uhrzeiten; Gastpiloten führen zu ihrem Gastflug.</div>
         </div>
       </div>
       <div>
@@ -617,14 +631,15 @@
         <div class="chk"><i class="bi bi-check-square-fill"></i><span>Ich habe Nachweis und Versicherung im Original gesehen<small class="mut">Max R. · eintragendes Mitglied</small></span></div>
         <div class="chk"><i class="bi bi-check-square-fill"></i><span>Datenschutzhinweis für Gäste ausgehändigt</span></div>
         <div class="btnrow"><span class="ibtn">Gast eintragen</span><small class="mut">erscheint unter „Heute am Platz“</small></div>
-        <span class="assume">Annahme: Datenschutzhinweis für Gäste ist Pflicht; Gastdaten werden wie Flugbuchdaten aufbewahrt. Flüge des Gastes trägt das eintragende Mitglied ins Vereinsflugbuch ein.</span>
+        <div class="note" style="text-align:left;margin-top:8px">Pflicht sind Name, Verband, Nachweis-Nr. und Versicherung. Das eintragende Mitglied bestätigt die Angaben und trägt die Flüge des Gastes ins Vereinsflugbuch ein. Gastdaten werden wie Flugbuchdaten aufbewahrt (Regelwerk, derzeit 3 Jahre).</div>
+        <span class="assume">Annahme: Datenschutzhinweis für Gäste ist Pflicht (Text liefert der Verein, offener Punkt 13.3).</span>
       </div>
       <div>
         <div class="card"><h3>Heute eingetragene Gäste</h3>
           <table class="dt"><tr><td><span class="av gast">AL</span><b>Andreas L.</b><br><small class="mut">DAeC · eigene Haftpflicht · eingetragen und bestätigt von Jonas B. 14:12</small></td></tr></table>
         </div>
         <div class="card"><h3>Gäste diesen Monat</h3>
-          <table class="dt"><tr><td>14.11.</td><td>Thomas K.</td><td>DMFV</td><td>1 Flug</td></tr><tr><td>09.11.</td><td>Andrea P.</td><td>DMFV</td><td>3 Flüge</td></tr></table>
+          <table class="dt"><tr><td>14.11.</td><td>Thomas K.</td><td>DMFV</td><td>1 Flug</td></tr><tr><td>08.11.</td><td>Andreas W.</td><td>DAeC</td><td>1 Flug</td></tr></table>
         </div>
       </div>
     </div>
@@ -805,7 +820,7 @@
         <dl class="kv2"><dt>Start–Landung</dt><dd>13:55–14:04 (9 min)</dd><dt>Modell</dt><dd>Nano-Quad<br><small class="mut">Eigentum des Gastes · C0 · unter 250 g</small></dd><dt>Flugart</dt><dd>Training</dd><dt>Ort</dt><dd>Vereinsgelände</dd><dt>Aufsicht</dt><dd>keine (optional)</dd></dl>
         <h3 style="margin-top:10px">Gastpilot (ohne Konto)</h3>
         <dl class="kv2"><dt>Verband</dt><dd>DMFV</dd><dt>Nachweis-Nr.</dt><dd>DEU-RP-8f3…</dd><dt>Versicherung</dt><dd>über Verband (DMFV)</dd><dt>Eingetragen von</dt><dd>Max R. · Sa 14.11. 13:52</dd><dt>Bestätigt</dt><dd>Nachweis und Versicherung im Original gesehen, Datenschutzhinweis ausgehändigt (Max R.)</dd></dl>
-        <span class="assume">Annahme: Für Gastflüge gilt die Aufbewahrungsfrist des Vereinsflugbuchs; Korrekturen macht nur das eintragende Mitglied.</span>
+        <div class="note" style="text-align:left;margin-top:8px">Gastdaten und Gastflüge werden wie Flugbuchdaten aufbewahrt (Regelwerk, derzeit 3 Jahre); Korrekturen macht nur das eintragende Mitglied.</div>
         <div class="note" style="text-align:left;margin-top:8px"><i class="bi bi-eye"></i> Sichtbar, weil der Ort das Merkmal „Vereinsgelände“ hat – automatisch, nicht widerrufbar.</div>
       </div>
     </div>

@@ -240,7 +240,7 @@
 
 <section class="direction">
   <div class="dhead"><span class="dletter">2</span><h2>Freigaben</h2></div>
-  <p class="ddesc">Zwei Tabellen: von mir geteilt (mit automatischen, gesperrten Freigaben) und mit mir geteilt. Neue Freigabe als Formular rechts.</p>
+  <p class="ddesc">Zwei Tabellen: von mir geteilt (mit automatischen, gesperrten Freigaben) und mit mir geteilt. Neue Freigabe als Formular rechts. Freigaben sind nur lesen; ein <b>einzelnes Luftfahrzeug</b> kann zusätzlich mit dem Recht <b>„darf fliegen“</b> freigegeben werden. Es erscheint dann in der Modellauswahl der Person, ihre Flüge zählen bei ihr und beim Modell.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -248,18 +248,23 @@
     <div class="dmain">
       <div>
         <div class="card"><div class="tabs"><div class="on">Von mir geteilt</div><div>Mit mir geteilt (2)</div></div>
-          <table class="dt"><tr><th>Was</th><th>An</th><th>Bis</th><th></th></tr>
-            <tr><td><b>Flugbuch (gesamt)</b></td><td>Max R.</td><td>31.12.2026</td><td><span class="ibtn out">Widerrufen</span></td></tr>
-            <tr><td><b>Modell DJI Neo 2</b></td><td>Jonas B.</td><td>unbefristet</td><td><span class="ibtn out">Widerrufen</span></td></tr>
-            <tr class="lockrow"><td>Flüge am Vereinsgelände</td><td>Abteilungsleitung</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
-            <tr class="lockrow"><td>Gültigkeit der Nachweise</td><td>Abteilungsleitung</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
+          <table class="dt"><tr><th>Was</th><th>An</th><th>Recht</th><th>Bis</th><th></th></tr>
+            <tr><td><b>Flugbuch (gesamt)</b></td><td>Max R.</td><td>nur lesen</td><td>31.12.2026</td><td><span class="ibtn out">Widerrufen</span></td></tr>
+            <tr><td><b>Modell DJI Neo 2</b></td><td>Jonas B.</td><td><span class="badge b-air"><i class="bi bi-airplane"></i> darf fliegen</span></td><td>unbefristet</td><td><span class="ibtn out">Widerrufen</span></td></tr>
+            <tr class="lockrow"><td>Flüge am Vereinsgelände</td><td>Abteilungsleitung</td><td>nur lesen</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
+            <tr class="lockrow"><td>Gültigkeit der Nachweise</td><td>Abteilungsleitung</td><td>nur lesen</td><td>automatisch</td><td><i class="bi bi-lock"></i></td></tr>
           </table>
-          <div class="note" style="text-align:left;margin-top:8px">Freigaben sind immer nur lesen. Automatische Freigaben ergeben sich aus den Vereinsregeln.</div>
+          <div class="note" style="text-align:left;margin-top:8px">Freigaben sind nur lesen, außer „darf fliegen“ bei einzelnen Luftfahrzeugen. Flüge anderer mit deinem Modell siehst du auf der Modellseite unter „Flüge“. Automatische Freigaben ergeben sich aus den Vereinsregeln.</div>
+          <h3 style="margin-top:12px">Mit mir geteilt</h3>
+          <table class="dt"><tr><td><b>Flugbuch von Lena K.</b></td><td>nur lesen</td><td>bis 31.01.2027</td></tr><tr><td><b>Modell DJI Avata 2</b> <small class="mut">von Max R.</small></td><td><span class="badge b-air"><i class="bi bi-airplane"></i> du darfst es fliegen</span></td><td>unbefristet</td></tr></table>
         </div>
       </div>
       <div class="card"><h3>Neue Freigabe</h3>
-        <label>Was teilen?</label><div class="chips"><span class="chip on">Flugbuch</span><span class="chip">Modelle</span><span class="chip">Nachweise</span><span class="chip">Einzelnes …</span></div>
-        <label>Mit wem?</label><div class="inp"><span class="mut">Person oder Gruppe suchen …</span><i class="bi bi-search"></i></div>
+        <label>Was teilen? <span class="req">*</span></label><div class="chips"><span class="chip">Flugbuch</span><span class="chip">Modelle</span><span class="chip">Nachweise</span><span class="chip on">Einzelnes …</span></div>
+        <label>Welches? <span class="req">*</span></label><div class="inp">DJI Neo 2 <small class="mut">&nbsp;Drohne · C0 · Luftfahrzeug</small><i class="bi bi-chevron-down"></i></div>
+        <label>Recht <span class="req">*</span></label><div class="chips"><span class="chip"><i class="bi bi-eye"></i> Nur lesen</span><span class="chip on"><i class="bi bi-airplane"></i> Darf fliegen</span></div>
+        <div class="hint">Nur bei einzelnen Luftfahrzeugen. Das Modell erscheint in der Modellauswahl der Person; ihre Flüge zählen bei ihr und beim Modell.</div>
+        <label>Mit wem? <span class="req">*</span></label><div class="inp">Jonas B. <i class="bi bi-chevron-down"></i></div>
         <label>Wie lange?</label><div class="chips"><span class="chip on">Unbefristet</span><span class="chip">1 Monat</span><span class="chip">Datum …</span></div>
         <span class="ibtn" style="margin-top:6px">Freigeben</span>
       </div>

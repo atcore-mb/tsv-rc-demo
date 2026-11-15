@@ -331,7 +331,7 @@
 <!-- 3 Event-Detail -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Event-Detail</h2></div>
-  <p class="ddesc">Links Eckdaten, Beschreibung und Teilnehmerliste mit Reitern. Rechts eigene Teilnahme, reservierte Vereinsmodelle, „Zum Kalender hinzufügen“ und die Aktionen für Leitung und Verantwortliche.</p>
+  <p class="ddesc">Links Eckdaten, Beschreibung und Teilnehmerliste mit Reitern. Die Teilnehmerliste sehen alle, die das Event sehen; Minderjährige erscheinen mit Vorname und Initial. Minderjährige sagen selbst zu, ihre Erziehungsberechtigten werden informiert und können die Zusage zurücknehmen (rechts unten: Elternsicht). Reservierte Vereinsmodelle gehen mit einem Übergabeprotokoll an die verantwortliche Person.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/kalender/fahrtag-sandbahn-2026-11-16</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -352,11 +352,11 @@
           <table class="dt"><tr><th>Name</th><th>Bereich</th><th>Zugesagt am</th><th>Hinweis</th></tr>
             <tr><td><b>Jonas B.</b></td><td>RC Cars, Luftsport</td><td>02.11.</td><td>Verantwortlich</td></tr>
             <tr><td><b>Lena K.</b></td><td>Luftsport, RC Cars</td><td>05.11.</td><td></td></tr>
-            <tr><td><b>Tim S. (14)</b></td><td>RC Cars</td><td>06.11.</td><td>zugesagt von Sandra S. (Mutter)</td></tr>
-            <tr><td><b>Paul W.</b></td><td>RC Cars</td><td>08.11.</td><td>möchte Vereinsauto testen</td></tr>
+            <tr><td><b>Tim S.</b></td><td>RC Cars</td><td>06.11.</td><td></td></tr>
+            <tr><td><b>Nico F.</b></td><td>RC Cars</td><td>08.11.</td><td>möchte Vereinsauto testen</td></tr>
             <tr><td><b>Anna H.</b></td><td>RC Cars</td><td>10.11.</td><td></td></tr>
           </table>
-          <span class="assume">Annahme: Teilnehmerliste sehen Mitglieder der Abteilung; für Minderjährige sagen Erziehungsberechtigte zu.</span>
+          <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-eye"></i> Sichtbar für alle, die dieses Event sehen. Minderjährige mit Vorname und Initial, ohne Alter.</div>
         </div>
       </div>
       <div>
@@ -367,10 +367,14 @@
         <div class="card"><h3>Reservierte Vereinsmodelle</h3>
           <table class="dt"><tr><td><i class="bi bi-car-front" style="color:var(--car)"></i> <b>Losi Mini-T 2.0</b><br><small class="mut">Offroad · 1:18</small></td><td><span class="badge b-g">reserviert</span></td></tr>
             <tr><td><i class="bi bi-battery-half" style="color:var(--car)"></i> <b>Vereins-Akkus 2S (4 Stück)</b><br><small class="mut">mit Ladekoffer</small></td><td><span class="badge b-g">reserviert</span></td></tr></table>
-          <span class="assume">Annahme: Ausgabe vor Ort durch die Verantwortlichen, ohne Ausleihantrag; Übergabeprotokoll bleibt Pflicht.</span>
+          <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-clipboard-check"></i> Ausgabe mit <b>einem</b> Übergabeprotokoll an die verantwortliche Person (<b>Jonas B.</b>), ohne Ausleihantrag. Sie gibt das Gerät beim Event weiter und bringt es mit einem Rückgabeprotokoll zurück.</div>
         </div>
         <div class="card"><h3>Kalender</h3><span class="ibtn out"><i class="bi bi-download"></i> .ics für diesen Termin</span> <span class="ibtn out"><i class="bi bi-arrow-repeat"></i> Alles abonnieren</span></div>
-        <div class="card"><h3>Leitung &amp; Verantwortliche</h3><span class="ibtn"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-megaphone"></i> Nachricht an Teilnehmer</span> <span class="ibtn out" style="color:var(--red);border-color:var(--red);margin-top:6px"><i class="bi bi-calendar-x"></i> Absagen</span></div>
+        <div class="card"><h3>Leitung &amp; Verantwortliche</h3><span class="ibtn"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-megaphone"></i> Nachricht an Teilnehmer</span> <span class="ibtn out"><i class="bi bi-clipboard-check"></i> Reserviertes Gerät übergeben</span> <span class="ibtn out" style="color:var(--red);border-color:var(--red);margin-top:6px"><i class="bi bi-calendar-x"></i> Absagen</span></div>
+        <div class="card" style="background:var(--airbg);border-color:#c9dcf0"><h3><i class="bi bi-people-fill"></i> Elternsicht (Sandra S.)</h3>
+          <div style="font-size:13px"><b>Tim hat zugesagt</b> · Fahrtag Sandbahn, Mo 16.11.<br><small class="mut">Benachrichtigung vom 06.11. · Tim sieht bei seiner Zusage: „Deine Erziehungsberechtigten werden informiert und können die Zusage zurücknehmen.“</small></div>
+          <span class="ibtn out" style="color:var(--red);border-color:var(--red);margin-top:6px"><i class="bi bi-x-circle"></i> Zusage zurücknehmen</span>
+          <div class="hint">Tim und die Verantwortlichen werden benachrichtigt; Tim sieht „Deine Zusage wurde von Sandra S. zurückgenommen“.</div></div>
       </div>
     </div>
   </div></div></div>
@@ -452,8 +456,8 @@
         <div class="hrow"><h3>Teilnehmer &amp; Ergebnis</h3><span class="mut" style="font-size:12px">Ansicht Ausbilder / Leitung</span></div>
         <table class="dt"><tr><th>Anwesend</th><th>Name</th><th>Ergebnis</th><th>Nachweis beim Teilnehmer</th></tr>
           <tr><td><span class="ck on"></span></td><td><b>Lena K.</b></td><td><div class="chips" style="margin:0"><span class="chip on">bestanden</span><span class="chip">nicht bestanden</span></div></td><td>wird <b>verlängert</b> bis 23.11.2031</td></tr>
-          <tr><td><span class="ck on"></span></td><td><b>Tim S. (14)</b><br><small class="mut">minderjährig · Mutter Sandra S.</small></td><td><div class="chips" style="margin:0"><span class="chip on">bestanden</span><span class="chip">nicht bestanden</span></div></td><td>wird <b>angelegt</b> · Sandra S. wird benachrichtigt</td></tr>
-          <tr><td><span class="ck on"></span></td><td><b>Paul W.</b></td><td><div class="chips" style="margin:0"><span class="chip">bestanden</span><span class="chip on">nicht bestanden</span></div></td><td class="mut">kein Nachweis</td></tr>
+          <tr><td><span class="ck on"></span></td><td><b>Tim S.</b><br><small class="mut">minderjährig · selbst angemeldet, Erziehungsberechtigte informiert</small></td><td><div class="chips" style="margin:0"><span class="chip on">bestanden</span><span class="chip">nicht bestanden</span></div></td><td>wird <b>angelegt</b> · Erziehungsberechtigte werden benachrichtigt</td></tr>
+          <tr><td><span class="ck on"></span></td><td><b>Nico F.</b></td><td><div class="chips" style="margin:0"><span class="chip">bestanden</span><span class="chip on">nicht bestanden</span></div></td><td class="mut">kein Nachweis</td></tr>
           <tr><td><span class="ck"></span></td><td><b>Anna H.</b></td><td><div class="chips" style="margin:0"><span class="chip on">nicht teilgenommen</span></div></td><td class="mut">kein Nachweis</td></tr>
         </table>
         <div style="margin-top:10px;display:flex;gap:8px;align-items:center"><span class="ibtn">Ergebnisse speichern</span><span class="ibtn out"><i class="bi bi-person-plus"></i> Teilnehmer hinzufügen</span><small class="mut">Speichern erst, wenn jeder Teilnehmer ein Ergebnis hat.</small></div>

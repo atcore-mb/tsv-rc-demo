@@ -277,7 +277,7 @@
 <!-- ================= 1 ================= -->
 <section class="direction">
   <div class="dhead"><span class="dletter">1</span><h2>Vereinsgerät: Detail und Ausleihe beantragen</h2></div>
-  <p class="ddesc">Im Bereich Luftsport › Ausleihe (vorgefiltert, Filter aufhebbar). Links das ausleihbare Vereinsgerät, Mitte Inhalt und Zustand des Sets mit Verfügbarkeitskalender, rechts der Antrag. Gegenstand per Auswahldialog, Zeitraum direkt im Kalender, belegte Tage sind nicht wählbar.</p>
+  <p class="ddesc">Im Bereich Luftsport › Ausleihe (vorgefiltert, Filter aufhebbar). Links das ausleihbare Vereinsgerät, Mitte Inhalt und Zustand des Sets mit Verfügbarkeitskalender, rechts der Antrag. Gegenstand per Auswahldialog, Zeitraum direkt im Kalender. Genehmigte Ausleihen und Event-Reservierungen blockieren Tage; offene Anträge anderer blockieren nicht, sie erzeugen nur einen Hinweis auf die Überschneidung. Teile eines Sets sind einzeln ausleihbar, solange das Set nicht verliehen ist.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/ausleihe/avata-set-1</span></div>
   <div class="app" style="height:640px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -306,6 +306,7 @@
             <tr><td>Ladehub + Netzteil</td><td>Ladegerät</td><td>–</td><td><span class="badge b-g">ok</span></td></tr>
             <tr><td>Transporttasche</td><td>Sonstiges Zubehör</td><td>–</td><td><span class="badge b-g">ok</span></td></tr>
           </table>
+          <div class="hint"><i class="bi bi-diagram-3"></i> Jedes Teil hat eine eigene Seite mit Verfügbarkeit und „Dieses Teil ausleihen“. Einzeln ausleihbar, solange das Set nicht verliehen ist; ist ein Teil einzeln verliehen (z. B. Goggles 3 #1 am 28.11.), ist das Set an diesen Tagen belegt.</div>
           <div class="note" style="text-align:left;margin-top:6px">Vermerk: kleiner Kratzer am Gehäuse oben, ohne Funktionseinschränkung. Voraussetzung: Kompetenznachweis A1/A3 (C1).</div>
         </div>
         <div class="card">
@@ -324,7 +325,8 @@
           <label>Zeitraum <span class="req">*</span></label>
           <div class="two"><div><div class="inp">Mi 18.11.</div></div><div><div class="inp">Fr 20.11.</div></div></div>
           <div class="hint" style="color:var(--g)"><i class="bi bi-check-circle"></i> frei · 3 Tage · im Kalender gewählt</div>
-          <span class="assume">Annahme: höchstens 7 Tage am Stück</span>
+          <div class="hint"><i class="bi bi-hourglass"></i> Höchstdauer 7 Tage am Stück (Standard, vom Admin je Teil oder Set einstellbar). Länger später per Verlängerungsantrag.</div>
+          <div class="hint" style="color:var(--warn)"><i class="bi bi-exclamation-triangle"></i> Beispiel Hinweis: „Überschneidung mit einem offenen Antrag (26.11.) – blockiert nicht, die Abteilungsleitung entscheidet.“</div>
           <label>Zweck <span class="req">*</span></label>
           <div class="chips sm" style="margin-bottom:2px"><span class="chip on">Training</span><span class="chip">Ausprobieren</span><span class="chip">Event</span><span class="chip">Schulung</span><span class="chip">Rennen</span></div>
           <label>Bezug zu Event <span class="opt">optional</span></label>
@@ -359,7 +361,12 @@
         <div class="kc air"><b>Tinywhoop-Set</b><br><span class="mut">Do 19.11. · Event Hallenfliegen</span><div class="nx"><i class="bi bi-arrow-right-circle"></i> abholen bei Max R. in der Halle</div><span class="ibtn">Übergabe starten</span></div>
       </div>
       <div class="kcol"><h4>Ausgegeben <span>1</span></h4>
-        <div class="kc car"><b>TRX-4M Crawler</b><br><span class="mut">Fr 13.11. – Di 17.11. · von Max R.</span><div class="nx"><i class="bi bi-arrow-right-circle"></i> Rückgabe Di 17.11. (in 3 Tagen)</div><span class="ibtn">Rückgabe starten</span> <span class="ibtn out">Verlängern</span></div>
+        <div class="kc car"><b>TRX-4M Crawler</b><br><span class="mut">Fr 13.11. – Di 17.11. · von Max R.</span><div class="nx"><i class="bi bi-arrow-right-circle"></i> Rückgabe Di 17.11. (in 3 Tagen)</div><span class="ibtn">Rückgabe starten</span> <span class="ibtn out">Verlängerung beantragen</span></div>
+        <div class="kc car" style="border-style:dashed"><b>Verlängerung beantragen</b> · TRX-4M Crawler<br>
+          <span class="mut">Neues Enddatum im Kalender: <b>Mo 23.11.</b> (frei bis 23.11.; am 24.11. Event-Reservierung VM Lauf 5)</span>
+          <div class="nx"><i class="bi bi-lightning-charge"></i> Abteilungsleitung: sofort bestätigt</div>
+          <div class="nx w"><i class="bi bi-hourglass-split"></i> Mitglieder: Antrag an die Leitung, bis dahin gilt Di 17.11.</div>
+          <span class="ibtn">Verlängern</span></div>
       </div>
       <div class="kcol"><h4>Zurück <span>2</span></h4>
         <div class="kc air"><b>Avata-Set 1</b><br><span class="mut">02.–03.11. · ohne Mängel</span><div class="nx" style="color:var(--mut)"><i class="bi bi-file-earmark-check"></i> Protokolle ansehen</div></div>
@@ -372,7 +379,7 @@
 <!-- ================= 3 ================= -->
 <section class="direction">
   <div class="dhead"><span class="dletter">3</span><h2>Übergabeprotokoll (hier: Rückgabe)</h2></div>
-  <p class="ddesc">Gleiches Formular für Ausgabe und Rückgabe. Checkliste je Gegenstand mit Zustand, bei Akkus die Ladezyklen (bei Ausgabe vorbelegt), Fotos und Bemerkungen. Abschluss erst, wenn beide Seiten bestätigt haben. Mangel oder Fehlteil führt nach dem Abschluss direkt zu „Vorfall melden“ mit Bezug zur Ausleihe.</p>
+  <p class="ddesc">Gleiches Formular für Ausgabe und Rückgabe. Checkliste je Gegenstand mit Zustand, bei Akkus die Ladezyklen (bei Ausgabe vorbelegt), Fotos und Bemerkungen. Beide Seiten bestätigen <b>vor Ort am selben Gerät</b>: die angemeldete Person per Klick, die andere tippt auf ihren Namen bzw. bestätigt mit ihrem Passkey. Fehlt eine Bestätigung, lässt sich das Protokoll als „unbestätigt“ speichern; die Abteilungsleitung wird erinnert. Mangel oder Fehlteil führt nach dem Abschluss direkt zu „Vorfall melden“ mit Bezug zur Ausleihe.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/ausleihen/trx-4m-1311/rueckgabe</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
@@ -402,11 +409,12 @@
         <div class="card">
           <h3>Bestätigung beider Seiten</h3>
           <div class="ack ok"><i class="bi bi-person-check" style="font-size:18px;color:var(--g)"></i><div><b>Markus B.</b> · gibt zurück<br><small class="mut">angemeldet bestätigt · 16:42</small></div><span class="st" style="color:var(--g)"><i class="bi bi-check-circle-fill"></i> bestätigt</span></div>
-          <div class="ack"><i class="bi bi-person" style="font-size:18px;color:var(--mut)"></i><div><b>Max R.</b> · nimmt zurück<br><small class="mut">Anfrage per Push gesendet · alternativ auf diesem Gerät anmelden</small></div><span class="st" style="color:var(--warn)"><i class="bi bi-hourglass-split"></i> wartet</span></div>
-          <span class="assume">Annahme: Jede Seite bestätigt angemeldet im eigenen Konto (Tippen am eigenen Handy oder hier per Passkey). Ändert sich danach die Checkliste, verfallen die Bestätigungen.</span>
+          <div class="ack"><i class="bi bi-person" style="font-size:18px;color:var(--mut)"></i><div><b>Max R.</b> · nimmt zurück<br><small class="mut">tippt hier auf seinen Namen · oder <i class="bi bi-fingerprint"></i> Passkey</small></div><span class="st" style="color:var(--warn)"><i class="bi bi-hand-index"></i> Name antippen</span></div>
+          <span class="assume">Annahme: Ändert sich die Checkliste nach einer Bestätigung, verfallen die Bestätigungen.</span>
         </div>
         <span class="ibtn dis" style="display:block;text-align:center;padding:9px">Rückgabe abschließen</span>
-        <div class="note">Beide Seiten müssen bestätigen. Das Protokoll ist danach unveränderlich, Korrekturen nur mit Verlauf.</div>
+        <span class="ibtn out" style="display:block;text-align:center;padding:7px;margin-top:6px"><i class="bi bi-exclamation-triangle"></i> Ohne Bestätigung von Max R. speichern (unbestätigt)</span>
+        <div class="note">Mit beiden Bestätigungen ist das Protokoll abgeschlossen und unveränderlich. Fehlt eine, bleibt es „unbestätigt“ und die Abteilungsleitung wird erinnert.</div>
       </div>
     </div>
   </div></div></div>
@@ -415,7 +423,7 @@
 <!-- ================= 4 ================= -->
 <section class="direction">
   <div class="dhead"><span class="dletter">4</span><h2>Abteilungsleitung: Anträge genehmigen</h2></div>
-  <p class="ddesc">Unter Abteilung › Ausleihe. Offene Anträge als Tabelle mit Prüfhinweisen (Überschneidung, Zustimmung der Erziehungsberechtigten, Nachweis). Ablehnen nur mit Begründung, die das Mitglied sieht. Eigene Ausleihen der Abteilungsleitung brauchen keine Genehmigung (entschieden) und erscheinen hier nicht.</p>
+  <p class="ddesc">Unter Abteilung › Ausleihe. Offene Anträge als Tabelle mit Prüfhinweisen (Überschneidung, Zustimmung der Erziehungsberechtigten, Nachweis). Ablehnen nur mit Begründung, die das Mitglied sieht. Eigene Ausleihen der Abteilungsleitung brauchen keine Genehmigung (entschieden) und erscheinen hier nicht. Verlängerungsanträge erscheinen ebenfalls hier; offene Anträge blockieren einander nicht, erst die Genehmigung belegt die Tage. Rechts die unbestätigten Übergaben, an die die Leitung erinnert wird.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/ausleihe/antraege</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. · Leitung</div></div>
@@ -426,7 +434,7 @@
         <div class="hrow"><h3>Offene Anträge</h3><div class="chips sm" style="margin:0"><span class="chip on">Alle</span><span class="chip">Luftsport</span><span class="chip">RC Cars</span></div></div>
         <table class="dt"><tr><th>Gerät</th><th>Mitglied</th><th>Zeitraum</th><th>Zweck</th><th>Prüfung</th><th></th></tr>
           <tr><td><b>Mini-T Einsteiger-Set</b><br><span class="badge b-car">RC Cars</span></td><td>Jonas B.</td><td>20.–22.11.</td><td>Training</td><td><span class="flag ok"><i class="bi bi-check-circle"></i> frei</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
-          <tr class="hl"><td><b>Mini-T Einsteiger-Set</b><br><span class="badge b-car">RC Cars</span></td><td>Lena K.</td><td>21.11.</td><td>Ausprobieren</td><td><span class="flag w"><i class="bi bi-exclamation-triangle"></i> überschneidet Antrag Jonas B.</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
+          <tr class="hl"><td><b>Mini-T Einsteiger-Set</b><br><span class="badge b-car">RC Cars</span></td><td>Lena K.</td><td>21.11.</td><td>Ausprobieren</td><td><span class="flag w"><i class="bi bi-exclamation-triangle"></i> überschneidet offenen Antrag Jonas B. (blockiert nicht)</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr><td><b>Tinywhoop-Set</b><br><span class="badge b-air">Luftsport</span></td><td>Tim S. <span class="badge b-w">14 J.</span></td><td>26.11.</td><td>Training</td><td><span class="flag ok"><i class="bi bi-people-fill"></i> Sandra S. zugestimmt 13.11.</span><br><span class="flag ok"><i class="bi bi-patch-check"></i> A1/A3 gültig</span></td><td style="white-space:nowrap"><span class="ibtn">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr><td><b>TRX-4M Crawler</b><br><span class="badge b-car">RC Cars</span></td><td>Tim S. <span class="badge b-w">14 J.</span></td><td>30.11.</td><td>Ausprobieren</td><td><span class="flag w"><i class="bi bi-hourglass-split"></i> wartet auf Sandra S.</span></td><td style="white-space:nowrap"><span class="ibtn dis">Genehmigen</span> <span class="ibtn no">Ablehnen</span></td></tr>
           <tr><td><b>Avata-Set 1</b><br><span class="badge b-air">Luftsport</span></td><td>Markus B. (du)</td><td>25.–26.11.</td><td>Training</td><td><span class="flag w"><i class="bi bi-person-lock"></i> eigener Antrag</span></td><td><small class="mut">andere Leitung</small></td></tr>
@@ -443,6 +451,9 @@
           <div class="hint">Lena K. sieht die Begründung und wird benachrichtigt.</div>
           <div style="margin-top:10px;display:flex;gap:8px"><span class="ibtn" style="background:var(--red)">Ablehnung senden</span><span class="ibtn out">Abbrechen</span></div>
         </div>
+        <div class="card" style="margin-top:14px"><h3>Unbestätigte Übergaben <span class="badge b-w">1</span></h3>
+          <table class="dt"><tr><td><b>Mini-T Einsteiger-Set</b> · Rückgabe Sa 07.11.<br><small class="mut">Lena K. an Max R. · Bestätigung von Lena K. fehlt</small></td><td><span class="badge b-w">unbestätigt</span></td></tr></table>
+          <div class="hint">Fehlt eine Bestätigung, bleibt das Protokoll „unbestätigt“; die Leitung wird erinnert, bis es geklärt ist.</div></div>
         <div class="card" style="margin-top:14px"><h3>Heute</h3><table class="dt"><tr><td>Rückgaben fällig</td><td>–</td></tr><tr><td>Ausgaben geplant</td><td>–</td></tr><tr><td>Überfällig</td><td><span class="badge b-g">keine</span></td></tr></table></div>
       </div>
     </div>
@@ -462,7 +473,7 @@
       <div class="hrow"><div style="display:flex;gap:10px;align-items:center"><b style="font-size:15px">14.11. – 30.11.2026</b><span class="mut"><i class="bi bi-chevron-left"></i> <i class="bi bi-chevron-right"></i></span><div class="chips sm" style="margin:0"><span class="chip on">Alle Bereiche</span><span class="chip">Luftsport</span><span class="chip">RC Cars</span><span class="chip">nur Sets</span></div></div><span class="ibtn"><i class="bi bi-bookmark-plus"></i> Event-Reservierung</span></div>
       <div class="gantt" id="gantt"></div>
       <div class="leg" style="margin-top:8px"><span><i style="background:var(--gd)"></i>ausgegeben</span><span><i style="background:var(--g)"></i>genehmigt</span><span><i style="background:var(--warn)"></i>Event-Reservierung</span><span><i style="background:repeating-linear-gradient(45deg,#fff,#fff 2px,#cfe8d4 2px,#cfe8d4 4px)"></i>beantragt</span><span><i style="border:2px solid var(--red)"></i>Überschneidung</span><span><i style="background:#c9cdc9"></i>Wartung</span></div>
-      <span class="assume">Annahme: Eine Event-Reservierung blockiert die Tage wie eine Ausleihe; Ausgabe an Teilnehmer vor Ort mit Protokoll durch den Verantwortlichen.</span>
+      <div class="note" style="text-align:left">Eine Event-Reservierung blockiert die Tage für Ausleihen. Ausgegeben wird mit <b>einem</b> Übergabeprotokoll an die verantwortliche Person; sie gibt das Gerät beim Event weiter und bringt es mit einem Rückgabeprotokoll zurück.</div>
     </div>
     <div class="pop" style="top:182px;right:30px">
       <h3 style="margin:0 0 4px;font-size:15px;display:flex;justify-content:space-between">Event-Reservierung <i class="bi bi-x-lg mut" style="font-size:13px"></i></h3>
@@ -471,8 +482,9 @@
       <label>Vereinsgerät <span class="req">*</span></label>
       <div class="chips sm" style="margin-bottom:4px"><span class="chip on">TRX-4M Crawler</span><span class="chip on">Mini-T Einsteiger-Set</span><span class="chip">FlySky NB4</span><span class="chip">Akku-Pool 2S</span></div>
       <div class="hint" style="color:var(--g)"><i class="bi bi-check-circle"></i> beide am 24.11. frei</div>
-      <label>Ausgabe vor Ort durch <span class="req">*</span></label>
+      <label>Übergabe an (verantwortlich) <span class="req">*</span></label>
       <div class="inp sm">Jonas B. <i class="bi bi-chevron-down"></i></div>
+      <div class="hint">ein Übergabeprotokoll an diese Person</div>
       <div style="margin-top:10px"><span class="ibtn">Reservieren</span> <span class="ibtn out">Abbrechen</span></div>
     </div>
   </div></div></div>
@@ -481,7 +493,7 @@
 <!-- ================= 6 ================= -->
 <section class="direction">
   <div class="dhead"><span class="dletter">6</span><h2>Abteilungsleitung: Sets verwalten</h2></div>
-  <p class="ddesc">Ein Set bündelt Vereinsmodelle und Zubehör zu einer Ausleiheinheit mit eigener Genehmigungspflicht. Teile kommen per Auswahldialog dazu; was schon in einem anderen Set steckt, ist ausgegraut. Der Bereich ergibt sich aus dem Inhalt.</p>
+  <p class="ddesc">Ein Set bündelt Vereinsgerät (nur Besitzer Abteilung) zu einer Ausleiheinheit mit eigener Genehmigungspflicht. Die Teile bleiben einzeln ausleihbar, solange das Set nicht verliehen ist. Teile kommen per Auswahldialog dazu; was schon in einem anderen Set steckt, ist ausgegraut. Der Bereich ergibt sich aus dem Inhalt.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/abteilung/sets/avata-set-1</span></div>
   <div class="app" style="height:600px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B. · Leitung</div></div>
@@ -496,7 +508,8 @@
           <tr><td><b>Tinywhoop-Set</b></td><td><span class="badge b-air">Luftsport</span></td><td>4</td><td><span class="badge b-w">ausgeliehen</span></td></tr>
           <tr><td><b>Mini-T Einsteiger-Set</b></td><td><span class="badge b-car">RC Cars</span></td><td>5</td><td><span class="badge b-g">frei</span></td></tr>
         </table>
-        <span class="assume">Annahme (Entscheidung offen): Sets gibt es nur für Vereinsgerät. Ein Teil gehört höchstens zu einem Set und wird dann nur mit dem Set verliehen.</span>
+        <div class="note" style="text-align:left">Sets gibt es nur für Vereinsgerät. Teile eines Sets sind einzeln ausleihbar, solange das Set nicht verliehen ist; ist das Set verliehen oder reserviert, sind seine Teile belegt.</div>
+        <span class="assume">Annahme: Ein Teil gehört höchstens zu einem Set.</span>
       </div>
       <div class="card">
         <div class="hrow"><h3>Set bearbeiten: Avata-Set 1</h3><span class="badge b-air">Luftsport</span></div>
@@ -511,6 +524,7 @@
           <tr><td>Transporttasche</td><td>Sonstiges Zubehör</td><td><span class="badge b-g">ok</span></td><td><i class="bi bi-x mut"></i></td></tr>
         </table>
         <div class="addlink"><i class="bi bi-plus-circle"></i> Vereinsmodell oder Zubehör hinzufügen</div>
+        <div class="hint"><i class="bi bi-hourglass"></i> Höchstdauer: 7 Tage am Stück (Standard). Abweichend je Teil oder Set im Admin einstellbar.</div>
         <label>Hinweise für Ausleihende <span class="opt">optional</span></label>
         <div class="inp sm">Nur mit Kompetenznachweis A1/A3 (C1).</div>
         <div style="margin-top:10px;display:flex;gap:8px"><span class="ibtn">Speichern</span><span class="ibtn out" style="color:var(--red);border-color:var(--red)">Set auflösen</span></div>
@@ -551,7 +565,7 @@
         <div class="card">
           <div class="hrow"><h3>Avata-Set 1</h3><span class="badge b-all">zurückgegeben</span></div>
           <dl class="kv2"><dt>Zeitraum</dt><dd>Mo 02.11. – Di 03.11.2026</dd><dt>Zweck</dt><dd>Schulung</dd><dt>Event</dt><dd>Praxisschulung A1/A3 · Vereinsgelände</dd><dt>Grundlage</dt><dd>Event-Reservierung der Leitung</dd><dt>Ausgegeben von</dt><dd>Max R.</dd><dt>Ergebnis</dt><dd><span class="badge b-g">ohne Mängel</span></dd></dl>
-          <span class="assume">Annahme: Bei einer Event-Reservierung wird das Gerät an die verantwortliche Person (hier den Ausbilder) ausgegeben – mit normalem Übergabeprotokoll, ohne eigenen Antrag.</span>
+          <div class="note" style="text-align:left">Event-Reservierung: ausgegeben mit einem Übergabeprotokoll an die verantwortliche Person (hier den Ausbilder), ohne eigenen Antrag.</div>
         </div>
         <div class="card"><h3>Bezüge</h3>
           <table class="dt"><tr><td><i class="bi bi-airplane"></i> Flug Mo 02.11. · Lena K. <small class="mut">Schulung, Ausbilder Markus B.</small></td><td>›</td></tr></table>
@@ -576,7 +590,7 @@
           <tr><td>Ladehub + Netzteil</td><td><span class="badge b-g">ok</span></td><td>–</td></tr>
           <tr><td>Transporttasche</td><td><span class="badge b-g">ok</span></td><td>–</td></tr>
         </table>
-        <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-check2-all" style="color:var(--g)"></i> Bestätigt von <b>Max R.</b> (Ausgabe) und <b>Markus B.</b> (Empfang) · 1 Foto</div>
+        <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-check2-all" style="color:var(--g)"></i> Vor Ort an einem Gerät bestätigt von <b>Max R.</b> (Ausgabe) und <b>Markus B.</b> (Empfang) · 1 Foto</div>
       </div>
       <div class="card">
         <div class="hrow"><h3>Rückgabeprotokoll · Di 03.11. 18:34</h3><span class="badge b-g">8 / 8 in Ordnung</span></div>
@@ -590,7 +604,7 @@
           <tr><td>Ladehub + Netzteil</td><td><span class="badge b-g">in Ordnung</span></td><td>–</td></tr>
           <tr><td>Transporttasche</td><td><span class="badge b-g">in Ordnung</span></td><td>–</td></tr>
         </table>
-        <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-check2-all" style="color:var(--g)"></i> Bestätigt von <b>Markus B.</b> (Rückgabe) und <b>Max R.</b> (Rücknahme) · keine Bemerkungen</div>
+        <div class="note" style="text-align:left;margin-top:6px"><i class="bi bi-check2-all" style="color:var(--g)"></i> Vor Ort an einem Gerät bestätigt von <b>Markus B.</b> (Rückgabe) und <b>Max R.</b> (Rücknahme) · keine Bemerkungen</div>
         <div class="note" style="text-align:left">Protokolle sind unveränderlich; Korrekturen nur mit Eintrag im Änderungsprotokoll.</div>
       </div>
     </div>

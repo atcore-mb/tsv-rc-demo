@@ -229,6 +229,14 @@
   .pfmap .pin{font-size:32px;color:var(--red);transform:translate(-50%,-92%);line-height:1}
   .pfmap .zoom{right:8px;top:8px;display:flex;flex-direction:column;gap:6px}
   .pfmap .zoom i{width:30px;height:30px;background:#fff;border:1px solid #cfd6cf;border-radius:6px;display:flex;align-items:center;justify-content:center}
+  .pk{font-size:13px}
+  .pk .sec{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:10px 0 2px}
+  .pk .it{display:flex;align-items:center;gap:10px;padding:6px 4px;border-bottom:1px solid #f0f2f0}
+  .pk .it .tx{flex:1}
+  .pk .it small{display:block;color:var(--mut)}
+  .pk .it.off{opacity:.45}
+  .pk .it.on{background:var(--gl);border-radius:4px}
+  .pk .foot{font-size:11.5px;color:var(--mut);margin-top:8px;border-top:1px solid #eef0ee;padding-top:6px}
 </style>
 </head>
 <body>
@@ -459,6 +467,7 @@
             <tr><td>14.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>14:05</td><td>18</td><td><i class="bi bi-cloud-arrow-up mut"></i></td></tr>
             <tr><td>12.11.2026</td><td>FPV Quad 5″</td><td>Sporthalle</td><td>Training</td><td>18:20</td><td>6</td><td></td></tr>
             <tr class="sel"><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td>15:40</td><td>24</td><td><span class="badge b-w">korr.</span></td></tr>
+            <tr><td>07.11.2026</td><td>DJI Avata 2 <span class="badge b-air">Max R.</span></td><td>Vereinsgelände</td><td>Training</td><td>15:20</td><td>11</td><td></td></tr>
             <tr><td>02.11.2026</td><td>Avata 2 <span class="badge b-g">Verein</span></td><td>Vereinsgelände</td><td>Schulung</td><td>10:15</td><td>11</td><td></td></tr>
             <tr><td>28.10.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>16:00</td><td>15</td><td></td></tr>
             <tr><td>26.10.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>15:12</td><td>12</td><td></td></tr>
@@ -602,6 +611,64 @@
             <div style="margin-top:10px"><span class="ibtn">Ort übernehmen</span> <span class="ibtn out">Abbrechen</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+<!-- ========== 7 Fremdes Privatmodell fliegen ========== -->
+<section class="direction">
+  <div class="dhead"><span class="dletter">7</span><h2>Fremdes Privatmodell fliegen (Freigabe zum Fliegen)</h2></div>
+  <p class="ddesc">Ein Mitglied kann ein einzelnes eigenes Luftfahrzeug anderen <b>zum Fliegen freigeben</b> (Mehr › Freigaben › Neue Freigabe › Einzelnes …, Recht „Darf fliegen“). Das Modell erscheint dann in der Modellauswahl unter „Für mich zum Fliegen freigegeben“. Der Flug zählt beim Piloten und beim Modell: Der Besitzer sieht ihn auf der Modellseite unter „Flüge“. Handy: Klickdummy, Flugbuch-Eintrag vom 07.11. und Modell „DJI Avata 2“ unter Freigaben › Mit mir geteilt.</p>
+  <p class="sublabel">PC · Modellauswahl beim Flug nachtragen</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/flugbuch/neu</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="opacity:.45"><div class="card"><h3>Flug nachtragen</h3><div class="two"><div><label>Modell</label><div class="inp ph">wählen</div></div><div><label>Ort</label><div class="inp">Vereinsgelände</div></div></div></div><div></div></div>
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center">
+      <div class="card pk" style="width:520px;padding:14px 18px;box-shadow:0 10px 30px rgba(0,0,0,.25)">
+        <div class="hrow"><h3>Modell wählen</h3><i class="bi bi-x-lg"></i></div>
+        <div class="search" style="margin:4px 0 0"><i class="bi bi-search"></i> Suchen</div>
+        <div class="sec">Zuletzt verwendet</div>
+        <div class="it"><span class="ico air"><i class="bi bi-airplane"></i></span><span class="tx"><b>DJI Neo 2</b><small>C0 · eigenes · zuletzt heute</small></span></div>
+        <div class="sec">Meine Modelle</div>
+        <div class="it"><span class="ico air"><i class="bi bi-airplane"></i></span><span class="tx"><b>Mini 4 Pro</b><small>Drohne · C0 · 249 g</small></span></div>
+        <div class="it"><span class="ico air"><i class="bi bi-airplane"></i></span><span class="tx"><b>FPV Quad 5″</b><small>FPV · Eigenbau</small></span></div>
+        <div class="sec">Vereinsmodelle für dich</div>
+        <div class="it"><span class="ico air"><i class="bi bi-airplane"></i></span><span class="tx"><b>Avata 2</b><small>ausgeliehen bis 22.11.</small></span><span class="badge b-g">Verein</span></div>
+        <div class="sec">Für mich zum Fliegen freigegeben</div>
+        <div class="it on"><span class="ico air"><i class="bi bi-airplane"></i></span><span class="tx"><b>DJI Avata 2</b><small>FPV · C1 · Modell von Max R. · unbefristet</small></span><span class="badge b-air">Max R.</span></div>
+        <div class="sec">Weitere Vereinsmodelle</div>
+        <div class="it off"><span class="ico air"><i class="bi bi-airplane"></i></span><span class="tx"><b>Avata-Set 2</b><small>nicht für dich ausgeliehen</small></span><span class="badge b-all">Ausleihe nötig</span></div>
+        <div class="foot">Nur Modelle mit „ist Luftfahrzeug“: deine eigenen, Vereinsmodelle mit Ausleihe oder Reservierung für dich und Modelle anderer Mitglieder, die dir zum Fliegen freigegeben sind. Ausgemusterte sind ausgeblendet.</div>
+      </div>
+    </div>
+  </div></div></div>
+  <p class="sublabel">PC · Flugbuch mit Flug am fremden Modell (Detail rechts zeigt den Besitzer)</p>
+  <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/flugbuch/2026-11-07</span></div>
+  <div class="app">
+    <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
+    <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div>
+    <div class="dnav2"><a class="on">Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
+    <div class="dmain" style="grid-template-columns:1.7fr 1fr">
+      <div>
+        <div class="card">
+          <table class="dt"><tr><th>Datum</th><th>Modell</th><th>Ort</th><th>Art</th><th>Start</th><th>Min.</th></tr>
+            <tr><td>09.11.2026</td><td>Mini 4 Pro</td><td>Wolfgangsberg</td><td>Foto</td><td>15:40</td><td>24</td></tr>
+            <tr class="sel"><td>07.11.2026</td><td>DJI Avata 2 <span class="badge b-air">Max R.</span></td><td>Vereinsgelände</td><td>Training</td><td>15:20</td><td>11</td></tr>
+            <tr><td>05.11.2026</td><td>DJI Neo 2</td><td>Vereinsgelände</td><td>Training</td><td>14:10</td><td>14</td></tr>
+          </table>
+          <div class="note" style="text-align:left;margin:8px 0 4px">Flüge mit fremden Modellen tragen den Namen des Besitzers.</div>
+        </div>
+      </div>
+      <div class="detailpane">
+        <div class="hrow"><h3>Flug am 07.11.2026</h3><span class="ibtn out"><i class="bi bi-pencil"></i> Korrigieren</span></div>
+        <dl class="kv2"><dt>Pilot</dt><dd>Markus B.</dd><dt>Modell</dt><dd style="color:var(--g)">DJI Avata 2 · C1</dd><dt>Besitzer</dt><dd>Max R.<br><small class="mut">Freigabe zum Fliegen seit Di 03.11.</small></dd><dt>Ort</dt><dd>Vereinsgelände</dd><dt>Zeit</dt><dd>15:20 – 15:31 (11 min)</dd><dt>Flugart</dt><dd>Training</dd><dt>Checkliste</dt><dd>6/6 · 15:17</dd></dl>
+        <div class="note" style="text-align:left">Zählt in deinem Flugbuch und beim Modell; Max R. sieht den Flug auf der Modellseite unter „Flüge“.</div>
+        <h3 style="margin-top:10px">Änderungsverlauf</h3>
+        <div class="tl"><div class="e"><b>Erfasst · 07.11. 15:31</b><small>Freigabe zum Fliegen von Max R.</small></div></div>
+        <span class="assume">Annahme: Korrigieren kann nur der Pilot; der Besitzer sieht Flüge mit seinem Modell nur lesend.</span>
       </div>
     </div>
   </div></div></div>

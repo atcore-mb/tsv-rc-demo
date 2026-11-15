@@ -421,7 +421,7 @@
 <!-- ========== 4 Modell-Detail Drohne/FPV und Zubehör ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">4</span><h2>Modell-Detail: Drohne/FPV und Zubehör</h2></div>
-  <p class="ddesc">Dieselbe Seite wie beim RC Car, gefüllt aus dem Modelltyp. Bei Luftfahrzeugen erscheinen die festen Felder (EU-Klasse, Gewicht, Remote-ID, Betreiber) mit Schloss, der Reiter heißt <b>Flüge</b>, Akkus stehen mit Ladezyklen dabei. Zubehör (z. B. Fernsteuerung, Akku) hat kein Flugbuch, zeigt dafür <b>„Passt zu“</b> und bei Akkus den Ladezyklen-Zähler. Handy: Klickdummy, Bildschirm <code>md-detail</code>.</p>
+  <p class="ddesc">Dieselbe Seite wie beim RC Car, gefüllt aus dem Modelltyp. Bei Luftfahrzeugen erscheinen die festen Felder (EU-Klasse, Gewicht, Remote-ID, Betreiber) mit Schloss, der Reiter heißt <b>Flüge</b>, Akkus stehen mit Ladezyklen dabei. Die Wind-Grenze fürs Drohnenwetter kommt vom Admin und lässt sich je Modell überschreiben (optional, im Bearbeiten-Formular unter „Wetter“); gesetzt erscheint sie auf der Modellseite. Zubehör (z. B. Fernsteuerung, Akku) hat kein Flugbuch, zeigt dafür <b>„Passt zu“</b> und bei Akkus den Ladezyklen-Zähler. Handy: Klickdummy, Bildschirm <code>md-detail</code>.</p>
   <p class="sublabel">PC · FPV Quad 5″ (Luftfahrzeug)</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/modelle/fpv-quad-5</span></div>
   <div class="app">
@@ -432,6 +432,7 @@
         <div class="card"><h3><i class="bi bi-lock" style="color:var(--mut);font-size:13px"></i> Luftfahrzeug (fest)</h3><dl class="kv2"><dt>EU-Klasse</dt><dd>Ohne Klasse – Eigenbau</dd><dt>Gewicht</dt><dd>640 g</dd><dt>Remote-ID</dt><dd class="mut">–</dd><dt>Betreiber</dt><dd>ich · DEU8K2P4… <i class="bi bi-lock mut"></i></dd></dl></div>
         <div class="card"><h3>Typ FPV · eigene Angaben</h3><dl class="kv2"><dt>Größe</dt><dd>5″</dd><dt>Videosystem</dt><dd>Analog</dd><dt>Akku-System</dt><dd>6S 1100</dd><dt>Frame</dt><dd>TBS Source One V5 <small class="mut">(eigene Angabe)</small></dd></dl>
           <span class="ibtn out"><i class="bi bi-pencil"></i> Bearbeiten</span> <span class="ibtn out"><i class="bi bi-share"></i> Teilen</span> <span class="ibtn out"><i class="bi bi-exclamation-diamond"></i> Vorfall</span></div>
+        <div class="card"><h3><i class="bi bi-cloud-sun"></i> Wetter</h3><dl class="kv2"><dt>Eigene Wind-Grenze</dt><dd>25 km/h <small class="mut">(Standard vom Admin: 20 km/h)</small></dd></dl><small style="color:var(--g);font-weight:700">Drohnenwetter mit diesem Modell</small></div>
       </div>
       <div>
         <div class="card"><div class="hrow"><h3>Flüge</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Flug</span></div><div class="stats"><div class="stat"><b>14</b><span>Flüge 2026</span></div><div class="stat"><b>1:31</b><span>Std.</span></div></div>
@@ -441,7 +442,9 @@
       <div>
         <div class="card"><div class="hrow"><h3>Wartung</h3><span class="ibtn"><i class="bi bi-plus-lg"></i> Eintrag</span></div><div class="tl"><div class="e w"><b>So 12.04. Propeller getauscht</b><small>nach Vorfall vom Sa 11.04.</small></div></div>
           <table class="dt"><tr><td>Schrauben nachziehen<br><small class="mut">alle 10 Flüge</small></td><td><span class="badge b-w">in 2 Flügen</span></td></tr></table></div>
-        <div class="card"><h3>Verlauf</h3><div class="tl"><div class="e"><b>So 12.04. · Markus B.</b><small>Vorfall „Propeller gebrochen“ verknüpft</small></div><div class="e"><b>So 14.02. · Markus B.</b><small>Angelegt</small></div></div></div>
+        <div class="card"><h3>Verlauf</h3><div class="tl"><div class="e w"><b>Fr 13.11. · Markus B.</b><small>Eigene Wind-Grenze: – → 25 km/h</small></div><div class="e"><b>So 12.04. · Markus B.</b><small>Vorfall „Propeller gebrochen“ verknüpft</small></div><div class="e"><b>So 14.02. · Markus B.</b><small>Angelegt</small></div></div></div>
+        <div class="card"><h3>Bearbeiten · Abschnitt Wetter</h3><label>Eigene Wind-Grenze (km/h) <span class="opt">optional</span></label><div class="inp">25</div><div class="hint">Standard vom Admin: 20 km/h. Leer lassen, um den Standard zu verwenden.</div>
+          <span class="assume">Annahme: Die eigene Grenze ersetzt den Wert für „grün“; „gelb“ reicht wie beim Standard 10 km/h darüber.</span></div>
       </div>
     </div>
   </div></div></div>
@@ -469,14 +472,14 @@
 
 <!-- ========== 5 Geteiltes Modell ========== -->
 <section class="direction">
-  <div class="dhead"><span class="dletter">5</span><h2>Geteiltes Modell (nur lesen)</h2></div>
-  <p class="ddesc">Ein fremdes Modell, das jemand mit mir geteilt hat (Mehr › Freigaben › Mit mir geteilt). Gleiche Seite, aber mit Hinweis „geteilt von …“, ohne Bearbeiten, Teilen, Flug erfassen oder Wartung eintragen. Handy: <code>md-detail</code> mit Avata 2 von Max R.</p>
+  <div class="dhead"><span class="dletter">5</span><h2>Geteiltes Modell, zum Fliegen freigegeben</h2></div>
+  <p class="ddesc">Ein fremdes Privatmodell, das der Besitzer mit mir geteilt hat (Mehr › Freigaben › Mit mir geteilt). Gleiche Seite mit Hinweis „geteilt von …“, ohne Bearbeiten, Teilen oder Wartung eintragen. Hat der Besitzer das Recht <b>„darf fliegen“</b> vergeben, zeigt die Seite „Du darfst es fliegen“, den Reiter „Meine Flüge“ und „Flug erfassen“ (Modell vorbelegt). Der Flug zählt bei mir und beim Modell; der Besitzer sieht ihn unter „Flüge“. Ohne dieses Recht bleibt es bei „nur lesen“. Handy: <code>md-detail</code> mit DJI Avata 2 von Max R.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/freigaben/modell/avata-2-max</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a class="on"><i class="bi bi-people"></i>Abteilung</a></div>
     <div class="dmain">
       <div>
-        <div class="md-share"><i class="bi bi-eye"></i> <b>Geteilt von Max R.</b> · nur lesen · unbefristet (seit Di 03.11.). Ändern kann nur der Besitzer, die Freigabe kann Max R. jederzeit widerrufen.</div>
+        <div class="md-share"><i class="bi bi-airplane"></i> <b>Geteilt von Max R.</b> · <b>du darfst es fliegen</b> · unbefristet (seit Di 03.11.). Ändern kann nur der Besitzer, die Freigabe kann Max R. jederzeit widerrufen.</div>
         <div class="hero"><div class="pic air"><i class="bi bi-airplane"></i></div><div><b>DJI Avata 2</b><small>FPV · Besitzer Max R.</small><br><span class="badge b-g">bereit</span> <span class="badge b-air">Luftfahrzeug</span></div></div>
         <div class="card"><h3><i class="bi bi-lock" style="color:var(--mut);font-size:13px"></i> Luftfahrzeug (fest) · Typ FPV</h3><dl class="kv2"><dt>EU-Klasse</dt><dd>C1</dd><dt>Gewicht</dt><dd>377 g</dd><dt>Remote-ID</dt><dd>aktiv</dd><dt>Betreiber</dt><dd>Max R. · registriert</dd><dt>Größe</dt><dd>3″</dd><dt>Videosystem</dt><dd>DJI O3 / O4</dd></dl></div>
         <span class="assume">Annahme (DSGVO): Die Registrierungsnummer des Betreibers wird bei Freigaben nicht angezeigt</span>
@@ -484,7 +487,10 @@
       <div>
         <div class="card"><h3>Zubehör</h3><table class="dt"><tr><td>Akku Avata 2 #1</td><td><small>24 Zyklen</small></td></tr><tr><td>Akku Avata 2 #2</td><td><small>21 Zyklen</small></td></tr><tr><td>DJI Goggles 3</td><td><small>FPV-Brille</small></td></tr><tr><td>RC Motion 3</td><td><small>Fernsteuerung</small></td></tr></table></div>
         <div class="card"><h3>Wartung</h3><div class="tl"><div class="e"><b>So 01.11. Propeller getauscht</b></div></div></div>
-        <span class="assume">Annahme: Freigabe „Modell“ zeigt keine Flüge des Besitzers (dafür Freigabe „Flugbuch“)</span>
+        <div class="card"><div class="hrow"><h3>Meine Flüge mit diesem Modell</h3><span class="ibtn"><i class="bi bi-airplane"></i> Flug erfassen</span></div>
+          <table class="dt"><tr><td>Sa 07.11.</td><td>Vereinsgelände · Training</td><td>11 min</td></tr></table>
+          <div class="note" style="text-align:left">Du darfst es fliegen. Deine Flüge zählen in deinem Flugbuch und beim Modell; Max R. sieht sie.</div></div>
+        <span class="assume">Annahme: Die Freigabe zeigt Daten, Zubehör und Wartung; von den Flügen mit dem Modell siehst du nur deine eigenen (alle Flüge des Besitzers nur über die Freigabe „Flugbuch“).</span>
       </div>
     </div>
   </div></div></div>
@@ -548,7 +554,7 @@
 <!-- ========== 8 Checklisten ========== -->
 <section class="direction">
   <div class="dhead"><span class="dletter">8</span><h2>Checklisten</h2></div>
-  <p class="ddesc">Die vom Admin im Regelwerk vorgegebenen Vorlagen, nach Bereich filterbar, mit Vorschau zum Abhaken (wird nicht gespeichert). Gespeichert wird eine Checkliste nur beim Flug erfassen (mit Uhrzeit am Flug) bzw. im Übergabeprotokoll. Darunter die zuletzt durchgeführten Checklisten. Handy: <code>md-checklisten</code>, <code>md-cl</code>.</p>
+  <p class="ddesc">Die vom Admin im Regelwerk vorgegebenen Vorlagen, nach Bereich filterbar, mit Vorschau zum Abhaken (wird nicht gespeichert). Gespeichert wird eine Checkliste nur beim Flug erfassen (mit Uhrzeit am Flug) bzw. im Übergabeprotokoll. Darunter die zuletzt durchgeführten Checklisten. Für RC Cars sind Checklisten eine <b>Merkhilfe ohne Speichern</b>; sie liegen im ⋯-Menü von RC Cars und öffnen dort auf RC Cars gefiltert. Handy: <code>md-checklisten</code>, <code>md-cl</code>.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/checklisten</span></div>
   <div class="app">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div><div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a></div><div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="on">Checklisten</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
@@ -572,7 +578,7 @@
           <div class="chk"><i class="bi bi-square off"></i><span>Remote-ID aktiv (falls nötig)</span></div>
           <div class="chk"><i class="bi bi-square off"></i><span>Aufsicht informiert (falls vorhanden)</span></div>
           <div style="margin-top:8px"><span class="ibtn out">Zurücksetzen</span> <span class="ibtn"><i class="bi bi-airplane"></i> Flug erfassen</span></div></div>
-        <span class="assume">Annahme: Für RC Cars wird „Vor der Fahrt“ nicht gespeichert (kein Fahrtenbuch)</span>
+        <div class="note" style="text-align:left"><i class="bi bi-info-circle"></i> RC Cars („Vor der Fahrt“): Merkhilfe, wird nicht gespeichert.</div>
       </div>
     </div>
   </div></div></div>

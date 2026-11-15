@@ -463,15 +463,15 @@
 <!-- ============ 6 WETTER ============ -->
 <section class="direction">
   <div class="dhead"><span class="dletter">6</span><h2>Drohnenwetter</h2></div>
-  <p class="ddesc">Ort per Auswahldialog (GPS-Nähe, Vereinsorte, eigene Orte). Oben die Ampel mit Begründung und Vorschau, wann es schlechter wird, darunter die aktuellen Werte und der Stundenverlauf mit farbigen Zellen. Rechts die Grenzwerte der Ampel – ausdrücklich als Annahme. Bei Hallen erscheint kein Wetter.</p>
+  <p class="ddesc">Ort per Auswahldialog (GPS-Nähe, Vereinsorte, eigene Orte). Oben die Ampel mit Begründung und Vorschau, wann es schlechter wird, darunter die aktuellen Werte und der Stundenverlauf mit farbigen Zellen. Rechts die geltenden Grenzwerte: der Standard des Vereins (global vom Admin eingestellt) oder – nach Wahl eines Modells – dessen eigene Grenze für einzelne Werte, deutlich gekennzeichnet. Bei Hallen erscheint kein Wetter.</p>
   <div class="winwrap"><div class="win"><div class="chrome"><span class="dots"><span></span><span></span><span></span></span><span class="url">rc.tsv1927roethenbach.de/luftsport/wetter</span></div>
-  <div class="app" style="height:620px">
+  <div class="app" style="height:820px">
     <div class="hdr"><img src="https://www.tsv1927roethenbach.de/static/core/images/logo.svg" alt=""><div><div class="t1">TSV RC</div><div class="t2">RC-Modellsport · TSV 1927 Röthenbach</div></div><div class="user"><i class="bi bi-person-circle"></i> Markus B.</div></div>
     <div class="dnav"><a><i class="bi bi-house"></i>Start</a><a class="on"><i class="bi bi-airplane"></i>Luftsport</a><a><i class="bi bi-car-front"></i>RC Cars</a><a><i class="bi bi-calendar3"></i>Kalender</a><a><i class="bi bi-people"></i>Abteilung</a><a class="r"><i class="bi bi-question-circle"></i>Hilfe</a><a><i class="bi bi-person-circle"></i>Profil</a></div>
     <div class="dnav2"><a>Flugbuch</a><a>Modelle</a><a>Ausleihe</a><a>Nachweise</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a><a class="on">Drohnenwetter</a></div>
     <div class="dmain" style="grid-template-columns:2.4fr 1fr">
       <div>
-        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><div class="inp" style="min-width:280px"><span><i class="bi bi-geo-alt-fill" style="color:var(--air)"></i> <b>Vereinsgelände</b> <small class="mut">· per GPS erkannt</small></span><i class="bi bi-chevron-down"></i></div><div class="chips" style="margin:0"><span class="chip on">Heute</span><span class="chip">Morgen</span><span class="chip">Übermorgen</span></div></div>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><div class="inp" style="min-width:280px"><span><i class="bi bi-geo-alt-fill" style="color:var(--air)"></i> <b>Vereinsgelände</b> <small class="mut">· per GPS erkannt</small></span><i class="bi bi-chevron-down"></i></div><div class="inp" style="min-width:230px"><span><i class="bi bi-sliders"></i> Grenzwerte für <b>alle Modelle (Standard)</b></span><i class="bi bi-chevron-down"></i></div><div class="chips" style="margin:0"><span class="chip on">Heute</span><span class="chip">Morgen</span><span class="chip">Übermorgen</span></div></div>
         <div class="wx-amp g"><span class="lamp"><i class="bi bi-check-lg"></i></span><span><b>fliegbar</b>Alle Werte im grünen Bereich. Ab 14 Uhr schlechter (gelb), ab 16 Uhr nicht empfohlen (Böen, Regen).</span></div>
         <div class="wx-grid"><div><b>14 km/h</b>Wind SW</div><div><b>22 km/h</b>Böen</div><div><b>0 mm/h</b>Niederschlag</div><div><b>12 km</b>Sicht</div><div><b>6 °C</b>Temperatur</div><div><b>3</b>Kp-Index</div></div>
         <div class="card"><h3>Stundenverlauf</h3>
@@ -489,6 +489,7 @@
       </div>
       <div>
         <div class="card"><h3>Grenzwerte der Ampel</h3>
+          <div style="font-size:12.5px;margin-bottom:6px"><i class="bi bi-sliders"></i> Es gilt der <b>Standard des Vereins</b> (vom Admin eingestellt).</div>
           <table class="dt"><tr><th>Wert</th><th>grün</th><th>gelb</th><th>rot</th></tr>
             <tr><td>Wind</td><td>≤ 20</td><td>≤ 30</td><td>&gt; 30</td></tr>
             <tr><td>Böen</td><td>≤ 30</td><td>≤ 40</td><td>&gt; 40</td></tr>
@@ -497,7 +498,16 @@
             <tr><td>Temp.</td><td>5–30</td><td>−5–38</td><td>sonst</td></tr>
             <tr><td>Kp</td><td>≤ 4</td><td>5</td><td>≥ 6</td></tr>
           </table>
-          <span class="assume">Annahme: Vorschlagswerte, vom Admin einstellbar, vorerst nicht je Modell. Die Ampel ist eine Empfehlung, die Entscheidung trifft der Pilot.</span>
+          <div class="hint">Die Ampel ist eine Empfehlung, die Entscheidung trifft der Pilot.</div>
+        </div>
+        <div class="card" style="font-size:12.5px"><h3>Mit Modell „DJI Neo 2“</h3>
+          <div style="margin-bottom:6px"><i class="bi bi-person-gear"></i> Es gilt die <b>eigene Grenze Modell DJI Neo 2</b> für Wind und Böen; alle anderen Werte nach Standard.</div>
+          <table class="dt"><tr><th>Wert</th><th>grün</th><th>gelb</th><th>rot</th></tr>
+            <tr><td>Wind <span class="badge b-air">eigene Grenze</span></td><td>≤ 15</td><td>≤ 22</td><td>&gt; 22</td></tr>
+            <tr><td>Böen <span class="badge b-air">eigene Grenze</span></td><td>≤ 20</td><td>≤ 28</td><td>&gt; 28</td></tr>
+            <tr><td class="mut">übrige Werte</td><td colspan="3" class="mut">Standard</td></tr>
+          </table>
+          <div class="hint">Ampel dann: „eingeschränkt fliegbar – Böen 22 km/h (eigene Grenze DJI Neo 2)“. Eigene Grenzen hinterlegt der Besitzer am Modell.</div>
         </div>
         <div class="card" style="font-size:12.5px"><h3>Datenquelle</h3>Stand 10:00 · aktualisiert stündlich<br><span class="assume">Annahme: DWD-Daten (z. B. über Open-Meteo), Kp-Index von NOAA, serverseitig abgefragt – der Browser spricht keinen Fremddienst an.</span></div>
       </div>
@@ -541,8 +551,8 @@
     <div class="dnav2 car"><a>Modelle</a><a>Ausleihe</a><a class="on">Meisterschaft</a><a>Strecken</a><a>Vorfälle</a><a class="dots"><i class="bi bi-three-dots"></i></a></div>
     <div class="dmain">
       <div>
-        <div class="hrow"><h3>Vereinsmeisterschaft 2026</h3><span><span class="badge b-g"><i class="bi bi-broadcast"></i> live</span> <span class="ibtn out">Saison 2025</span></span></div>
-        <div class="tabs car"><div>Offroad <small class="mut">4/5</small></div><div>Crawler <small class="mut">4/6</small></div><div class="on">Glattbahn <small class="mut">6/6</small></div><div><i class="bi bi-airplane"></i> FPV-Race <small class="mut">2/4</small></div></div>
+        <div class="hrow"><h3>Vereinsmeisterschaft 2026 <small class="mut" style="font-weight:600">RC Cars und Luftsport</small></h3><span><span class="badge b-g"><i class="bi bi-broadcast"></i> live</span> <span class="ibtn out">Saison 2025</span></span></div>
+        <div class="tabs car"><div>Offroad <small class="mut">4/5</small></div><div>Crawler <small class="mut">4/6</small></div><div class="on">Glattbahn <small class="mut">6/6</small></div><div><i class="bi bi-airplane"></i> FPV-Race <span class="badge b-air">Luftsport</span> <small class="mut">2/4</small></div></div>
         <div class="card">
           <div class="hrow"><span style="font-size:13px">Saison abgeschlossen · Meister: <b>Jonas B.</b> · 1 Streichergebnis</span><span class="ibtn out"><i class="bi bi-file-earmark-pdf"></i> Tabelle als PDF</span></div>
           <table class="dt st"><tr><th>Pl.</th><th class="n">Fahrer</th><th>L1<br>03.05.</th><th>L2<br>31.05.</th><th>L3<br>28.06.</th><th>L4<br>26.07.</th><th>L5<br>23.08.</th><th>L6<br>13.09.</th><th>Siege</th><th>Punkte</th></tr>
@@ -553,7 +563,8 @@
           </table>
           <div class="note" style="text-align:left;margin-top:6px">Durchgestrichen = Streichergebnis (ein verpasster Lauf wird zuerst gestrichen) · – = nicht gefahren</div>
         </div>
-        <span class="assume">Annahme: Disziplinen, Anzahl Läufe, Punkteschema und Streichregel sind Platzhalter – offener Punkt 6 im Gesamtdesign.</span>
+        <div class="note" style="text-align:left">FPV-Race ist eine Disziplin der Vereinsmeisterschaft unter Luftsport (erscheint dort ebenfalls unter „Meisterschaft“); Offroad, Crawler und Glattbahn gehören zu RC Cars.</div>
+        <span class="assume">Annahme: Weitere Disziplinen, Anzahl Läufe, Punkteschema und Streichregel sind Platzhalter – offener Punkt 6 im Gesamtdesign.</span>
       </div>
       <div>
         <div class="card"><h3>Läufe Glattbahn</h3>
@@ -742,7 +753,7 @@
             <tr><td>6.</td><td class="n"><i>ehem. Mitglied</i></td><td>10</td><td>11</td><td class="x">–</td><td>10</td><td>–</td><td class="s">31</td></tr>
           </table>
         </div>
-        <span class="assume">Annahme: Ausgetretene Mitglieder erscheinen anonymisiert als „ehemaliges Mitglied“; Archiv nur lesbar.</span>
+        <span class="assume">Annahme: Ausgetretene Mitglieder erscheinen anonymisiert als „ehemaliges Mitglied“; Archiv nur lesbar. FPV-Race (Luftsport) wird erst ab 2026 gewertet, 2025 nur RC-Cars-Disziplinen.</span>
       </div>
       <div>
         <div class="card"><h3>Läufe Offroad 2025</h3><table class="dt"><tr><td>L1 Mo 27.04.</td><td>Max R.</td></tr><tr class="me"><td><b>L2 Mo 25.05.</b></td><td>Jonas B.</td></tr><tr><td>L3 Mo 22.06.</td><td>Max R.</td></tr><tr><td>L4 Mo 21.09.</td><td>Jonas B.</td></tr><tr><td>L5 Mo 12.10.</td><td>Jonas B.</td></tr></table></div>
